@@ -1,21 +1,24 @@
-{ config, lib, pkgs, ... }:
+{ inputs,
+  outputs,
+  lib,
+  config,
+  pkgs, ... }:
 let
   secrets = "/etc/nixos/secrets";
   domain = "voicelesscrimson.com";
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      (builtins.fetchTarball {
-        url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-23.11/nixos-mailserver-n
-ixos-23.11.tar.gz";
-        sha256 = "122vm4n3gkvlkqmlskiq749bhwfd0r71v6vcmg1bbyg4998brvx8";
-      })
-      (fetchTarball "https://github.com/Ten0/nixos-vscode-server/tarball/support_new_vscode_versions")
-    ];
+  [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    (builtins.fetchTarball {
+      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-23.11/nixos-mailserver-n
+  ixos-23.11.tar.gz";
+      sha256 = "122vm4n3gkvlkqmlskiq749bhwfd0r71v6vcmg1bbyg4998brvx8";
+    })
+    (fetchTarball "https://github.com/Ten0/nixos-vscode-server/tarball/support_new_vscode_versions")
+    ../../modules
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -35,39 +38,10 @@ ixos-23.11.tar.gz";
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = true;
 
-  # Enable experimental features like Flakes.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   networking.hostName = "Delaware"; # Define your hostname.
 
   # Enable networking.
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "America/New_York";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # Configure keymap in X11.
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  users.defaultUserShell = pkgs.zsh;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kent = {
@@ -143,25 +117,6 @@ ixos-23.11.tar.gz";
       requires = [ "local-fs.target" ];
     }
   ];
-
-  # Allow unfree packages.
-  nixpkgs.config.allowUnfree = true;
-
-  # Turn on zsh
-  programs.zsh = {
-    enable = true;
-    zsh-autoenv.enable = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      l = "lsd -al";
-      cd = "z";
-    };
-    shellInit = ''
-      eval "$(zoxide init zsh)"
-      eval "$(starship init zsh)"
-      #eval "$(atuin init zsh)"
-    '';
-  };
 
   programs.git = {
     enable = true;
@@ -347,9 +302,6 @@ ixos-23.11.tar.gz";
   };
 
   # List services that you want to enable:
-
-  # Add locate/updatedb commands
-  services.locate.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -685,12 +637,6 @@ ixos-23.11.tar.gz";
 
   # Make VS Code function when SSH'ing into this server
   services.vscode-server.enableFHS = true;
-
-  # Use Avahi to make this computer discoverable and to discover other computers.
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-  };
 
   # NextCloud Cron service
   systemd.timers."nextcloudcron" = {

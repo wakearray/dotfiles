@@ -1,16 +1,20 @@
-{ config, pkgs, ... }:
+{ inputs,
+  outputs,
+  lib,
+  config,
+  pkgs, ... }:
 let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+
 in
 {
   imports =
   [
-    <nixos-hardware/gpd/win-max-2/2023>
     ./hardware-configuration.nix
+    ../../modules
     #<nixpkgs/nixos/modules/virtualisation/qemu-vm.nix>
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -18,32 +22,10 @@ in
   # Kernal Params.
   boot.kernelParams = [ "drm_kms_helper.poll=N" "usbcore.autosuspend=-1" ];
 
-  # Deletes temp files on boot.
-  boot.tmp.useTmpfs = true;
-  nix.gc.automatic = true;
-
   networking.hostName = "GreatBlue"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "America/New_York";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
 
   # Enable the Gnome Desktop Environment using Wayland.
   services.xserver = {
@@ -81,12 +63,6 @@ in
 
   services.gnome.gnome-browser-connector.enable = true;
 
-  # Configure keymap in X11.
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
@@ -109,8 +85,6 @@ in
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  users.defaultUserShell = pkgs.zsh;
 
   users.users.kent = {
     isNormalUser = true;
@@ -170,9 +144,9 @@ in
       tidal-hifi
 
       # Password Management
-      _1password
-      _1password-gui
-      git-credential-1password
+      unstable._1password
+      unstable._1password-gui
+      unstable.git-credential-1password
 
       # Image editing
       gimp-with-plugins
@@ -209,6 +183,10 @@ in
 
       # Note taking app
       obsidian
+
+      # Just - A handy way to save and run project-specific commands
+      # https://just.systems/man/en/
+      just
     ];
   };
 
@@ -219,22 +197,6 @@ in
 
   # Enable keyboard access
   hardware.keyboard.qmk.enable = true;
-
-  # Turn on zsh
-  programs.zsh = {
-    enable = true;
-    zsh-autoenv.enable = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      l = "lsd -al";
-      cd = "z";
-    };
-    shellInit = ''
-      eval "$(zoxide init zsh)"
-      eval "$(starship init zsh)"
-      #eval "$(atuin init zsh)"
-    '';
-  };
 
   # Enable Steam
   programs.steam = {
@@ -264,26 +226,18 @@ in
 
   programs.git = {
     enable = true;
-#     config = [
-#       { init = { defaultBranch = "main"; }; }
-#       { user = {
-#         name = "Kent Hambrock";
-#         email = "Kent.Hambrock@gmail.com";
-#         signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q";
-#       };}
-#       { gpg = { format = "ssh"; }; }
-#       { commit = { gpgsign = true; }; }
-#     ];
+    config = [
+      { init = { defaultBranch = "main"; }; }
+      { user = {
+        name = "Kent Hambrock";
+        email = "Kent.Hambrock@gmail.com";
+        signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q";
+      };}
+      { gpg = { format = "ssh"; }; }
+      { commit = { gpgsign = true; }; }
+      { "gpg \"ssh\"" = { program = "${config.programs._1password.package}/share/1password/op-ssh-sign"; }; }
+    ];
   };
-
-  # Console typo fixer
-  programs.thefuck.enable = true;
-
-  # Keep the Nix package store optimised
-  nix.settings.auto-optimise-store = true;
-
-  # Allow unfree packages.
-  nixpkgs.config.allowUnfree = true;
 
   # Environment variables
   environment.sessionVariables = rec {
@@ -299,7 +253,10 @@ in
     ];
     # Session var to ensure chrome/electron apps are
     # rendered corectly when using Wayland
-    NIXOS_OZONE_WL = "1";
+    #NIXOS_OZONE_WL = "1";
+
+    # Makes SSH work with 1Password
+    SSH_AUTH_SOCK="~/.1password/agent.sock";
   };
 
   # List packages ilibsForQt5.kdenlivenstalled in system profile.
@@ -325,17 +282,13 @@ in
 
     # Gnome Extensions
     gnomeExtensions.dash-to-panel
-    gnomeExtensions.arcmenu
+    #gnomeExtensions.arcmenu
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pop-shell
-    # Makes ArcMenu work on Wayland
-    unstable.xdg-utils
-    xdg-user-dirs
-    gnome-menus # <- Needed for ArcMenu, but doesn't seem to work
     # Makes QT/KDE apps look like Gnome apps
-    adwaita-qt
+    #adwaita-qt
 
-    polkit_gnome
+    unstable.polkit_gnome
 
     # Allows me to avoid retyping my default KDE wallet password while I'm logged in.
     #libsForQt5.kwallet-pam
@@ -548,9 +501,6 @@ in
   # Enale direnv
   programs.direnv.enable = true;
 
-  # Partition manager
-  programs.partition-manager.enable = true;
-
   # Samba
   fileSystems = {
     "/mnt/Share_Public" = {
@@ -657,15 +607,7 @@ in
   security.polkit.enable = true;
 
   # Services
-  services.locate.enable = true;
   services.flatpak.enable = true;
-
-  # Use Avahi to make this computer discoverable and to discover other computers.
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    openFirewall = true;
-  };
 
   systemd.user.services.kent-autostart = {
     description = "Updates packages";
@@ -693,7 +635,6 @@ in
 
   # Hardware.
   hardware.bluetooth.enable = true;
-
 
 #   virtualisation.vmVariant = {
 #     # following configuration is added only when building VM with build-vm
