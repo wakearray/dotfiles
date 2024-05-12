@@ -121,6 +121,8 @@
     notcurses
   ];
 
+  programs.git.enable = true;
+
 #   systemd.user.services."catvideo" = {
 #     enable = true;
 #     description = "Play string video for cat";
