@@ -135,7 +135,7 @@
 #     wantedBy = [ "default.target" ];
 #   };
 
-  services.xserver.displayManager.setupCommands = "vlc -L -f /home/kent/Desktop/string_video.webm"
+  services.xserver.displayManager.setupCommands = "vlc -L -f /home/kent/Desktop/string_video.webm";
 
   # List services that you want to enable:
 
