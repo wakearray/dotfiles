@@ -590,19 +590,22 @@ in
   ];
 
   # Security
-  security.pam.u2f = {
-    enable = true;
-    control = "sufficient";
-    authFile = "/etc/u2f_mappings";
-  };
-  security.pam.services = {
-    login.u2fAuth = true;
-    sudo.u2fAuth = true;
-    su.u2fAuth = true;
-    gdm-launch-environment.u2fAuth = true;
-    gdm-password.u2fAuth = true;
-    polkit-1.u2fAuth = true;
-    kde.u2fAuth = true;
+  security.pam = {
+    u2f = {
+      enable = true;
+      control = "sufficient";
+      authFile = "/etc/u2f_mappings";
+      appId = "pam://GreatBlue-NixOS"; # Temporary, when I changed hostnames u2f broke
+    };
+    services = {
+      login.u2fAuth = true;
+      sudo.u2fAuth = true;
+      su.u2fAuth = true;
+      gdm-launch-environment.u2fAuth = true;
+      gdm-password.u2fAuth = true;
+      polkit-1.u2fAuth = true;
+      kde.u2fAuth = true;
+    };
   };
   security.polkit.enable = true;
 

@@ -135,7 +135,9 @@
 #     wantedBy = [ "default.target" ];
 #   };
 
-  services.xserver.displayManager.setupCommands = "vlc -L -f /home/kent/Desktop/string_video.webm";
+  services.xserver.displayManager.sessionCommands = ''
+    vlc -L -f /home/kent/Desktop/string_video.webm
+  '';
 
   # List services that you want to enable:
 
@@ -143,14 +145,20 @@
   services.openssh = {
     enable = true;
     # require public key authentication for better security
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = "no";
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+    openFirewall = true;
   };
   security.pam.enableSSHAgentAuth = true;
   security.pam.services.sudo.sshAgentAuth = true;
-  security.sudo.enable = true;
-  security.sudo.wheelNeedsPassword = false;
+
+  security.sudo = {
+    enable = true;
+    wheelNeedsPassword = false;
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
