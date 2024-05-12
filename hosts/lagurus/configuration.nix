@@ -74,6 +74,12 @@
     ];
   };
 
+  # Autologin as Kent
+  services.xserver.displayManager.autoLogin.enable = true;
+  services.xserver.displayManager.autoLogin.user = "kent";
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -115,17 +121,19 @@
     notcurses
   ];
 
-  systemd.user.services."cat-video" = {
-    enable = true;
-    description = "Play string video for cat";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "vlc -L -f /home/kent/Desktop/string_video.webm";
-      ExecStop = "pkill cat-video";
-      Restart = "on-failure";
-    };
-    wantedBy = [ "default.target" ];
-  };
+#   systemd.user.services."catvideo" = {
+#     enable = true;
+#     description = "Play string video for cat";
+#     serviceConfig = {
+#       Type = "simple";
+#       ExecStart = "vlc -L -f /home/kent/Desktop/string_video.webm";
+#       ExecStop = "pkill cat-video";
+#       Restart = "on-failure";
+#     };
+#     wantedBy = [ "default.target" ];
+#   };
+
+  services.xserver.displayManager.setupCommands = "vlc -L -f /home/kent/Desktop/string_video.webm"
 
   # List services that you want to enable:
 
