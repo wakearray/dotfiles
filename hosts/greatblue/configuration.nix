@@ -616,8 +616,7 @@ in
     description = "Updates packages";
     serviceConfig.PassEnvironment = "DISPLAY";
     script = ''
-      nix-channel --update
-      nixos-rebuild --switch
+      #!/bin/sh
       nix-collect-garbage --delete-older-than 7d
     '';
     wantedBy = [ "multi-user.target" ]; # starts after login

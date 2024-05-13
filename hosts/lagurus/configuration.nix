@@ -122,22 +122,15 @@
   ];
 
   programs.git.enable = true;
-
-#   systemd.user.services."catvideo" = {
-#     enable = true;
-#     description = "Play string video for cat";
-#     serviceConfig = {
-#       Type = "simple";
-#       ExecStart = "vlc -L -f /home/kent/Desktop/string_video.webm";
-#       ExecStop = "pkill cat-video";
-#       Restart = "on-failure";
-#     };
-#     wantedBy = [ "default.target" ];
-#   };
-
-  services.xserver.displayManager.sessionCommands = ''
-    vlc -L -f /home/kent/Desktop/string_video.webm
-  '';
+  systemd.user.services.catvideo = {
+    description = "plays a video";
+    serviceConfig.PassEnvironment = "DISPLAY";
+    script = ''
+      #!/bin/sh
+      vlc -L -f /home/kent/Desktop/string_video.webm
+    '';
+    wantedBy = [ "multi-user.target" ]; # starts after login
+  };
 
   # List services that you want to enable:
 

@@ -16,7 +16,7 @@
       url = "github:yaxitech/ragenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        darwin.follows = "";
+        #darwin.follows = ""; # This currently does nothing on ragenix
       };
     };
   };
