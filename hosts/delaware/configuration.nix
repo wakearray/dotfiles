@@ -157,6 +157,7 @@ in
     docker-client
     docker-compose
     git
+    unstable.neovim
     # An attempt to get VSCode working over SSH
     unstable.vscode-fhs
     # For NextCloud Memories
@@ -492,6 +493,18 @@ in
     # Use Let's Encrypt certificates. Note that this needs to set up a stripped
     # down nginx and opens port 80.
     certificateScheme = "acme-nginx";
+  };
+
+  # Deluge
+  services.deluge = {
+    enable = true;
+    declarative = true;
+    web = {
+      enable = true;
+      openFirewall = true;
+    };
+    authFile = "/run/keys/deluge-auth";
+    openFirewall = true;
   };
 
   # Enable CUPS for printer support.

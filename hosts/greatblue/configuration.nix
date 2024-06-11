@@ -36,6 +36,7 @@ in
         wayland = true;
       };
     };
+    videoDrivers = [ "displaylink" "modesetting" ];
     desktopManager.gnome.enable = true;
   };
   services.xserver.dpi = 300;
@@ -66,7 +67,7 @@ in
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [ pkgs.brlaser ];
+    drivers = [ pkgs.brlaser pkgs.cups-dymo ];
   };
 
   # Enable sound with pipewire.
@@ -89,7 +90,7 @@ in
   users.users.kent = {
     isNormalUser = true;
     description = "Kent";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "kvm" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q kent" ];
     packages = with pkgs; [
       # Gnome specific stuffs
@@ -146,7 +147,6 @@ in
       # Password Management
       unstable._1password
       unstable._1password-gui
-      unstable.git-credential-1password
 
       # Image editing
       gimp-with-plugins
@@ -187,6 +187,17 @@ in
       # Just - A handy way to save and run project-specific commands
       # https://just.systems/man/en/
       just
+      
+      # Collection of image builders
+      # https://github.com/nix-community/nixos-generators
+      nixos-generators
+      
+      sshfs
+      android-studio
+      soundwireserver
+
+      # OpenSCAD
+      unstable.openscad-unstable
     ];
   };
 
@@ -265,6 +276,9 @@ in
 
     # Drivers to support docks with HDMI ports
     displaylink
+
+    # Cups-filers for printing PNG to Dymo XL4
+    cups-filters
 
     # To disable middle mouse click paste
     # https://askubuntu.com/questions/4507/how-do-i-disable-middle-mouse-button-click-paste/1387263#1387263
@@ -489,7 +503,28 @@ in
     # termusic - Terminal Music and Podcast Player written in Rust
     # https://github.com/tramhao/termusic
     unstable.termusic
+
+    xboxdrv
   ];
+  
+  # Udev rules to start or stop systemd service when controller is connected or disconnected
+  services.udev.extraRules = ''
+    # May vary depending on your controller model, find product id using 'lsusb'
+    SUBSYSTEM=="usb", ATTR{idVendor}=="2dc8", ATTR{idProduct}=="3106", ATTR{manufacturer}=="8BitDo", RUN+="${pkgs.systemd}/bin/systemctl start 8bitdo-ultimate-xinput@2dc8:3106"
+    # This device (2dc8:3016) is "connected" when the above device disconnects
+    SUBSYSTEM=="usb", ATTR{idVendor}=="2dc8", ATTR{idProduct}=="3016", ATTR{manufacturer}=="8BitDo", RUN+="${pkgs.systemd}/bin/systemctl stop 8bitdo-ultimate-xinput@2dc8:3106"
+
+    ACTION=="add", ATTR{idVendor}=="2541", ATTR{idProduct}=="9711", ATTR{authorized}="0"
+  '';
+
+  # Systemd service which starts xboxdrv in xbox360 mode
+  systemd.services."8bitdo-ultimate-xinput@" = {
+    unitConfig.Description = "8BitDo Ultimate Controller XInput mode xboxdrv daemon";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.xboxdrv}/bin/xboxdrv --mimic-xpad --silent --type xbox360 --device-by-id %I --force-feedback";
+    };
+  };
 
   # Enable Atuin
   # Replacement for a shell history which records additional commands context with optional encrypted synchronization between machines
@@ -624,9 +659,9 @@ in
 
   # Disable the fingerprint reader since it causes resume from sleep to fail.
   # But this method doesn't seem to work
-  services.udev.extraRules = ''
-    ACTION=="add", ATTR{idVendor}=="2541", ATTR{idProduct}=="9711", ATTR{authorized}="0"
-  '';
+  # services.udev.extraRules = ''
+  #  ACTION=="add", ATTR{idVendor}=="2541", ATTR{idProduct}=="9711", ATTR{authorized}="0"
+  # '';
 
   # Firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -642,6 +677,10 @@ in
 #     # following configuration is added only when building VM with build-vm
 #     virtualisation.cores = 4;
 #   };
+
+  # Enable binfmt emulation of aarch64-linux.
+  # Supports building for phone architectures.
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   system.stateVersion = "23.11";
 }
