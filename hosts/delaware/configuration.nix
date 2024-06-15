@@ -165,6 +165,9 @@ in
     # For NextCloud
     php
 
+    # WebUI for Aria2
+    unstable.ariang
+
 
     # Terminal UI for Systemd Logs and Status
     # https://crates.io/crates/systemctl-tui
@@ -270,7 +273,7 @@ in
           OPENAI_API_KEY = "ebb3a8d1-0fdd-4ccd-a9b1-e5030cebbbfb";
           OPENAI_PROXY_URL = "http://bricksllm:8002/api/providers/openai/v1";
           ACCESS_CODE = "Q4DMynk2PXFvBoFpwTcxqvsYGvfarw3Hfy8,NW6ypPgXztoytBvXq9nEAdqP3QEpKc67pbR,kyKepksasK7q2vYcUCY6FAgrNFCn4vx93nz";
-          CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4-turbo-preview=gpt-4-turbo,+gpt-4-1106-preview=gpt-4-turbo-1106,+gpt-4-vision-preview=gpt-4-vision";
+          CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4o=gpt-4o";
           PLUGIN_SETTINGS = "search-engine:SERPAPI_API_KEY=14f65436997bf5ecfe72277c1c4a4b695faec4d914da27556f6471976323818f";
         };
         ports = [ "3210:3210" ];
@@ -498,13 +501,17 @@ in
   # Deluge
   services.deluge = {
     enable = true;
-    declarative = true;
+    declarative = false;
     web = {
       enable = true;
       openFirewall = true;
     };
-    authFile = "/run/keys/deluge-auth";
-    openFirewall = true;
+  };
+
+  # Aria2 multithread-multisource downloader
+  services.aria2 = {
+    enable = true;
+    rpcSecret = "M9W7xjAP3dQAhLw8FmEwF9dp8xU8pBwqCUtuaM6NuBk8EMunWHTAmfvoeF";
   };
 
   # Enable CUPS for printer support.
@@ -697,20 +704,8 @@ in
     };
   };
 
-  fonts.packages = with pkgs; [
-    # Better emojis
-    twemoji-color-font
-
-    # Comic Sans like fonts for making memes
-    comic-mono
-    comic-neue
-
-    # Just some nice fonts
-    source-sans
-  ];
-
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 25 80 143 443 465 587 631 993 3210 8123 8070 ];
+  networking.firewall.allowedTCPPorts = [ 25 80 139 143 445 443 465 587 631 993 3210 8123 8070 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;

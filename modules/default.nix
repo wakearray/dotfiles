@@ -9,6 +9,11 @@ in
 {
   ## These are the defaults I want on every machine:
 
+  imports =
+  [
+    ./zsh.nix
+  ];
+
   # nixpkgs allow unfree with unstable overlay.
   nixpkgs = {
     overlays = [
@@ -53,27 +58,6 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Set zsh as the default user shell.
-  users.defaultUserShell = pkgs.zsh;
-
-  # Turn on zsh.
-  programs.zsh = {
-    enable = true;
-    zsh-autoenv.enable = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      # use lsd instead of ls.
-      l = "lsd -al";
-      # use zoxide instead of cd.
-      cd = "z";
-    };
-    shellInit = ''
-      eval "$(zoxide init zsh)"
-      eval "$(starship init zsh)"
-      #eval "$(atuin init zsh)"
-    '';
-  };
-
   # Console typo fixer.
   programs.thefuck.enable = true;
 
@@ -87,4 +71,19 @@ in
     openFirewall = true;
     domainName = "local";
   };
+
+  fonts.packages = with pkgs; [
+    # Better emojis
+    twemoji-color-font
+
+    # Comic Sans like fonts for making memes
+    comic-mono
+    comic-neue
+
+    # Just some nice fonts
+    source-sans
+
+    # Nerdfonts
+    unstable.nerdfonts
+  ];
 }
