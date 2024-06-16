@@ -12,7 +12,16 @@ in
   imports =
   [
     ./zsh.nix
+    ./tui.nix
   ];
+
+  # TODO: Consider using this:
+  # boot.initrd.network.ssh.authorizedKeyFiles is a new option in the initrd ssh daemon module,
+  # for adding authorized keys via list of files.
+
+  # Removes old Perl scripts
+  system.etc.overlay.enable = true;
+  systemd.sysusers.enable = true;
 
   # nixpkgs allow unfree with unstable overlay.
   nixpkgs = {
@@ -65,12 +74,12 @@ in
   services.locate.enable = true;
 
   # Use Avahi to make this computer discoverable and to discover other computers.
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    openFirewall = true;
-    domainName = "local";
-  };
+#   services.avahi = {
+#     enable = true;
+#     nssmdns4 = true;
+#     openFirewall = true;
+#     domainName = "local";
+#   };
 
   fonts.packages = with pkgs; [
     # Better emojis

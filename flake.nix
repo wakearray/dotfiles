@@ -2,8 +2,8 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-latest";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 

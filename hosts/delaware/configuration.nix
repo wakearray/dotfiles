@@ -404,15 +404,15 @@ in
   # NextCloud
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud28;
+    package = pkgs.nextcloud29;
     home = "/sambazfs/nextcloud";
-    logType = "file";
-    logLevel = 2;
+    log_type = "file";
+    loglevel = 2;
     hostName = "cloud.${domain}";
     nginx.hstsMaxAge = 15552000;
     config = {
       # Further forces Nextcloud to use HTTPS
-      overwriteProtocol = "https";
+      overwriteprotocol = "https";
 
       # Nextcloud PostegreSQL database configuration, recommended over using SQLite
       dbtype = "pgsql";
@@ -423,7 +423,7 @@ in
 
       adminpassFile = "/var/nextcloud-admin-pass";
       adminuser = "admin";
-      defaultPhoneRegion = "US";
+      default_phone_region = "US";
     };
     appstoreEnable = true;
     extraApps = {
@@ -511,7 +511,7 @@ in
   # Aria2 multithread-multisource downloader
   services.aria2 = {
     enable = true;
-    rpcSecret = "M9W7xjAP3dQAhLw8FmEwF9dp8xU8pBwqCUtuaM6NuBk8EMunWHTAmfvoeF";
+    rpcSecretFile = ""; ## TODO
   };
 
   # Enable CUPS for printer support.
