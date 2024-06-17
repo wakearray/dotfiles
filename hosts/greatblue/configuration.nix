@@ -222,9 +222,6 @@ in
   # change steam Launch Options on per game basis to `gamemoderun %command%`
   programs.gamemode.enable = true;
 
-  # Allows VSCode to install plugins like normal.
-  programs.nix-ld-rs.enable = true;
-
   # Make 1 Password work correctly
   programs._1password = {
     enable = true;

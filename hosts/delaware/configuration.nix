@@ -173,9 +173,6 @@ in
     unstable.ariang
   ];
 
-  # Allow VS Code server
-  programs.nix-ld-rs.enable = true;
-
   # Docker containers
   virtualisation.oci-containers = {
     backend = "docker";

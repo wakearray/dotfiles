@@ -72,6 +72,12 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Allows installing unpackaged binaries
+  programs.nix-ld = {
+    enable = true;
+    package = pkgs.nix-ld-rs;
+  };
+
   # Console typo fixer.
   programs.thefuck.enable = true;
 
