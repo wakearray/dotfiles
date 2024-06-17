@@ -657,12 +657,12 @@ in
         "Kent_S24_Ultra" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
         # "Kent_P80" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
         # "Kent_GreatBlue" = { id = "DEVICE-ID-GOES-HERE"; };
-        # "Jess_S20_Ultra" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
+        "Jess_S20_Ultra" = { id = "F436IQN-OOP5KEX-CNCY7VA-4CKUSOR-6YUHIO2-TTESNNW-TMMSMNI-CQZNUAZ"; };
       };
       folders = {
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
           path = "/mnt/syncthing/kent_personal/notes";    # Which folder to add to Syncthing
-          devices = [ "Kent_S24_Ultra" ];         # Which devices to share the folder with
+          devices = [ "Kent_S24_Ultra" "Jess_S20_Ultra" ];         # Which devices to share the folder with
         };
         "Kent_Notes" = {
           path = "/mnt/syncthing/kent_personal/notes";
@@ -674,11 +674,11 @@ in
         };
         "Jess_Notes" = {
           path = "/mnt/syncthing/jess_personal/notes";
-          devices = [ "Kent_S24_Ultra" ];
+          devices = [ "Jess_S20_Ultra" ];
         };
         "Jess_DCIM" = {
           path = "/mnt/syncthing/jess_personal/DCIM";
-          devices = [ "Kent_S24_Ultra" ];
+          devices = [ "Jess_S20_Ultra" ];
         };
       };
     };
