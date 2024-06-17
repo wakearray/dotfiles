@@ -694,7 +694,6 @@ in
       };
     };
   };
-};
 
   # Required for samba printer sharing
   systemd.tmpfiles.rules = [
