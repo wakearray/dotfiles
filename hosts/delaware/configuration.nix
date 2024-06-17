@@ -6,6 +6,7 @@
 let
   secrets = "/etc/nixos/secrets";
   domain = "voicelesscrimson.com";
+
 in
 {
   imports =
@@ -149,17 +150,29 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Needed for hosting SSH File System
     sshfs
+
+    # Needed for doing things with ZFS
     zfs
+
+    # CUPS supports printing
     cups
+
+    # I don't remember why I put this here. xD
     iproute2
+
+    # Needed for Docker
     bridge-utils
     docker-client
     docker-compose
+
+    # It's git
     git
-    unstable.neovim
+
     # An attempt to get VSCode working over SSH
     unstable.vscode-fhs
+
     # For NextCloud Memories
     exiftool
     # For NextCloud
@@ -167,55 +180,6 @@ in
 
     # WebUI for Aria2
     unstable.ariang
-
-
-    # Terminal UI for Systemd Logs and Status
-    # https://crates.io/crates/systemctl-tui
-    systemctl-tui
-
-    # Zellij - A terminal workspace with batteries included
-    # https://github.com/zellij-org/zellij
-    # https://www.youtube.com/watch?v=gtjPeTCkm-8
-    zellij
-
-    # lsd - The next gen ls command
-    # https://github.com/lsd-rs/lsd
-    unstable.lsd
-
-    # Zoxide - A fast cd command that learns your habits
-    # https://github.com/ajeetdsouza/zoxide
-    # https://www.youtube.com/watch?v=aghxkpyRVDY
-    unstable.zoxide
-
-    # fzf - Command-line fuzzy finder written in Go
-    # https://github.com/junegunn/fzf
-    fzf
-
-    # Terminal file managers
-    # https://github.com/antonmedv/walk
-    walk
-    # https://github.com/dzfrias/projectable
-    projectable
-    # https://github.com/GiorgosXou/TUIFIManager
-    tuifimanager
-    # Yazi - Blazing fast terminal file manager written in Rust, based on async I/O
-    # https://github.com/sxyazi/yazi
-    yazi
-    # xplr - A hackable, minimal, fast TUI file explorer
-    # https://xplr.dev/
-    xplr
-
-    # Nerdfonts - Iconic font aggregator, collection, and patcher
-    # https://www.nerdfonts.com/
-    unstable.nerdfonts
-
-    # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
-    # https://starship.rs/
-    unstable.starship
-
-    # notcurses - blingful character graphics/TUI library. definitely not curses.
-    # https://github.com/dankamongmen/notcurses
-    notcurses
   ];
 
   # Allow VS Code server
@@ -357,17 +321,55 @@ in
           };
         };
       };
-     # "git.${domain}" = {
-     #   enableACME = true;
-     #   forceSSL = true;
-     #   locations = {
-     #     "/" = {
-     #       proxyPass = "http://localhost:8065";
-     #     };
-     #   };
-     # };
+      "git.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        extraConfig = ''
+          client_max_body_size 512M;
+        '';
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:8065";
+          };
+        };
+      };
     };
   };
+
+  # Forgejo
+  services.forgejo = {
+    enable = true;
+    database.type = "postgres";
+    # Enable support for Git Large File Storage
+    lfs.enable = true;
+    settings = {
+      server = {
+        DOMAIN = "git.${domain}";
+        # You need to specify this to remove the port from URLs in the web UI.
+        ROOT_URL = "https://${domain}/";
+        PROTOCOL = "https";
+        HTTP_PORT = 8065;
+      };
+      # You can temporarily allow registration to create an admin user.
+      service.DISABLE_REGISTRATION = true;
+      # Add support for actions, based on act: https://github.com/nektos/act
+      actions = {
+        ENABLED = true;
+        DEFAULT_ACTIONS_URL = "github";
+      };
+      # Sending emails is completely optional
+      # You can send a test email from the web UI at:
+      # Profile Picture > Site Administration > Configuration >  Mailer Configuration
+#       mailer = {
+#         ENABLED = true;
+#         SMTP_ADDR = "mail.example.com";
+#         FROM = "noreply@${srv.DOMAIN}";
+#         USER = "noreply@${srv.DOMAIN}";
+#       };
+    };
+#     mailerPasswordFile = config.age.secrets.forgejo-mailer-password.path;
+  };
+
   users.users.nginx.extraGroups = [ "acme" ];
 
   environment.noXlibs = false;
@@ -511,7 +513,7 @@ in
   # Aria2 multithread-multisource downloader
   services.aria2 = {
     enable = true;
-    rpcSecretFile = ""; ## TODO
+    rpcSecretFile = "${secrets}/aria2";
   };
 
   # Enable CUPS for printer support.
@@ -650,6 +652,50 @@ in
     };
   };
 
+  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; # Don't create default ~/Sync folder
+
+  # Syncthing, a file syncing service
+  services.syncthing = {
+    enable = true;
+    key = "${secrets}/syncthing/key.pem";
+    cert = "${secrets}/syncthing/cert.pem";
+    user = "nextcloud";
+    configDir = "/home/myusername/Documents/.config/syncthing";
+    overrideDevices = true;     # overrides any devices added or deleted through the WebUI
+    overrideFolders = true;     # overrides any folders added or deleted through the WebUI
+    settings = {
+      devices = {
+        "Kent_S24_Ultra" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
+        # "Kent_P80" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
+        # "Kent_GreatBlue" = { id = "DEVICE-ID-GOES-HERE"; };
+        # "Jess_S20_Ultra" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
+      };
+      folders = {
+        "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
+          path = "/mnt/syncthing/kent_personal/notes";    # Which folder to add to Syncthing
+          devices = [ "Kent_S24_Ultra" ];         # Which devices to share the folder with
+        };
+        "Kent_Notes" = {
+          path = "/mnt/syncthing/kent_personal/notes";
+          devices = [ "Kent_S24_Ultra" ];
+        };
+        "Kent_DCIM" = {
+          path = "/mnt/syncthing/kent_personal/DCIM";
+          devices = [ "Kent_S24_Ultra" ];
+        };
+        "Jess_Notes" = {
+          path = "/mnt/syncthing/jess_personal/notes";
+          devices = [ "Kent_S24_Ultra" ];
+        };
+        "Jess_DCIM" = {
+          path = "/mnt/syncthing/jess_personal/DCIM";
+          devices = [ "Kent_S24_Ultra" ];
+        };
+      };
+    };
+  };
+};
+
   # Required for samba printer sharing
   systemd.tmpfiles.rules = [
     "d /var/spool/samba 1777 root root -"
@@ -678,14 +724,13 @@ in
   };
 
   # Docker Container Update Timer
-  systemd.services.updateDockerImages = {
+  systemd.services."updateDockerImages" = {
     description = "Pull latest Docker images and restart services";
     script = ''
       #!/bin/sh
       docker pull luyuanxin1995/bricksllm:latest
       docker pull lobehub/lobe-chat:latest
       systemctl restart docker-bricksllm.service
-      nix-channel --update
       nix-collect-garbage --delete-older-than 7d
       systemctl restart docker-lobe-chat.service
     '';
@@ -701,12 +746,13 @@ in
     timerConfig = {
       OnCalendar = "Mon *-*-* 06:00:00";
       Persistent = true; # Ensures the timer catches up if it missed a run
+      Unit = "updateDockerImages.service";
     };
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 25 80 139 143 445 443 465 587 631 993 3210 8123 8070 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 25 80 139 143 445 443 465 587 631 993 3210 8123 8070 8384 22000 ];
+  networking.firewall.allowedUDPPorts = [ 21027 22000 ];
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;
   services.openssh.openFirewall = true;

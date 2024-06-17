@@ -19,9 +19,10 @@ in
   # boot.initrd.network.ssh.authorizedKeyFiles is a new option in the initrd ssh daemon module,
   # for adding authorized keys via list of files.
 
-  # Removes old Perl scripts
-  system.etc.overlay.enable = true;
-  systemd.sysusers.enable = true;
+  # Removes old Perl scripts (fixed in master branch only, unsure how to obtain that)
+  #boot.initrd.systemd.enable = true;
+  #system.etc.overlay.enable = true;
+  #systemd.sysusers.enable = true;
 
   # nixpkgs allow unfree with unstable overlay.
   nixpkgs = {

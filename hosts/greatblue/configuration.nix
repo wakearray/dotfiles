@@ -298,13 +298,11 @@ in
     #gnomeExtensions.arcmenu
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pop-shell
-    # Makes QT/KDE apps look like Gnome apps
-    #adwaita-qt
 
     unstable.polkit_gnome
 
-    # Allows me to avoid retyping my default KDE wallet password while I'm logged in.
-    #libsForQt5.kwallet-pam
+    # Rust based teamviewer alternative
+    rustdesk
 
     # Allows me to use U2F/FIDO2 USB keys
     pam_u2f
