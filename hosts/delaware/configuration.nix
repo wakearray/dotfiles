@@ -661,7 +661,7 @@ in
       };
       folders = {
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
-          path = "/mnt/syncthing/kent_personal/notes";    # Which folder to add to Syncthing
+          path = "/mnt/syncthing/shared_family/notes";    # Which folder to add to Syncthing
           devices = [ "Kent_S24_Ultra" "Jess_S20_Ultra" ];         # Which devices to share the folder with
         };
         "Kent_Notes" = {
