@@ -12,12 +12,6 @@ in
   imports =
   [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    (builtins.fetchTarball {
-      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-23.11/nixos-mailserver-n
-  ixos-23.11.tar.gz";
-      sha256 = "122vm4n3gkvlkqmlskiq749bhwfd0r71v6vcmg1bbyg4998brvx8";
-    })
-    (fetchTarball "https://github.com/Ten0/nixos-vscode-server/tarball/support_new_vscode_versions")
     ../../modules
   ];
 
@@ -234,11 +228,11 @@ in
       lobe-chat = {
         image = "lobehub/lobe-chat";
         environment = {
-          OPENAI_API_KEY = "ebb3a8d1-0fdd-4ccd-a9b1-e5030cebbbfb";
+          # Bricksllm locally generated key (accidentally leaked and now invalid)
+          # OPENAI_API_KEY = "ebb3a8d1-0fdd-4ccd-a9b1-e5030cebbbfb";
+          # Bricksllm local proxy
           OPENAI_PROXY_URL = "http://bricksllm:8002/api/providers/openai/v1";
-          ACCESS_CODE = "Q4DMynk2PXFvBoFpwTcxqvsYGvfarw3Hfy8,NW6ypPgXztoytBvXq9nEAdqP3QEpKc67pbR,kyKepksasK7q2vYcUCY6FAgrNFCn4vx93nz";
           CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4o=gpt-4o";
-          PLUGIN_SETTINGS = "search-engine:SERPAPI_API_KEY=14f65436997bf5ecfe72277c1c4a4b695faec4d914da27556f6471976323818f";
         };
         ports = [ "3210:3210" ];
         dependsOn = [ "bricksllm" ];

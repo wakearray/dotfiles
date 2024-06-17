@@ -11,7 +11,6 @@ in
   [
     ./hardware-configuration.nix
     ../../modules
-    #<nixpkgs/nixos/modules/virtualisation/qemu-vm.nix>
   ];
 
 
@@ -19,10 +18,10 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Kernal Params.
+  # Trying to prevent the fingerprint reader from blocking resume from suspend-to-ram
   boot.kernelParams = [ "drm_kms_helper.poll=N" "usbcore.autosuspend=-1" ];
 
-  networking.hostName = "GreatBlue"; # Define your hostname.
+  networking.hostName = "GreatBlue";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -378,6 +377,7 @@ in
     # https://github.com/tramhao/termusic
     unstable.termusic
 
+    # Makes the 8BitDo controller work
     xboxdrv
   ];
   
@@ -492,7 +492,7 @@ in
       enable = true;
       control = "sufficient";
       authFile = "/etc/u2f_mappings";
-      appId = "pam://GreatBlue-NixOS"; # Temporary, when I changed hostnames u2f broke
+      appId = "pam://NixOS";
     };
     services = {
       login.u2fAuth = true;
@@ -501,7 +501,7 @@ in
       gdm-launch-environment.u2fAuth = true;
       gdm-password.u2fAuth = true;
       polkit-1.u2fAuth = true;
-      kde.u2fAuth = true;
+      #kde.u2fAuth = true;
     };
   };
   security.polkit.enable = true;
@@ -534,11 +534,6 @@ in
 
   # Hardware.
   hardware.bluetooth.enable = true;
-
-#   virtualisation.vmVariant = {
-#     # following configuration is added only when building VM with build-vm
-#     virtualisation.cores = 4;
-#   };
 
   # Enable binfmt emulation of aarch64-linux.
   # Supports building for phone architectures.

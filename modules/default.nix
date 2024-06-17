@@ -15,6 +15,10 @@ in
     ./tui.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+
+  ];
+
   # TODO: Consider using this:
   # boot.initrd.network.ssh.authorizedKeyFiles is a new option in the initrd ssh daemon module,
   # for adding authorized keys via list of files.

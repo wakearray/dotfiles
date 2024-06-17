@@ -19,9 +19,11 @@
         #darwin.follows = ""; # This currently does nothing on ragenix
       };
     };
+
+    inputs.simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, agenix, simple-nixos-mailserver, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib; # // nixpkgs-unstable.lib;
@@ -64,6 +66,7 @@
         modules = [
           ./hosts/delaware/configuration.nix
           agenix.nixosModules.default
+          simple-nixos-mailserver.nixosModule
         ];
       };
       Lagurus = lib.nixosSystem {
