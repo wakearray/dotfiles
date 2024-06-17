@@ -267,7 +267,7 @@ in
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
   };
-  security.pam.enableSSHAgentAuth = true;
+  security.pam.sshAgentAuth.enable = true;
   security.pam.services.sudo.sshAgentAuth = true;
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
@@ -398,15 +398,6 @@ in
     home = "/sambazfs/nextcloud";
     hostName = "cloud.${domain}";
     nginx.hstsMaxAge = 15552000;
-    settings = {
-      loglevel = 2;
-      log_type = "file";
-
-      # Further forces Nextcloud to use HTTPS
-      overwriteprotocol = "https";
-
-      default_phone_region = "US";
-    };
     config = {
       # Nextcloud PostegreSQL database configuration, recommended over using SQLite
       dbtype = "pgsql";
@@ -431,7 +422,14 @@ in
     };
 
     extraAppsEnable = true;
-    extraOptions = {
+    settings = {
+      loglevel = 2;
+      log_type = "file";
+
+      # Further forces Nextcloud to use HTTPS
+      overwriteprotocol = "https";
+
+      default_phone_region = "US";
       # Fixes ffmpeg errors
       "memories.vod.ffmpeg" = "${lib.getExe pkgs.ffmpeg-headless}";
       "memories.vod.ffprobe" = "${pkgs.ffmpeg-headless}/bin/ffprobe";
