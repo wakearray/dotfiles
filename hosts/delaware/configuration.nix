@@ -402,10 +402,10 @@ in
     enable = true;
     package = pkgs.nextcloud29;
     home = "/sambazfs/nextcloud";
-    loglevel = 2;
     hostName = "cloud.${domain}";
     nginx.hstsMaxAge = 15552000;
     settings = {
+      loglevel = 2;
       log_type = "file";
 
       # Further forces Nextcloud to use HTTPS
