@@ -164,9 +164,6 @@ in
     # It's git
     git
 
-    # An attempt to get VSCode working over SSH
-    unstable.vscode-fhs
-
     # For NextCloud Memories
     exiftool
     # For NextCloud
@@ -177,7 +174,7 @@ in
   ];
 
   # Allow VS Code server
-  programs.nix-ld.enable = true;
+  programs.nix-ld-rs.enable = true;
 
   # Docker containers
   virtualisation.oci-containers = {
@@ -696,9 +693,6 @@ in
   systemd.tmpfiles.rules = [
     "d /var/spool/samba 1777 root root -"
   ];
-
-  # Make VS Code function when SSH'ing into this server
-  services.vscode-server.enableFHS = true;
 
   # NextCloud Cron service
   systemd.timers."nextcloudcron" = {

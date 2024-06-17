@@ -223,7 +223,7 @@ in
   programs.gamemode.enable = true;
 
   # Allows VSCode to install plugins like normal.
-  programs.nix-ld.enable = true;
+  programs.nix-ld-rs.enable = true;
 
   # Make 1 Password work correctly
   programs._1password = {
