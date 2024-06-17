@@ -394,7 +394,7 @@ in
   services.audiobookshelf = {
     enable = true;
     port = 8066;
-    package = unstable.audiobookshelf;
+    package = pkgs.unstable.audiobookshelf;
   };
 
   # NextCloud
@@ -406,10 +406,13 @@ in
     loglevel = 2;
     hostName = "cloud.${domain}";
     nginx.hstsMaxAge = 15552000;
-    config = {
+    settings = {
       # Further forces Nextcloud to use HTTPS
       overwriteprotocol = "https";
 
+      default_phone_region = "US";
+    };
+    config = {
       # Nextcloud PostegreSQL database configuration, recommended over using SQLite
       dbtype = "pgsql";
       dbuser = "nextcloud";
@@ -419,7 +422,6 @@ in
 
       adminpassFile = "/var/nextcloud-admin-pass";
       adminuser = "admin";
-      default_phone_region = "US";
     };
     appstoreEnable = true;
     extraApps = {
