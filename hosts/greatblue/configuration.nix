@@ -294,6 +294,7 @@ in
     #gnomeExtensions.arcmenu
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pop-shell
+    gnome-menus
 
     unstable.polkit_gnome
 
@@ -376,6 +377,9 @@ in
 
     # Makes the 8BitDo controller work
     xboxdrv
+
+    # Tools for testing Vulkan driver compatibility
+    vulkan-tools
   ];
   
   # Udev rules to start or stop systemd service when controller is connected or disconnected

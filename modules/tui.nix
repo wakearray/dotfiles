@@ -8,6 +8,7 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
+    rustdesk
     # 7-zip
     p7zip
 

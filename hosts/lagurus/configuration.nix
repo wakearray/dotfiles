@@ -108,10 +108,6 @@
     # https://github.com/junegunn/fzf
     fzf
 
-    # Nerdfonts - Iconic font aggregator, collection, and patcher
-    # https://www.nerdfonts.com/
-    unstable.nerdfonts
-
     # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
     # https://starship.rs/
     unstable.starship
