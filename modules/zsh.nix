@@ -81,6 +81,19 @@ in
         fi
       }
 
+      bevyflake(){
+        nix flake new --template github:wakearray/nix-templates/automation-improvements#rust-bevy ''$1
+        cd ''$1
+        direnv allow
+        rm init.sh
+        git init
+        sed -i "s/bevy_template/''$1/g" Cargo.toml
+        git add * .envrc .gitignore
+        nix flake update
+        git add flake.lock Cargo.lock
+        git commit -m "Initial commit"
+      }
+
       eval "''$(zoxide init zsh)"
       eval "''$(starship init zsh)"
       #eval "''$(atuin init zsh)"

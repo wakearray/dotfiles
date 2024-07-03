@@ -180,9 +180,6 @@ in
       # https://github.com/hhd-dev/hhd
       unstable.handheld-daemon
 
-      # Note taking app
-      obsidian
-
       # Just - A handy way to save and run project-specific commands
       # https://just.systems/man/en/
       just

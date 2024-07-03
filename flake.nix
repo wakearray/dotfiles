@@ -7,6 +7,11 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0-rc1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +28,7 @@
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, agenix, simple-nixos-mailserver, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, agenix, simple-nixos-mailserver, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib; # // nixpkgs-unstable.lib;
@@ -59,6 +64,7 @@
           ./hosts/greatblue/configuration.nix
           nixos-hardware.nixosModules.gpd-win-max-2-2023
           agenix.nixosModules.default
+          lix-module.nixosModules.default
         ];
       };
       Delaware = lib.nixosSystem {
@@ -67,6 +73,7 @@
           ./hosts/delaware/configuration.nix
           agenix.nixosModules.default
           simple-nixos-mailserver.nixosModule
+          lix-module.nixosModules.default
         ];
       };
       Lagurus = lib.nixosSystem {
@@ -74,6 +81,7 @@
         modules = [
           ./hosts/lagurus/configuration.nix
           agenix.nixosModules.default
+          lix-module.nixosModules.default
         ];
       };
     };
