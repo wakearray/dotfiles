@@ -82,13 +82,14 @@ in
       }
 
       bevyflake(){
-        nix flake new --template github:wakearray/nix-templates/automation-improvements#rust-bevy ''$1
+        nix flake new --template github:wakearray/nix-templates/feature/automation-improvements#rust-bevy ''$1
+        direnv allow ''$1
         cd ''$1
-        direnv allow
         rm init.sh
         git init
         sed -i "s/bevy_template/''$1/g" Cargo.toml
         git add * .envrc .gitignore
+        git reset -- init.sh
         nix flake update
         git add flake.lock Cargo.lock
         git commit -m "Initial commit"

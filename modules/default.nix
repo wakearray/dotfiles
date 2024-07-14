@@ -13,10 +13,32 @@ in
   [
     ./zsh.nix
     ./tui.nix
+    ./nvim.nix
   ];
 
   environment.systemPackages = with pkgs; [
+    # Rust based teamviewer
+    rustdesk
 
+    # 7-zip
+    p7zip
+
+    # Git
+    git
+
+    # Rust grep use `rg`
+    repgrep
+    ripgrep
+    ripgrep-all
+
+    # lsd - The next gen ls command
+    # https://github.com/lsd-rs/lsd
+    unstable.lsd
+
+    # Zoxide - A fast cd command that learns your habits
+    # https://github.com/ajeetdsouza/zoxide
+    # https://www.youtube.com/watch?v=aghxkpyRVDY
+    unstable.zoxide
   ];
 
   # TODO: Consider using this:
@@ -49,7 +71,11 @@ in
 
   # Deletes temp files on boot.
   boot.tmp.useTmpfs = true;
-  nix.gc.automatic = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   # Keep the Nix package store optimised.
   nix.settings.auto-optimise-store = true;
@@ -85,12 +111,12 @@ in
   services.locate.enable = true;
 
   # Use Avahi to make this computer discoverable and to discover other computers.
-#   services.avahi = {
-#     enable = true;
-#     nssmdns4 = true;
-#     openFirewall = true;
-#     domainName = "local";
-#   };
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+    domainName = "local";
+  };
 
   fonts.packages = with pkgs; [
     # Better emojis
@@ -99,9 +125,6 @@ in
     # Comic Sans like fonts for making memes
     comic-mono
     comic-neue
-
-    # Just some nice fonts
-    source-sans
 
     # Nerdfonts
     unstable.nerdfonts

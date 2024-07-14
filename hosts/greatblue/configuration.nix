@@ -178,7 +178,7 @@ in
 
       # Linux support for handheld gaming devices like the Legion Go, ROG Ally, and GPD Win
       # https://github.com/hhd-dev/hhd
-      unstable.handheld-daemon
+#       unstable.handheld-daemon
 
       # Just - A handy way to save and run project-specific commands
       # https://just.systems/man/en/
@@ -196,11 +196,6 @@ in
       unstable.openscad-unstable
     ];
   };
-
-  # Not sure which package this is for, but I think it might be obsidian
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
 
   # Enable keyboard access
   hardware.keyboard.qmk.enable = true;
@@ -239,7 +234,8 @@ in
       };}
       { gpg = { format = "ssh"; }; }
       { commit = { gpgsign = true; }; }
-      { "gpg \"ssh\"" = { program = "${config.programs._1password.package}/share/1password/op-ssh-sign"; }; }
+      { "gpg \"ssh\"" = { program = "${config.programs._1password-gui.package}/share/1password/op-ssh-sign"; }; }
+      { color = { ui = "auto"; }; }
     ];
   };
 
@@ -272,15 +268,6 @@ in
     # Cups-filers for printing PNG to Dymo XL4
     cups-filters
 
-    # To disable middle mouse click paste
-    # https://askubuntu.com/questions/4507/how-do-i-disable-middle-mouse-button-click-paste/1387263#1387263
-    #xbindkeys
-    #xsel
-    #xdotool
-
-    # Dolphin refused to handle zips without this
-    #libsForQt5.ark
-
     # Wayland things
     # Sirula - Simple app launcher for wayland written in rust
     # https://github.com/DorianRudolph/sirula
@@ -288,15 +275,9 @@ in
 
     # Gnome Extensions
     gnomeExtensions.dash-to-panel
-    #gnomeExtensions.arcmenu
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.pop-shell
     gnome-menus
 
     unstable.polkit_gnome
-
-    # Rust based teamviewer alternative
-    rustdesk
 
     # Allows me to use U2F/FIDO2 USB keys
     pam_u2f
@@ -310,9 +291,6 @@ in
 
     # Allows me to mount samba drives
     cifs-utils
-
-    # Git
-    git
 
     # aspell
     aspell

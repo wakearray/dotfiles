@@ -12,6 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +33,7 @@
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, agenix, simple-nixos-mailserver, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, nixvim, agenix, simple-nixos-mailserver, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib; # // nixpkgs-unstable.lib;
@@ -63,6 +68,7 @@
         modules = [
           ./hosts/greatblue/configuration.nix
           nixos-hardware.nixosModules.gpd-win-max-2-2023
+          nixvim.nixosModules.nixvim
           agenix.nixosModules.default
           lix-module.nixosModules.default
         ];
@@ -71,6 +77,7 @@
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./hosts/delaware/configuration.nix
+          nixvim.nixosModules.nixvim
           agenix.nixosModules.default
           simple-nixos-mailserver.nixosModule
           lix-module.nixosModules.default
@@ -80,6 +87,7 @@
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./hosts/lagurus/configuration.nix
+          nixvim.nixosModules.nixvim
           agenix.nixosModules.default
           lix-module.nixosModules.default
         ];
