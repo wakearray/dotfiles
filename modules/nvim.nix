@@ -68,7 +68,8 @@ in
           rnix-lsp.enable = true;
           rust-analyzer = {
             enable = true;
-            installCargo = true;
+            installRustc = false;
+            installCargo = false;
           };
           taplo.enable = true;
           marksman.enable = true;

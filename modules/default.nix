@@ -18,7 +18,9 @@ in
 
   environment.systemPackages = with pkgs; [
     # Rust based teamviewer
-    rustdesk
+    # Wainting on RustDesk to release new version with fixed dependencies
+    # https://github.com/NixOS/nixpkgs/issues/328884#issuecomment-2241582878
+    #rustdesk
 
     # 7-zip
     p7zip

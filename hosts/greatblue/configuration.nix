@@ -290,7 +290,7 @@ in
     android-tools
 
     # Rust Tools
-    rustc
+    #rustc
 
     # Nix packager
     nix-init
