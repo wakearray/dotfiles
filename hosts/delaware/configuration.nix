@@ -45,7 +45,10 @@ in
     description = "Kent";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "samba" ];
     packages = with pkgs; [];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q kent" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q kent"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPKZDK5hEVMpb35Eanw/7zct8selZTgMtzwak92GdYg0"
+    ];
   };
 
   users.users.sambauser = {
@@ -649,24 +652,41 @@ in
     key = "${secrets}/syncthing/key.pem";
     cert = "${secrets}/syncthing/cert.pem";
     user = "nextcloud";
-    configDir = "/home/myusername/Documents/.config/syncthing";
     overrideDevices = true;     # overrides any devices added or deleted through the WebUI
     overrideFolders = true;     # overrides any folders added or deleted through the WebUI
     settings = {
       devices = {
         "Kent_S24_Ultra" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
-        # "Kent_P80" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
-        # "Kent_GreatBlue" = { id = "DEVICE-ID-GOES-HERE"; };
+        "Kent_P80" = { id = "TUOYN7I-JW7FVCY-B2RJSIW-2QJD6KO-7MQ5JOY-QK5X6HA-BKSZ4KL-FGSVDQL"; };
+        "Kent_y700" = { id = "CWTMGYN-7PYXAVX-UVHV2CL-R26FJMJ-GQGOS2B-PBYG4QQ-4562DXH-CEEDUQR"; };
+        "Kent_Boox" = { id = "T3U4VSV-7LPWYBK-7GNDAMU-GG7IMXO-OKCFZQB-4WMC2KP-RFANMLH-FFO3WQ7"; };
+        "Kent_Hisense_A9" = { id = "S55WSYJ-K3C6MV7-YWEUAW5-YAYHAB2-FIZ7RNR-NE7KCTZ-PZNPO2I-6S3W4AT"; };
+        "Kent_GreatBlue" = { id = "6B6CFWQ-AOVKOLS-AJ77Y7U-T5G7QPG-IQTPCSJ-NRPZNJR-4LMLIRS-FGMYSQ2"; };
         "Jess_S20_Ultra" = { id = "F436IQN-OOP5KEX-CNCY7VA-4CKUSOR-6YUHIO2-TTESNNW-TMMSMNI-CQZNUAZ"; };
       };
       folders = {
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
           path = "/mnt/syncthing/shared_family/notes";    # Which folder to add to Syncthing
-          devices = [ "Kent_S24_Ultra" "Jess_S20_Ultra" ];         # Which devices to share the folder with
+          devices = [
+            "Jess_S20_Ultra"
+            "Kent_S24_Ultra"
+            "Kent_P80"
+            "Kent_y700"
+            "Kent_Boox"
+            "Kent_Hisense_A9"
+            "Kent_GreatBlue"
+          ];
         };
         "Kent_Notes" = {
           path = "/mnt/syncthing/kent_personal/notes";
-          devices = [ "Kent_S24_Ultra" ];
+          devices = [
+            "Kent_S24_Ultra"
+            "Kent_P80"
+            "Kent_y700"
+            "Kent_Boox"
+            "Kent_Hisense_A9"
+            "Kent_GreatBlue"
+          ];
         };
         "Kent_DCIM" = {
           path = "/mnt/syncthing/kent_personal/DCIM";

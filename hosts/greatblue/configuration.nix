@@ -4,7 +4,7 @@
   config,
   pkgs, ... }:
 let
-
+  secrets = "/etc/nixos/secrets";
 in
 {
   imports =
@@ -90,7 +90,10 @@ in
     isNormalUser = true;
     description = "Kent";
     extraGroups = [ "networkmanager" "wheel" "kvm" ];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q kent" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q kent"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPKZDK5hEVMpb35Eanw/7zct8selZTgMtzwak92GdYg0"
+    ];
     packages = with pkgs; [
       # Gnome specific stuffs
       gnome.gnome-tweaks
@@ -286,6 +289,9 @@ in
     usbutils
     android-tools
 
+    # Rust Tools
+    rustc
+
     # Nix packager
     nix-init
 
@@ -462,6 +468,31 @@ in
     };
   };
 
+  # Syncthing, a file syncing service
+  services.syncthing = {
+    enable = true;
+    key = "${secrets}/syncthing/key.pem";
+    cert = "${secrets}/syncthing/cert.pem";
+    user = "kent";
+    overrideDevices = true;     # overrides any devices added or deleted through the WebUI
+    overrideFolders = true;     # overrides any folders added or deleted through the WebUI
+    settings = {
+      devices = {
+        "Delaware" = { id = "NPGSSWY-NXG6AOK-2D56VX6-DEZTGFD-OZFWLNX-NMZWCYG-VT6Q4X4-OCIWPQM"; };
+      };
+      folders = {
+        "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
+          path = "/home/kent/notes/family/";    # Which folder to add to Syncthing
+          devices = [ "Delaware" ];
+        };
+        "Kent_Notes" = {
+          path = "/home/kent/notes/personal/";
+          devices = [ "Delaware" ];
+        };
+      };
+    };
+  };
+
   # Security
   security.pam = {
     u2f = {
@@ -469,6 +500,7 @@ in
       control = "sufficient";
       authFile = "/etc/u2f_mappings";
       appId = "pam://NixOS";
+      origin = "pam://NixOS";
     };
     services = {
       login.u2fAuth = true;
@@ -477,7 +509,6 @@ in
       gdm-launch-environment.u2fAuth = true;
       gdm-password.u2fAuth = true;
       polkit-1.u2fAuth = true;
-      #kde.u2fAuth = true;
     };
   };
   security.polkit.enable = true;

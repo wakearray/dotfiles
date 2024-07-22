@@ -10,6 +10,11 @@ in
   programs.nixvim = {
     enable = true;
     colorschemes.gruvbox.enable = true;
+    globalOpts = {
+      # Line numbers
+      number = true;
+      relativenumber = true;
+    };
     plugins = {
       treesitter.enable = true;
       zellij.enable = true;
@@ -19,6 +24,7 @@ in
       fzf-lua.enable = true;
       gitignore.enable = true;
       lualine.enable = true;
+      hydra.enable = true;
       markdown-preview = {
         enable = true;
         settings = {
@@ -70,11 +76,6 @@ in
           bashls.enable = true;
         };
       };
-    };
-    globalOpts = {
-      # Line numbers
-      number = true;
-      relativenumber = true;
     };
   };
 }
