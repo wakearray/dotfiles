@@ -35,8 +35,17 @@ in
       # use zoxide instead of cd.
       cd = "z";
       cdi = "zi";
-      delaware = "ssh 192.168.0.46";
+      # SSH Hosts
+      greatblue = "ssh 192.168.0.11"; # GPD Win 2 2023
+      delaware = "ssh 192.168.0.46"; # NextCloud Server
+      lagurus = "ssh 192.168.0.65"; # Cat's Projector
+      jerboa = "ssh 192.168.0.32"; # Living Room TV
+      cichlid = "echo 'This computer isn't setup yet'"; # Jess' Desktop
+      SebrightBantam = "echo 'This computer isn't setup yet'";  # QNAP TS-251
+      Orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
+
       kcp = "killCurrentSessionSpawn";
+
     };
     shellInit = ''
       SAVEHIST=10000
@@ -47,13 +56,49 @@ in
 
       # Functions
 
+      ## Flake Functions
+
       editzsh(){
-        nvim ~/.dotfiles/modules/zsh
+        hash=$(sha256sum "~/.dotfiles/modules/zsh.nix")
+        nvim ~/.dotfiles/modules/zsh.nix
+        newhash=$(sha256sum "~/.dotfiles/modules/zsh.nix")
+
+        if [[ "$hash" == "$newhash" ]]
+        then
+          echo "zsh.nix has not changed."
+        else
+          echo "zsh.nix has been updated."
+          read "Would you like to rebuild the system now?"
+          if [ "$REPLY" == "y" ]; then
+            rebuildflake
+          else
+            echo "zsh.nix has been edited. Run 'sudo rebuildflake' to rebuild the current system."
+          fi
+        fi
+      }
+
+      editflake(){
+        CWD=''${pwd}
+        cd ~/.dotfiles
+        nvim
+        git add .
+        git commit
+        echo "Flake has been updated."
+        read "Would you like to rebuild the system now?"
+        if [ "$REPLY" == "cheese" ]; then
+          rebuildflake
+        else
+          echo "Flake has been edited. Run 'sudo rebuildflake' to rebuild the current system."
+        fi
+        cd ''$CWD
+      }
+
+      rebuildflake(){
         CWD=''${pwd}
         cd ~/.dotfiles
         git add .
         sudo nixos-rebuild switch --flake .
-        cd $CWD
+        cd ''$CWD
         echo "Please close and reopen the terminal to use the new shellInit."
       }
 
@@ -64,7 +109,35 @@ in
         git commit
         git push origin main
         echo "Flake has been pushed to GitHub."
-        cd $CWD
+        read "Would you like to rebuild the system now?"
+        if [ "$REPLY" == "cheese" ]; then
+          rebuildflake
+        else
+          echo "Flake has been edited. Run 'sudo rebuildflake' to rebuild the current system."
+        fi
+        cd ''$CWD
+      }
+
+      ### Development Flakes
+
+      bevyflake(){
+        nix flake new --template github:wakearray/nix-templates/feature/automation-improvements#rust-bevy ''$1
+        direnv allow ''$1
+        cd ''$1
+        rm init.sh
+        git init
+        sed -i "s/bevy_template/''$1/g" Cargo.toml
+        git add * .envrc .gitignore
+        git reset -- init.sh
+        nix flake update
+        git add flake.lock Cargo.lock
+        git commit -m "Initial commit"
+      }
+
+      ## Misc Shell Functions
+
+      notes(){
+        nvim ~/notes
       }
 
       killCurrentSessionSpawn(){
@@ -79,20 +152,6 @@ in
         else
           mkdir ''$1 && cd ''$1
         fi
-      }
-
-      bevyflake(){
-        nix flake new --template github:wakearray/nix-templates/feature/automation-improvements#rust-bevy ''$1
-        direnv allow ''$1
-        cd ''$1
-        rm init.sh
-        git init
-        sed -i "s/bevy_template/''$1/g" Cargo.toml
-        git add * .envrc .gitignore
-        git reset -- init.sh
-        nix flake update
-        git add flake.lock Cargo.lock
-        git commit -m "Initial commit"
       }
 
       eval "''$(zoxide init zsh)"

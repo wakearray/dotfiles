@@ -124,10 +124,6 @@ in
     # Better emojis
     twemoji-color-font
 
-    # Comic Sans like fonts for making memes
-    comic-mono
-    comic-neue
-
     # Nerdfonts
     unstable.nerdfonts
   ];
