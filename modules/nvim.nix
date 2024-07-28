@@ -65,7 +65,10 @@ in
       lsp = {
         enable = true;
         servers = {
-          rnix-lsp.enable = true;
+	  nil-ls = {
+	    enable = true;
+	    pakage = pkgs.nil;
+	  };
           rust-analyzer = {
             enable = true;
             installRustc = false;

@@ -18,9 +18,7 @@ in
 
   environment.systemPackages = with pkgs; [
     # Rust based teamviewer
-    # Wainting on RustDesk to release new version with fixed dependencies
-    # https://github.com/NixOS/nixpkgs/issues/328884#issuecomment-2241582878
-    #rustdesk
+    rustdesk-flutter
 
     # 7-zip
     p7zip
@@ -103,7 +101,7 @@ in
   # Allows installing unpackaged binaries
   programs.nix-ld = {
     enable = true;
-    package = pkgs.nix-ld-rs;
+    package = pkgs.nil;
   };
 
   # Console typo fixer.

@@ -10,6 +10,10 @@ in
   # Set zsh as the default user shell.
   users.defaultUserShell = pkgs.zsh;
 
+  environment.systemPackages = with pkgs; [
+    zsh-nix-shell
+  ];
+
   # Turn on zsh.
   programs.zsh = {
     enable = true;
