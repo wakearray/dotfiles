@@ -39,6 +39,15 @@ in
     # https://github.com/ajeetdsouza/zoxide
     # https://www.youtube.com/watch?v=aghxkpyRVDY
     unstable.zoxide
+
+    # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
+    # https://starship.rs/
+    unstable.starship
+    
+    # fzf - Command-line fuzzy finder written in Go
+    # https://github.com/junegunn/fzf
+    fzf
+
   ];
 
   # TODO: Consider using this:

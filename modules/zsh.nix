@@ -71,13 +71,8 @@ in
         then
           echo "zsh.nix has not changed."
         else
-          echo "zsh.nix has been updated."
-          read -p "Would you like to rebuild the system now? (y/n)" ans
-          if [ "''$ans" == "y" ]; then
-            rebuildflake
-          else
-            echo "zsh.nix has been edited. Run 'rebuildflake' to rebuild the current system."
-          fi
+          echo "Flake has been updated."
+          rebuildflake
         fi
       }
 
@@ -88,22 +83,22 @@ in
         git add .
         git commit
         echo "Flake has been updated."
-        read -p "Would you like to rebuild the system now?" ans
-        if [ "''$ans" == "y" ]; then
-          rebuildflake
-        else
-          echo "Flake has been edited. Run 'rebuildflake' to rebuild the current system."
-        fi
+        rebuildflake
         cd ''$CWD
       }
 
       rebuildflake(){
-        CWD=''${pwd}
-        cd ~/.dotfiles
-        git add .
-        sudo nixos-rebuild switch --flake .
-        cd ''$CWD
-        echo "Please close and reopen the terminal to use the new shellInit."
+        read -p "Would you like to rebuild the system now?" ans
+        if [ "$ans" == "y" ]; then
+          CWD=''${pwd}
+          cd ~/.dotfiles
+          git add .
+          sudo nixos-rebuild switch --flake .
+          cd ''$CWD
+          echo "Please close and reopen the terminal to use the new shellInit."
+        else
+          echo "Flake has been edited. Run 'rebuildflake' to rebuild the current system."
+        fi
       }
 
       flakepush(){
@@ -113,12 +108,7 @@ in
         git commit
         git push origin main
         echo "Flake has been pushed to GitHub."
-        read -p "Would you like to rebuild the system now?" ans
-        if [ "$ans" == "y" ]; then
-          rebuildflake
-        else
-          echo "Flake has been edited. Run 'rebuildflake' to rebuild the current system."
-        fi
+        rebuildflake
         cd ''$CWD
       }
 

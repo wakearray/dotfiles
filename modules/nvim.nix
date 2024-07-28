@@ -65,10 +65,10 @@ in
       lsp = {
         enable = true;
         servers = {
-	  nil-ls = {
-	    enable = true;
-	    pakage = pkgs.nil;
-	  };
+          nil-ls = {
+            enable = true;
+            package = pkgs.nil;
+          };
           rust-analyzer = {
             enable = true;
             installRustc = false;
