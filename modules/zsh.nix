@@ -67,16 +67,16 @@ in
         nvim ~/.dotfiles/modules/zsh.nix
         newhash=$(sha256sum "~/.dotfiles/modules/zsh.nix")
 
-        if [[ "$hash" == "$newhash" ]]
+        if [[ "''$hash" == "''$newhash" ]]
         then
           echo "zsh.nix has not changed."
         else
           echo "zsh.nix has been updated."
-          read "Would you like to rebuild the system now?"
-          if [ "$REPLY" == "y" ]; then
+          read -p "Would you like to rebuild the system now? (y/n)" ans
+          if [ "''$ans" == "y" ]; then
             rebuildflake
           else
-            echo "zsh.nix has been edited. Run 'sudo rebuildflake' to rebuild the current system."
+            echo "zsh.nix has been edited. Run 'rebuildflake' to rebuild the current system."
           fi
         fi
       }
@@ -88,11 +88,11 @@ in
         git add .
         git commit
         echo "Flake has been updated."
-        read "Would you like to rebuild the system now?"
-        if [ "$REPLY" == "cheese" ]; then
+        read -p "Would you like to rebuild the system now?" ans
+        if [ "''$ans" == "y" ]; then
           rebuildflake
         else
-          echo "Flake has been edited. Run 'sudo rebuildflake' to rebuild the current system."
+          echo "Flake has been edited. Run 'rebuildflake' to rebuild the current system."
         fi
         cd ''$CWD
       }
@@ -113,11 +113,11 @@ in
         git commit
         git push origin main
         echo "Flake has been pushed to GitHub."
-        read "Would you like to rebuild the system now?"
-        if [ "$REPLY" == "cheese" ]; then
+        read -p "Would you like to rebuild the system now?" ans
+        if [ "$ans" == "y" ]; then
           rebuildflake
         else
-          echo "Flake has been edited. Run 'sudo rebuildflake' to rebuild the current system."
+          echo "Flake has been edited. Run 'rebuildflake' to rebuild the current system."
         fi
         cd ''$CWD
       }
