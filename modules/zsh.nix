@@ -63,22 +63,23 @@ in
       ## Flake Functions
 
       editzsh(){
-        hash=$(sha256sum "~/.dotfiles/modules/zsh.nix")
-        nvim ~/.dotfiles/modules/zsh.nix
-        newhash=$(sha256sum "~/.dotfiles/modules/zsh.nix")
+        hash=''$(sha256sum "''$HOME/.dotfiles/modules/zsh.nix")
+        nvim ''$HOME/dotfiles/modules/zsh.nix
+        newhash=''$(sha256sum "''$HOME/.dotfiles/modules/zsh.nix")
 
         if [[ "''$hash" == "''$newhash" ]]
         then
           echo "zsh.nix has not changed."
         else
+
           echo "Flake has been updated."
           rebuildflake
         fi
       }
 
       editflake(){
-        CWD=''${pwd}
-        cd ~/.dotfiles
+        CWD=''$(pwd)
+        cd ''$HOME/dotfiles
         nvim
         git add .
         git commit
@@ -87,11 +88,32 @@ in
         cd ''$CWD
       }
 
+      commitflake(){
+	echo "Would you like to commit the flake now?"
+        read -q ans
+        if [[ "''$ans" == "y" ]]; then
+	  echo "Commiting flake..."
+	  CWD=''$(pwd)
+          cd ''$HOME/dotfiles
+          git add .
+	  git commit
+	  echo "Would you like to also push to remote?"
+	  read -q ans
+	  if [[ "''$ans" == "y" ]]; then
+	    echo "Pushing to remote..."
+	    git push 
+          cd ''$CWD
+        else
+          echo "Not commiting flake at this time."
+        fi
+      }
+
       rebuildflake(){
-        read -p "Would you like to rebuild the system now?" ans
-        if [ "$ans" == "y" ]; then
-          CWD=''${pwd}
-          cd ~/.dotfiles
+        echo "Would you like to rebuild the system now?"
+        read -q ans
+        if [[ "''$ans" == "y" ]]; then
+          CWD=''$(pwd)
+          cd ''$HOME/dotfiles
           git add .
           sudo nixos-rebuild switch --flake .
           cd ''$CWD
@@ -102,8 +124,8 @@ in
       }
 
       flakepush(){
-        CWD=''${pwd}
-        cd ~/.dotfiles
+        CWD=''$(pwd)
+        cd ''$HOME/dotfiles
         git add .
         git commit
         git push origin main
@@ -142,10 +164,19 @@ in
         if [ ! -n "''$1" ]; then
           echo "Enter a directory name"
         elif [ -d ''$1 ]; then
-          echo "\`''$1' already exists"; cd ''$1
+          echo "\`''$1' already exists, entering.."; cd ''$1
         else
           mkdir ''$1 && cd ''$1
         fi
+      }
+
+      function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
       }
 
       eval "''$(zoxide init zsh)"

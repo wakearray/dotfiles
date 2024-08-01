@@ -174,6 +174,7 @@ in
 
     # WebUI for Aria2
     unstable.ariang
+
   ];
 
   # Docker containers
@@ -491,6 +492,13 @@ in
     # down nginx and opens port 80.
     certificateScheme = "acme-nginx";
   };
+
+  # TODO: Setup Rustdesk-Server
+#   services.rustdesk-server = {
+#     enable = true;
+#     openFirewall = true;
+#     package = pkgs.unstable.rustdesk-server;
+#   };
 
   # Deluge
   services.deluge = {
