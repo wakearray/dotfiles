@@ -67,11 +67,9 @@ in
         nvim ''$HOME/dotfiles/modules/zsh.nix
         newhash=''$(sha256sum "''$HOME/.dotfiles/modules/zsh.nix")
 
-        if [[ "''$hash" == "''$newhash" ]]
-        then
+        if [[ "''$hash" == "''$newhash" ]]; then
           echo "zsh.nix has not changed."
         else
-
           echo "Flake has been updated."
           rebuildflake
         fi
@@ -82,8 +80,7 @@ in
         cd ''$HOME/dotfiles
         nvim
         git add .
-        git commit
-        echo "Flake has been updated."
+        commitflake
         rebuildflake
         cd ''$CWD
       }
@@ -100,8 +97,12 @@ in
 	  echo "Would you like to also push to remote?"
 	  read -q ans
 	  if [[ "''$ans" == "y" ]]; then
+	    selected_branch = ''$(git rev-parse --abbrev-ref HEAD)
 	    echo "Pushing to remote..."
-	    git push 
+	    git push origin ''$selected_branch
+	  else
+	    echo "Not pushing to remote."
+	  fi
           cd ''$CWD
         else
           echo "Not commiting flake at this time."
