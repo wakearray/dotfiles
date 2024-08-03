@@ -64,7 +64,6 @@ in
   security = {
     pam = {
       sshAgentAuth.enable = true;
-      sevices.sudo.sshAgentAuth = true;
     };
     sudo = {
       enable = true;
