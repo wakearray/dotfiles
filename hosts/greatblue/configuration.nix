@@ -270,6 +270,8 @@ in
 
     # Cups-filers for printing PNG to Dymo XL4
     cups-filters
+    lprint
+    cups-printers
 
     # Wayland things
     # Sirula - Simple app launcher for wayland written in rust
