@@ -118,16 +118,6 @@ in
 
   programs.git = {
     enable = true;
-    config = [
-      { init = { defaultBranch = "main"; }; }
-      { user = {
-        name = "Kent Hambrock";
-        email = "Kent.Hambrock@gmail.com";
-        signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q";
-      };}
-      { gpg = { format = "ssh"; }; }
-      { commit = { gpgsign = true; }; }
-    ];
   };
 
   # Environment variables

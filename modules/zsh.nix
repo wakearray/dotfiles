@@ -45,8 +45,8 @@ in
       lagurus = "ssh 192.168.0.65"; # Cat's Projector
       jerboa = "ssh 192.168.0.32"; # Living Room TV
       cichlid = "echo 'This computer isn't setup yet'"; # Jess' Desktop
-      SebrightBantam = "echo 'This computer isn't setup yet'";  # QNAP TS-251
-      Orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
+      sebrightbantam = "ssh 192.168.0.80";  # QNAP TS-251
+      orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
 
       kcp = "killCurrentSessionSpawn";
 
@@ -86,23 +86,23 @@ in
       }
 
       commitflake(){
-	echo "Would you like to commit the flake now?"
+        echo "Would you like to commit the flake now?"
         read -q ans
         if [[ "''$ans" == "y" ]]; then
-	  echo "Commiting flake..."
-	  CWD=''$(pwd)
+          echo "Commiting flake..."
+          CWD=''$(pwd)
           cd ''$HOME/dotfiles
           git add .
-	  git commit
-	  echo "Would you like to also push to remote?"
-	  read -q ans
-	  if [[ "''$ans" == "y" ]]; then
-	    selected_branch = ''$(git rev-parse --abbrev-ref HEAD)
-	    echo "Pushing to remote..."
-	    git push origin ''$selected_branch
-	  else
-	    echo "Not pushing to remote."
-	  fi
+          git commit
+          echo -e "Would you like to also push to remote?"
+          read -q ans
+          if [[ "''$ans" == "y" ]]; then
+            selected_branch = ''$(git rev-parse --abbrev-ref HEAD)
+            echo "Pushing to remote..."
+            git push origin ''$selected_branch
+          else
+            echo "Not pushing to remote."
+          fi
           cd ''$CWD
         else
           echo "Not commiting flake at this time."
@@ -172,12 +172,12 @@ in
       }
 
       function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+          builtin cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
       }
 
       eval "''$(zoxide init zsh)"

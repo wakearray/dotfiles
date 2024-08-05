@@ -29,9 +29,8 @@ in
     description = "Kent";
     extraGroups = [ "networkmanager" "wheel" ];
     initialHashedPassword = "$y$j9T$a09xjLjAlf/rHpCdhnAM4/$wlp6tDHeX2OfnUTXA29RWbALS5PvLc/1cpu0rZF4170";
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q kent"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPKZDK5hEVMpb35Eanw/7zct8selZTgMtzwak92GdYg0"
+    openssh.authorizedKeys.keys = with sshkeys; [
+      greatblue samsung_s24 lenovo_y700 cubot_p80 boox_air_nova_c hisense_a9
     ];
   };
 
@@ -45,9 +44,6 @@ in
 
     # It's git
     git
-
-    # WebUI for Aria2
-    unstable.ariang
   ];
 
   # Enable the OpenSSH daemon.
@@ -68,10 +64,6 @@ in
     sudo = {
       enable = true;
       wheelNeedsPassword = false;
-    };
-    acme = {
-      acceptTerms = true;
-      defaults.email = "kent.hambrock@gmail.com";
     };
   };
 
@@ -99,25 +91,9 @@ in
     };
   };
 
-  # Deluge
-  services.deluge = {
-    enable = true;
-    declarative = false;
-    web = {
-      enable = true;
-      openFirewall = true;
-    };
-  };
-
-  # Aria2 multithread-multisource downloader
-  services.aria2 = {
-    enable = true;
-    rpcSecretFile = "${secrets}/aria2";
-  };
-
   # Open ports in the firewall.
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.05";
 }

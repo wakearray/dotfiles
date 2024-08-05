@@ -83,6 +83,15 @@
           lix-module.nixosModules.default
         ];
       };
+      SebrightBantam = lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+        modules = [
+          ./hosts/sebrightbantam/configuration.nix
+          nixvim.nixosModules.nixvim
+          agenix.nixosModules.default
+          lix-module.nixosModules.default
+        ];
+      };
       Lagurus = lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
         modules = [

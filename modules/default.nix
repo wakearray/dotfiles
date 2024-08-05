@@ -14,6 +14,7 @@ in
     ./zsh.nix
     ./tui.nix
     ./nvim.nix
+    ./ssh.nix
   ];
 
   environment.systemPackages = with pkgs; [
