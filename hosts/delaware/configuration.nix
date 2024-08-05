@@ -174,6 +174,7 @@ in
 
     # WebUI for Aria2
     unstable.ariang
+
   ];
 
   # Docker containers
@@ -492,6 +493,13 @@ in
     certificateScheme = "acme-nginx";
   };
 
+  # TODO: Setup Rustdesk-Server
+#   services.rustdesk-server = {
+#     enable = true;
+#     openFirewall = true;
+#     package = pkgs.unstable.rustdesk-server;
+#   };
+
   # Deluge
   services.deluge = {
     enable = true;
@@ -661,7 +669,10 @@ in
         "Kent_y700" = { id = "CWTMGYN-7PYXAVX-UVHV2CL-R26FJMJ-GQGOS2B-PBYG4QQ-4562DXH-CEEDUQR"; };
         "Kent_Boox" = { id = "T3U4VSV-7LPWYBK-7GNDAMU-GG7IMXO-OKCFZQB-4WMC2KP-RFANMLH-FFO3WQ7"; };
         "Kent_Hisense_A9" = { id = "S55WSYJ-K3C6MV7-YWEUAW5-YAYHAB2-FIZ7RNR-NE7KCTZ-PZNPO2I-6S3W4AT"; };
-        "Kent_GreatBlue" = { id = "6B6CFWQ-AOVKOLS-AJ77Y7U-T5G7QPG-IQTPCSJ-NRPZNJR-4LMLIRS-FGMYSQ2"; };
+        "Kent_GreatBlue" = {
+          id = "6B6CFWQ-AOVKOLS-AJ77Y7U-T5G7QPG-IQTPCSJ-NRPZNJR-4LMLIRS-FGMYSQ2";
+          autoAcceptFolders = true;
+        };
         "Jess_S20_Ultra" = { id = "F436IQN-OOP5KEX-CNCY7VA-4CKUSOR-6YUHIO2-TTESNNW-TMMSMNI-CQZNUAZ"; };
       };
       folders = {

@@ -10,6 +10,10 @@ in
   # Set zsh as the default user shell.
   users.defaultUserShell = pkgs.zsh;
 
+  environment.systemPackages = with pkgs; [
+    zsh-nix-shell
+  ];
+
   # Turn on zsh.
   programs.zsh = {
     enable = true;
@@ -35,8 +39,17 @@ in
       # use zoxide instead of cd.
       cd = "z";
       cdi = "zi";
-      delaware = "ssh 192.168.0.46";
+      # SSH Hosts
+      greatblue = "ssh 192.168.0.11"; # GPD Win 2 2023
+      delaware = "ssh 192.168.0.46"; # NextCloud Server
+      lagurus = "ssh 192.168.0.65"; # Cat's Projector
+      jerboa = "ssh 192.168.0.32"; # Living Room TV
+      cichlid = "echo 'This computer isn't setup yet'"; # Jess' Desktop
+      SebrightBantam = "echo 'This computer isn't setup yet'";  # QNAP TS-251
+      Orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
+
       kcp = "killCurrentSessionSpawn";
+
     };
     shellInit = ''
       SAVEHIST=10000
@@ -47,39 +60,82 @@ in
 
       # Functions
 
+      ## Flake Functions
+
       editzsh(){
-        nvim ~/.dotfiles/modules/zsh
-        CWD=''${pwd}
-        cd ~/.dotfiles
+        hash=''$(sha256sum "''$HOME/.dotfiles/modules/zsh.nix")
+        nvim ''$HOME/dotfiles/modules/zsh.nix
+        newhash=''$(sha256sum "''$HOME/.dotfiles/modules/zsh.nix")
+
+        if [[ "''$hash" == "''$newhash" ]]; then
+          echo "zsh.nix has not changed."
+        else
+          echo "Flake has been updated."
+          rebuildflake
+        fi
+      }
+
+      editflake(){
+        CWD=''$(pwd)
+        cd ''$HOME/dotfiles
+        nvim
         git add .
-        sudo nixos-rebuild switch --flake .
-        cd $CWD
-        echo "Please close and reopen the terminal to use the new shellInit."
+        commitflake
+        rebuildflake
+        cd ''$CWD
+      }
+
+      commitflake(){
+	echo "Would you like to commit the flake now?"
+        read -q ans
+        if [[ "''$ans" == "y" ]]; then
+	  echo "Commiting flake..."
+	  CWD=''$(pwd)
+          cd ''$HOME/dotfiles
+          git add .
+	  git commit
+	  echo "Would you like to also push to remote?"
+	  read -q ans
+	  if [[ "''$ans" == "y" ]]; then
+	    selected_branch = ''$(git rev-parse --abbrev-ref HEAD)
+	    echo "Pushing to remote..."
+	    git push origin ''$selected_branch
+	  else
+	    echo "Not pushing to remote."
+	  fi
+          cd ''$CWD
+        else
+          echo "Not commiting flake at this time."
+        fi
+      }
+
+      rebuildflake(){
+        echo "Would you like to rebuild the system now?"
+        read -q ans
+        if [[ "''$ans" == "y" ]]; then
+          CWD=''$(pwd)
+          cd ''$HOME/dotfiles
+          git add .
+          sudo nixos-rebuild switch --flake .
+          cd ''$CWD
+          echo "Please close and reopen the terminal to use the new shellInit."
+        else
+          echo "Flake has been edited. Run 'rebuildflake' to rebuild the current system."
+        fi
       }
 
       flakepush(){
-        CWD=''${pwd}
-        cd ~/.dotfiles
+        CWD=''$(pwd)
+        cd ''$HOME/dotfiles
         git add .
         git commit
         git push origin main
         echo "Flake has been pushed to GitHub."
-        cd $CWD
+        rebuildflake
+        cd ''$CWD
       }
 
-      killCurrentSessionSpawn(){
-        kill ''$(ps -s ''$''$ -o pid=)
-      }
-
-      function mkcd {
-        if [ ! -n "''$1" ]; then
-          echo "Enter a directory name"
-        elif [ -d ''$1 ]; then
-          echo "\`''$1' already exists"; cd ''$1
-        else
-          mkdir ''$1 && cd ''$1
-        fi
-      }
+      ### Development Flakes
 
       bevyflake(){
         nix flake new --template github:wakearray/nix-templates/feature/automation-improvements#rust-bevy ''$1
@@ -93,6 +149,35 @@ in
         nix flake update
         git add flake.lock Cargo.lock
         git commit -m "Initial commit"
+      }
+
+      ## Misc Shell Functions
+
+      notes(){
+        nvim ~/notes
+      }
+
+      killCurrentSessionSpawn(){
+        kill ''$(ps -s ''$''$ -o pid=)
+      }
+
+      function mkcd {
+        if [ ! -n "''$1" ]; then
+          echo "Enter a directory name"
+        elif [ -d ''$1 ]; then
+          echo "\`''$1' already exists, entering.."; cd ''$1
+        else
+          mkdir ''$1 && cd ''$1
+        fi
+      }
+
+      function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
       }
 
       eval "''$(zoxide init zsh)"

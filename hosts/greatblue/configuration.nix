@@ -478,7 +478,10 @@ in
     overrideFolders = true;     # overrides any folders added or deleted through the WebUI
     settings = {
       devices = {
-        "Delaware" = { id = "NPGSSWY-NXG6AOK-2D56VX6-DEZTGFD-OZFWLNX-NMZWCYG-VT6Q4X4-OCIWPQM"; };
+        "Delaware" = {
+          id = "NPGSSWY-NXG6AOK-2D56VX6-DEZTGFD-OZFWLNX-NMZWCYG-VT6Q4X4-OCIWPQM";
+          autoAcceptFolders = true;
+        };
       };
       folders = {
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
