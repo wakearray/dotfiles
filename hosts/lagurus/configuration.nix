@@ -86,39 +86,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # Youtube Downloader
-    yt-dlp
-    youtube-tui
 
     # Video Player
     vlc
-    mpv
 
-    # Terminal UI for Systemd Logs and Status
-    # https://crates.io/crates/systemctl-tui
-    systemctl-tui
-
-    # lsd - The next gen ls command
-    # https://github.com/lsd-rs/lsd
-    unstable.lsd
-
-    # Zoxide - A fast cd command that learns your habits
-    # https://github.com/ajeetdsouza/zoxide
-    # https://www.youtube.com/watch?v=aghxkpyRVDY
-    unstable.zoxide
-
-    # fzf - Command-line fuzzy finder written in Go
-    # https://github.com/junegunn/fzf
-    fzf
-
-    # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
-    # https://starship.rs/
-    unstable.starship
-
-    # notcurses - blingful character graphics/TUI library. definitely not curses.
-    # https://github.com/dankamongmen/notcurses
-    notcurses
   ];
+
 
   programs.git.enable = true;
   systemd.user.services.catvideo = {

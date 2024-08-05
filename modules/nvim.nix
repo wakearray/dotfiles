@@ -65,7 +65,10 @@ in
       lsp = {
         enable = true;
         servers = {
-          rnix-lsp.enable = true;
+          nil-ls = {
+            enable = true;
+            package = pkgs.nil;
+          };
           rust-analyzer = {
             enable = true;
             installRustc = false;
@@ -78,5 +81,10 @@ in
         };
       };
     };
+  };
+
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 }

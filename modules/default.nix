@@ -14,13 +14,12 @@ in
     ./zsh.nix
     ./tui.nix
     ./nvim.nix
+    ./ssh.nix
   ];
 
   environment.systemPackages = with pkgs; [
     # Rust based teamviewer
-    # Wainting on RustDesk to release new version with fixed dependencies
-    # https://github.com/NixOS/nixpkgs/issues/328884#issuecomment-2241582878
-    #rustdesk
+    rustdesk-flutter
 
     # 7-zip
     p7zip
@@ -41,6 +40,15 @@ in
     # https://github.com/ajeetdsouza/zoxide
     # https://www.youtube.com/watch?v=aghxkpyRVDY
     unstable.zoxide
+
+    # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
+    # https://starship.rs/
+    unstable.starship
+    
+    # fzf - Command-line fuzzy finder written in Go
+    # https://github.com/junegunn/fzf
+    fzf
+
   ];
 
   # TODO: Consider using this:
@@ -103,7 +111,7 @@ in
   # Allows installing unpackaged binaries
   programs.nix-ld = {
     enable = true;
-    package = pkgs.nix-ld-rs;
+    package = pkgs.nil;
   };
 
   # Console typo fixer.
@@ -123,10 +131,6 @@ in
   fonts.packages = with pkgs; [
     # Better emojis
     twemoji-color-font
-
-    # Comic Sans like fonts for making memes
-    comic-mono
-    comic-neue
 
     # Nerdfonts
     unstable.nerdfonts

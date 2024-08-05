@@ -8,34 +8,15 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    # lsd - The next gen ls command
-    # https://github.com/lsd-rs/lsd
-    unstable.lsd
-
-    # Zoxide - A fast cd command that learns your habits
-    # https://github.com/ajeetdsouza/zoxide
-    # https://www.youtube.com/watch?v=aghxkpyRVDY
-    unstable.zoxide
-
-    # fzf - Command-line fuzzy finder written in Go
-    # https://github.com/junegunn/fzf
-    fzf
-
+    
     # Terminal file managers
     # Yazi - Blazing fast terminal file manager written in Rust, based on async I/O
     # https://github.com/sxyazi/yazi
     yazi
-    # xplr - A hackable, minimal, fast TUI file explorer
-    # https://xplr.dev/
-    xplr
 
     # Terminal UI for Systemd Logs and Status
     # https://crates.io/crates/systemctl-tui
     systemctl-tui
-
-    # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
-    # https://starship.rs/
-    unstable.starship
 
     # notcurses - blingful character graphics/TUI library. definitely not curses.
     # https://github.com/dankamongmen/notcurses
@@ -70,5 +51,10 @@ in
     # yt-dlp - Command-line tool to download videos from YouTube.com and other sites (youtube-dl fork)
     # https://github.com/yt-dlp/yt-dlp/
     yt-dlp
+
+    # An aesthetically pleasing YouTube TUI written in Rust
+    # https://github.com/Siriusmart/youtube-tui
+    youtube-tui
+
   ];
 }
