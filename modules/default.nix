@@ -49,6 +49,10 @@ in
     # https://github.com/junegunn/fzf
     fzf
 
+    # nixd - Nix language server written in C
+    # https://github.com/nix-community/nixd
+    nixd
+
   ];
 
   # TODO: Consider using this:
@@ -111,7 +115,6 @@ in
   # Allows installing unpackaged binaries
   programs.nix-ld = {
     enable = true;
-    package = pkgs.nil;
   };
 
   # Console typo fixer.

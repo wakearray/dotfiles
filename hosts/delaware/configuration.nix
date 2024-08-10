@@ -261,10 +261,17 @@ in
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
   };
-  security.pam.sshAgentAuth.enable = true;
-  security.pam.services.sudo.sshAgentAuth = true;
-  security.sudo.enable = true;
-  security.sudo.wheelNeedsPassword = false;
+
+  security = {
+    pam = {
+      sshAgentAuth.enable = true;
+      services.sudo.sshAgentAuth = true;
+    };
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = false;
+    };
+  };
 
   # Nginx reverse proxy
   services.nginx = {

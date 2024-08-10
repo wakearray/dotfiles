@@ -67,7 +67,7 @@ in
         servers = {
           nil-ls = {
             enable = true;
-            package = pkgs.nil;
+            package = pkgs.nixd;
           };
           rust-analyzer = {
             enable = true;
@@ -87,4 +87,10 @@ in
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
+
+  environment.systemPackages = with pkgs; [
+    nixd
+    gnused
+    repgrep
+  ];
 }
