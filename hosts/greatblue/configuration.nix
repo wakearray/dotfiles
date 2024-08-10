@@ -33,16 +33,6 @@ in
   # Services
   services.flatpak.enable = true;
 
-  systemd.user.services.kent-autostart = {
-    description = "Deletes old derivations";
-    serviceConfig.PassEnvironment = "DISPLAY";
-    script = ''
-      #!/bin/sh
-      nix-collect-garbage --delete-older-than 7d
-    '';
-    wantedBy = [ "multi-user.target" ]; # starts after login
-  };
-
   # Firewall.
   networking.firewall.enable = true;
 

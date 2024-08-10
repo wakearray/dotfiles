@@ -21,11 +21,14 @@ in
     # Rust based teamviewer
     rustdesk-flutter
 
-    # 7-zip
+    # 7-Zip
     p7zip
 
     # Git
     git
+
+    # SSH File System
+    sshfs
 
     # Rust grep use `rg`
     repgrep
@@ -53,6 +56,8 @@ in
     # https://github.com/nix-community/nixd
     nixd
 
+    # zellij - Terminal Multiplexor written in Rust
+    zellij
   ];
 
   # TODO: Consider using this:
@@ -113,9 +118,9 @@ in
   };
 
   # Allows installing unpackaged binaries
-  programs.nix-ld = {
-    enable = true;
-  };
+  programs.nix-ld.enable = true;
+
+  programs.git.enable = true;
 
   # Console typo fixer.
   programs.thefuck.enable = true;
@@ -128,7 +133,17 @@ in
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
-    domainName = "local";
+    domainName = "wakenet";
+  };
+
+  systemd.user.services.nix-cleaner-autostart = {
+    description = "Deletes old derivations";
+    serviceConfig.PassEnvironment = "DISPLAY";
+    script = ''
+      #!/bin/sh
+      nix-collect-garbage --delete-older-than 7d
+    '';
+    wantedBy = [ "multi-user.target" ]; # starts after login
   };
 
   fonts.packages = with pkgs; [
