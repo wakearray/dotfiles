@@ -30,7 +30,4 @@ in
       };
     };
   };
-  environment.systemPackages = [
-
-  ];
 }
