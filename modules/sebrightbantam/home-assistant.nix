@@ -29,5 +29,5 @@ in
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ <other ports> 8123 ];
+  networking.firewall.allowedTCPPorts = [ 8123 ];
 }
