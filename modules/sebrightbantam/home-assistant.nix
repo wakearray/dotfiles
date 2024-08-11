@@ -7,7 +7,7 @@ let
 
 in
 {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     python312Packages.isal
     python312Packages.aiohttp-isal
   ];
