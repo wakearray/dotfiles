@@ -49,8 +49,8 @@ in
       orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
 
       # Phones
-      p80 = "ssh u0_a183@192.168.0.10 -p8022"
-      
+      p80 = "ssh u0_a183@192.168.0.10 -p8022";
+      mountp80 = "sshfs u0_a183@192.168.0.10:/data/data/com.termux/files /mnt/phones/p80 -p8022";
 
       kcp = "killCurrentSessionSpawn";
 
