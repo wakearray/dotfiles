@@ -48,6 +48,10 @@ in
       sebrightbantam = "ssh 192.168.0.80";  # QNAP TS-251
       orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
 
+      # Phones
+      p80 = "ssh u0_a183@192.168.0.10 -p8022"
+      
+
       kcp = "killCurrentSessionSpawn";
 
     };
@@ -63,9 +67,9 @@ in
       ## Flake Functions
 
       editzsh(){
-        hash=''$(sha256sum "''$HOME/.dotfiles/modules/zsh.nix")
+        hash=''$(sha256sum "''$HOME/dotfiles/modules/zsh.nix")
         nvim ''$HOME/dotfiles/modules/zsh.nix
-        newhash=''$(sha256sum "''$HOME/.dotfiles/modules/zsh.nix")
+        newhash=''$(sha256sum "''$HOME/dotfiles/modules/zsh.nix")
 
         if [[ "''$hash" == "''$newhash" ]]; then
           echo "zsh.nix has not changed."
