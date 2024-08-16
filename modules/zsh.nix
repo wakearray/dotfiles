@@ -67,76 +67,76 @@ in
       ## Flake Functions
 
       editzsh(){
-        hash=''$(sha256sum "''$HOME/dotfiles/modules/zsh.nix")
         nvim ''$HOME/dotfiles/modules/zsh.nix
-        newhash=''$(sha256sum "''$HOME/dotfiles/modules/zsh.nix")
-
-        if [[ "''$hash" == "''$newhash" ]]; then
-          echo "zsh.nix has not changed."
-        else
-          echo "Flake has been updated."
-          rebuildflake
-        fi
+        flakeworkflow
       }
 
       editflake(){
-        CWD=''$(pwd)
-        cd ''$HOME/dotfiles
-        nvim
-        git add .
-        commitflake
-        rebuildflake
-        cd ''$CWD
+        nvim ''$HOME/dotfiles
+        flakeworkflow
       }
 
-      commitflake(){
-        echo "Would you like to commit the flake now?"
-        read -q ans
-        if [[ "''$ans" == "y" ]]; then
-          echo "Commiting flake..."
+      flakeworkflow(){
+        if [[ `git status --porcelain` ]]; then
           CWD=''$(pwd)
           cd ''$HOME/dotfiles
+	  g=0
+          echo "Flake has been modified."
           git add .
-          git commit
-          echo -e "Would you like to also push to remote?"
+
+	  echo "Would you like to commit now?"
           read -q ans
           if [[ "''$ans" == "y" ]]; then
-            selected_branch = ''$(git rev-parse --abbrev-ref HEAD)
-            echo "Pushing to remote..."
-            git push origin ''$selected_branch
-          else
-            echo "Not pushing to remote."
+            echo "\r\nCommiting..."
+	    git commit
+	    g=1
           fi
-          cd ''$CWD
+
+	  echo "Would you like to run a test build?"
+	  read -q ans	
+	  if [[ "''$ans" == "y" ]]; then
+            echo "\r\n"
+	    testbuildflake
+
+	    echo "Would you like to rebuild the system now?"
+            read -q ans
+            if [[ "''$ans" == "y" ]]; then
+	      echo "\r\n"
+	      rebuildflake
+	      echo "Flake rebuild, complete."
+	    else
+              echo "Flake has been edited, but not built."
+	    fi
+	  fi
+
+          if [[ "$g" == 1 ]]; then
+	    echo -e "Would you like to push to remote?"
+            read -q ans
+            if [[ "''$ans" == "y" ]]; then
+              echo "\r\nPushing to remote..."
+              push 
+            else
+              echo "Not pushing to remote."
+            fi
+	  fi
+	  cd ''$CWD
         else
-          echo "Not commiting flake at this time."
+          echo "No updates found."
         fi
+      }
+
+      testbuildflake(){
+        sudo nixos-rebuild test --flake .
       }
 
       rebuildflake(){
-        echo "Would you like to rebuild the system now?"
-        read -q ans
-        if [[ "''$ans" == "y" ]]; then
-          CWD=''$(pwd)
-          cd ''$HOME/dotfiles
-          git add .
-          sudo nixos-rebuild switch --flake .
-          cd ''$CWD
-          echo "Please close and reopen the terminal to use the new shellInit."
-        else
-          echo "Flake has been edited. Run 'rebuildflake' to rebuild the current system."
-        fi
+        git add .
+        sudo nixos-rebuild switch --flake .
       }
 
-      flakepush(){
-        CWD=''$(pwd)
-        cd ''$HOME/dotfiles
-        git add .
-        git commit
-        git push origin main
-        echo "Flake has been pushed to GitHub."
-        rebuildflake
-        cd ''$CWD
+      push(){
+	selected_branch = ''$(git rev-parse --abbrev-ref HEAD)
+        git push origin ''$selected_branch
       }
 
       ### Development Flakes
