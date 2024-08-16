@@ -22,10 +22,6 @@
     # https://github.com/builditluc/wiki-tui
     wiki-tui
 
-    # termusic - Terminal Music and Podcast Player written in Rust
-    # https://github.com/tramhao/termusic
-    unstable.termusic
-
     # Tools for testing Vulkan driver compatibility
     vulkan-tools
   ];
