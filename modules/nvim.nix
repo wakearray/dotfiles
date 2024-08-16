@@ -65,7 +65,7 @@ in
       lsp = {
         enable = true;
         servers = {
-          nil-ls = {
+          nixd = {
             enable = true;
             package = pkgs.nixd;
           };
