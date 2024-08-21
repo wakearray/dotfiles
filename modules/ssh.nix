@@ -8,9 +8,12 @@
   services.openssh = {
     enable = true;
     # require public key authentication for better security
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = "no";
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+    openFirewall = true;
   };
 
   # the calling user’s SSH agent is used to authenticate against the keys

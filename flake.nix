@@ -66,6 +66,13 @@
       GreatBlue = lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
         modules = [
+	  ({ config, pkgs, ... }: {
+              # Define the variable here
+              config = {
+	        secrets = "/etc/nixos/secrets";
+		domain = "voicelesscrimson.com";
+	      };
+            })
           ./hosts/greatblue/configuration.nix
           nixos-hardware.nixosModules.gpd-win-max-2-2023
           nixvim.nixosModules.nixvim

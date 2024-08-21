@@ -17,6 +17,20 @@ in
     ./ssh.nix
   ];
 
+  # Environment variables
+  environment.sessionVariables = rec {
+    XDG_CACHE_HOME  = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME   = "$HOME/.local/share";
+    XDG_STATE_HOME  = "$HOME/.local/state";
+
+    # Not officially in the specification
+    XDG_BIN_HOME    = "$HOME/.local/bin";
+    PATH = [
+      "${XDG_BIN_HOME}"
+    ];
+  };
+
   environment.systemPackages = with pkgs; [
     # Rust based teamviewer
     rustdesk-flutter
@@ -38,6 +52,10 @@ in
     # lsd - The next gen ls command
     # https://github.com/lsd-rs/lsd
     unstable.lsd
+
+    # eza - Modern, maintained replacement for ls
+    # https://github.com/eza-community/eza
+    unstable.eza
 
     # Zoxide - A fast cd command that learns your habits
     # https://github.com/ajeetdsouza/zoxide
@@ -85,20 +103,24 @@ in
     };
   };
 
-  # Enable flakes.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  nix = {
+    settings = {
+      # Enable flakes.
+      experimental-features = [ "nix-command" "flakes" ];
+      # Uses hard links to remove duplicates in the nix store
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
 
   # Deletes temp files on boot.
   boot.tmp.useTmpfs = true;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
-
-  # Keep the Nix package store optimised.
-  nix.settings.auto-optimise-store = true;
-
+  
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -134,16 +156,6 @@ in
     nssmdns4 = true;
     openFirewall = true;
     domainName = "wakenet";
-  };
-
-  systemd.user.services.nix-cleaner-autostart = {
-    description = "Deletes old derivations";
-    serviceConfig.PassEnvironment = "DISPLAY";
-    script = ''
-      #!/bin/sh
-      nix-collect-garbage --delete-older-than 7d
-    '';
-    wantedBy = [ "multi-user.target" ]; # starts after login
   };
 
   fonts.packages = with pkgs; [
