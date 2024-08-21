@@ -2,7 +2,9 @@
   outputs,
   lib,
   config,
-  pkgs, ... }:
+  pkgs,
+  domain,
+  ... }:
 let
   domain = "voicelesscrimson.com";
 in
@@ -16,12 +18,12 @@ in
     recommendedProxySettings = true;
 
     virtualHosts = {
-      "${config.domain}" = {
+      "${domain}" = {
         enableACME = true;
         forceSSL = true;
-        root = "/var/www/${config.domain}";
+        root = "/var/www/${domain}";
       };
-      "lobe.${config.domain}" = {
+      "lobe.${domain}" = {
         enableACME = true;
         forceSSL = true;
         locations = {
@@ -30,11 +32,11 @@ in
           };
         };
       };
-      "cloud.${config.domain}" = {
+      "cloud.${domain}" = {
         enableACME = true;
         forceSSL = true;
       };
-      "audiobookshelf.${config.domain}" = {
+      "audiobookshelf.${domain}" = {
         enableACME = true;
         forceSSL = true;
         locations = {
@@ -44,7 +46,7 @@ in
           };
         };
       };
-      "git.${config.domain}" = {
+      "git.${domain}" = {
         enableACME = true;
         forceSSL = true;
         extraConfig = ''

@@ -2,7 +2,9 @@
   outputs,
   lib,
   config,
-  pkgs, ... }:
+  pkgs,
+  secrets,
+  ... }:
 let
 
 in
@@ -12,8 +14,8 @@ in
   # Syncthing, a file syncing service
   services.syncthing = {
     enable = true;
-    key = "${config.secrets}/syncthing/key.pem";
-    cert = "${config.secrets}/syncthing/cert.pem";
+    key = "${secrets}/syncthing/key.pem";
+    cert = "${secrets}/syncthing/cert.pem";
     user = "nextcloud";
     overrideDevices = true;     # overrides any devices added or deleted through the WebUI
     overrideFolders = true;     # overrides any folders added or deleted through the WebUI

@@ -2,7 +2,9 @@
   outputs,
   lib,
   config,
-  pkgs, ... }:
+  pkgs,
+  domain,
+  ... }:
 let
 
 in
@@ -15,9 +17,9 @@ in
     lfs.enable = true;
     settings = {
       server = {
-        DOMAIN = "git.${config.domain}";
+        DOMAIN = "git.${domain}";
         # You need to specify this to remove the port from URLs in the web UI.
-        ROOT_URL = "https://${config.domain}/";
+        ROOT_URL = "https://${domain}/";
         PROTOCOL = "https";
         HTTP_PORT = 8065;
       };

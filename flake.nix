@@ -64,15 +64,12 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       GreatBlue = lib.nixosSystem {
-        specialArgs = { inherit inputs outputs; };
+        specialArgs = { 
+	  inherit inputs outputs; 
+	  secrets = "/etc/nixos/secrets";
+	  domain = "voicelesscrimson.com";
+	};
         modules = [
-	  ({ config, pkgs, ... }: {
-              # Define the variable here
-              config = {
-	        secrets = "/etc/nixos/secrets";
-		domain = "voicelesscrimson.com";
-	      };
-            })
           ./hosts/greatblue/configuration.nix
           nixos-hardware.nixosModules.gpd-win-max-2-2023
           nixvim.nixosModules.nixvim

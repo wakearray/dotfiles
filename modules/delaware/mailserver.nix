@@ -2,15 +2,18 @@
   outputs,
   lib,
   config,
-  pkgs, ... }:
+  pkgs,
+  domain,
+  secrets,
+  ... }:
 let
 
 in
 {
   mailserver = {
     enable = true;
-    fqdn = "mail.${config.domain}";
-    domains = [ "${config.domain}" ];
+    fqdn = "mail.${domain}";
+    domains = [ "${domain}" ];
     openFirewall = true;
 
     fullTextSearch = {
@@ -25,18 +28,18 @@ in
     # A list of all login accounts. To create the password hashes, use
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     loginAccounts = {
-      "admin@${config.domain}" = {
-        hashedPasswordFile = "${config.secrets}/nixos-mailserver/admin";
-        aliases = [ "postmaster@${config.domain}" "security@${config.domain}" "abuse@${config.domain}" ];
+      "admin@${domain}" = {
+        hashedPasswordFile = "${secrets}/nixos-mailserver/admin";
+        aliases = [ "postmaster@${domain}" "security@${domain}" "abuse@${domain}" ];
       };
-      "noreply@${config.domain}" = {
-        hashedPasswordFile = "${config.secrets}/nixos-mailserver/noreply";
+      "noreply@${domain}" = {
+        hashedPasswordFile = "${secrets}/nixos-mailserver/noreply";
       };
-      "kent@${config.domain}" = {
-        hashedPasswordFile = "${config.secrets}/nixos-mailserver/kent";
+      "kent@${domain}" = {
+        hashedPasswordFile = "${secrets}/nixos-mailserver/kent";
       };
-      "jess@${config.domain}" = {
-        hashedPasswordFile = "${config.secrets}/nixos-mailserver/jess";
+      "jess@${domain}" = {
+        hashedPasswordFile = "${secrets}/nixos-mailserver/jess";
       };
     };
     

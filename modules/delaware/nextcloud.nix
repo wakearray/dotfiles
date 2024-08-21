@@ -2,7 +2,9 @@
   outputs,
   lib,
   config,
-  pkgs, ... }:
+  pkgs,
+  domain,
+  ... }:
 let
   
 in
@@ -37,7 +39,7 @@ in
     enable = true;
     package = pkgs.nextcloud29;
     home = "/sambazfs/nextcloud";
-    hostName = "cloud.${config.domain}";
+    hostName = "cloud.${domain}";
     autoUpdateApps.enable = true;
     nginx.hstsMaxAge = 15552000;
     config = {

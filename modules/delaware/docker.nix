@@ -7,10 +7,7 @@ let
 
 in
 {
-  # Enable virtualization.
-  virtualisation.docker.enable = true;
-  virtualisation.docker.enableOnBoot = true;
-
+  
   environment.systemPackages = with pkgs; [
     # Needed for Docker
     bridge-utils
@@ -18,61 +15,68 @@ in
     docker-compose
   ];
 
-  # Docker containers
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers = {
-      bricks-redis = {
-        image = "redis:6.2-alpine";
-        cmd = [ "redis-server" "--save" "20" "1" "--loglevel" "warning" "--requirepass" "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81" ];
-        volumes = [
-          "bricks-redis:/data"
-        ];
-        hostname = "bricks-redis";
-        autoStart = true;
-        extraOptions = [ "--network=lobechat-network" ];
-      };
-      bricks-postgresql = {
-        image = "postgres:14.1-alpine";
-        environment = {
-          POSTGRES_USER = "postgres";
-          POSTGRES_PASSWORD = "postgres";
+  virtualisation = {
+    # Enable virtualization.
+    docker = {
+      enable = true;
+      enableOnBoot = true;
+    };
+    # Docker containers
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        bricks-redis = {
+          image = "redis:6.2-alpine";
+          cmd = [ "redis-server" "--save" "20" "1" "--loglevel" "warning" "--requirepass" "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81" ];
+          volumes = [
+            "bricks-redis:/data"
+          ];
+          hostname = "bricks-redis";
+          autoStart = true;
+          extraOptions = [ "--network=lobechat-network" ];
         };
-        volumes = [
-          "bricks-postgresql:/var/lib/postgresql/data"
-        ];
-        hostname = "bricks-postgresql";
-        autoStart = true;
-        extraOptions = [ "--network=lobechat-network" ];
-      };
-      bricksllm = {
-        image = "luyuanxin1995/bricksllm";
-        cmd = [ "-m=dev" ];
-        environment = {
-          POSTGRESQL_USERNAME = "postgres";
-          POSTGRESQL_PASSWORD = "postgres";
-          REDIS_PASSWORD = "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81";
-          POSTGRESQL_HOSTS = "bricks-postgresql";
-          REDIS_HOSTS = "bricks-redis";
+        bricks-postgresql = {
+          image = "postgres:14.1-alpine";
+          environment = {
+            POSTGRES_USER = "postgres";
+            POSTGRES_PASSWORD = "postgres";
+          };
+          volumes = [
+            "bricks-postgresql:/var/lib/postgresql/data"
+          ];
+          hostname = "bricks-postgresql";
+          autoStart = true;
+          extraOptions = [ "--network=lobechat-network" ];
         };
-        ports = [ "8001:8001" "8002:8002" ];
-        dependsOn = [ "bricks-redis" "bricks-postgresql" ];
-        hostname = "bricksllm";
-        autoStart = true;
-        extraOptions = [ "--network=lobechat-network" ];
-      };
-      lobe-chat = {
-        image = "lobehub/lobe-chat";
-        environment = {
-          # Bricksllm local proxy
-          OPENAI_PROXY_URL = "http://bricksllm:8002/api/providers/openai/v1";
-          CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4o=gpt-4o";
+        bricksllm = {
+          image = "luyuanxin1995/bricksllm";
+          cmd = [ "-m=dev" ];
+          environment = {
+            POSTGRESQL_USERNAME = "postgres";
+            POSTGRESQL_PASSWORD = "postgres";
+            REDIS_PASSWORD = "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81";
+            POSTGRESQL_HOSTS = "bricks-postgresql";
+            REDIS_HOSTS = "bricks-redis";
+          };
+          ports = [ "8001:8001" "8002:8002" ];
+          dependsOn = [ "bricks-redis" "bricks-postgresql" ];
+          hostname = "bricksllm";
+          autoStart = true;
+          extraOptions = [ "--network=lobechat-network" ];
         };
-        ports = [ "3210:3210" ];
-        dependsOn = [ "bricksllm" ];
-        hostname = "Lobe-Chat";
-        autoStart = true;
-        extraOptions = [ "--network=lobechat-network" ];
+        lobe-chat = {
+          image = "lobehub/lobe-chat";
+          environment = {
+            # Bricksllm local proxy
+            OPENAI_PROXY_URL = "http://bricksllm:8002/api/providers/openai/v1";
+            CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4o=gpt-4o";
+          };
+          ports = [ "3210:3210" ];
+          dependsOn = [ "bricksllm" ];
+          hostname = "Lobe-Chat";
+          autoStart = true;
+          extraOptions = [ "--network=lobechat-network" ];
+        };
       };
     };
   };
@@ -94,7 +98,7 @@ in
       else
         echo "lobechat-network already exists in docker"
       fi
-     '';
+    '';
   };
 
   # Docker Container Update Timer

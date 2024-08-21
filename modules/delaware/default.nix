@@ -26,6 +26,9 @@ in
   ];
 
   # Where needed:
-  # config.secrets = "/etc/nixos/secrets";
-  # config.domain = "voicelesscrimson.com";
+  # {secrets, domain, ...}:
+  # {
+  #   secrets = "/etc/nixos/secrets";
+  #   domain = "voicelesscrimson.com";
+  # }
 }
