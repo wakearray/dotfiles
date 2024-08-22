@@ -16,9 +16,11 @@ in
   ];
 
   # Bootloader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
     # Enable binfmt emulation of aarch64-linux.
     # Supports building for phone architectures.
     binfmt.emulatedSystems = [ "aarch64-linux" ];
