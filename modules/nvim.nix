@@ -89,7 +89,10 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    # nixd - Nix language server written in C
+    # https://github.com/nix-community/nixd
     nixd
+    
     gnused
     repgrep
   ];

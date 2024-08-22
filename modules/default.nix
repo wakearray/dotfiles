@@ -63,13 +63,14 @@ in
     # https://github.com/junegunn/fzf
     fzf
 
-    # nixd - Nix language server written in C
-    # https://github.com/nix-community/nixd
-    nixd
-
     # zellij - Terminal Multiplexor written in Rust
     zellij
-  ];
+
+    # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
+    # https://github.com/lemonade-command/lemonade/
+    lemonade
+
+    ];
 
   # TODO: Consider using this:
   # boot.initrd.network.ssh.authorizedKeyFiles is a new option in the initrd ssh daemon module,

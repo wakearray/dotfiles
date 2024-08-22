@@ -24,10 +24,7 @@ in
 
     # hyfetch - neofetch with pride flags
     hyfetch
-
-    # mpv - General-purpose media player, fork of MPlayer and mplayer2
-    # https://mpv.io/
-    mpv
+    
     # mpvc - A mpc-like control interface for mpv
     # https://github.com/lwilletts/mpvc
     mpvc
@@ -47,14 +44,5 @@ in
     # Stress-Terminal UI, s-tui, monitors CPU temperature, frequency, power and utilization in a graphical way from the terminal.
     # https://amanusk.github.io/s-tui/
     unstable.s-tui
-
-    # yt-dlp - Command-line tool to download videos from YouTube.com and other sites (youtube-dl fork)
-    # https://github.com/yt-dlp/yt-dlp/
-    yt-dlp
-
-    # An aesthetically pleasing YouTube TUI written in Rust
-    # https://github.com/Siriusmart/youtube-tui
-    youtube-tui
-
   ];
 }
