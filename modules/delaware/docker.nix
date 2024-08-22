@@ -104,10 +104,10 @@ in
   # Docker Container Update Timer
   systemd.services."updateDockerImages" = {
     description = "Pull latest Docker images and restart services";
-    script = ''
-      #!/bin/sh
-      docker pull luyuanxin1995/bricksllm:latest
-      docker pull lobehub/lobe-chat:latest
+    script = let dockercli = "${config.virtualisation.docker.package}/bin/docker";
+    in ''
+      ${dockercli} pull luyuanxin1995/bricksllm:latest
+      ${dockercli} pull lobehub/lobe-chat:latest
       systemctl restart docker-bricksllm.service
       systemctl restart docker-lobe-chat.service
     '';
