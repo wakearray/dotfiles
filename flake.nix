@@ -65,9 +65,8 @@
     nixosConfigurations = {
       GreatBlue = lib.nixosSystem {
         specialArgs = { 
-	  inherit inputs outputs; 
+	  inherit inputs outputs;
 	  secrets = "/etc/nixos/secrets";
-	  domain = "voicelesscrimson.com";
 	};
         modules = [
           ./hosts/greatblue/configuration.nix
@@ -78,7 +77,11 @@
         ];
       };
       Delaware = lib.nixosSystem {
-        specialArgs = { inherit inputs outputs; };
+        specialArgs = { 
+	  inherit inputs outputs;
+	  secrets = "/etc/nixos/secrets";
+	  domain = "voicelesscrimson.com";
+	};
         modules = [
           ./hosts/delaware/configuration.nix
           nixvim.nixosModules.nixvim
@@ -88,7 +91,10 @@
         ];
       };
       SebrightBantam = lib.nixosSystem {
-        specialArgs = { inherit inputs outputs; };
+        specialArgs = { 
+	  inherit inputs outputs; 
+	  secrets = "/etc/nixos/secrets";
+	};
         modules = [
           ./hosts/sebrightbantam/configuration.nix
           nixvim.nixosModules.nixvim
@@ -97,7 +103,10 @@
         ];
       };
       Lagurus = lib.nixosSystem {
-        specialArgs = { inherit inputs outputs; };
+        specialArgs = { 
+	  inherit inputs outputs;
+          secrets = "/etc/nixos/secrets";
+	};
         modules = [
           ./hosts/lagurus/configuration.nix
           nixvim.nixosModules.nixvim

@@ -2,7 +2,10 @@
   outputs,
   lib,
   config,
-  pkgs, ... }:
+  pkgs,
+  domain,
+  secrets,
+  ... }:
 let
   config.secrets = "/etc/nixos/secrets";
   config.domain = "voicelesscrimson.com";

@@ -35,11 +35,12 @@ in
     ];
     shellAliases = {
       # use lsd instead of ls.
-      l = "lsd -al";
+      l = "eza -la --tree --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore --level=1";
       # use zoxide instead of cd.
       cd = "z";
-      cdi = "zi";
+      cdi = "zi"; 
       # SSH Hosts
+      lhosts = "echo 'greatblue delaware lagurus jerboa sebrightbantam orloff cichlid'";
       greatblue = "ssh 192.168.0.11"; # GPD Win 2 2023
       delaware = "ssh 192.168.0.46"; # NextCloud Server
       lagurus = "ssh 192.168.0.65"; # Cat's Projector
@@ -84,24 +85,16 @@ in
           echo "Flake has been modified."
           git add .
 
-	  echo "Would you like to commit now?"
-          read -q ans
-          if [[ "''$ans" == "y" ]]; then
-            echo "\r\nCommiting..."
-	    git commit
-	    g=1
-          fi
-
 	  echo "Would you like to run a test build?"
 	  read -q ans	
 	  if [[ "''$ans" == "y" ]]; then
-            echo "\r\n"
+            echo "\n"
 	    testbuildflake
 
 	    echo "Would you like to rebuild the system now?"
             read -q ans
             if [[ "''$ans" == "y" ]]; then
-	      echo "\r\n"
+	      echo "\n"
 	      rebuildflake
 	      echo "Flake rebuild, complete."
 	    else
@@ -109,16 +102,20 @@ in
 	    fi
 	  fi
 
-          if [[ "$g" == 1 ]]; then
+	  echo "Would you like to commit now?"
+          read -q ans
+          if [[ "''$ans" == "y" ]]; then
+            echo "\nCommiting..."
+	    git commit
 	    echo -e "Would you like to push to remote?"
             read -q ans
             if [[ "''$ans" == "y" ]]; then
-              echo "\r\nPushing to remote..."
+              echo "\nPushing to remote..."
               push 
             else
               echo "Not pushing to remote."
             fi
-	  fi
+          fi 
 	  cd ''$CWD
         else
           echo "No updates found."

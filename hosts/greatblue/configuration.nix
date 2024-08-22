@@ -11,6 +11,7 @@ in
   [
     ./hardware-configuration.nix
     ../../modules
+    ../../modules/gui
     ../../modules/greatblue
     ../../users/kent
   ];

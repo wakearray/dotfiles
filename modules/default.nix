@@ -2,13 +2,13 @@
   outputs,
   lib,
   config,
-  pkgs, ... }:
+  pkgs,
+  ... }:
 let
 
 in
 {
   ## These are the defaults I want on every machine:
-
   imports =
   [
     ./zsh.nix
@@ -32,9 +32,6 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    # Rust based teamviewer
-    rustdesk-flutter
-
     # 7-Zip
     p7zip
 
@@ -48,10 +45,6 @@ in
     repgrep
     ripgrep
     ripgrep-all
-
-    # lsd - The next gen ls command
-    # https://github.com/lsd-rs/lsd
-    unstable.lsd
 
     # eza - Modern, maintained replacement for ls
     # https://github.com/eza-community/eza
@@ -157,12 +150,4 @@ in
     openFirewall = true;
     domainName = "wakenet";
   };
-
-  fonts.packages = with pkgs; [
-    # Better emojis
-    twemoji-color-font
-
-    # Nerdfonts
-    unstable.nerdfonts
-  ];
 }

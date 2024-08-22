@@ -11,7 +11,7 @@ in
    services.rustdesk-server = {
      enable = true;
      openFirewall = true;
-     relay-IP = "23.16.17.118";
+     relayIP = "23.16.17.118";
      package = pkgs.unstable.rustdesk-server;
    };
 }
