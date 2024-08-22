@@ -8,8 +8,6 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    
-    # Terminal file managers
     # Yazi - Blazing fast terminal file manager written in Rust, based on async I/O
     # https://github.com/sxyazi/yazi
     yazi
@@ -23,12 +21,9 @@ in
     notcurses
 
     # hyfetch - neofetch with pride flags
+    # https://github.com/hykilpikonna/HyFetch
     hyfetch
     
-    # mpvc - A mpc-like control interface for mpv
-    # https://github.com/lwilletts/mpvc
-    mpvc
-
     # Lazycli - A tool to static turn CLI commands into TUIs
     # https://github.com/jesseduffield/lazycli
     lazycli

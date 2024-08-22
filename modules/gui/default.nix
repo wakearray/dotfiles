@@ -16,6 +16,10 @@ in
     # Rust based teamviewer
     rustdesk-flutter
 
+    # mpv - General-purpose media player, fork of MPlayer and mplayer2
+    # https://mpv.io/
+    mpv
+    
     # mpvc - A mpc-like control interface for mpv
     # https://github.com/lwilletts/mpvc
     mpvc

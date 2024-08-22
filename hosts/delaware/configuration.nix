@@ -7,8 +7,7 @@
   secrets,
   ... }:
 let
-  config.secrets = "/etc/nixos/secrets";
-  config.domain = "voicelesscrimson.com";
+
 in
 {
   imports =
@@ -25,19 +24,20 @@ in
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-
-  networking.hostName = "Delaware"; # Define your hostname.
-
-  # Enable networking.
-  networking.networkmanager.enable = true;
-
-  # When true, no X11 libraries will be installed on this machine.
-  environment.noXlibs = true;
   
-  networking.firewall = {
-    enable = true;
-    allowPing = true;
+  # Enable networking.
+  networking = {
+    networkmanager.enable = true;
+    hostName = "Delaware"; # Define your hostname
+    firewall = {
+      enable = true;
+      allowPing = true;
+    };
   };
 
+  # When true, no X11 libraries will be installed on this machine.
+  # This needs to be false for deluge to install -_-
+  environment.noXlibs = false;
+  
   system.stateVersion = "23.05";
 }
