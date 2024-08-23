@@ -36,6 +36,7 @@ in
     shellAliases = {
       # use lsd instead of ls.
       l = "eza -la --tree --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore --level=1";
+      c = "clear";
       # use zoxide instead of cd.
       cd = "z";
       cdi = "zi"; 
@@ -78,10 +79,9 @@ in
       }
 
       flakeworkflow(){
+        CWD=''$(pwd)
+        cd ''$HOME/dotfiles
         if [[ `git status --porcelain` ]]; then
-          CWD=''$(pwd)
-          cd ''$HOME/dotfiles
-	  g=0
           echo "Flake has been modified."
           git add .
 
@@ -116,10 +116,10 @@ in
               echo "Not pushing to remote."
             fi
           fi 
-	  cd ''$CWD
         else
           echo "No updates found."
         fi
+	cd ''$CWD
       }
 
       testbuildflake(){
@@ -133,6 +133,14 @@ in
 
       push(){
         git push origin ''$(git rev-parse --abbrev-ref HEAD)
+      }
+
+      clean(){
+        sudo nix-collect-garbage -d
+	sudo nix-store --gc
+	clear
+	echo "Avaliable NixOS generations:"
+	sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
       }
 
       ### Development Flakes

@@ -24,7 +24,7 @@ in
       fzf-lua.enable = true;
       gitignore.enable = true;
       lualine.enable = true;
-      hydra.enable = false; # Only until border warning is fixed
+     #hydra.enable = false; # Only until border warning is fixed
       markdown-preview = {
         enable = true;
         settings = {
