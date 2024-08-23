@@ -51,6 +51,14 @@ in
       gitgutter.enable = true;
       flash.enable = true;
       bufferline.enable = true;
+      # nvim-tree - A file explorer tree for nvim
+      # https://github.com/nvim-tree/nvim-tree.lua
+      # 
+      # Common commands:
+      # :NvimTreeToggle   | Opens and closes the navigation tree
+      # :NvimTreeFocus    | Open and focus on tree
+      # :NvimTreeFindFile | Move cursor to requested file
+      # :NvimTreeCollapse | Collapse the tree recursively
       nvim-tree = {
         enable = true;
         openOnSetup = true;

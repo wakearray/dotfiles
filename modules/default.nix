@@ -35,9 +35,6 @@ in
     # 7-Zip
     p7zip
 
-    # Git
-    git
-
     # SSH File System
     sshfs
 
@@ -69,7 +66,6 @@ in
     # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
     # https://github.com/lemonade-command/lemonade/
     lemonade
-
     ];
 
   # TODO: Consider using this:
@@ -119,36 +115,42 @@ in
   time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
   };
 
-  # Allows installing unpackaged binaries
-  programs.nix-ld.enable = true;
-
-  programs.git.enable = true;
-
-  # Console typo fixer.
-  programs.thefuck.enable = true;
+  programs = {
+    # Allows installing unpackaged binaries
+    nix-ld.enable = true;
+    # Installs git as a system
+    git.enable = true;
+    # Console typo fixer.
+    thefuck.enable = true;
+    # Enable direnv
+    direnv.enable = true;
+  };
 
   # Services.
-  services.locate.enable = true;
-
-  # Use Avahi to make this computer discoverable and to discover other computers.
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-    domainName = "wakenet";
+  services = {
+    locate.enable = true;
+    # Use Avahi to make this computer discoverable and 
+    # to discover other computers.
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+      domainName = "wakenet";
+    };
   };
 }

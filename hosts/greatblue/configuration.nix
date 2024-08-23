@@ -26,7 +26,6 @@ in
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
-
   # Enable networking
   networking = {
     networkmanager.enable = true;
@@ -39,12 +38,6 @@ in
     bluetooth.enable = true;
     keyboard.qmk.enable = true;
   };
-
-  # Enale direnv
-  programs.direnv.enable = true;
-
-  # Services
-  services.flatpak.enable = true;
 
   system.stateVersion = "23.11";
 }
