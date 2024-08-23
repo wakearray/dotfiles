@@ -14,7 +14,10 @@
 
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nix-darwin.follows = "";
+      };
     };
 
     home-manager = {
