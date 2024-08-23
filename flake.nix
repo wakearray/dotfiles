@@ -33,10 +33,17 @@
       };
     };
 
-    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+    };
+
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, nixvim, agenix, simple-nixos-mailserver, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, nixvim, agenix, simple-nixos-mailserver, nixos-generators, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib; # // nixpkgs-unstable.lib;
@@ -117,18 +124,38 @@
           lix-module.nixosModules.default
         ];
       };
+      cichlid = nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        modules = [
+	  ./hosts/cichlid/configuration.nix
+          nixos-hardware.nixosModules.common-cpu-intel
+          nixos-hardware.nixosModules.common-gpu-nvidia
+	  nixos-hardware.nixosModules.common-pc-ssd
+	  nixos-hardware.nixosModules.common-hidpi
+	  nixvim.nixosModules.nixvim
+          agenix.nixosModules.default
+          lix-module.nixosModules.default
+        ];
+        format = "iso";
+        # https://github.com/nix-community/nixos-generators#using-in-a-flake
+      };
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       "kent@greatblue" = lib.homeManagerConfiguration {
-        modules = [ ./home/kent/greatblue.nix ];
+        modules = [
+	  ./home/kent
+	  ./home/kent/greatblue.nix 
+	];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
       "kent@delaware" = lib.homeManagerConfiguration {
-        modules = [ ./home/kent/delaware.nix ];
+        modules = [
+	  ./home/kent
+	   ./home/kent/delaware.nix ];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };

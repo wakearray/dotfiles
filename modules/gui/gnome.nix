@@ -7,6 +7,7 @@
   # Enable the Gnome Desktop Environment using Wayland.
   services.xserver = {
     enable = true;
+    dpi = 300;
     displayManager = {
       gdm = {
         enable = true;
@@ -16,7 +17,6 @@
     videoDrivers = [ "displaylink" "modesetting" ];
     desktopManager.gnome.enable = true;
   };
-  services.xserver.dpi = 300;
 
   # Style the KDE apps in Gnome drip.
   qt = {
