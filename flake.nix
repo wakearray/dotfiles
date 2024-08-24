@@ -124,21 +124,26 @@
           lix-module.nixosModules.default
         ];
       };
-      cichlid = nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
-        modules = [
-	  ./hosts/cichlid/configuration.nix
-          nixos-hardware.nixosModules.common-cpu-intel
-          nixos-hardware.nixosModules.common-gpu-nvidia
-	  nixos-hardware.nixosModules.common-pc-ssd
-	  nixos-hardware.nixosModules.common-hidpi
-	  nixvim.nixosModules.nixvim
-          agenix.nixosModules.default
-          lix-module.nixosModules.default
-        ];
-        format = "iso";
-        # https://github.com/nix-community/nixos-generators#using-in-a-flake
+    };
+    # Cichlid liveCD
+    Cichlid = nixos-generators.nixosGenerate {
+      system = "x86_64-linux";
+      specialArgs = { 
+	inherit inputs outputs;
+	secrets = "/etc/nixos/secrets";
       };
+      modules = [
+	./hosts/cichlid/configuration.nix
+        nixos-hardware.nixosModules.common-cpu-intel
+        nixos-hardware.nixosModules.common-gpu-nvidia
+	nixos-hardware.nixosModules.common-pc-ssd
+	nixos-hardware.nixosModules.common-hidpi
+	nixvim.nixosModules.nixvim
+        agenix.nixosModules.default
+        lix-module.nixosModules.default
+      ];
+      format = "iso";
+      # https://github.com/nix-community/nixos-generators#using-in-a-flake
     };
 
     # Standalone home-manager configuration entrypoint
