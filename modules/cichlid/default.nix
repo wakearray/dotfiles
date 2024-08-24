@@ -9,6 +9,7 @@ in
 {
   # Everything I want on Cichlid
   imports = [
+    ./nvidia.nix
     ./git.nix
     ./syncthing.nix
     

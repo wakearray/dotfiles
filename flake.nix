@@ -135,7 +135,6 @@
       modules = [
 	./hosts/cichlid/configuration.nix
         nixos-hardware.nixosModules.common-cpu-intel
-        nixos-hardware.nixosModules.common-gpu-nvidia
 	nixos-hardware.nixosModules.common-pc-ssd
 	nixos-hardware.nixosModules.common-hidpi
 	nixvim.nixosModules.nixvim
