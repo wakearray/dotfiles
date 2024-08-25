@@ -9,10 +9,15 @@ in
 {
   # Everything I want on Cichlid
   imports = [
+    # Harware related
     ./nvidia.nix
+    ./rgb.nix
+
+    # Software related
     ./git.nix
     ./syncthing.nix
     
+    # GUI related
     ../gui
     ../gui/gnome.nix
     ../gui/steam.nix

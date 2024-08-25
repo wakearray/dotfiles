@@ -1,5 +1,5 @@
 {
-  description = "Nixos config flake";
+  description = "WakeNet Nixos config flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
@@ -124,6 +124,29 @@
           lix-module.nixosModules.default
         ];
       };
+      Cichlid = lib.nixosSystem {
+        specialArgs = { 
+          inherit inputs outputs;
+          secrets = "/etc/nixos/secrets";
+        };
+        modules = [
+          ./hosts/cichlid/configuration.nix
+          nixos-hardware.nixosModules.common-cpu-intel
+          nixos-hardware.nixosModules.common-pc-ssd
+          nixos-hardware.nixosModules.common-hidpi
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.jess = import ./home/jess;
+            };
+          }
+          nixvim.nixosModules.nixvim
+          agenix.nixosModules.default
+          lix-module.nixosModules.default
+        ];
+      };
     };
     # Cichlid liveCD
     Cichlid = nixos-generators.nixosGenerate {
@@ -137,17 +160,33 @@
         nixos-hardware.nixosModules.common-cpu-intel
 	nixos-hardware.nixosModules.common-pc-ssd
 	nixos-hardware.nixosModules.common-hidpi
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.jess = import ./home/jess;
+          };
+        }
 	nixvim.nixosModules.nixvim
         agenix.nixosModules.default
         lix-module.nixosModules.default
       ];
-      format = "iso";
+      format = "install-iso";
       # https://github.com/nix-community/nixos-generators#using-in-a-flake
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
+      "kent@mobile" = lib.homeManagerConfiguration {
+        modules = [
+	  ./home/kent
+	  ./home/kent/mobile.nix 
+	];
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
       "kent@greatblue" = lib.homeManagerConfiguration {
         modules = [
 	  ./home/kent
@@ -159,7 +198,8 @@
       "kent@delaware" = lib.homeManagerConfiguration {
         modules = [
 	  ./home/kent
-	   ./home/kent/delaware.nix ];
+	  ./home/kent/delaware.nix 
+        ];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
