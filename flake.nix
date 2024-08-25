@@ -172,7 +172,7 @@
         agenix.nixosModules.default
         lix-module.nixosModules.default
       ];
-      format = "install-iso";
+      format = "iso";
       # https://github.com/nix-community/nixos-generators#using-in-a-flake
     };
 

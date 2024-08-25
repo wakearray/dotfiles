@@ -13,6 +13,8 @@ in
     ../../modules/gui
     ../../modules/cichlid
     ../../users/jess
+
+    ../../modules/installer.nix
   ];
 
   # Bootloader.
