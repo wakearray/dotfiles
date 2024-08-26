@@ -11,7 +11,7 @@
     displayManager = {
       sddm = {
         enable = true;
-        wayland = true;
+        wayland.enable = true;
       };
     };
     videoDrivers = [ "displaylink" "modesetting" ];
