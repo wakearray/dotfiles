@@ -9,7 +9,7 @@
     enable = true;
     dpi = 300;
     displayManager = {
-      gdm = {
+      sddm = {
         enable = true;
         wayland = true;
       };

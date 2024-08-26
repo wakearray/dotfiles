@@ -23,6 +23,29 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    plymouth = { 
+      enable = true;
+      catppuccin = { 
+        enable = true; 
+	flavor = "macchiato";
+      };
+    };
+  };
+
+  services.displayManager.sddm.catppuccin = { 
+    enable = true;
+    flavor = "macchiato";
+  };
+
+  catppuccin = { 
+    enable = true;
+    accent = "mauve";
+    flavor = "macchiato";
+  };
+
+  console.catppuccin = { 
+    enable = true;
+    flavor = "macchiato";
   };
   
   # Enable networking

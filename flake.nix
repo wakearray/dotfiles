@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     lix-module = {
@@ -41,9 +40,11 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, nixvim, agenix, simple-nixos-mailserver, nixos-generators, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, nixvim, agenix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib; # // nixpkgs-unstable.lib;
@@ -134,13 +135,19 @@
           nixos-hardware.nixosModules.common-cpu-intel
           nixos-hardware.nixosModules.common-pc-ssd
           nixos-hardware.nixosModules.common-hidpi
+	  catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.jess = import ./home/jess;
-            };
+              users.jess = { 
+	        imports = [
+	          ./home/jess
+		  catppuccin.homeManagerModules.catppuccin
+	        ];
+              };
+	    };
           }
           nixvim.nixosModules.nixvim
           agenix.nixosModules.default

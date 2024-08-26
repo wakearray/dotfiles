@@ -10,6 +10,7 @@ in
   programs = {
     starship = {
       enable = true;
+      catppuccin.enable = false;
       enableZshIntegration = true;
       settings = {
         format = lib.concatStrings [
@@ -39,31 +40,31 @@ in
           "[ ](fg:color_06)"
           "$line_break$character"
         ];
-        palette = "gruvbox_dark";
-        palettes.gruvbox_dark = {
-          color_fg0 = "#000000";
-          color_fg1 = "#000000";
-          color_fg2 = "#000000";
+        palette = "wisteria";
+        palettes.wisteria = {
+          color_fg0 = "#3A1C6E";
+          color_fg1 = "#3A1C6E";
+          color_fg2 = "#3A1C6E";
           color_green = "#A6DA95";
-          color_purple = "#EED49F";
+          color_yellow = "#EED49F";
           color_red = "#ED8796";
 
           color_01 = "#FFD6FF";
           color_02 = "#E7C6FF";
           color_03 = "#C8B6FF";
-          color_04 = "#C0BBFF";
-          color_05 = "#B8C0FF";
-          color_06 = "#BBD0FF";
+          color_04 = "#B8C0FF";
+          color_05 = "#BBD0FF";
+          color_06 = "#C9DAFF";
         };
         os = {
           disabled = false;
           style = "bg:color_01 fg:color_fg0";
           symbols = {
-            Windows = "󰍲";
-            Android = "";
-            Arch = "󰣇";
-            Debian = "󰣚";
-            NixOS = "";
+            Windows = "󰍲 ";
+            Android = " ";
+            Arch = "󰣇 ";
+            Debian = "󰣚 ";
+            NixOS = " ";
           };
         };
         username = {
@@ -87,7 +88,7 @@ in
           };
         };
         git_branch = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_03";
           format = "[[ $symbol $branch ](fg:color_fg0 bg:color_03)]($style)";
         };
@@ -96,7 +97,7 @@ in
           format = "[[($all_status$ahead_behind )](fg:color_fg0 bg:color_03)]($style)";
         };
         nodejs = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
@@ -108,19 +109,19 @@ in
         };
 
         rust = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         golang = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         php = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
@@ -132,25 +133,25 @@ in
         };
 
         kotlin = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         haskell = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         python = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         docker_context = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_05";
           format = "[[ $symbol( $context) ](fg:color_fg2 bg:color_05)]($style)";
         };
@@ -177,8 +178,8 @@ in
           success_symbol = "[](bold fg:color_green)";
           error_symbol = "[](bold fg:color_red)";
           vimcmd_symbol = "[](bold fg:color_green)";
-          vimcmd_replace_one_symbol = "[](bold fg:color_purple)";
-          vimcmd_replace_symbol = "[](bold fg:color_purple)";
+          vimcmd_replace_one_symbol = "[](bold fg:color_yellow)";
+          vimcmd_replace_symbol = "[](bold fg:color_yellow)";
           vimcmd_visual_symbol = "[](bold fg:color_02)";
         };
       };
