@@ -185,9 +185,6 @@
       };
     };
   };
-  
-  # zsh completion for system packages
-  environment.pathsToLink = [ "/share/zsh" ];
 
   services = {
     # dunst - Lightweight and customizable notification daemon
@@ -200,13 +197,21 @@
   gtk = { 
     enable = true;
     catppuccin = {
+      enable = true;
       gnomeShellTheme = true;
       icon = { enable = true; };
     };
   };
   qt = {
     enable = true;
-    style.catppuccin.apply = true;
+    style = {
+      catppuccin = {
+        apply = true;
+	enable = true;
+      };
+      name = "kvantum";
+    };
+    platformTheme.name = "kvantum";
   };
  
   dconf.settings = {

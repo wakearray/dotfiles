@@ -11,6 +11,7 @@ in
     #./hardware-configuration.nix
     ../../modules
     ../../modules/gui
+    ../../modules/gui/catppuccin.nix
     ../../modules/cichlid
     ../../users/jess
 
@@ -23,37 +24,17 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    plymouth = { 
-      enable = true;
-      catppuccin = { 
-        enable = true; 
-	flavor = "macchiato";
-      };
-    };
   };
 
-  services.displayManager.sddm.catppuccin = { 
-    enable = true;
-    flavor = "macchiato";
-  };
-
-  catppuccin = { 
-    enable = true;
-    accent = "mauve";
-    flavor = "macchiato";
-  };
-
-  console.catppuccin = { 
-    enable = true;
-    flavor = "macchiato";
-  };
-  
   # Enable networking
   networking = {
     networkmanager.enable = true;
     hostName = "Cichlid";
     firewall.enable = true;
   };
+  
+  # zsh completion for system packages
+  environment.pathsToLink = [ "/share/zsh" ];
   
   hardware = {
     bluetooth.enable = true;

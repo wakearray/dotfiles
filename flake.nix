@@ -84,6 +84,7 @@
           nixos-hardware.nixosModules.gpd-win-max-2-2023
           nixvim.nixosModules.nixvim
           agenix.nixosModules.default
+	  {environment.systemPackages = [ agenix.packages.x86_64-linux.default ];}
           lix-module.nixosModules.default
         ];
       };
@@ -156,6 +157,7 @@
       };
     };
     # Cichlid liveCD
+    # Available through `nix build .#Cichlid`
     Cichlid = nixos-generators.nixosGenerate {
       system = "x86_64-linux";
       specialArgs = { 
@@ -167,12 +169,18 @@
         nixos-hardware.nixosModules.common-cpu-intel
 	nixos-hardware.nixosModules.common-pc-ssd
 	nixos-hardware.nixosModules.common-hidpi
+	catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.jess = import ./home/jess;
+            users.jess = { 
+	      imports = [
+	        ./home/jess
+	        catppuccin.homeManagerModules.catppuccin
+	      ];
+	    };
           };
         }
 	nixvim.nixosModules.nixvim

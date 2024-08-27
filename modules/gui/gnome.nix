@@ -12,6 +12,7 @@
       sddm = {
         enable = true;
         wayland.enable = true;
+	package = pkgs.kdePackages.sddm;
       };
     };
     videoDrivers = [ "displaylink" "modesetting" ];
