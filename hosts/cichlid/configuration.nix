@@ -11,7 +11,7 @@ in
     #./hardware-configuration.nix
     ../../modules
     ../../modules/gui
-    ../../modules/gui/catppuccin.nix
+    ../../modules/gui/themes/catppuccin.nix
     ../../modules/cichlid
     ../../users/jess
 
