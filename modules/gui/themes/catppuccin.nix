@@ -18,11 +18,6 @@ in
     };
   };
 
-  services.displayManager.sddm.catppuccin = { 
-    enable = true;
-    flavor = "macchiato";
-  };
-
   catppuccin = { 
     enable = true;
     accent = "mauve";
@@ -42,9 +37,13 @@ in
     }
   )];
 
-  displayManager.sddm = {
-    enable = true;
-    theme = "catppuccin-mocha";
-    package = pkgs.kdePackages.sddm;
+  services.xserver = {
+    displayManager.sddm = {
+      enable = true;
+      theme = lib.mkOverride 10 "catppuccin-macchiato";
+      # Because this is overriding a setting set in gnome.nix
+      # set it to a higher priority to override the other option
+      package = lib.mkOverride 10 pkgs.kdePackages.sddm;
+    };
   };
 }

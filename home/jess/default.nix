@@ -162,7 +162,7 @@
       syntaxHighlighting = { enable = true; };
       autosuggestion = { 
         enable = true;
-        strategy = "history";
+        strategy = [ "history" ];
       };
       history = { 
         append = true;
@@ -174,8 +174,7 @@
         enable = true;
       };
       # Things to put in the .zshrc file
-      initExtra = {
-      };
+      initExtra = "\n";
       shellAliases = {
         l = "eza -la --tree --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore --level=1";
         c = "clear";
@@ -222,7 +221,6 @@
       font-antialiasing = "grayscale";
       font-hinting = "slight";
       gtk-enable-primary-paste = false;
-      gtk-theme = "Adwaita-dark";
       monospace-font-name = "Source Code Pro Light 10";
       show-battery-percentage = false;
     };

@@ -12,7 +12,7 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-	package = pkgs.kdePackages.sddm;
+	package = lib.mkOverride 1000 pkgs.kdePackages.sddm;
       };
     };
     videoDrivers = [ "displaylink" "modesetting" ];
@@ -23,8 +23,8 @@
   qt = {
     # null or one of "adwaita", "adwaita-dark", "adwaita-highcontrast", "adwaita-highcontrastinverse",
     # "bb10bright", "bb10dark", "breeze", "cde", "cleanlooks", "gtk2", "kvantum", "motif", "plastique"
-    style = "adwaita-dark";
-    platformTheme = "gnome";
+    style = lib.mkOverride 1000 "adwaita-dark";
+    platformTheme = lib.mkOverride 1000 "gnome";
     enable = true;
   };
 
