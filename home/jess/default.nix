@@ -193,24 +193,16 @@
     dunst.enable = true;
   };
 
-  gtk = { 
-    enable = true;
-    catppuccin = {
-      enable = true;
-      gnomeShellTheme = true;
-      icon = { enable = true; };
-    };
-  };
-  qt = {
+    qt = {
     enable = true;
     style = {
-      catppuccin = {
+      catppuccin = lib.mkOverride 10 {
         apply = true;
 	enable = true;
       };
-      name = "kvantum";
+      name = lib.mkOverride 10 "kvantum";
     };
-    platformTheme.name = "kvantum";
+    platformTheme.name = lib.mkOverride 10 "kvantum";
   };
  
   dconf.settings = {

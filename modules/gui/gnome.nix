@@ -12,7 +12,7 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-	package = lib.mkOverride 1000 pkgs.kdePackages.sddm;
+	package = lib.mkOverride 1000 pkgs.gnome.gdm;
       };
     };
     videoDrivers = [ "displaylink" "modesetting" ];
