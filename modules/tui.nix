@@ -8,7 +8,7 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    # Yazi - Blazing fast terminal file manager written in Rust, based on async I/O
+    # Yazi - Blazing fast terminal file manager written in Rust
     # https://github.com/sxyazi/yazi
     yazi
 
@@ -16,7 +16,7 @@ in
     # https://crates.io/crates/systemctl-tui
     systemctl-tui
 
-    # notcurses - blingful character graphics/TUI library. definitely not curses.
+    # notcurses - blingful character graphics/TUI library
     # https://github.com/dankamongmen/notcurses
     notcurses
 
@@ -28,15 +28,11 @@ in
     # https://github.com/jesseduffield/lazycli
     lazycli
 
-    # Oxker - A simple tui to view & control docker containers
-    # https://github.com/mrjackwills/oxker
-    oxker
-
-    # GitUI provides you with the comfort of a git GUI but right in your terminal
+    # GitUI - The comfort of a git GUI right in your terminal
     # https://github.com/extrawurst/gitui
     unstable.gitui
 
-    # Stress-Terminal UI, s-tui, monitors CPU temperature, frequency, power and utilization in a graphical way from the terminal.
+    # Stress-Terminal UI, s-tui, monitors CPU temperature, frequency, power and utilization in a graphical way from the terminal
     # https://amanusk.github.io/s-tui/
     unstable.s-tui
   ];

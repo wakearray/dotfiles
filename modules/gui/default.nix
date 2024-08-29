@@ -16,6 +16,10 @@ in
     # Rust based teamviewer
     rustdesk-flutter
 
+    # vlc - Cross-platform media player and streaming server
+    # https://www.videolan.org/vlc/
+    vlc
+
     # mpv - General-purpose media player, fork of MPlayer and mplayer2
     # https://mpv.io/
     mpv
