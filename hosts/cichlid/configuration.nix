@@ -8,7 +8,7 @@ in
 {
   imports =
   [
-    #./hardware-configuration.nix
+    ./hardware-configuration.nix
     ../../modules
     ../../modules/gui
     ../../modules/gui/themes/catppuccin.nix
