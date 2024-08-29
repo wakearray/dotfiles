@@ -192,18 +192,6 @@
     # https://nix-community.github.io/home-manager/options.xhtml#opt-services.dunst.enable
     dunst.enable = true;
   };
-
-    qt = {
-    enable = true;
-    style = {
-      catppuccin = lib.mkOverride 10 {
-        apply = true;
-	enable = true;
-      };
-      name = lib.mkOverride 10 "kvantum";
-    };
-    platformTheme.name = lib.mkOverride 10 "kvantum";
-  };
  
   dconf.settings = {
     "org/gnome/desktop/interface" = {
