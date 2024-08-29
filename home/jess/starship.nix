@@ -1,35 +1,16 @@
-{ lib, config, pkgs, ... }:
+{ inputs,
+  outputs,
+  lib,
+  config,
+  pkgs, ... }:
+let
 
+in
 {
-  home = {
-    username = "kent";
-    homeDirectory = "/home/kent";
-    stateVersion = "24.05";
-    packages = with pkgs; [
-      # 
-    ];
-  };
-
-  # Editor Config helps enforce your preferences on editors
-  editorconfig = {
-    enable = true;
-    settings = {
-      "*" = {
-        charset = "utf-8";
-        end_of_line = "lf";
-        trim_trailing_whitespace = true;
-        insert_final_newline = true;
-        max_line_width = 78;
-        indent_style = "space";
-        indent_size = 2;
-      };
-    };
-  };
-
   programs = {
-    home-manager.enable = true;
     starship = {
       enable = true;
+      catppuccin.enable = false;
       enableZshIntegration = true;
       settings = {
         format = lib.concatStrings [
@@ -59,31 +40,31 @@
           "[ ](fg:color_06)"
           "$line_break$character"
         ];
-        palette = "gruvbox_dark";
-        palettes.gruvbox_dark = {
-          color_fg0 = "#184E77";
-          color_fg1 = "#D9ED92";
-          color_fg2 = "#83A598";
-          color_green = "#98971a";
-          color_purple = "#b16286";
-          color_red = "#cc241d";
+        palette = "wisteria";
+        palettes.wisteria = {
+          color_fg0 = "#3A1C6E";
+          color_fg1 = "#3A1C6E";
+          color_fg2 = "#3A1C6E";
+          color_green = "#A6DA95";
+          color_yellow = "#EED49F";
+          color_red = "#ED8796";
 
-          color_01 = "#D9ED92";
-          color_02 = "#99D98C";
-          color_03 = "#52B69A";
-          color_04 = "#168AAD";
-          color_05 = "#1E6091";
-          color_06 = "#184E77";
+          color_01 = "#FFD6FF";
+          color_02 = "#E7C6FF";
+          color_03 = "#C8B6FF";
+          color_04 = "#B8C0FF";
+          color_05 = "#BBD0FF";
+          color_06 = "#C9DAFF";
         };
         os = {
           disabled = false;
           style = "bg:color_01 fg:color_fg0";
           symbols = {
-            Windows = "󰍲";
-            Android = "";
-            Arch = "󰣇";
-            Debian = "󰣚";
-            NixOS = "";
+            Windows = "󰍲 ";
+            Android = " ";
+            Arch = "󰣇 ";
+            Debian = "󰣚 ";
+            NixOS = " ";
           };
         };
         username = {
@@ -107,7 +88,7 @@
           };
         };
         git_branch = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_03";
           format = "[[ $symbol $branch ](fg:color_fg0 bg:color_03)]($style)";
         };
@@ -116,7 +97,7 @@
           format = "[[($all_status$ahead_behind )](fg:color_fg0 bg:color_03)]($style)";
         };
         nodejs = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
@@ -128,19 +109,19 @@
         };
 
         rust = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         golang = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         php = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
@@ -152,25 +133,25 @@
         };
 
         kotlin = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         haskell = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         python = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_04";
           format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_04)]($style)";
         };
 
         docker_context = {
-          symbol = "";
+          symbol = " ";
           style = "bg:color_05";
           format = "[[ $symbol( $context) ](fg:color_fg2 bg:color_05)]($style)";
         };
@@ -197,8 +178,8 @@
           success_symbol = "[](bold fg:color_green)";
           error_symbol = "[](bold fg:color_red)";
           vimcmd_symbol = "[](bold fg:color_green)";
-          vimcmd_replace_one_symbol = "[](bold fg:color_purple)";
-          vimcmd_replace_symbol = "[](bold fg:color_purple)";
+          vimcmd_replace_one_symbol = "[](bold fg:color_yellow)";
+          vimcmd_replace_symbol = "[](bold fg:color_yellow)";
           vimcmd_visual_symbol = "[](bold fg:color_02)";
         };
       };

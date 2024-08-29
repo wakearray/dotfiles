@@ -10,8 +10,12 @@ in
   [
     ./hardware-configuration.nix
     ../../modules
-    ../../modules/greatblue
-    ../../users/kent
+    ../../modules/gui
+    ../../modules/gui/themes/catppuccin.nix
+    ../../modules/cichlid
+    ../../users/jess
+
+    ../../modules/installer.nix
   ];
 
   # Bootloader.
@@ -20,23 +24,23 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    # Enable binfmt emulation of aarch64-linux.
-    # Supports building for phone architectures.
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   # Enable networking
   networking = {
     networkmanager.enable = true;
-    hostName = "GreatBlue";
+    hostName = "Cichlid";
     firewall.enable = true;
   };
   
-  # Enable keyboard access
+  # zsh completion for system packages
+  environment.pathsToLink = [ "/share/zsh" ];
+  
   hardware = {
     bluetooth.enable = true;
+    # Enable keyboard firmware control
     keyboard.qmk.enable = true;
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

@@ -7,23 +7,24 @@
   # Enable the Gnome Desktop Environment using Wayland.
   services.xserver = {
     enable = true;
+    dpi = 300;
     displayManager = {
-      gdm = {
+      sddm = {
         enable = true;
-        wayland = true;
+        wayland.enable = true;
+	package = lib.mkOverride 1000 pkgs.gnome.gdm;
       };
     };
     videoDrivers = [ "displaylink" "modesetting" ];
     desktopManager.gnome.enable = true;
   };
-  services.xserver.dpi = 300;
 
   # Style the KDE apps in Gnome drip.
   qt = {
     # null or one of "adwaita", "adwaita-dark", "adwaita-highcontrast", "adwaita-highcontrastinverse",
     # "bb10bright", "bb10dark", "breeze", "cde", "cleanlooks", "gtk2", "kvantum", "motif", "plastique"
-    style = "adwaita-dark";
-    platformTheme = "gnome";
+    style = lib.mkOverride 1000 "adwaita-dark";
+    platformTheme = lib.mkOverride 1000 "gnome";
     enable = true;
   };
 

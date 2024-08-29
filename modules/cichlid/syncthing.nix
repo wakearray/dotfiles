@@ -12,7 +12,7 @@ in
     enable = true;
     key = "${secrets}/syncthing/key.pem";
     cert = "${secrets}/syncthing/cert.pem";
-    user = "kent";
+    user = "jess";
     # overrides any devices added or deleted through the WebUI
     overrideDevices = true;
     # overrides any folders added or deleted through the WebUI
@@ -28,11 +28,11 @@ in
         # Name of folder in Syncthing, also the folder ID
         "Family_Notes" = {
 	  # Which folder to add to Syncthing
-          path = "/home/kent/notes/family/";    
+          path = "/home/jess/notes/family/";    
           devices = [ "Delaware" ];
         };
-        "Kent_Notes" = {
-          path = "/home/kent/notes/personal/";
+        "Jess_Notes" = {
+          path = "/home/jess/notes/personal/";
           devices = [ "Delaware" ];
         };
       };

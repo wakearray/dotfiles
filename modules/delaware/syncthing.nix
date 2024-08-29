@@ -31,12 +31,15 @@ in
           autoAcceptFolders = true;
         };
         "Jess_S20_Ultra" = { id = "F436IQN-OOP5KEX-CNCY7VA-4CKUSOR-6YUHIO2-TTESNNW-TMMSMNI-CQZNUAZ"; };
+	"Jess_Cichlid" = { id = "GS6LSCL-ANDVRKL-M3DOWQF-PIQJKUK-WB2K7FT-KOANCWV-4P5CHNF-FPJNWA2"; };
       };
       folders = {
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
           path = "/mnt/syncthing/shared_family/notes";    # Which folder to add to Syncthing
           devices = [
             "Jess_S20_Ultra"
+	    "Jess_Cichlid"
+
             "Kent_S24_Ultra"
             "Kent_P80"
             "Kent_y700"
@@ -77,7 +80,10 @@ in
 	};
         "Jess_Notes" = {
           path = "/mnt/syncthing/jess_personal/notes";
-          devices = [ "Jess_S20_Ultra" ];
+          devices = [ 
+	    "Jess_S20_Ultra"
+	    "Jess_Cichlid"
+	  ];
         };
         "Jess_DCIM" = {
           path = "/mnt/syncthing/jess_personal/DCIM";

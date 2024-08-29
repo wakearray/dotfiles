@@ -8,15 +8,17 @@
   imports =
   [
     ./8bitdo.nix
-    ./printers.nix
     ./fingerprint_reader.nix
-    ./u2f.nix
-    ./tui.nix
+    ./git.nix
+    ./printers.nix
     ./samba.nix
     ./syncthing.nix
-    ./git.nix
+    ./tui.nix
+    ./u2f.nix
 
-    ./gnome.nix
+    ../gui
+    ../gui/steam.nix
+    ../gui/gnome.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -35,10 +37,6 @@
 
     # Drivers to support docks with HDMI ports
     displaylink
-
-    # Language servers
-    nodePackages.bash-language-server
-    nixd
 
     # Generate Nix packages from URLs
     # https://github.com/nix-community/nix-init
@@ -116,9 +114,6 @@
     # Internet browsers
     firefox
     google-chrome
-
-    # Nix packager
-    nix-init
 
     # commandline clipboad manipulation
     xclip

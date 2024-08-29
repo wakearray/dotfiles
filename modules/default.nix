@@ -141,6 +141,9 @@ in
     direnv.enable = true;
   };
 
+  # Policy Kit, necessary for some things like hyperland, 1Pass, etc
+  security.polkit.enable = true;
+
   # Services.
   services = {
     locate.enable = true;
