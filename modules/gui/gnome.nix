@@ -9,10 +9,9 @@
     enable = true;
     dpi = 300;
     displayManager = {
-      sddm = {
+      gdm = {
         enable = true;
-        wayland.enable = true;
-	package = lib.mkOverride 1000 pkgs.gnome.gdm;
+        wayland = true;
       };
     };
     videoDrivers = [ "displaylink" "modesetting" ];
