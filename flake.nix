@@ -86,6 +86,18 @@
           agenix.nixosModules.default
 	  {environment.systemPackages = [ agenix.packages.x86_64-linux.default ];}
           lix-module.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kent = { 
+	        imports = [
+	          ./home/kent
+	        ];
+              };
+	    };
+          }
         ];
       };
       Delaware = lib.nixosSystem {

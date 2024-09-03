@@ -39,6 +39,18 @@
     };
   };
 
+  qt = {
+    enable = true;
+    style = {
+      catppuccin = lib.mkOverride 10 {
+        apply = true;
+	enable = true;
+      };
+      name = lib.mkOverride 10 "kvantum";
+    };
+    platformTheme.name = lib.mkOverride 10 "kvantum";
+  };
+
   # Editor Config helps enforce your preferences on editors
   editorconfig = {
     enable = true;

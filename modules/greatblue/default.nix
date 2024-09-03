@@ -49,7 +49,6 @@
     android-studio
 
     # IDEs
-    unstable.vscode-fhs
     libsForQt5.kate
 
     # Video player
@@ -129,4 +128,6 @@
     unstable.alacritty
     unstable.alacritty-theme
   ];
+
+  home-manager.backupFileExtension = "backup";
 }

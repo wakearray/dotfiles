@@ -9,7 +9,7 @@ in
 {
   # zellij - A terminal workspace with batteries included
   # https://github.com/zellij-org/zellij
-  zellij = {
+  programs.zellij = {
     enable = true;
     # `zellij.settings` expects yaml, but zellij has used kdl for years now.
     # Use `home.file` to write the approriate configuration files manually.

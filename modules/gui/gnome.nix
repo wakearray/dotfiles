@@ -10,10 +10,26 @@
     dpi = 300;
     displayManager = {
       gdm = {
-        enable = true;
-        wayland = true;
-      };
+          enable = true;
+          wayland = true;
+        };
     };
+    # TODO: Make this work:
+#    displayManager = lib.mkMerge [
+#      (lib.mkIf (config.catppuccin.enable) {
+#        gdm = {
+#          enable = true;
+#          wayland = true;
+#        };
+#     })
+#     (lib.mkIf (config.catppuccin.enable != true) {
+#       sddm = {
+#          enable = true;
+#          wayland.enable = true;
+#	  package = lib.mkOverride 1000 pkgs.kdePackages.sddm;
+#        };
+#      })
+#    ];
     videoDrivers = [ "displaylink" "modesetting" ];
     desktopManager.gnome.enable = true;
   };

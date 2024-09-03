@@ -9,5 +9,6 @@ in
 {
   imports = [
     ./zsh.nix
+    ./development_environments.nix
   ];
 }

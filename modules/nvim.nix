@@ -14,12 +14,31 @@ in
       # Line numbers
       number = true;
       relativenumber = true;
+      shiftwidth = 2;
     };
+    extraConfigLuaPre = ''
+  -- Hide depreciation warnings
+  vim.notify = function(msg, ...)
+    if msg:match("has been deprecated") then
+      return
+      end
+    notify(msg, ...)
+  end
+'';
     plugins = {
       treesitter.enable = true;
       zellij.enable = true;
       wtf.enable = true;
       rustaceanvim.enable = true;
+      dap = { 
+        enable = true; 
+        adapters.executables = {
+        # Good example https://github.com/foo-dogsquared/nixos-config/blob/8e7a3e6277362d4830b8b13bb8aa02bc7ae5ca6b/configs/home-manager/foo-dogsquared/modules/programs/nixvim/dap.nix#L15
+          lldb = {
+            command = "lldb-dap";
+          };
+        };
+      };
       direnv.enable = true;
       fzf-lua.enable = true;
       gitignore.enable = true;
@@ -31,6 +50,13 @@ in
           theme = "dark";
           auto_start = true;
         };
+      };
+      # Trouble - Shows lsp errors
+      # https://github.com/folke/trouble.nvim
+      trouble = { 
+        enable = true;
+        # Settings found here:
+        # https://nix-community.github.io/nixvim/plugins/trouble/settings/index.html
       };
       nvim-colorizer.enable = true;
       qmk = {
@@ -64,7 +90,10 @@ in
         openOnSetup = true;
         openOnSetupFile = true;
       };
-      multicursors.enable = true;
+      # Removed till hydra warning is fixed:
+      # https://github.com/nix-community/nixvim/issues/1943
+      #multicursors.enable = true;
+
       spectre = {
         enable = true;
         findPackage = pkgs.repgrep;
@@ -91,17 +120,24 @@ in
     };
   };
 
-  environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-  };
+  environment = {
+    variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+    systemPackages = with pkgs; [
+      # nixd - Nix language server written in C
+      # https://github.com/nix-community/nixd
+      nixd
 
-  environment.systemPackages = with pkgs; [
-    # nixd - Nix language server written in C
-    # https://github.com/nix-community/nixd
-    nixd
+      # CodeLLDB - A debugging server for Rust
+      # https://github.com/vadimcn/codelldb
+      vscode-extensions.vadimcn.vscode-lldb
     
-    gnused
-    repgrep
-  ];
+      lldb_18
+
+      gnused
+      repgrep
+    ];
+  };
 }

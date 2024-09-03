@@ -72,7 +72,9 @@ in
               echo "Flake has been edited, but not built."
 	    fi
 	  fi
-
+          echo "-.-.-"
+	  git status
+	  echo "-.-.-"
 	  echo "Would you like to commit now?"
           read -q ans
           if [[ "''$ans" == "y" ]]; then
