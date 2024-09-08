@@ -75,37 +75,37 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       GreatBlue = lib.nixosSystem {
-        specialArgs = { 
-	  inherit inputs outputs;
-	  secrets = "/etc/nixos/secrets";
-	};
+        specialArgs = {
+          inherit inputs outputs;
+          secrets = "/etc/nixos/secrets";
+        };
         modules = [
           ./hosts/greatblue/configuration.nix
           nixos-hardware.nixosModules.gpd-win-max-2-2023
           nixvim.nixosModules.nixvim
           agenix.nixosModules.default
-	  {environment.systemPackages = [ agenix.packages.x86_64-linux.default ];}
+	        {environment.systemPackages = [ agenix.packages.x86_64-linux.default ];}
           lix-module.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.kent = { 
-	        imports = [
-	          ./home/kent
-	        ];
+              users.kent = {
+                imports = [
+                  ./home/kent
+                ];
               };
-	    };
+            };
           }
         ];
       };
       Delaware = lib.nixosSystem {
-        specialArgs = { 
-	  inherit inputs outputs;
-	  secrets = "/etc/nixos/secrets";
-	  domain = "voicelesscrimson.com";
-	};
+        specialArgs = {
+          inherit inputs outputs;
+          secrets = "/etc/nixos/secrets";
+          domain = "voicelesscrimson.com";
+        };
         modules = [
           ./hosts/delaware/configuration.nix
           nixvim.nixosModules.nixvim
@@ -115,10 +115,10 @@
         ];
       };
       SebrightBantam = lib.nixosSystem {
-        specialArgs = { 
-	  inherit inputs outputs; 
-	  secrets = "/etc/nixos/secrets";
-	};
+        specialArgs = {
+          inherit inputs outputs;
+          secrets = "/etc/nixos/secrets";
+        };
         modules = [
           ./hosts/sebrightbantam/configuration.nix
           nixvim.nixosModules.nixvim
@@ -127,10 +127,10 @@
         ];
       };
       Lagurus = lib.nixosSystem {
-        specialArgs = { 
-	  inherit inputs outputs;
-          secrets = "/etc/nixos/secrets";
-	};
+        specialArgs = {
+          inherit inputs outputs;
+            secrets = "/etc/nixos/secrets";
+        };
         modules = [
           ./hosts/lagurus/configuration.nix
           nixvim.nixosModules.nixvim
@@ -139,7 +139,7 @@
         ];
       };
       Cichlid = lib.nixosSystem {
-        specialArgs = { 
+        specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
         };
@@ -148,19 +148,19 @@
           nixos-hardware.nixosModules.common-cpu-intel
           nixos-hardware.nixosModules.common-pc-ssd
           nixos-hardware.nixosModules.common-hidpi
-	  catppuccin.nixosModules.catppuccin
+	        catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.jess = { 
-	        imports = [
-	          ./home/jess
-		  catppuccin.homeManagerModules.catppuccin
-	        ];
+              users.jess = {
+	              imports = [
+	                ./home/jess
+		              catppuccin.homeManagerModules.catppuccin
+	              ];
               };
-	    };
+	          };
           }
           nixvim.nixosModules.nixvim
           agenix.nixosModules.default
@@ -172,30 +172,30 @@
     # Available through `nix build .#Cichlid`
     Cichlid = nixos-generators.nixosGenerate {
       system = "x86_64-linux";
-      specialArgs = { 
-	inherit inputs outputs;
-	secrets = "/etc/nixos/secrets";
+      specialArgs = {
+        inherit inputs outputs;
+        secrets = "/etc/nixos/secrets";
       };
       modules = [
-	./hosts/cichlid/configuration.nix
+        ./hosts/cichlid/configuration.nix
         nixos-hardware.nixosModules.common-cpu-intel
-	nixos-hardware.nixosModules.common-pc-ssd
-	nixos-hardware.nixosModules.common-hidpi
-	catppuccin.nixosModules.catppuccin
+        nixos-hardware.nixosModules.common-pc-ssd
+        nixos-hardware.nixosModules.common-hidpi
+        catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.jess = { 
-	      imports = [
-	        ./home/jess
-	        catppuccin.homeManagerModules.catppuccin
-	      ];
-	    };
+            users.jess = {
+              imports = [
+                ./home/jess
+                catppuccin.homeManagerModules.catppuccin
+              ];
+            };
           };
         }
-	nixvim.nixosModules.nixvim
+        nixvim.nixosModules.nixvim
         agenix.nixosModules.default
         lix-module.nixosModules.default
       ];
@@ -208,24 +208,24 @@
     homeConfigurations = {
       "kent@mobile" = lib.homeManagerConfiguration {
         modules = [
-	  ./home/kent
-	  ./home/kent/mobile.nix 
-	];
+          ./home/kent
+          ./home/kent/mobile.nix
+        ];
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
       "kent@greatblue" = lib.homeManagerConfiguration {
         modules = [
-	  ./home/kent
-	  ./home/kent/greatblue.nix 
-	];
+          ./home/kent
+          ./home/kent/greatblue.nix
+        ];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
       "kent@delaware" = lib.homeManagerConfiguration {
         modules = [
-	  ./home/kent
-	  ./home/kent/delaware.nix 
+          ./home/kent
+          ./home/kent/delaware.nix
         ];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};

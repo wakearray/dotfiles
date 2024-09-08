@@ -5,33 +5,20 @@
   pkgs, ... }:
 {
   # Enable the Gnome Desktop Environment using Wayland.
-  services.xserver = {
-    enable = true;
-    dpi = 300;
-    displayManager = {
-      gdm = {
-          enable = true;
-          wayland = true;
-        };
+  services = {
+    xserver = {
+      enable = true;
+      dpi = 300;
+      videoDrivers = [ "displaylink" "modesetting" ];
+      desktopManager.gnome.enable = true;
     };
-    # TODO: Make this work:
-#    displayManager = lib.mkMerge [
-#      (lib.mkIf (config.catppuccin.enable) {
-#        gdm = {
-#          enable = true;
-#          wayland = true;
-#        };
-#     })
-#     (lib.mkIf (config.catppuccin.enable != true) {
-#       sddm = {
-#          enable = true;
-#          wayland.enable = true;
-#	  package = lib.mkOverride 1000 pkgs.kdePackages.sddm;
-#        };
-#      })
-#    ];
-    videoDrivers = [ "displaylink" "modesetting" ];
-    desktopManager.gnome.enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+	      package = lib.mkOverride 1000 pkgs.kdePackages.sddm;
+      };
+    };
   };
 
   # Style the KDE apps in Gnome drip.

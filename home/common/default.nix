@@ -11,4 +11,5 @@ in
     ./zsh.nix
     ./development_environments.nix
   ];
+  home.enableNixpkgsReleaseCheck = false;
 }
