@@ -82,7 +82,7 @@ in
       # https://github.com/nvim-lualine/lualine.nvim/
       lualine = {
         enable = true;
-        settings.options.theme = "gruvbox-material";
+        #settings.options.theme = "gruvbox-material";
         # Additional settings:
         # https://nix-community.github.io/nixvim/plugins/lualine/settings/index.html
         # https://github.com/nvim-lualine/lualine.nvim/blob/master/README.md
@@ -166,9 +166,13 @@ in
       # https://github.com/akinsho/bufferline.nvim/
       bufferline = {
         enable = true;
-        settings.options.diagnostics = "nvim_lsp";
-        # Lots and lots of settings:
-        # https://nix-community.github.io/nixvim/plugins/bufferline/settings/index.html
+#        settings = {
+#          options = {
+#            diagnostics = "nvim_lsp";
+#          };
+#        # Lots and lots of settings:
+#        # https://nix-community.github.io/nixvim/plugins/bufferline/settings/index.html
+#        };
       };
 
       # vim-floaterm - Terminal manager for (neo)vim

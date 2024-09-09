@@ -8,6 +8,6 @@ let
 in
 {
   imports = [
-    ./nvim.nix
+    #./nvim.nix
   ];
 }

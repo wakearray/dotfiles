@@ -8,7 +8,7 @@ let
 in
 {
   imports = [
-    ./nvim.nix
+    #./nvim.nix
   ];
   home.sessionVariables = {
     EDITOR = "nvim";
