@@ -20,7 +20,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      # url = "github:nix-community/hom-manager/release-24.05";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -210,6 +211,7 @@
         modules = [
           ./home/kent
           ./home/kent/mobile.nix
+          #nixvim.homeManagerModules.nixvim
         ];
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {inherit inputs outputs;};

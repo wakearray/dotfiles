@@ -9,26 +9,27 @@ in
 {
   # Bootloader.
   boot = {
-    plymouth = { 
+    plymouth = {
       enable = true;
-      catppuccin = { 
-        enable = true; 
+      catppuccin = {
+        enable = true;
         flavor = "macchiato";
       };
     };
   };
 
-  catppuccin = { 
+  catppuccin = {
     enable = true;
     accent = "mauve";
     flavor = "macchiato";
   };
 
-  console.catppuccin = { 
+  console.catppuccin = {
     enable = true;
     flavor = "macchiato";
   };
 
+  # https://github.com/catppuccin/sddm
   services.xserver = {
     displayManager.sddm = {
       enable = true;

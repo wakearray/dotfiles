@@ -2,7 +2,9 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib ]);    userSettings = {
+    package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib ]);
+    enableUpdateCheck = false;
+    userSettings = {
       "[nix]"."editor.tabSize" = 2;
     };
     extensions = with pkgs.vscode-extensions; [
