@@ -1,7 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
+{ lib,
   pkgs, ... }:
 {
   # Enable the Gnome Desktop Environment using Wayland.
@@ -11,12 +8,9 @@
       dpi = 300;
       videoDrivers = [ "displaylink" "modesetting" ];
       desktopManager.gnome.enable = true;
-    };
-    displayManager = {
-      sddm = {
+      displayManager.gdm  = {
         enable = true;
-        wayland.enable = true;
-	      package = lib.mkOverride 1000 pkgs.kdePackages.sddm;
+        wayland = true;
       };
     };
   };
@@ -48,9 +42,6 @@
     # Rofi - Window switcher, run dialog and dmenu replacement for Wayland
     # https://github.com/lbonn/rofi
     rofi-wayland
-    # Tiny dynamic menu for Wayland
-    # https://github.com/philj56/tofi
-    tofi
 
     # Gnome specific stuffs
     gnome.gnome-tweaks

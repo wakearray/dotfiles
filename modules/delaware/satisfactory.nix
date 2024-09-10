@@ -15,11 +15,11 @@ in
       description = "Beta channel to follow";
     };
 
-#    address = lib.mkOption {
-#      type = lib.types.str;
-#      default = "0.0.0.0";
-#      description = "Bind address";
-#    };
+    address = lib.mkOption {
+      type = lib.types.str;
+      default = "0.0.0.0";
+      description = "Bind address";
+    };
 
     maxPlayers = lib.mkOption {
       type = lib.types.number;
@@ -83,9 +83,8 @@ in
         ${pkgs.crudini}/bin/crudini --set /var/lib/satisfactory/SatisfactoryDedicatedServer/FactoryGame/Saved/Config/LinuxServer/ServerSettings.ini '/Script/FactoryGame.FGServerSubsystem' mAutoSaveOnDisconnect ${if cfg.autoSaveOnDisconnect then "True" else "False"}
       '';
       script = ''
-       #"/var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping" FactoryGame "$@"
-        #/var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame -multihome=${cfg.address}
-        /var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame
+        /var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame -multihome=${cfg.address}
+        #/var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame
       '';
       serviceConfig = {
         Restart = "always";
