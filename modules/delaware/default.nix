@@ -26,6 +26,9 @@ in
     ./syncthing.nix
     ./systemd-mounts.nix
     ./zfs.nix
+
+    # Game servers
+    ./satisfactory.nix
   ];
 
   # Where needed:
@@ -34,4 +37,6 @@ in
   #   secrets = "/etc/nixos/secrets";
   #   domain = "voicelesscrimson.com";
   # }
+
+  services.satisfactory = { enable = true; };
 }
