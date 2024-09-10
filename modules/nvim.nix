@@ -13,7 +13,9 @@ in
       register = "unnamedplus";
       providers.wl-copy = {
         enable = true;
-        package = pkgs.wl-clipboard-rs;
+        # wl-clipboard-rs doesn't work in Gnome
+        # https://github.com/YaLTeR/wl-clipboard-rs/issues/8#issuecomment-542057210
+        #package = pkgs.wl-clipboard-rs;
       };
     };
     # gruvbox.nvim - Lua port of the most famous vim colorscheme

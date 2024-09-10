@@ -25,6 +25,7 @@ in
     ./samba.nix
     ./syncthing.nix
     ./systemd-mounts.nix
+    ./tt-rss.nix
     ./zfs.nix
 
     # Game servers
