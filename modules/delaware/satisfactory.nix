@@ -15,11 +15,11 @@ in
       description = "Beta channel to follow";
     };
 
-    address = lib.mkOption {
-      type = lib.types.str;
-      default = "0.0.0.0";
-      description = "Bind address";
-    };
+#    address = lib.mkOption {
+#      type = lib.types.str;
+#      default = "0.0.0.0";
+#      description = "Bind address";
+#    };
 
     maxPlayers = lib.mkOption {
       type = lib.types.number;
@@ -84,7 +84,8 @@ in
       '';
       script = ''
        #"/var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping" FactoryGame "$@"
-        /var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame -multihome=${cfg.address}
+        #/var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame -multihome=${cfg.address}
+        /var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame
       '';
       serviceConfig = {
         Restart = "always";
