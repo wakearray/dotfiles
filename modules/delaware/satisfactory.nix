@@ -15,12 +15,6 @@ in
       description = "Beta channel to follow";
     };
 
-    address = lib.mkOption {
-      type = lib.types.str;
-      default = "0.0.0.0";
-      description = "Bind address";
-    };
-
     maxPlayers = lib.mkOption {
       type = lib.types.number;
       default = 4;
@@ -58,9 +52,8 @@ in
 
     networking = {
       firewall = {
-        allowedUDPPorts = [ 15777 15000 7777 27015 ];
-        allowedUDPPortRanges = [ { from = 27031; to = 27036; } ];
-        allowedTCPPorts = [ 27015 27036 ];
+        allowedUDPPorts = [ 7777 ];
+        allowedTCPPorts = [ 7777 ];
       };
     };
 
@@ -83,7 +76,7 @@ in
         ${pkgs.crudini}/bin/crudini --set /var/lib/satisfactory/SatisfactoryDedicatedServer/FactoryGame/Saved/Config/LinuxServer/ServerSettings.ini '/Script/FactoryGame.FGServerSubsystem' mAutoSaveOnDisconnect ${if cfg.autoSaveOnDisconnect then "True" else "False"}
       '';
       script = ''
-        /var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame -multihome=${cfg.address}
+        /var/lib/satisfactory/SatisfactoryDedicatedServer/Engine/Binaries/Linux/FactoryServer-Linux-Shipping FactoryGame
       '';
       serviceConfig = {
         Restart = "always";
