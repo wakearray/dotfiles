@@ -3,6 +3,7 @@
 {
   imports = [
     ./starship.nix
+    ../themes/catppuccin.nix
   ];
 
   home = {
@@ -12,43 +13,11 @@
     packages = with pkgs; [
       # aseprite - Animated sprite editor & pixel art tool
       # https://www.aseprite.org/
-      aseprite 
+      aseprite
     ];
-  };
-
-  # Theme:
-  # Catppuccin Macchiato
-  # https://catppuccin.com/palette#flavor-macchiato
-  #
-  # #181926  #a5adcb  #eed49f
-  # #1e2030  #b8c0e0  #f5a97f
-  # #24273a  #cad3f5  #ee99a0
-  # #363a4f  #b7bdf8  #ed8796
-  # #494d64  #8aadf4  #c6a0f6
-  # #5b6078  #7dc4e4  #f5bde6
-  # #6e738d  #91d7e3  #f0c6c6
-  # #8087a2  #8bd5ca  #f4dbd6
-  # #939ab7  #a6da95  
-  # 
-  catppuccin = {
-    # Enable the Catppuccin Macchiato theme globally
-    enable = true;
-    flavor = "macchiato";
-    pointerCursor = { 
-      enable = true;
+    sessionVariables = {
+      FLAKE = "${config.home.homeDirectory}";
     };
-  };
-
-  qt = {
-    enable = true;
-    style = {
-      catppuccin = lib.mkOverride 10 {
-        apply = true;
-	enable = true;
-      };
-      name = lib.mkOverride 10 "kvantum";
-    };
-    platformTheme.name = lib.mkOverride 10 "kvantum";
   };
 
   # Editor Config helps enforce your preferences on editors
@@ -72,15 +41,15 @@
 
     # alacritty - A cross-platform, OpenGL terminal emulator
     # https://github.com/alacritty/alacritty
-    alacritty = { 
+    alacritty = {
       enable = true;
       settings = {
         selection = {
           save_to_clipboard = true;
 	};
         cursor = {
-          style = 
-	  { 
+          style =
+	  {
 	    shape = "Underline";
 	    blinking = "Off";
 	  };
@@ -89,8 +58,8 @@
           osc52 = "CopyPaste";
 	};
         mouse = {
-          bindings = [{ 
-	    mouse = "Middle"; 
+          bindings = [{
+	    mouse = "Middle";
 	    action = "Paste";
 	  }];
 	};
@@ -102,13 +71,13 @@
     # More options found here:
     # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.bat.enable
     bat.enable = true;
-    
+
     # btop - Resource monitor that shows usage and stats
     # https://github.com/aristocratos/btop
     # More options found here:
     # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.btop.enable
-    btop.enable = true;   
-    
+    btop.enable = true;
+
     # fzf - The most supported command line fuzzy finder
     # https://github.com/junegunn/fzf
     # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.fzf.enable
@@ -124,9 +93,9 @@
       enable = true;
       # delta - A syntax-highlighting pager for git, diff, grep, and blame output
       # https://github.com/dandavison/delta
-      delta.enable = true; 
+      delta.enable = true;
     };
-    
+
     # imv - a command line image viewer intended for use with tiling window managers
     # https://sr.ht/~exec64/imv/
     imv.enable = true;
@@ -163,26 +132,26 @@
       # Use `home.file` to write the approriate configuration files manually.
     };
 
-    # zsh - 
-    # 
+    # zsh -
+    #
     # More options found here:
     # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zellij.enable
-    zsh = { 
+    zsh = {
       enable = true;
       enableCompletion = true;
       enableVteIntegration = true;
       syntaxHighlighting = { enable = true; };
-      autosuggestion = { 
+      autosuggestion = {
         enable = true;
         strategy = [ "history" ];
       };
-      history = { 
+      history = {
         append = true;
-	ignoreAllDups = true;
-	save = 20000;
-	size = 20000;
+	      ignoreAllDups = true;
+	      save = 20000;
+	      size = 20000;
       };
-      historySubstringSearch = { 
+      historySubstringSearch = {
         enable = true;
       };
       # Things to put in the .zshrc file
@@ -204,7 +173,7 @@
     # https://nix-community.github.io/home-manager/options.xhtml#opt-services.dunst.enable
     dunst.enable = true;
   };
- 
+
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       clock-format = "12h";
@@ -229,7 +198,7 @@
       search-filter-time-type = "last_modified";
       show-delete-permanently = true;
     };
-    "org/gnome/desktop/session" = { 
+    "org/gnome/desktop/session" = {
       idle-delay= lib.gvariant.mkUint32 0;
     };
   };

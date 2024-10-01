@@ -1,6 +1,4 @@
-{ inputs,
-  outputs,
-  pkgs, ... }:
+{ ... }:
 let
   sshkeys = import ../../secrets/sshkeys.nix;
 in

@@ -7,7 +7,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0-rc1.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -25,12 +25,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agenix = {
-      url = "github:yaxitech/ragenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        #darwin.follows = ""; # This currently does nothing on ragenix
-      };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     simple-nixos-mailserver = {
@@ -45,10 +42,10 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, nixvim, agenix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib; # // nixpkgs-unstable.lib;
+    lib = nixpkgs.lib // home-manager.lib;
     systems = [ "aarch64-linux" "x86_64-linux" ];
     forAllSystems = nixpkgs.lib.genAttrs systems;
 #     forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
@@ -84,8 +81,7 @@
           ./hosts/greatblue/configuration.nix
           nixos-hardware.nixosModules.gpd-win-max-2-2023
           nixvim.nixosModules.nixvim
-          agenix.nixosModules.default
-	        {environment.systemPackages = [ agenix.packages.x86_64-linux.default ];}
+          sops-nix.nixosModules.sops
           lix-module.nixosModules.default
           home-manager.nixosModules.home-manager
           {
@@ -95,6 +91,7 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  nixvim.homeManagerModules.nixvim
                 ];
               };
             };
@@ -110,7 +107,7 @@
         modules = [
           ./hosts/delaware/configuration.nix
           nixvim.nixosModules.nixvim
-          agenix.nixosModules.default
+          sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule
           lix-module.nixosModules.default
         ];
@@ -123,7 +120,7 @@
         modules = [
           ./hosts/sebrightbantam/configuration.nix
           nixvim.nixosModules.nixvim
-          agenix.nixosModules.default
+          sops-nix.nixosModules.sops
           lix-module.nixosModules.default
         ];
       };
@@ -135,7 +132,7 @@
         modules = [
           ./hosts/lagurus/configuration.nix
           nixvim.nixosModules.nixvim
-          agenix.nixosModules.default
+          sops-nix.nixosModules.sops
           lix-module.nixosModules.default
         ];
       };
@@ -164,7 +161,7 @@
 	          };
           }
           nixvim.nixosModules.nixvim
-          agenix.nixosModules.default
+          sops-nix.nixosModules.sops
           lix-module.nixosModules.default
         ];
       };
@@ -197,7 +194,7 @@
           };
         }
         nixvim.nixosModules.nixvim
-        agenix.nixosModules.default
+        sops-nix.nixosModules.sops
         lix-module.nixosModules.default
       ];
       format = "iso";
@@ -210,26 +207,10 @@
       "kent@mobile" = lib.homeManagerConfiguration {
         modules = [
           ./home/kent
-          ./home/kent/mobile.nix
-          #nixvim.homeManagerModules.nixvim
+          ./home/kent/mobile
+          nixvim.homeManagerModules.nixvim
         ];
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-      };
-      "kent@greatblue" = lib.homeManagerConfiguration {
-        modules = [
-          ./home/kent
-          ./home/kent/greatblue.nix
-        ];
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-      };
-      "kent@delaware" = lib.homeManagerConfiguration {
-        modules = [
-          ./home/kent
-          ./home/kent/delaware.nix
-        ];
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
     };

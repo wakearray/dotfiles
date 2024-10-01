@@ -1,4 +1,6 @@
-{lib, pkgs, ...}:
+{ pkgs, ... }:
+let
+in
 {
   programs.vscode = {
     enable = true;
@@ -17,8 +19,6 @@
       rubymaniac.vscode-paste-and-indent
       ms-vsliveshare.vsliveshare
       jdinhlife.gruvbox
-      catppuccin.catppuccin-vsc
-      catppuccin.catppuccin-vsc-icons
     ];
   };
 }

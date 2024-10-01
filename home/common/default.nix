@@ -5,7 +5,9 @@ in
 {
   imports = [
     ./zsh.nix
-    ./development_environments.nix
+    ./vscode.nix
+
+    ../../modules/nvim/home.nix
   ];
   home.enableNixpkgsReleaseCheck = false;
 }

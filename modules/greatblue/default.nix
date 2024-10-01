@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ pkgs, ... }:
 {
   ## These are the defaults I want on GreatBlue only:
   imports =

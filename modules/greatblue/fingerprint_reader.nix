@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ ... }:
 {
   # Trying to prevent the fingerprint reader from blocking resume from suspend-to-ram
   # Only occasionally works

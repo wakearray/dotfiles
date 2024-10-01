@@ -1,23 +1,7 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
   programs.nixvim = {
     enable = true;
-    clipboard = {
-      register = "unnamedplus";
-      providers.wl-copy = {
-        enable = true;
-        # wl-clipboard-rs doesn't work in Gnome
-        # https://github.com/YaLTeR/wl-clipboard-rs/issues/8#issuecomment-542057210
-        package = pkgs.wl-clipboard;
-      };
-    };
     # gruvbox.nvim - Lua port of the most famous vim colorscheme
     # https://github.com/ellisonleao/gruvbox.nvim/
     colorschemes.gruvbox.enable = true;
@@ -95,6 +79,7 @@ in
       hydra = {
         enable = true;
         package = pkgs.unstable.vimPlugins.hydra-nvim;
+        settings.hint = false;
       };
 
       # markdown-preview.nvim - markdown preview plugin for (neo)vim
@@ -234,28 +219,5 @@ in
         };
       };
     };
-  };
-
-  environment = {
-    variables = {
-      EDITOR = "nvim";
-    };
-    systemPackages = with pkgs; [
-      # nixd - Nix language server written in C
-      # https://github.com/nix-community/nixd
-      nixd
-
-      # CodeLLDB - A debugging server for Rust
-      # https://github.com/vadimcn/codelldb
-      vscode-extensions.vadimcn.vscode-lldb
-
-      lldb_18
-
-      # wl-clipboard-rs - A clipboard manager for Wayland written in Rust
-      wl-clipboard-rs
-
-      gnused
-      repgrep
-    ];
   };
 }

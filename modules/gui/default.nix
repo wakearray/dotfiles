@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ pkgs, ... }:
 let
 
 in
@@ -19,7 +15,7 @@ in
     # mpv - General-purpose media player, fork of MPlayer and mplayer2
     # https://mpv.io/
     mpv
-    
+
     # mpvc - A mpc-like control interface for mpv
     # https://github.com/lwilletts/mpvc
     mpvc

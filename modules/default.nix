@@ -1,6 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
+{ outputs,
   config,
   pkgs,
   ... }:
@@ -13,7 +11,7 @@ in
   [
     ./zsh.nix
     ./tui.nix
-    ./nvim.nix
+    ./nvim
     ./ssh.nix
   ];
 
@@ -55,7 +53,7 @@ in
     # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
     # https://starship.rs/
     unstable.starship
-    
+
     # fzf - Command-line fuzzy finder written in Go
     # https://github.com/junegunn/fzf
     fzf
@@ -66,7 +64,7 @@ in
     # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
     # https://github.com/lemonade-command/lemonade/
     lemonade
-    ];
+  ];
 
   # TODO: Consider using this:
   # boot.initrd.network.ssh.authorizedKeyFiles is a new option in the initrd ssh daemon module,
@@ -93,7 +91,7 @@ in
     };
   };
 
-  
+
   nix = {
     settings = {
       # Enable flakes.
@@ -101,16 +99,11 @@ in
       # Uses hard links to remove duplicates in the nix store
       auto-optimise-store = true;
     };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
   };
 
   # Deletes temp files on boot.
   boot.tmp.useTmpfs = true;
-  
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -133,12 +126,20 @@ in
   programs = {
     # Allows installing unpackaged binaries
     nix-ld.enable = true;
-    # Installs git as a system
+    # Installs git as a system program
     git.enable = true;
-    # Console typo fixer.
+    # Console typo fixer
     thefuck.enable = true;
     # Enable direnv
     direnv.enable = true;
+    # Not Another Command Line Nix Helper
+    nh = {
+      enable = true;
+      clean = {
+        enable = true;
+        extraArgs = "--keep-since 4d --keep 3";
+      };
+    };
   };
 
   # Policy Kit, necessary for some things like hyperland, 1Pass, etc
@@ -147,7 +148,7 @@ in
   # Services.
   services = {
     locate.enable = true;
-    # Use Avahi to make this computer discoverable and 
+    # Use Avahi to make this computer discoverable and
     # to discover other computers.
     avahi = {
       enable = true;

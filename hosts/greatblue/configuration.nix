@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ ... }:
 let
 in
 {
@@ -31,7 +27,7 @@ in
     hostName = "GreatBlue";
     firewall.enable = true;
   };
-  
+
   # Enable keyboard access
   hardware = {
     bluetooth.enable = true;

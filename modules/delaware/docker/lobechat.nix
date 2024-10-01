@@ -1,20 +1,10 @@
-{ config, pkgs, ... }:
-let
-
-in
+{ config, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    # Needed for Docker
-    bridge-utils
-    docker-client
-    docker-compose
-  ];
-
   virtualisation = {
-    # Docker containers
     oci-containers = {
       backend = "docker";
       containers = {
+        # Redis server needed for bricksllm
         bricks-redis = {
           image = "redis:6.2-alpine";
           cmd = [ "redis-server" "--save" "20" "1" "--loglevel" "warning" "--requirepass" "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81" ];
@@ -25,6 +15,7 @@ in
           autoStart = true;
           extraOptions = [ "--network=lobechat-network" ];
         };
+        # Postgresql server needed for bricksllm
         bricks-postgresql = {
           image = "postgres:14.1-alpine";
           environment = {
@@ -38,6 +29,8 @@ in
           autoStart = true;
           extraOptions = [ "--network=lobechat-network" ];
         };
+        # bricksllm - Enterprise-grade API gateway that helps you monitor and impose cost or rate limits per API key.
+        # https://github.com/bricks-cloud/BricksLLM
         bricksllm = {
           image = "luyuanxin1995/bricksllm";
           cmd = [ "-m=dev" ];
@@ -54,11 +47,14 @@ in
           autoStart = true;
           extraOptions = [ "--network=lobechat-network" ];
         };
+        # Lobe Chat - A web based frontend for LLM chatbots.
+        # https://github.com/lobehub/lobe-chat
         lobe-chat = {
           image = "lobehub/lobe-chat";
           environment = {
             # Bricksllm local proxy
             OPENAI_PROXY_URL = "http://bricksllm:8002/api/providers/openai/v1";
+            # Manually set the allowable models. These are also manually set in bricksllm
             CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4o=gpt-4o";
           };
           ports = [ "3210:3210" ];

@@ -1,15 +1,15 @@
-{ config, ... }:
+{ ... }:
 let
   sshkeys = import ../../secrets/sshkeys.nix;
 in
 {
-  users.users.jess = {
+  users.users.entertainment = {
     isNormalUser = true;
-    description = "Jess";
-    extraGroups = [ "networkmanager" "wheel" "samba" ];
+    description = "Entertainment";
+    extraGroups = [ "networkmanager" ];
     initialHashedPassword = "$y$j9T$a09xjLjAlf/rHpCdhnAM4/$wlp6tDHeX2OfnUTXA29RWbALS5PvLc/1cpu0rZF4170";
     openssh.authorizedKeys.keys = with sshkeys; [
-      greatblue cichlid
+      greatblue samsung_s24 lenovo_y700 cubot_p80 boox_air_nova_c hisense_a9
     ];
   };
 }

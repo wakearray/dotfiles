@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  domain,
-  secrets,
-  ... }:
+{ ... }:
 let
 
 in
@@ -13,22 +6,38 @@ in
   ## These are the defaults I want on Delaware only:
   imports =
   [
-    ./audiobookshelf.nix
-    ./deluge.nix
-    ./docker.nix
-    ./forgejo.nix
-    ./mailserver.nix
-    ./nextcloud.nix
-    ./nginx.nix
     ./printers.nix
-    ./rustdesk.nix
-    ./samba.nix
-    ./syncthing.nix
+    #./rustdesk.nix
     ./systemd-mounts.nix
-    ./tt-rss.nix
     ./zfs.nix
 
-    # Game servers
+    ## Servers
+
+    ./nginx.nix
+
+    ### Audio
+    ./audiobookshelf.nix
+    ./jellyfin.nix
+
+    ### Containers
+    ./docker
+
+    ### File
+    ./deluge.nix
+    ./nextcloud.nix
+    ./samba.nix
+    ./syncthing.nix
+
+    ### Git
+    ./forgejo.nix
+
+    ### Mail
+    ./mailserver.nix
+
+    ### RSS
+    ./tt-rss.nix
+
+    ### Game servers
     ./satisfactory.nix
   ];
 

@@ -1,10 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  domain,
-  ... }:
+{ domain, ... }:
 let
   domain = "voicelesscrimson.com";
 in
@@ -55,6 +49,15 @@ in
         locations = {
           "/" = {
             proxyPass = "http://localhost:8065";
+          };
+        };
+      };
+      "rss.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:8064";
           };
         };
       };
