@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ lib, pkgs, ... }:
 {
   # Bootloader.
   boot = {

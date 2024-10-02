@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ pkgs, ... }:
 {
   # https://wiki.nixos.org/wiki/OpenRGB
   # https://openrgb.org/index.html

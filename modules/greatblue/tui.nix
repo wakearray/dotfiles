@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # Typing tester TUI

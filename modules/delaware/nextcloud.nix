@@ -1,13 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  domain,
-  ... }:
-let
-  
-in
+{ lib, pkgs, domain, ... }:
 {
   environment.systemPackages = with pkgs; [
     # For NextCloud Memories
@@ -15,7 +6,7 @@ in
     # For NextCloud
     php
   ];
-  
+
   services.postgresql = {
     enable = true;
 
@@ -28,12 +19,12 @@ in
      }
     ];
   };
-  
+
   systemd.services."nextcloud-setup" = {
     requires = ["postgresql.service"];
     after = ["postgresql.service"];
   };
-  
+
   # NextCloud
   services.nextcloud = {
     enable = true;

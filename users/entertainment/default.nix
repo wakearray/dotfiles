@@ -1,6 +1,6 @@
 { ... }:
 let
-  sshkeys = import ../../secrets/sshkeys.nix;
+  devices = import ../../modules/devices.nix;
 in
 {
   users.users.entertainment = {
@@ -8,8 +8,8 @@ in
     description = "Entertainment";
     extraGroups = [ "networkmanager" ];
     initialHashedPassword = "$y$j9T$a09xjLjAlf/rHpCdhnAM4/$wlp6tDHeX2OfnUTXA29RWbALS5PvLc/1cpu0rZF4170";
-    openssh.authorizedKeys.keys = with sshkeys; [
-      greatblue samsung_s24 lenovo_y700 cubot_p80 boox_air_nova_c hisense_a9
+    openssh.authorizedKeys.keys = with devices; [
+      greatblue.key samsung_s24.key lenovo_y700.key cubot_p80.key boox_air_nova_c.key hisense_a9.key
     ];
   };
 }

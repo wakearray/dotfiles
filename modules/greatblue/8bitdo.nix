@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
   # Udev rules to start or stop systemd service when controller is connected or disconnected
   services.udev.extraRules = ''

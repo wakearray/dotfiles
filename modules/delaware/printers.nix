@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # Cups-filters for printing PNG to Dymo XL4
@@ -27,14 +20,14 @@ in
 
   ###
   ### # Instructions:
-  ### 
+  ###
   ###  - Build sytem with required Nix Expression above
   ###  - Open terminal and start lprint server
   ###  - Open cups local server at http://localhost:631/ and modify the printer
   ###  - You’ll click next a bunch of times till you get to the drivers page.
   ###  - On the drivers page you’ll need to change the printer from generic manufacturer to dymo and then select the correct printer driver.
   ###  - After that, it’ll ask you for your login details. Login with your normal OS login and everything should work now.
-  ### 
+  ###
 
   #hardware.printers = {
   #  ensurePrinters = [

@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
   users.users.sambauser = {
     isNormalUser = true;

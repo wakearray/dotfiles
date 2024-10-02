@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ ... }:
 {
   imports =
   [ # Include the results of the hardware scan.

@@ -1,7 +1,4 @@
 { ... }:
-let
-
-in
 {
   ## These are the defaults I want on Delaware only:
   imports =

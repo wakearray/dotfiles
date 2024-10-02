@@ -1,14 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  domain,
-  secrets,
-  ... }:
-let
-
-in
+{ ... }:
 {
   imports =
   [ # Include the results of the hardware scan.
@@ -20,11 +10,11 @@ in
   ];
 
   # Bootloader.
-  boot.loader = { 
+  boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-  
+
   # Enable networking.
   networking = {
     networkmanager.enable = true;
@@ -38,6 +28,6 @@ in
   # When true, no X11 libraries will be installed on this machine.
   # This needs to be false for deluge to install -_-
   environment.noXlibs = false;
-  
+
   system.stateVersion = "23.05";
 }

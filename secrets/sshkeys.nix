@@ -10,6 +10,12 @@ let
 
     # Jess
     cichlid = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDTbos7tHfhXlbGSg4l4j6AtT/9+xKtX6+6JANkndht";
+
+    # Servers
+    delaware = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBZ2xTcSdudbG+E3z7ebHHxVJ4MiN/euWYzZ9RsTonGR";
+    lagurus = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM6IG1FP+yFHuGcBK8DavEYlc1jvaog/aztJMAP38bQv";
+    jerboa = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILoQeclOZSjy9K8lPvdz/38WU/INxMGuecfFf47X5pGj";
+    sebright_bantam = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJnBdFqtIA/MRYb7Wtmp7xxn7l4M0Fc09JkUMw3665Ua";
   };
 in
   sshkeys

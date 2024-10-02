@@ -1,13 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  secrets,
-  ... }:
-let
-
-in
+{ secrets, ... }:
 {
   systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; # Don't create default ~/Sync folder
 
@@ -31,14 +22,14 @@ in
           autoAcceptFolders = true;
         };
         "Jess_S20_Ultra" = { id = "F436IQN-OOP5KEX-CNCY7VA-4CKUSOR-6YUHIO2-TTESNNW-TMMSMNI-CQZNUAZ"; };
-	"Jess_Cichlid" = { id = "GS6LSCL-ANDVRKL-M3DOWQF-PIQJKUK-WB2K7FT-KOANCWV-4P5CHNF-FPJNWA2"; };
+	      "Jess_Cichlid" = { id = "GS6LSCL-ANDVRKL-M3DOWQF-PIQJKUK-WB2K7FT-KOANCWV-4P5CHNF-FPJNWA2"; };
       };
       folders = {
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
           path = "/mnt/syncthing/shared_family/notes";    # Which folder to add to Syncthing
           devices = [
             "Jess_S20_Ultra"
-	    "Jess_Cichlid"
+	          "Jess_Cichlid"
 
             "Kent_S24_Ultra"
             "Kent_P80"
@@ -63,9 +54,9 @@ in
           path = "/mnt/syncthing/kent_personal/DCIM";
           devices = [ "Kent_S24_Ultra" ];
         };
-	"Kent_Backup_Android" = {
+	      "Kent_Backup_Android" = {
           path = "/mnt/syncthing/kent_personal/Backups/Android";
-	  devices = [
+	        devices = [
             "Kent_S24_Ultra"
             "Kent_P80"
             "Kent_y700"
@@ -73,17 +64,17 @@ in
             "Kent_Hisense_A9"
             "Kent_GreatBlue"
           ];
-	};
-	"Kent_Backup_PC" = {
+	      };
+        "Kent_Backup_PC" = {
           path = "/mnt/syncthing/kent_personal/Backups/PC";
-	  devices = [ "Kent_GreatBlue" ];
-	};
+	        devices = [ "Kent_GreatBlue" ];
+	      };
         "Jess_Notes" = {
           path = "/mnt/syncthing/jess_personal/notes";
-          devices = [ 
-	    "Jess_S20_Ultra"
-	    "Jess_Cichlid"
-	  ];
+          devices = [
+	          "Jess_S20_Ultra"
+	          "Jess_Cichlid"
+	        ];
         };
         "Jess_DCIM" = {
           path = "/mnt/syncthing/jess_personal/DCIM";

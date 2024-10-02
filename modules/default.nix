@@ -41,6 +41,10 @@ in
     ripgrep
     ripgrep-all
 
+    # Rage - Rust implementation of age
+    # https://github.com/str4d/rage
+    rage
+
     # eza - Modern, maintained replacement for ls
     # https://github.com/eza-community/eza
     unstable.eza

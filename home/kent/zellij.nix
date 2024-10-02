@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ ... }:
 let
 
 in
@@ -395,7 +391,7 @@ copy_on_select true
 //
 // disable_session_metadata true
   '';
-  
+
   home.file.".config/zellij/layouts/default.kdl".text = ''
 layout {
     pane size=1 borderless=true {
@@ -407,7 +403,7 @@ layout {
     }
 }
   '';
-  
+
   home.file.".config/zellij/layouts/split.kdl".text = ''
 layout {
     pane size=1 borderless=true {

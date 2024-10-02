@@ -29,8 +29,6 @@
     aspellDicts.en-computers
     aspellDicts.en-science
 
-    sshfs
-
     # Drivers to support docks with HDMI ports
     displaylink
 

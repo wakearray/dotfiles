@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # Cups-filers for printing PNG to Dymo XL4

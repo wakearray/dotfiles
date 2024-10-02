@@ -1,13 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  domain,
-  ... }:
-let
-
-in
+{ domain, ... }:
 {
     # Forgejo
   services.forgejo = {

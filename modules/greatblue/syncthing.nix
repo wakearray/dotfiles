@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ ... }:
 let
   secrets = "/etc/nixos/secrets";
 in
@@ -16,7 +12,7 @@ in
     # overrides any devices added or deleted through the WebUI
     overrideDevices = true;
     # overrides any folders added or deleted through the WebUI
-    overrideFolders = true; 
+    overrideFolders = true;
     settings = {
       devices = {
         "Delaware" = {
@@ -28,7 +24,7 @@ in
         # Name of folder in Syncthing, also the folder ID
         "Family_Notes" = {
 	  # Which folder to add to Syncthing
-          path = "/home/kent/notes/family/";    
+          path = "/home/kent/notes/family/";
           devices = [ "Delaware" ];
         };
         "Kent_Notes" = {

@@ -1,7 +1,4 @@
 { domain, ... }:
-let
-  domain = "voicelesscrimson.com";
-in
 {
   # Nginx reverse proxy
   services.nginx = {

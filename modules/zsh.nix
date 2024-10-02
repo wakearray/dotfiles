@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
   # Set zsh as the default user shell.
   users.defaultUserShell = pkgs.zsh;
@@ -39,14 +32,14 @@ in
       c = "clear";
       # use zoxide instead of cd.
       cd = "z";
-      cdi = "zi"; 
+      cdi = "zi";
       # SSH Hosts
       lhosts = "echo 'greatblue delaware lagurus jerboa sebrightbantam orloff cichlid'";
-      greatblue = "ssh 192.168.0.11"; # GPD Win 2 2023
-      delaware = "ssh 192.168.0.46"; # NextCloud Server
-      lagurus = "ssh 192.168.0.65"; # Cat's Projector
-      jerboa = "ssh 192.168.0.32"; # Living Room TV
-      cichlid = "echo 'This computer isn't setup yet'"; # Jess' Desktop
+      greatblue = "ssh 192.168.0.11"; # GreatBlue
+      delaware = "ssh 192.168.0.46"; # Delaware
+      lagurus = "ssh 192.168.0.65"; # Lagurus
+      jerboa = "ssh 192.168.0.32"; # Jerboa
+      cichlid = "echo 'This computer isn't setup yet'"; # Cichlid
       sebrightbantam = "ssh 192.168.0.80";  # QNAP TS-251
       orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
 
@@ -86,7 +79,7 @@ in
           git add .
 
 	  echo "Would you like to run a test build?"
-	  read -q ans	
+	  read -q ans
 	  if [[ "''$ans" == "y" ]]; then
             echo "\n"
 	    testbuildflake
@@ -111,11 +104,11 @@ in
             read -q ans
             if [[ "''$ans" == "y" ]]; then
               echo "\nPushing to remote..."
-              push 
+              push
             else
               echo "Not pushing to remote."
             fi
-          fi 
+          fi
         else
           echo "No updates found."
         fi

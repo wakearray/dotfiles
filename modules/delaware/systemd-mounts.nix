@@ -1,15 +1,8 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ ... }:
 {
-  # I need to reorganize the server file structure so that 
-  # some of these folders are outside the NextCloud folder 
-  # structure and are mounted inside NextCloud as 
+  # I need to reorganize the server file structure so that
+  # some of these folders are outside the NextCloud folder
+  # structure and are mounted inside NextCloud as
   # "external storage"
 
   systemd.mounts = [

@@ -1,8 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
+{ pkgs, ... }:
 let
   remote = "192.168.0.46";
 in

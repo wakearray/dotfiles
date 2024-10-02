@@ -1,14 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  domain,
-  secrets,
-  ... }:
-let
-
-in
+{ domain, secrets, ... }:
 {
   mailserver = {
     enable = true;
@@ -42,7 +32,7 @@ in
         hashedPasswordFile = "${secrets}/nixos-mailserver/jess";
       };
     };
-    
+
     # Use Let's Encrypt certificates. Note that this needs to set up a stripped
     # down nginx and opens port 80.
     certificateScheme = "acme-nginx";

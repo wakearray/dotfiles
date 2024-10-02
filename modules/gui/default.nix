@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-
-in
 {
   # Defaults for any GUI specific applications that I want on every GUI capable computer
   imports = [

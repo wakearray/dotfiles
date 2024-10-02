@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # Yazi - Blazing fast terminal file manager written in Rust, based on async I/O
@@ -23,7 +16,7 @@ in
     # hyfetch - neofetch with pride flags
     # https://github.com/hykilpikonna/HyFetch
     hyfetch
-    
+
     # Lazycli - A tool to static turn CLI commands into TUIs
     # https://github.com/jesseduffield/lazycli
     lazycli
@@ -35,9 +28,5 @@ in
     # GitUI provides you with the comfort of a git GUI but right in your terminal
     # https://github.com/extrawurst/gitui
     unstable.gitui
-
-    # Stress-Terminal UI, s-tui, monitors CPU temperature, frequency, power and utilization in a graphical way from the terminal.
-    # https://amanusk.github.io/s-tui/
-    unstable.s-tui
   ];
 }

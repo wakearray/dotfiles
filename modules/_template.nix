@@ -1,12 +1,8 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
+  imports = [
+
+  ];
   environment.systemPackages = with pkgs; [
 
   ];

@@ -1,10 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-in
+{ ... }:
 {
   imports =
   [
@@ -32,10 +26,10 @@ in
     hostName = "Cichlid";
     firewall.enable = true;
   };
-  
+
   # zsh completion for system packages
   environment.pathsToLink = [ "/share/zsh" ];
-  
+
   hardware = {
     bluetooth.enable = true;
     # Enable keyboard firmware control

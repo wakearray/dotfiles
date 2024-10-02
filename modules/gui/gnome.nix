@@ -1,5 +1,4 @@
-{ lib,
-  pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   # Enable the Gnome Desktop Environment using Wayland.
   services = {

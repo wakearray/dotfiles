@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ pkgs, ... }:
 {
   # Everything I want on Cichlid
   imports = [
@@ -16,15 +9,15 @@ in
     # Software related
     ./git.nix
     ./syncthing.nix
-    
+
     # GUI related
     ../gui
     ../gui/gnome.nix
     ../gui/steam.nix
   ];
   environment.systemPackages = with pkgs; [
-    # vscodium - Open source source code editor developed 
-    # by Microsoft for Windows, Linux and macOS 
+    # vscodium - Open source source code editor developed
+    # by Microsoft for Windows, Linux and macOS
     # (VS Code without MS branding/telemetry/licensing)
     # https://github.com/VSCodium/vscodium
     vscodium
@@ -45,7 +38,7 @@ in
     # Discord - An Electron wrapper for the Discord web client
     discord
 
-    # Tidal - HiFi - An Electron wrapper for Tidal that 
+    # Tidal - HiFi - An Electron wrapper for Tidal that
     # enables HiFi listening
     tidal-hifi
 

@@ -1,11 +1,4 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ config, pkgs, ... }:
 {
   environment = {
     systemPackages = with pkgs; [
@@ -14,7 +7,7 @@ in
       unstable._1password-gui
     ];
     # Environment variables
-    sessionVariables = rec {
+    sessionVariables = {
       # Makes SSH work with 1Password
       SSH_AUTH_SOCK="~/.1password/agent.sock";
     };
