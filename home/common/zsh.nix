@@ -1,28 +1,21 @@
-{ inputs,
-  outputs,
-  lib,
-  config,
-  pkgs, ... }:
-let
-
-in
+{ ... }:
 {
-  # zsh 
+  # zsh
   # More options found here:
   # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zellij.enable
-  programs.zsh = { 
+  programs.zsh = {
     enable = true;
     enableCompletion = true;
     enableVteIntegration = true;
     syntaxHighlighting = { enable = true; };
-    autosuggestion = { 
+    autosuggestion = {
       enable = true;
       strategy = [ "history" ];
     };
     dirHashes = {
       dots = "$HOME/dotfiles";
     };
-    history = { 
+    history = {
       append = true;
       ignoreAllDups = true;
       ignoreSpace = true;
@@ -30,7 +23,7 @@ in
       save = 20000;
       size = 20000;
     };
-    historySubstringSearch = { 
+    historySubstringSearch = {
       enable = true;
     };
     # Things to put in the .zshrc file
@@ -57,7 +50,7 @@ in
           git add .
 
 	  echo "Would you like to run a test build?"
-	  read -q ans	
+	  read -q ans
 	  if [[ "''$ans" == "y" ]]; then
             echo "\n"
 	    testbuildflake
@@ -84,11 +77,11 @@ in
             read -q ans
             if [[ "''$ans" == "y" ]]; then
               echo "\nPushing to remote..."
-              push 
+              push
             else
               echo "Not pushing to remote."
             fi
-          fi 
+          fi
         else
           echo "No updates found."
         fi
@@ -96,12 +89,11 @@ in
       }
 
       testbuildflake(){
-        sudo nixos-rebuild test --flake .
+        nh os test .
       }
 
       rebuildflake(){
-        git add .
-        sudo nixos-rebuild switch --flake .
+        nh os switch .
       }
 
       push(){

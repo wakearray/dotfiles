@@ -1,10 +1,4 @@
-{ outputs,
-  config,
-  pkgs,
-  ... }:
-let
-
-in
+{ outputs, pkgs, ... }:
 {
   ## These are the defaults I want on every machine:
   imports =
