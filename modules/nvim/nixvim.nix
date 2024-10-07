@@ -17,7 +17,6 @@
     if msg:match("has been deprecated") then
       return
       end
-    notify(msg, ...)
   end
 '';
     plugins = {

@@ -8,9 +8,6 @@
     # packages = with pkgs; [
     #
     # ];
-    sessionVariables = {
-      FLAKE = "${config.home.homeDirectory}";
-    };
   };
 
   imports = [

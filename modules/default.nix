@@ -59,6 +59,11 @@
     # zellij - Terminal Multiplexor written in Rust
     zellij
 
+    # LocalSend - Virtual lighttable and darkroom for photographers
+    # https://github.com/localsend/localsend
+    # Port 53317 needs too be opened
+    localsend
+
     # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
     # https://github.com/lemonade-command/lemonade/
     lemonade

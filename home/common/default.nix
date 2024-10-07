@@ -1,7 +1,4 @@
-{ ... }:
-let
-
-in
+{ config, ... }:
 {
   imports = [
     ./zsh.nix
@@ -9,7 +6,12 @@ in
 
     ../../modules/nvim/home.nix
   ];
-  home.enableNixpkgsReleaseCheck = false;
+  home = {
+    enableNixpkgsReleaseCheck = false;
+    sessionVariables = {
+      FLAKE = "${config.home.homeDirectory}/dotfiles";
+    };
+  };
 
   programs = {
     zoxide = {
