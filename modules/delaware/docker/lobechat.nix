@@ -1,4 +1,4 @@
-{ config, ... }:
+{ domain, config, ... }:
 {
   virtualisation = {
     oci-containers = {
@@ -110,6 +110,19 @@
       OnCalendar = "06:00:00";
       Persistent = true; # Ensures the timer catches up if it missed a run
       Unit = "updateDockerImages.service";
+    };
+  };
+
+  # Nginx reverse proxy
+  services.nginx.virtualHosts = {
+    "lobe.${domain}" = {
+      enableACME = true;
+      forceSSL = true;
+      locations = {
+        "/" = {
+          proxyPass = "http://localhost:3210";
+        };
+      };
     };
   };
 }

@@ -6,6 +6,8 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    nur.url = "github:nix-community/NUR";
+
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,7 +44,7 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, lix-module, home-manager, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, nur, lix-module, home-manager, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;

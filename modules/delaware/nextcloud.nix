@@ -101,4 +101,12 @@
       User = "nextcloud";
     };
   };
+
+  # Nginx reverse proxy
+  services.nginx.virtualHosts = {
+    "cloud.${domain}" = {
+      enableACME = true;
+      forceSSL = true;
+    };
+  };
 }

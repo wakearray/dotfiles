@@ -2,7 +2,7 @@
 {
   imports = [
     ./lobechat.nix
-    ./wyzecam-bridge.nix
+    ./wger.nix
   ];
 
   environment.systemPackages = with pkgs; [

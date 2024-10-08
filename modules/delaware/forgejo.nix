@@ -33,4 +33,20 @@
     };
 #     mailerPasswordFile = config.age.secrets.forgejo-mailer-password.path;
   };
+
+  # Nginx reverse proxy
+  services.nginx.virtualHosts = {
+    "git.${domain}" = {
+      enableACME = true;
+      forceSSL = true;
+      extraConfig = ''
+        client_max_body_size 512M;
+      '';
+      locations = {
+        "/" = {
+          proxyPass = "http://localhost:8065";
+        };
+      };
+    };
+  };
 }
