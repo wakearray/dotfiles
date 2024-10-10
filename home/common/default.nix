@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./zsh.nix
@@ -18,6 +18,7 @@
     # https://github.com/ajeetdsouza/zoxide
     zoxide = {
       enable = true;
+      package = pkgs.unstable.zoxide;
     };
 
     # eza - A modern replacement for ls
@@ -25,6 +26,7 @@
     eza = {
       enable = true;
       enableZshIntegration = true;
+      package = pkgs.unstable.eza;
     };
 
     home-manager.enable = true;
