@@ -4,19 +4,14 @@ let
   knownHostsContent = builtins.concatStringsSep "\n" (map (device: "${device.ip} ${device.key}") (builtins.attrValues devices.devices));
 in
 {
+  # Create the `known_hosts` file from a nix file
   home.file = {
     ".ssh/known_hosts" = {
       venable = true;
       text = knownHostsContent;
     };
-    ".ssh/ssh_config" = {
-      text = ''
-Host *
-  User kent
-  IdentityFile ~/.ssh/id_ed25519
-  IdentitiesOnly yes
-  Port 22
-      '';
-    };
   };
+
+  # Enable the ssh-agent
+  services.ssh-agent.enable = true;
 }

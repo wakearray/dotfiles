@@ -37,6 +37,11 @@
         flakeworkflow
       }
 
+      edithome(){
+        nvim ''$HOME/dotfiles/home/
+        homeworkflow
+      }
+
       editflake(){
         nvim ''$HOME/dotfiles
         flakeworkflow
@@ -88,6 +93,44 @@
 	cd ''$CWD
       }
 
+      homeworkflow(){
+        CWD=''$(pwd)
+        cd ''$HOME/dotfiles
+        if [[ `git status --porcelain` ]]; then
+          echo "Flake has been modified."
+          git add .
+	        echo "Would you like to rebuild the home-manager derivation now?"
+          read -q ans
+          if [[ "''$ans" == "y" ]]; then
+	          echo "\n"
+	          rebuildhome
+            echo "Flake rebuild, complete."
+	        else
+            echo "Flake has been edited, but not built."
+	        fi
+          echo "-.-.-"
+	        git status
+	        echo "-.-.-"
+	        echo "Would you like to commit now?"
+          read -q ans
+          if [[ "''$ans" == "y" ]]; then
+            echo "\nCommiting..."
+	          git commit
+	          echo -e "Would you like to push to remote?"
+            read -q ans
+            if [[ "''$ans" == "y" ]]; then
+              echo "\nPushing to remote..."
+              push
+            else
+              echo "Not pushing to remote."
+            fi
+          fi
+        else
+          echo "The flake has not been modified."
+        fi
+	      cd ''$CWD
+      }
+
       testbuildflake(){
         nh os test .
       }
@@ -96,16 +139,20 @@
         nh os switch .
       }
 
+      rebuildhome(){
+        nh home switch -b backup -c kent@mobile
+      }
+
       push(){
         git push origin ''$(git rev-parse --abbrev-ref HEAD)
       }
 
       clean(){
         sudo nix-collect-garbage -d
-	sudo nix-store --gc
-	clear
-	echo "Avaliable NixOS generations:"
-	sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+        sudo nix-store --gc
+        clear
+        echo "Avaliable NixOS generations:"
+        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
       }
 
       ### Development Flakes
@@ -179,6 +226,9 @@
       mountp80 = "sshfs u0_a183@192.168.0.10:/data/data/com.termux/files /mnt/phones/p80 -p8022";
 
       kcp = "killCurrentSessionSpawn";
+
+      ## Home Manager only
+      i3 = "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 && dbus-launch --exit-with-session i3";
     };
   };
 }

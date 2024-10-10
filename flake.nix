@@ -27,6 +27,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,20 +51,17 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, nur, lix-module, home-manager, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, nur, lix-module, home-manager, nixgl, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
     systems = [ "aarch64-linux" "x86_64-linux" ];
     forAllSystems = nixpkgs.lib.genAttrs systems;
-#     forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-#     pkgsFor = lib.genAttrs systems (
-#       system:
-#         import nixpkgs {
-#           inherit system;
-#           config.allowUnfree = true;
-#         }
-#     );
+
+    pkgsFor = system: import nixpkgs {
+      inherit system;
+      overlays = [ nixgl.overlay ];
+    };
   in
   {
     inherit lib;
@@ -212,7 +216,8 @@
           ./home/kent/mobile
           nixvim.homeManagerModules.nixvim
         ];
-        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        pkgs = pkgsFor "aarch64-linux";
+        # pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
     };
