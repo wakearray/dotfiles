@@ -70,6 +70,13 @@
       enableZshIntegration = true;
     };
 
+    # yt-dlp - A feature-rich command-line audio/video downloader
+    # https://github.com/yt-dlp/yt-dlp#configuration
+    yt-dlp = {
+      enable = true;
+      # TODO: Fill in the settings later
+    };
+
     # yazi - Blazing Fast Terminal File Manager
     # https://github.com/sxyazi/yazi
     yazi = {

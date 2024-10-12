@@ -2,6 +2,7 @@
 {
   imports = [
     ./i3.nix
+    ./urxvt.nix
     ../../alacritty.nix
   ];
 
@@ -16,6 +17,9 @@
     # https://github.com/darktable-org/darktable
     darktable
 
+    # dconf - Gnome system config, wanted by darktable
+    dconf
+
     # Localsend - An open source cross-platform alternative to AirDrop
     # https://github.com/localsend/localsend
     localsend
@@ -28,8 +32,23 @@
     xorg.xinit
     xorg.xorgserver
     xorg.xauth
+    xorg.xrdb
+
+    # Potentially the source of issues with urxvt
+    fontconfig
+
+    # pcmanfm - gui file manager
+    pcmanfm
 
     # Mesa - OpenGL drivers
-    mesa
+    unstable.mesa
   ];
+
+  programs = {
+    zsh = {
+      shellAliases = {
+        ngl = "nix run --override-input nixpkgs nixpkgs/nixos-24.05 --impure github:nix-community/nixGL -- ";
+      };
+    };
+  };
 }

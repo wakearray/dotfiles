@@ -1,7 +1,6 @@
 { outputs,
   pkgs,
   lib,
-  #nixgl,
   ... }:
 {
   # A standalone home-manager file for aarch64 Android devices
@@ -47,19 +46,18 @@ PATH=/home/kent/.local/state/nix/profiles/profile/bin:/home/kent/.nix-profile/bi
     '';
   };
 
-  # This is supposed to resolve an issue with Haskell,
-  # but doesn't seem to. Perhaps only an issue on aarch64
-  # https://discourse.nixos.org/t/cabal-init-fails-in-devshell/16573
-  # https://nixos.org/manual/nixpkgs/stable/#locales
   home.sessionVariables = {
+    # This is supposed to resolve an issue with Haskell,
+    # but doesn't seem to. Perhaps only an issue on aarch64
+    # https://discourse.nixos.org/t/cabal-init-fails-in-devshell/16573
+    # https://nixos.org/manual/nixpkgs/stable/#locales
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   };
 
-# I need to figure out how to use this to set the
-# ssh-agent identities as they keep getting reset
-# on every build.
-
   home.activation = {
+    # Home-Manager frequently kills ssh-agent and
+    # causes it to forget its keys
+    # So far this only sometimes helps
     activateSshAgent = lib.hm.dag.entryAfter [
       "installPackages"
       "reloadSystemd"

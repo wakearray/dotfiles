@@ -8,8 +8,13 @@
       config = {
         assigns = {
           "0: term" = [{ class = "Alacritty"; }];
-          "1: discord" = [{ class = "Discord"; }];
-          "2: web" = [{ class = "Firefox"; }];
+          "1: discord" = [{ class = "Firefox-esr"; }];
+          "2: web" = [{ class = "Firefox-esr"; }];
+        };
+        fonts = {
+          names = [ "SauceCodePro Nerd Font Mono" ];
+          style = "Regular";
+          size = 12.0;
         };
       };
     };

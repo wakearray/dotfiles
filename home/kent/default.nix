@@ -14,6 +14,7 @@
     ./starship.nix
     ./zellij.nix
     ./ssh.nix
+    ./fonts.nix
   ];
 
   # Editor Config helps enforce your preferences on editors
