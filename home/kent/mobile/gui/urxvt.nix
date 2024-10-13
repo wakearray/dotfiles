@@ -3,7 +3,7 @@
   programs.urxvt = {
     enable = true;
     fonts = [
-      "xft:SauceCodePro NFM Light:size=20"
+      "xft:SauceCodePro NFM:size=20"
     ];
     scroll.bar.enable = false;
     extraConfig = {
@@ -11,10 +11,10 @@
         "xft:SauceCodePro NFM SemiBold:size=20"
       ];
       italicFont = [
-        "xft:SauceCodePro NFM SemiBold:size=20"
+        "xft:SauceCodePro NFM Italic:size=20"
       ];
       boldItalicFont = [
-        "xft:SauceCodePro NFM SemiBold:style=SemiBold Italic:size=20"
+        "xft:SauceCodePro NFM SemiBold Italic:size=20"
       ];
       # GruvboxDark Colors
       # hard contrast: background = "#1d2021"
@@ -39,10 +39,10 @@
       color15 = "#ebdbb2";
 
       # Remove border chrome
-      borderLess = true;
+      #borderLess = true;
 
       # Enables using font glyphs instead
-      skipBuiltinGlyphs = true;
+      #skipBuiltinGlyphs = true;
     };
   };
 }

@@ -24,6 +24,24 @@
 	          action = "Paste";
 	        }];
 	      };
+        font = {
+          normal = {
+            family = "SauceCodePro NFM";
+            style = "Regular";
+          };
+          bold = {
+            family = "SauceCodePro NFM";
+            style = "SemiBold";
+          };
+          italic = {
+            family = "SauceCodePro NFM";
+            style = "Italic";
+          };
+          bold_italic = {
+            family = "SauceCodePro NFM";
+            style = "SemiBold Italic";
+          };
+        };
       };
     };
   };

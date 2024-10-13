@@ -55,9 +55,6 @@
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
-    systems = [ "aarch64-linux" "x86_64-linux" ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-
     pkgsFor = system: import nixpkgs {
       inherit system;
       overlays = [ nixgl.overlay ];
@@ -215,6 +212,7 @@
           ./home/kent
           ./home/kent/mobile
           nixvim.homeManagerModules.nixvim
+          sops-nix.homeManagerModules.sops
         ];
         pkgs = pkgsFor "aarch64-linux";
         # pkgs = nixpkgs.legacyPackages.aarch64-linux;
