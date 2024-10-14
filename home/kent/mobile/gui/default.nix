@@ -2,7 +2,6 @@
 {
   imports = [
     ./i3.nix
-    ./urxvt.nix
     ../../alacritty.nix
   ];
 
