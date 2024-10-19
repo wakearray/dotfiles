@@ -3,6 +3,7 @@
   imports = [
     ./zsh.nix
     ./vscode.nix
+    ./ssh.nix
 
     ../../modules/nvim/home.nix
   ];

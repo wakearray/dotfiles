@@ -86,6 +86,7 @@ source /home/kent/.zshrc
     # chrooted Arch in Termux keeps forgetting the path
     zsh.envExtra = ''
 PATH=/home/kent/.local/state/nix/profiles/profile/bin:/home/kent/.nix-profile/bin:/usr/local/sbin:/usr/local/bin:/usr/bin
+TZ='America/New_York'
     '';
   };
 

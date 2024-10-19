@@ -14,6 +14,8 @@ in
     emojipick
   ];
 
+# TODO: Link a default config to /etc/fonts/fonts.conf
+# needs to include links to the home-manager managed fonts
 #  home.activation = {
 #    makeFontSymLink = lib.hm.dag.entryAfter [
 #      "installPackages"
