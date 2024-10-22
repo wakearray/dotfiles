@@ -71,6 +71,12 @@ let
       hosts = [ "greatblue" "delaware" "lagurus" "jerboa" "sebrightbantam" "orloff" "cichlid" ];
       users = [ "kent" ];
     };
+
+    # Just here so it gets added to the know_hosts file automatically
+    github = {
+      ip = "github.com";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+    };
   };
 in
   devices

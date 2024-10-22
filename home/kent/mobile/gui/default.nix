@@ -24,6 +24,8 @@
     xorg.xorgserver
     xorg.xauth
     xorg.xrdb
+    xorg.xwininfo
+    xorg.xprop
 
     # pcmanfm - gui file manager
     pcmanfm

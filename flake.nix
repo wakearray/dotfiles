@@ -27,6 +27,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    system-manager = {
+      url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-system-graphics = {
+      url = "github:soupglasses/nix-system-graphics";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixgl = {
       url = "github:nix-community/nixGL";
       inputs = {
@@ -51,7 +61,7 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, nur, lix-module, home-manager, nixgl, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, nur, lix-module, home-manager, system-manager, nixgl, nix-system-graphics, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
@@ -204,6 +214,21 @@
       # https://github.com/nix-community/nixos-generators#using-in-a-flake
     };
 
+    # Non-NixOS System Configuration
+    # nix run 'github:numtide/system-manager' -- switch --flake '.#mobile'
+    systemConfigs.mobile = system-manager.lib.makeSystemConfig {
+      modules = [
+        nix-system-graphics.systemModules.default
+        {
+          config = {
+            nixpkgs.hostPlatform = "aarch64-linux";
+            system-manager.allowAnyDistro = true;
+            system-graphics.enable = true;
+          };
+        }
+      ];
+    };
+
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
@@ -214,8 +239,8 @@
           nixvim.homeManagerModules.nixvim
           sops-nix.homeManagerModules.sops
         ];
-        pkgs = pkgsFor "aarch64-linux";
-        # pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        #pkgs = pkgsFor "aarch64-linux";
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
     };
