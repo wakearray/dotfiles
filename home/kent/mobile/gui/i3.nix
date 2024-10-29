@@ -28,12 +28,14 @@
         };
         keybindings =
         let
+          menu     = config.xsession.windowManager.i3.config.menu;
+          terminal = config.xsession.windowManager.i3.config.terminal;
           modifier = config.xsession.windowManager.i3.config.modifier;
-        in lib.mkOptionDefault {
+        in {
           # '47' is the keycode for ';' according to xev
-          #"${modifier}+Return" = "exec ${terminal}";
-          #"${modifier}+Shift+q" = "kill";
-          #"${modifier}+d" = "exec ${menu}";
+          "${modifier}+Return" = "exec ${terminal}";
+          "${modifier}+Shift+q" = "kill";
+          "${modifier}+d" = "exec ${menu}";
 
           "${modifier}+j" = "focus left";
           "${modifier}+k" = "focus down";
@@ -45,58 +47,58 @@
           "${modifier}+Shift+l" = "move up";
           "${modifier}+Shift+47" = "move right";
 
-          #"${modifier}+h" = "split h";
-          #"${modifier}+v" = "split v";
-          #"${modifier}+f" = "fullscreen toggle";
+          "${modifier}+h" = "split h";
+          "${modifier}+v" = "split v";
+          "${modifier}+f" = "fullscreen toggle";
 
-          #"${modifier}+s" = "layout stacking";
-          #"${modifier}+w" = "layout tabbed";
-          #"${modifier}+e" = "layout toggle split";
+          "${modifier}+s" = "layout stacking";
+          "${modifier}+w" = "layout tabbed";
+          "${modifier}+e" = "layout toggle split";
 
-          #"${modifier}+Shift+space" = "floating toggle";
-          #"${modifier}+space" = "focus mode_toggle";
+          "${modifier}+Shift+space" = "floating toggle";
+          "${modifier}+space" = "focus mode_toggle";
 
-          #"${modifier}+a" = "focus parent";
+          "${modifier}+a" = "focus parent";
 
-          #"${modifier}+Shift+minus" = "move scratchpad";
-          #"${modifier}+minus" = "scratchpad show";
+          "${modifier}+Shift+minus" = "move scratchpad";
+          "${modifier}+minus" = "scratchpad show";
 
-#          "${modifier}+1" = "workspace number 1";
-#          "${modifier}+2" = "workspace number 2";
-#          "${modifier}+3" = "workspace number 3";
-#          "${modifier}+4" = "workspace number 4";
-#          "${modifier}+5" = "workspace number 5";
-#          "${modifier}+6" = "workspace number 6";
-#          "${modifier}+7" = "workspace number 7";
-#          "${modifier}+8" = "workspace number 8";
-#          "${modifier}+9" = "workspace number 9";
-#          "${modifier}+0" = "workspace number 10";
-#
-#          "${modifier}+Shift+1" =
-#            "move container to workspace number 1";
-#          "${modifier}+Shift+2" =
-#            "move container to workspace number 2";
-#          "${modifier}+Shift+3" =
-#            "move container to workspace number 3";
-#          "${modifier}+Shift+4" =
-#            "move container to workspace number 4";
-#          "${modifier}+Shift+5" =
-#            "move container to workspace number 5";
-#          "${modifier}+Shift+6" =
-#            "move container to workspace number 6";
-#          "${modifier}+Shift+7" =
-#            "move container to workspace number 7";
-#          "${modifier}+Shift+8" =
-#            "move container to workspace number 8";
-#          "${modifier}+Shift+9" =
-#            "move container to workspace number 9";
-#          "${modifier}+Shift+0" =
-#            "move container to workspace number 10";
-#
-#          "${modifier}+Shift+c" = "reload";
-#          "${modifier}+Shift+r" = "restart";
-#
-#          "${modifier}+r" = "mode resize";
+          "${modifier}+1" = "workspace number 1";
+          "${modifier}+2" = "workspace number 2";
+          "${modifier}+3" = "workspace number 3";
+          "${modifier}+4" = "workspace number 4";
+          "${modifier}+5" = "workspace number 5";
+          "${modifier}+6" = "workspace number 6";
+          "${modifier}+7" = "workspace number 7";
+          "${modifier}+8" = "workspace number 8";
+          "${modifier}+9" = "workspace number 9";
+          "${modifier}+0" = "workspace number 10";
+
+          "${modifier}+Shift+1" =
+            "move container to workspace number 1";
+          "${modifier}+Shift+2" =
+            "move container to workspace number 2";
+          "${modifier}+Shift+3" =
+            "move container to workspace number 3";
+          "${modifier}+Shift+4" =
+            "move container to workspace number 4";
+          "${modifier}+Shift+5" =
+            "move container to workspace number 5";
+          "${modifier}+Shift+6" =
+            "move container to workspace number 6";
+          "${modifier}+Shift+7" =
+            "move container to workspace number 7";
+          "${modifier}+Shift+8" =
+            "move container to workspace number 8";
+          "${modifier}+Shift+9" =
+            "move container to workspace number 9";
+          "${modifier}+Shift+0" =
+            "move container to workspace number 10";
+
+          "${modifier}+Shift+c" = "reload";
+          "${modifier}+Shift+r" = "restart";
+
+          "${modifier}+r" = "mode resize";
           "${modifier}+Shift+e" = "exit";
 
         };
@@ -116,19 +118,19 @@
           titlebar = false;
           commands = [
             {
-              command = "move to workspace $ws02";
+              command = "move to workspace number 2";
               criteria = {
                 title = "Discord.*";
               };
             }
             {
-              command = "move to workspace $ws03";
+              command = "move to workspace number 3";
               criteria = {
                 title = ".*YouTube.*";
               };
             }
             {
-              command = "move to workspace $ws10";
+              command = "move to workspace number 10";
               criteria = {
                 title = ".*Tidal.*";
               };

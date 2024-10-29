@@ -8,6 +8,7 @@ in
   home.file = {
     ".ssh/known_hosts" = {
       enable = true;
+      force = true;
       text = knownHostsContent;
     };
   };

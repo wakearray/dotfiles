@@ -192,26 +192,33 @@
         ramp-free-7 = "█";
       };
       "module/date" = {
-        type = "custom/script";
-        exec = "/home/kent/.config/i3/date.sh";
-        tail = true;
-        click-left = "kill -USR1 %pid%";
+        type = "internal/date";
+
+        # Seconds to sleep between updates
+        interval = "20";
+
+        # See "https://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+        # NOTE: if you want to use syntax tags here you need to use %%{...}
+        date = "";
+        # Optional time format
+        time = "%l:%M %P";
+
+        # if `date-alt` or `time-alt` is defined, clicking
+        # the module will toggle between formats
+        date-alt = "%A, %d %B %Y";
+        time-alt = "%l:%M %P";
+
         format = "╭ 󱑎<label> ╮";
         format-background = "\${colors.bg_dim}";
         format-foreground = "\${colors.fg0}";
+
+        label = "%date% %time%";
+        label-font = "1";
+        label-foreground = "\${colors.fg0}";
       };
 
       "module/i3" = {
         type = "internal/i3";
-
-        # Only show workspaces defined on the same output as the bar
-        #
-        # Useful if you want to show monitor specific workspaces
-        # on different bars
-        #
-        # Default: false
-        #pin-workspaces = true;
-
         # Show urgent workspaces regardless of whether the workspace is actually hidden
         # by pin-workspaces.
         #
@@ -287,7 +294,7 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-focused = "╭ %index% ╷ %icon% ╷ %name% ╮";
+        label-focused = "╭ %icon% %index% ╮";
         label-focused-foreground = "\${colors.yellow}";
         label-focused-background = "\${colors.bg_dim}";
         label-focused-underline = "#";
@@ -299,7 +306,7 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-unfocused = "╭ %index% ╷ %icon% ╮";
+        label-unfocused = "╭ %icon% %index% ╮";
         label-unfocused-foreground = "\${colors.fg0}";
         label-unfocused-padding = 1;
 
@@ -309,7 +316,7 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-visible = "╭ %index% ╷ %icon% ╮";
+        label-visible = "╭ %icon% %index% ╮";
         label-visible-underline = "\${colors.bg_dim}";
         label-visible-padding = 1;
 
@@ -319,7 +326,7 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-urgent = "╭ %index% ╷ %icon% ╷ %name% ╮";
+        label-urgent = "╭ %icon% %index% ╮";
         label-urgent-foreground = "\${colors.red}";
         label-urgent-background = "\${colors.bg_dim}";
         label-urgent-padding = 1;
@@ -357,19 +364,6 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # Launch polybar
 polybar top &
-      '';
-    };
-    # Date Module Script
-    ".config/i3/date.sh" = {
-      text = ''
-#!/usr/bin/env sh
-
-while true; do
-    time=''$(TZ="America/New_York" date +'%l:%M %p')
-    echo "╭ 󱑎''$time ╮"
-  sleep 30 &
-  wait
-done
       '';
     };
   };
