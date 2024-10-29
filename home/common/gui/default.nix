@@ -9,5 +9,8 @@
     # https://github.com/localsend/localsend
     # Port 53317 needs too be opened
     localsend
+
+    # Keepassxc - Offline password store
+    keepassxc
   ];
 }

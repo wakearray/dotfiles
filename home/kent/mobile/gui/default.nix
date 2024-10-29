@@ -30,16 +30,10 @@
     # pcmanfm - gui file manager
     pcmanfm
 
+    # Keepassxc - Offline password manager
+    keepassxc
+
     # Mesa - OpenGL drivers
     unstable.mesa
   ];
-
-  programs = {
-    zsh = {
-      shellAliases = {
-        nglu = "nix run --impure github:nix-community/nixGL -- ";
-        ngl = "nix run --override-input nixpkgs nixpkgs/nixos-24.05 --impure github:nix-community/nixGL -- ";
-      };
-    };
-  };
 }

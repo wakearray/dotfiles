@@ -24,6 +24,9 @@
     # An aesthetically pleasing YouTube TUI written in Rust
     # https://github.com/Siriusmart/youtube-tui
     youtube-tui
+
+    # localsend
+    localsend
   ];
 
   fonts.packages = with pkgs; [

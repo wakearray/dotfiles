@@ -16,9 +16,12 @@
   vim.notify = function(msg, ...)
     if msg:match("has been deprecated") then
       return
-      end
+    end
   end
 '';
+    # keymaps
+    # unmap J,K,L,M
+    # Assign J = bprevious, K = bnext, L =  Join N lines; default is 2, M = lookup Keyword under the cursor with 'keywordprg'
     plugins = {
 
       # nvim-treesitter - Nvim Treesitter configurations and abstraction layer
@@ -152,13 +155,16 @@
       # https://github.com/akinsho/bufferline.nvim/
       bufferline = {
         enable = true;
-#        settings = {
-#          options = {
-#            diagnostics = "nvim_lsp";
-#          };
-#        # Lots and lots of settings:
-#        # https://nix-community.github.io/nixvim/plugins/bufferline/settings/index.html
-#        };
+        #settings.options.diagnostics = "nvim_lsp";
+        numbers = {
+              __raw = ''
+  function(opts)
+    return string.format('%s|%s', opts.id, opts.raise(opts.ordinal))
+  end
+              '';
+        # Lots and lots of settings:
+        # https://nix-community.github.io/nixvim/plugins/bufferline/settings/index.html
+        };
       };
 
       # vim-floaterm - Terminal manager for (neo)vim
@@ -166,6 +172,7 @@
       floaterm = {
         enable = true;
         # Settings: https://nix-community.github.io/nixvim/plugins/floaterm/index.html
+        autoinsert = true;
       };
 
       # nvim-tree - A file explorer tree for nvim
@@ -195,6 +202,15 @@
         enable = true;
         findPackage = pkgs.repgrep;
         replacePackage = pkgs.gnused;
+      };
+
+      # which-key.nvim - helps you remember your Neovim keymaps,
+      # by showing available keybindings in a popup as you type.
+      # https://github.com/folke/which-key.nvim
+      which-key = {
+        enable = true;
+        # More settings here:
+        # https://nix-community.github.io/nixvim/plugins/which-key/index.html
       };
 
       # neovim’s built-in LSP

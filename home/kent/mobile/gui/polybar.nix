@@ -1,9 +1,44 @@
-{ ... }:
+{ pkgs, ... }:
 {
   services.polybar = {
     enable = true;
     config = {
-      #
+      "colors" = {
+        bg_dim = "#141617";
+        bg0 = "#1d2021";
+        bg1 = "#282828";
+        bg2 = "#282828";
+        bg3 = "#3c3836";
+        bg4 = "#3c3836";
+        bg5 = "#504945";
+        bg_statusline1 = "#282828";
+        bg_statusline2 = "#32302f";
+        bg_statusline3 = "#504945";
+        bg_diff_green = "#32361a";
+        bg_visual_green = "#333e34";
+        bg_diff_red = "#3c1f1e";
+        bg_visual_red = "#442e2d";
+        bg_diff_blue = "#0d3138";
+        bg_visual_blue = "#2e3b3b";
+        bg_visual_yellow = "#473c29";
+        bg_current_word = "#32302f";
+        fg0 = "#d4be98";
+        fg1 = "#ddc7a1";
+        red = "#ea6962";
+        orange = "#e78a4e";
+        yellow = "#d8a657";
+        green = "#a9b665";
+        aqua = "#89b482";
+        blue = "#7daea3";
+        purple = "#d3869b";
+        bg_red = "#ea6962";
+        bg_green = "#a9b665";
+        bg_yellow = "#d8a657";
+        grey0 = "#7c6f64";
+        grey1 = "#928374";
+        grey2 = "#a89984";
+      };
+      # The top bar
       "bar/top" = {
         # i3 Specific
         override-redirect = true;
@@ -19,6 +54,10 @@
         dock = false;
         offset-x = 0;
         offset-y = 0;
+
+        # Bar colors
+        background = "\${colors.bg_dim}";
+        foreground = "\${colors.fg0}";
 
         # Modules
         modules-right = "tray memory date";
@@ -93,7 +132,7 @@
         #   %mb_swap_total%
         #   %mb_swap_free%
         #   %mb_swap_used%
-        label = "RAM %gb_used%/%gb_free%";
+        label = "╭ RAM %gb_used%/%gb_free% ╮";
 
         # Available tokens:
         #   %percentage_used% (default)
@@ -106,7 +145,7 @@
         #   %gb_total%
         #   %mb_used%
         #   %mb_free%
-        #   %mb_total%
+        #   %mb_total
         #   %percentage_swap_used%
         #   %percentage_swap_free%
         #   %swap_total% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
@@ -124,13 +163,13 @@
         # Only applies if <bar-used> is used
         bar-used-indicator = "";
         bar-used-width = 50;
-        bar-used-foreground-0 = "#55aa55";
-        bar-used-foreground-1 = "#557755";
-        bar-used-foreground-2 = "#f5a70a";
-        bar-used-foreground-3 = "#ff5555";
+        bar-used-foreground-0 = "\${colors.green}";
+        bar-used-foreground-1 = "\${colors.yellow}";
+        bar-used-foreground-2 = "\${colors.orange}";
+        bar-used-foreground-3 = "\${colors.red}";
         bar-used-fill = "▐";
         bar-used-empty = "▐";
-        bar-used-empty-foreground = "#444444";
+        bar-used-empty-foreground = "\${colors.bg2}";
 
         # Only applies if <ramp-used> is used
         ramp-used-0 = "▁";
@@ -152,26 +191,14 @@
         ramp-free-6 = "▇";
         ramp-free-7 = "█";
       };
-
       "module/date" = {
-        type = "internal/date";
-        interval = 5;
-        date = "%m.%d";
-        time = "%l:%M";
-
-        # Available tags:
-        #   <label> (default)
-        format = "🕓 <label>";
-        format-background = "#000";
-        format-foreground = "#fff";
-
-        # Available tokens:
-        #   %date%
-        #   %time%
-        # Default: %date%
-        label = "%date% %time%";
-        label-font = 1;
-        label-foreground = "#9A32DB";
+        type = "custom/script";
+        exec = "/home/kent/.config/i3/date.sh";
+        tail = true;
+        click-left = "kill -USR1 %pid%";
+        format = "╭ 󱑎<label> ╮";
+        format-background = "\${colors.bg_dim}";
+        format-foreground = "\${colors.fg0}";
       };
 
       "module/i3" = {
@@ -194,7 +221,7 @@
 
         # This will split the workspace name on ':'
         # Default: false
-        strip-wsnumbers = true;
+        #strip-wsnumbers = true;
 
         # Sort the workspaces by index instead of the default
         # sorting that groups the workspaces by output
@@ -227,12 +254,16 @@
         # ws-icon-[0-9]+ = <label>;<icon>
         # NOTE: The <label> needs to match the name of the i3 workspace
         # Neither <label> nor <icon> can contain a semicolon (;)
-        ws-icon-0 = "1;";
-        ws-icon-1 = "2;";
-        ws-icon-2 = "3;";
-        ws-icon-3 = "4;󰈹";
-        ws-icon-4 = "5;󰈹";
-        ws-icon-5 = "10;";
+        ws-icon-0 = "1: Alacritty;";
+        ws-icon-1 = "2: Discord;";
+        ws-icon-2 = "3: Youtube;";
+        ws-icon-3 = "4: Firefox;󰈹";
+        ws-icon-4 = "5: Firefox;󰈹";
+        ws-icon-5 = "6: Firefox;󰈹";
+        ws-icon-6 = "7: Firefox;󰈹";
+        ws-icon-7 = "8: Firefox;󰈹";
+        ws-icon-8 = "9: Firefox;󰈹";
+        ws-icon-9 = "10: Tidal;";
         ws-icon-default = "󰈹";
         # NOTE: You cannot skip icons, e.g. to get a ws-icon-6
         # you must also define a ws-icon-5.
@@ -248,7 +279,7 @@
         # Default: %mode%
         label-mode = "%mode%";
         label-mode-padding = 2;
-        label-mode-background = "#e60053";
+        label-mode-foreground = "\${colors.red}";
 
         # Available tokens:
         #   %name%
@@ -256,11 +287,11 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-focused = "%index%";
-        label-focused-foreground = "#ffffff";
-        label-focused-background = "#3f3f3f";
-        label-focused-underline = "#fba922";
-        label-focused-padding = 4;
+        label-focused = "╭ %index% ╷ %icon% ╷ %name% ╮";
+        label-focused-foreground = "\${colors.yellow}";
+        label-focused-background = "\${colors.bg_dim}";
+        label-focused-underline = "#";
+        label-focused-padding = 1;
 
         # Available tokens:
         #   %name%
@@ -268,8 +299,9 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-unfocused = "%index%";
-        label-unfocused-padding = 4;
+        label-unfocused = "╭ %index% ╷ %icon% ╮";
+        label-unfocused-foreground = "\${colors.fg0}";
+        label-unfocused-padding = 1;
 
         # Available tokens:
         #   %name%
@@ -277,9 +309,9 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-visible = "%index%";
-        label-visible-underline = "#555555";
-        label-visible-padding = 4;
+        label-visible = "╭ %index% ╷ %icon% ╮";
+        label-visible-underline = "\${colors.bg_dim}";
+        label-visible-padding = 1;
 
         # Available tokens:
         #   %name%
@@ -287,37 +319,58 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-urgent = "%index%";
-        label-urgent-foreground = "#000000";
-        label-urgent-background = "#bd2c40";
-        label-urgent-padding = 4;
+        label-urgent = "╭ %index% ╷ %icon% ╷ %name% ╮";
+        label-urgent-foreground = "\${colors.red}";
+        label-urgent-background = "\${colors.bg_dim}";
+        label-urgent-padding = 1;
 
         # Separator in between workspaces
-        label-separator = "|";
-        label-separator-padding = 2;
-        label-separator-foreground = "#ffb52a";
+        label-separator = "";
+        label-separator-padding = 0;
+        label-separator-foreground = "\${colors.bg_dim}";
       };
       settings = {
         screenchange-reload = true;
       };
     };
     script = "sh /home/kent/.config/i3/polybar.sh";
+    package = pkgs.polybar.override {
+      i3Support = true;
+      mpdSupport = true;
+      nlSupport = false;
+      alsaSupport = false;
+    };
   };
 
-  home.file.".config/i3/polybar.sh" = {
-    enable = true;
-    executable = true;
-    text = ''
+  home.file = {
+    ".config/i3/polybar.sh" = {
+      enable = true;
+      executable = true;
+      text = ''
 #!/usr/bin/env sh
 
 # Terminate already running bar instances
-killall -q polybar
+pkill polybar
 
 # Wait until the processes have been shut down
 while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # Launch polybar
 polybar top &
-    '';
+      '';
+    };
+    # Date Module Script
+    ".config/i3/date.sh" = {
+      text = ''
+#!/usr/bin/env sh
+
+while true; do
+    time=''$(TZ="America/New_York" date +'%l:%M %p')
+    echo "╭ 󱑎''$time ╮"
+  sleep 30 &
+  wait
+done
+      '';
+    };
   };
 }

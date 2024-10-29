@@ -33,12 +33,12 @@
       ## Flake Functions
 
       editzsh(){
-        nvim ''$HOME/dotfiles/modules/zsh.nix
+        nvim ''$HOME/dotfiles/home/common/zsh.nix
         flakeworkflow
       }
 
       edithome(){
-        nvim ''$HOME/dotfiles/home/
+        nvim ''$HOME/dotfiles/
         homeworkflow
       }
 
@@ -140,7 +140,7 @@
       }
 
       rebuildhome(){
-        nh home switch -b backup -c kent@mobile
+        nh home switch -c kent@mobile
       }
 
       push(){
