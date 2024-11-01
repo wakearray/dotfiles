@@ -41,13 +41,13 @@
       # The top bar
       "bar/top" = {
         # i3 Specific
-        override-redirect = true;
+        override-redirect = false;
         wm-restack = "i3";
         scroll-up = "#i3.prev";
         scroll-down = "#i3.next";
 
         # Monitor Details
-        monitor = "Builtin Display";
+        #monitor = "Builtin Display";
 
         # Bar size/shape
         width = "100%";
@@ -83,9 +83,9 @@
         type = "internal/date";
         interval = "20";
         date = "";
-        time = "-%l:%M %P";
+        time = "%l:%M %P";
         date-alt = "%a %b %d";
-        time-alt = "-%l:%M %P";
+        time-alt = "%l:%M %P";
 
         format = "╭ <label> ╮";
         format-background = "\${colors.bg_dim}";
@@ -109,28 +109,9 @@
         # Default: false
         #index-sort = true;
 
-        # Create click handler used to focus workspace
-        # Default: true
-        #enable-click = false;
-
-        # Create scroll handlers used to cycle workspaces
-        # Default: true
-        #enable-scroll = false;
-
-        # Wrap around when reaching the first/last workspace
-        # Default: true
-        #wrapping-scroll = false;
-
         # Set the scroll cycle direction
         # Default: true
         reverse-scroll = false;
-
-        # Use fuzzy (partial) matching for wc-icon.
-        # Example: code;♚ will apply the icon to all workspaces
-        # containing 'code' in the name
-        # Changed in version 3.7.0: Selects longest string match instead of the first match.
-        # Default: false
-        #fuzzy-match = true;
 
         # Available tags:
         #   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
@@ -150,7 +131,7 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-focused = "╭ %name% %index% ╮";
+        label-focused = "╭ %name% ╮";
         label-focused-foreground = "\${colors.yellow}";
         label-focused-background = "\${colors.bg_dim}";
         label-focused-padding = 0;
@@ -161,7 +142,7 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-unfocused = "╭ %name% %index% ╮";
+        label-unfocused = "╭ %name% ╮";
         label-unfocused-foreground = "\${colors.fg0}";
         label-unfocused-padding = 0;
 
@@ -171,7 +152,7 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-visible = "╭ %name% %index% ╮";
+        label-visible = "╭ %name% ╮";
         label-visible-underline = "\${colors.bg_dim}";
         label-visible-padding = 0;
 
@@ -181,7 +162,7 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-urgent = "╭ %name% %index% ╮";
+        label-urgent = "╭ %name% ╮";
         label-urgent-foreground = "\${colors.red}";
         label-urgent-background = "\${colors.bg_dim}";
         label-urgent-padding = 0;
@@ -212,6 +193,8 @@
 #!/usr/bin/env sh
 
 # Terminate already running bar instances
+polybar-msg cmd quit
+wait 2
 sudo pkill polybar
 
 # Wait until the processes have been shut down

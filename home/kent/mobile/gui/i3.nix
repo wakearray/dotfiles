@@ -11,13 +11,16 @@
       enable = true;
       config = {
         assigns = {
-          "1: Alacritty" = [ { class = "Alacritty"; } ];
-          "2: Discord" = [ { class = "(?i)firefox"; } { title = "Discord.*"; } ];
-          "3: Youtube" = [ { class = "(?i)firefox"; } { title = ".*YouTube.*"; } ];
-          "4: Firefox" = [ { class = "(?i)firefox"; } {class = "Navigator";} ];
-          "5: Firefox" = [ { class = "(?i)firefox"; } ];
-          "6: Firefox" = [ { class = "(?i)firefox"; } ];
-          "10: Tidal" = [ { class = "(?i)firefox"; } { title = ".*Tidal.*"; } ];
+          "1: t" = [ { class = "Alacritty"; } ];
+          "2: d" = [ { title = "Discord.*"; } ];
+          "3: y" = [ { title = ".*YouTube.*"; } ];
+          "4: f" = [ { class = "firefox"; } {class = "Navigator";} ];
+          "5: a" = [  ];
+          "6: b" = [  ];
+          "7: c" = [  ];
+          "8: d" = [  ];
+          "9: e" = [  ];
+          "10: t" = [ { title = ".*Tidal.*"; } ];
         };
         bars = [  ];
         defaultWorkspace = "workspace number 1";
@@ -113,7 +116,7 @@
           { command = "alacritty"; }
           { command = "firefox"; }
           { # polybar
-            command = "/home/kent/.config/i3/polybar.sh &";
+            command = "${config.home.file.".config/i3/polybar.sh".source} &";
             always = true;
             notification = false;
           }
@@ -191,7 +194,7 @@
         };
         "aliases.class" = {
           # "<window_class_regex>" = "<alias>";
-          Alacritty = "alacritty";
+          "Alacritty" = "alacritty";
           firefox = "firefox";
           darktable = "darktable";
           keepassxc = "keepass";

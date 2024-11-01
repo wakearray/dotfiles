@@ -108,23 +108,6 @@
 	        else
             echo "Flake has been edited, but not built."
 	        fi
-          echo "-.-.-"
-	        git status
-	        echo "-.-.-"
-	        echo "Would you like to commit now?"
-          read -q ans
-          if [[ "''$ans" == "y" ]]; then
-            echo "\nCommiting..."
-	          git commit
-	          echo -e "Would you like to push to remote?"
-            read -q ans
-            if [[ "''$ans" == "y" ]]; then
-              echo "\nPushing to remote..."
-              push
-            else
-              echo "Not pushing to remote."
-            fi
-          fi
         else
           echo "The flake has not been modified."
         fi

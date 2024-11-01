@@ -39,7 +39,7 @@
     alacritty = {
       settings = {
         shell = {
-          program = "/usr/share/zsh";
+          program = "${pkgs.zsh}/bin/zsh";
           args = [ "--login" "-c" "zellij" ];
         };
         font = {
