@@ -2,7 +2,6 @@
 {
   imports = [
     ./zsh.nix
-    ./vscode.nix
     ./ssh.nix
 
     ../../modules/nvim/home.nix
@@ -13,6 +12,10 @@
       FLAKE = "${config.home.homeDirectory}/dotfiles";
     };
   };
+
+  # Allows home-manager to manage the XDG variables and files
+  # https://nix-community.github.io/home-manager/options.xhtml#opt-xdg.enable
+  xdg.enable = true;
 
   programs = {
     # zoxide - A smarter cd command

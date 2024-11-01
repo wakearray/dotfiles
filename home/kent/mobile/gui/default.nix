@@ -14,10 +14,6 @@
     # dconf - Gnome system config, wanted by darktable
     dconf
 
-    # Localsend - An open source cross-platform alternative to AirDrop
-    # https://github.com/localsend/localsend
-    localsend
-
     # Window Manager Required Stuff
     xorg.libX11
     xorg.xinit
@@ -36,4 +32,20 @@
     # Mesa - OpenGL drivers
     unstable.mesa
   ];
+
+  xsession.numlock.enable = true;
+
+  programs = {
+    alacritty = {
+      settings = {
+        shell = {
+          program = "/usr/share/zsh";
+          args = [ "--login" "-c" "zellij" ];
+        };
+        font = {
+          size = 16;
+        };
+      };
+    };
+  };
 }

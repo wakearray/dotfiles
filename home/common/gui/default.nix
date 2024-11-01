@@ -2,6 +2,8 @@
 {
   imports = [
     ./rofi.nix
+    ./vscode.nix
+    ./alacritty.nix
   ];
 
   home.packages = with pkgs; [

@@ -46,12 +46,14 @@
         scroll-up = "#i3.prev";
         scroll-down = "#i3.next";
 
+        # Monitor Details
+        monitor = "Builtin Display";
+
         # Bar size/shape
         width = "100%";
         height = "3%";
         radius = 0;
         bottom = false;
-        dock = false;
         offset-x = 0;
         offset-y = 0;
 
@@ -61,7 +63,6 @@
 
         # Modules
         modules-right = "tray memory date";
-        modules-center = "";
         modules-left = "i3";
 
         font-0 = "SauceCodePro NFM:size=20;0";
@@ -73,157 +74,30 @@
 
       "module/memory" = {
         type = "internal/memory";
-
-        # Seconds to sleep between updates
-        # Default: 1
-        interval = 3;
-
-        # Default: 90
-        # New in version 3.6.0
-        warn-percentage = 95;
-
-        # Available tags:
-        #   <label> (default)
-        #   <bar-used>
-        #   <bar-free>
-        #   <ramp-used>
-        #   <ramp-free>
-        #   <bar-swap-used>
-        #   <bar-swap-free>
-        #   <ramp-swap-used>
-        #   <ramp-swap-free>
+        interval = 5;
         format = "<label>";
-
-        # Format used when RAM reaches warn-percentage
-        # If not defined, format is used instead.
-        # Available tags:
-        #   <label-warn>
-        #   <bar-used>
-        #   <bar-free>
-        #   <ramp-used>
-        #   <ramp-free>
-        #   <bar-swap-used>
-        #   <bar-swap-free>
-        #   <ramp-swap-used>
-        #   <ramp-swap-free>
-        # New in version 3.6.0
-        #format-warn = <label-warn>;
-
-        # Available tokens:
-        #   %percentage_used% (default)
-        #   %percentage_free%
-        #   %used% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %free% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %total% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %gb_used%
-        #   %gb_free%
-        #   %gb_total%
-        #   %mb_used%
-        #   %mb_free%
-        #   %mb_total%
-        #   %percentage_swap_used%
-        #   %percentage_swap_free%
-        #   %swap_total% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %swap_free% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %swap_used% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %gb_swap_total%
-        #   %gb_swap_free%
-        #   %gb_swap_used%
-        #   %mb_swap_total%
-        #   %mb_swap_free%
-        #   %mb_swap_used%
-        label = "╭ RAM %gb_used%/%gb_free% ╮";
-
-        # Available tokens:
-        #   %percentage_used% (default)
-        #   %percentage_free%
-        #   %used% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %free% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %total% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %gb_used%
-        #   %gb_free%
-        #   %gb_total%
-        #   %mb_used%
-        #   %mb_free%
-        #   %mb_total
-        #   %percentage_swap_used%
-        #   %percentage_swap_free%
-        #   %swap_total% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %swap_free% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %swap_used% (Switches between KiB, MiB, and GiB) (New in version 3.6.0)
-        #   %gb_swap_total%
-        #   %gb_swap_free%
-        #   %gb_swap_used%
-        #   %mb_swap_total%
-        #   %mb_swap_free%
-        #   %mb_swap_used%
-        # New in version 3.6.0
-        label-warn = "RAM %gb_used%/%gb_free%";
-
-        # Only applies if <bar-used> is used
-        bar-used-indicator = "";
-        bar-used-width = 50;
-        bar-used-foreground-0 = "\${colors.green}";
-        bar-used-foreground-1 = "\${colors.yellow}";
-        bar-used-foreground-2 = "\${colors.orange}";
-        bar-used-foreground-3 = "\${colors.red}";
-        bar-used-fill = "▐";
-        bar-used-empty = "▐";
-        bar-used-empty-foreground = "\${colors.bg2}";
-
-        # Only applies if <ramp-used> is used
-        ramp-used-0 = "▁";
-        ramp-used-1 = "▂";
-        ramp-used-2 = "▃";
-        ramp-used-3 = "▄";
-        ramp-used-4 = "▅";
-        ramp-used-5 = "▆";
-        ramp-used-6 = "▇";
-        ramp-used-7 = "█";
-
-        # Only applies if <ramp-free> is used
-        ramp-free-0 = "▁";
-        ramp-free-1 = "▂";
-        ramp-free-2 = "▃";
-        ramp-free-3 = "▄";
-        ramp-free-4 = "▅";
-        ramp-free-5 = "▆";
-        ramp-free-6 = "▇";
-        ramp-free-7 = "█";
+        label = "╭ 󰍛 %gb_used% ╮";
       };
+
       "module/date" = {
         type = "internal/date";
-
-        # Seconds to sleep between updates
         interval = "20";
-
-        # See "https://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
-        # NOTE: if you want to use syntax tags here you need to use %%{...}
         date = "";
-        # Optional time format
-        time = "%l:%M %P";
+        time = "-%l:%M %P";
+        date-alt = "%a %b %d";
+        time-alt = "-%l:%M %P";
 
-        # if `date-alt` or `time-alt` is defined, clicking
-        # the module will toggle between formats
-        date-alt = "%A, %d %B %Y";
-        time-alt = "%l:%M %P";
-
-        format = "╭ 󱑎<label> ╮";
+        format = "╭ <label> ╮";
         format-background = "\${colors.bg_dim}";
         format-foreground = "\${colors.fg0}";
 
-        label = "%date% %time%";
+        label = "%date% 󱑎 %time%";
         label-font = "1";
         label-foreground = "\${colors.fg0}";
       };
 
       "module/i3" = {
         type = "internal/i3";
-        # Show urgent workspaces regardless of whether the workspace is actually hidden
-        # by pin-workspaces.
-        #
-        # Default: false
-        # New in version 3.6.0
         show-urgent = true;
 
         # This will split the workspace name on ':'
@@ -258,24 +132,6 @@
         # Default: false
         #fuzzy-match = true;
 
-        # ws-icon-[0-9]+ = <label>;<icon>
-        # NOTE: The <label> needs to match the name of the i3 workspace
-        # Neither <label> nor <icon> can contain a semicolon (;)
-        ws-icon-0 = "1: Alacritty;";
-        ws-icon-1 = "2: Discord;";
-        ws-icon-2 = "3: Youtube;";
-        ws-icon-3 = "4: Firefox;󰈹";
-        ws-icon-4 = "5: Firefox;󰈹";
-        ws-icon-5 = "6: Firefox;󰈹";
-        ws-icon-6 = "7: Firefox;󰈹";
-        ws-icon-7 = "8: Firefox;󰈹";
-        ws-icon-8 = "9: Firefox;󰈹";
-        ws-icon-9 = "10: Tidal;";
-        ws-icon-default = "󰈹";
-        # NOTE: You cannot skip icons, e.g. to get a ws-icon-6
-        # you must also define a ws-icon-5.
-        # NOTE: Icon will be available as the %icon% token inside label-*
-
         # Available tags:
         #   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
         #   <label-mode> (default)
@@ -285,7 +141,7 @@
         #   %mode%
         # Default: %mode%
         label-mode = "%mode%";
-        label-mode-padding = 2;
+        label-mode-padding = 0;
         label-mode-foreground = "\${colors.red}";
 
         # Available tokens:
@@ -294,11 +150,10 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-focused = "╭ %icon% %index% ╮";
+        label-focused = "╭ %name% %index% ╮";
         label-focused-foreground = "\${colors.yellow}";
         label-focused-background = "\${colors.bg_dim}";
-        label-focused-underline = "#";
-        label-focused-padding = 1;
+        label-focused-padding = 0;
 
         # Available tokens:
         #   %name%
@@ -306,9 +161,9 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-unfocused = "╭ %icon% %index% ╮";
+        label-unfocused = "╭ %name% %index% ╮";
         label-unfocused-foreground = "\${colors.fg0}";
-        label-unfocused-padding = 1;
+        label-unfocused-padding = 0;
 
         # Available tokens:
         #   %name%
@@ -316,9 +171,9 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-visible = "╭ %icon% %index% ╮";
+        label-visible = "╭ %name% %index% ╮";
         label-visible-underline = "\${colors.bg_dim}";
-        label-visible-padding = 1;
+        label-visible-padding = 0;
 
         # Available tokens:
         #   %name%
@@ -326,10 +181,10 @@
         #   %index%
         #   %output%
         # Default: %icon% %name%
-        label-urgent = "╭ %icon% %index% ╮";
+        label-urgent = "╭ %name% %index% ╮";
         label-urgent-foreground = "\${colors.red}";
         label-urgent-background = "\${colors.bg_dim}";
-        label-urgent-padding = 1;
+        label-urgent-padding = 0;
 
         # Separator in between workspaces
         label-separator = "";
@@ -357,7 +212,7 @@
 #!/usr/bin/env sh
 
 # Terminate already running bar instances
-pkill polybar
+sudo pkill polybar
 
 # Wait until the processes have been shut down
 while pgrep -x polybar >/dev/null; do sleep 1; done

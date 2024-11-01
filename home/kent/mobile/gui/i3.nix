@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./polybar.nix
@@ -12,12 +12,12 @@
       config = {
         assigns = {
           "1: Alacritty" = [ { class = "Alacritty"; } ];
-          "2: Discord" = [  ];
-          "3: Youtube" = [  ];
-          "4: Firefox" = [ { class = "firefox";} {class = "Navigator";} ];
-          "5: Firefox" = [  ];
-          "6: Firefox" = [  ];
-          "10: Tidal" = [  ];
+          "2: Discord" = [ { class = "(?i)firefox"; } { title = "Discord.*"; } ];
+          "3: Youtube" = [ { class = "(?i)firefox"; } { title = ".*YouTube.*"; } ];
+          "4: Firefox" = [ { class = "(?i)firefox"; } {class = "Navigator";} ];
+          "5: Firefox" = [ { class = "(?i)firefox"; } ];
+          "6: Firefox" = [ { class = "(?i)firefox"; } ];
+          "10: Tidal" = [ { class = "(?i)firefox"; } { title = ".*Tidal.*"; } ];
         };
         bars = [  ];
         defaultWorkspace = "workspace number 1";
@@ -26,13 +26,20 @@
           style = "Regular";
           size = 16.0;
         };
+        keycodebindings =
+        let
+          modifier = config.xsession.windowManager.i3.config.modifier;
+        in {
+          # '47' is the keycode for ';' according to xev
+          "${modifier}+47" = "focus right";
+          "${modifier}+Shift+47" = "move right";
+        };
         keybindings =
         let
           menu     = config.xsession.windowManager.i3.config.menu;
           terminal = config.xsession.windowManager.i3.config.terminal;
           modifier = config.xsession.windowManager.i3.config.modifier;
         in {
-          # '47' is the keycode for ';' according to xev
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+Shift+q" = "kill";
           "${modifier}+d" = "exec ${menu}";
@@ -40,12 +47,12 @@
           "${modifier}+j" = "focus left";
           "${modifier}+k" = "focus down";
           "${modifier}+l" = "focus up";
-          "${modifier}+47" = "focus right";
+#          "${modifier}+\;" = "focus right";
 
           "${modifier}+Shift+j" = "move left";
           "${modifier}+Shift+k" = "move down";
           "${modifier}+Shift+l" = "move up";
-          "${modifier}+Shift+47" = "move right";
+#~          "${modifier}+Shift+\;" = "move right";
 
           "${modifier}+h" = "split h";
           "${modifier}+v" = "split v";
@@ -110,6 +117,11 @@
             always = true;
             notification = false;
           }
+          { # i3wsr - updates workspace names with app icons
+            command = "${pkgs.i3wsr}/bin/i3wsr";
+            always = true;
+            notification = false;
+          }
         ];
         terminal = "alacritty";
         window = {
@@ -142,7 +154,70 @@
           followMouse = false;
           wrapping = "no";
         };
-        menu = "${config.programs.rofi.finalPackage}/bin/rofi";
+        menu = "${config.programs.rofi.finalPackage}/bin/rofi -show drun";
+      };
+    };
+  };
+
+  home = {
+    packages = with pkgs; [
+      # Work Space Renamer - Allows for changing the name based on the app
+      # https://github.com/roosta/i3wsr
+      i3wsr
+      # Handles hiding terminal windows that launch applications
+      # https://github.com/jamesofarrell/i3-swallow
+      i3-swallow
+      # Commands for saving and restoring sessions
+      # https://github.com/JonnyHaystack/i3-resurrect
+      i3-resurrect
+      # Shortcuts for opening/moving windows to next empty workspace
+      # https://github.com/JohnDowson/i3-open-next-ws
+      i3-open-next-ws
+    ];
+  };
+
+  xdg.configFile = {
+    "i3wsr/config.toml" = {
+      enable = true;
+      force = true;
+      source = pkgs.writers.writeTOML "config.toml" {
+        "aliases.title" = {
+          # "<window_title_regex>" = "<alias>";
+          "Discord.*" = "discord";
+          ".*YouTube.*" = "youtube";
+          ".*Tidal.*" = "tidal";
+          "Photopea.*" = "photopea";
+          ".*Gmail.*" = "gmail";
+        };
+        "aliases.class" = {
+          # "<window_class_regex>" = "<alias>";
+          Alacritty = "alacritty";
+          firefox = "firefox";
+          darktable = "darktable";
+          keepassxc = "keepass";
+        };
+        icons = {
+          # alias = "icon";
+          discord = "";
+          youtube = "";
+          tidal = "";
+          photopea = "";
+          gmail = "󰊫";
+          alacritty = "";
+          firefox = "󰈹";
+          darktable = "󰄄";
+          localsend = "󱥸";
+          keepass = "";
+        };
+        general = {
+          separator = " ";
+          split_at = ":";
+          default_icon = "";
+        };
+        options = {
+          no_names = true;
+          no_icon_names = true;
+        };
       };
     };
   };

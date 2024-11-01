@@ -38,11 +38,12 @@
       ];
     };
     extraConfig = {
-      modi = "drun,emoji,ssh";
+      modi = "drun,emoji,ssh,window,windowcd,run,combi,keys,filebrowser,top,calc";
       kb-primary-paste = "Control+V,Shift+Insert";
       kb-secondary-paste = "Control+v,Insert";
     };
     font = "SauceCodePro NFM 16";
     terminal = "${pkgs.alacritty}/bin/alacritty";
+    theme = "gruvbox-dark";
   };
 }
