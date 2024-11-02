@@ -43,7 +43,7 @@
           args = [ "--login" "-c" "zellij" ];
         };
         font = {
-          size = 16;
+          size = 18;
         };
       };
     };
