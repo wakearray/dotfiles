@@ -2,7 +2,9 @@
 {
   programs.mpv = {
     enable = true;
-    bindings = {};
+    bindings = {
+      PLAYPAUSE = "cycle pause";
+    };
     config = {};
     profiles = {};
     scripts = {};

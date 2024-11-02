@@ -6,7 +6,6 @@
   # Using either Arch or Debian with the Nix package manager and home-manager
 
   imports = [
-    ./git.nix
     ./nix.nix
     ./mobilefonts.nix
 

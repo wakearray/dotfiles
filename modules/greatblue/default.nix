@@ -5,7 +5,7 @@
   [
     ./8bitdo.nix
     ./fingerprint_reader.nix
-    ./git.nix
+    ./pass.nix
     ./printers.nix
     ./samba.nix
     ./syncthing.nix

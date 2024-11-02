@@ -6,7 +6,7 @@
     unstable._1password-gui
   ];
 
-#  # Environment variables
+#  # This has some issues
 #  environment.sessionVariables = {
 #    # Makes SSH work with 1Password
 #    SSH_AUTH_SOCK="~/.1password/agent.sock";

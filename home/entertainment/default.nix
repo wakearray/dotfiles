@@ -7,7 +7,6 @@
 
     packages = with pkgs; [
       # packages
-      firefox
       tidal-hifi
     ];
 
