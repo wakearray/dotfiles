@@ -16,8 +16,9 @@
     ./audiobookshelf.nix
     ./jellyfin.nix
 
-    ### Containers
-    ./docker
+    ### Docker
+    ../server/docker/lobechat.nix
+    ../server/docker/wger.nix
 
     ### File
     ./deluge.nix

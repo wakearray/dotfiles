@@ -3,6 +3,8 @@
   ## These are the defaults I want on GreatBlue only:
   imports =
   [
+    ../host-options.nix
+
     ./8bitdo.nix
     ./fingerprint_reader.nix
     ./pass.nix
@@ -16,6 +18,11 @@
     ../gui/steam.nix
     ../gui/gnome.nix
   ];
+
+  host-options = {
+    display-system = "wayland";
+    host-type = "laptop";
+  };
 
   environment.systemPackages = with pkgs; [
     # GPD Specific Tool:

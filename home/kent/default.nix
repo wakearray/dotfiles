@@ -4,9 +4,6 @@
     username = "kent";
     homeDirectory = "/home/kent";
     stateVersion = "24.05";
-    # packages = with pkgs; [
-    #
-    # ];
   };
 
   imports = [

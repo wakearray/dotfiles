@@ -1,7 +1,7 @@
 { domain, ... }:
 {
+  imports = [ ./docker.nix ];
   virtualisation.oci-containers = {
-    backend = "docker";
     containers = {
       wger = {
         image = "wger/server:latest";

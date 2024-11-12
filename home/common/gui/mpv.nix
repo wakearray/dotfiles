@@ -5,9 +5,9 @@
     bindings = {
       PLAYPAUSE = "cycle pause";
     };
-    config = {};
-    profiles = {};
-    scripts = {};
-    scriptOpts = {};
+    #config = {};
+    #profiles = {};
+    #scripts = [];
+    #scriptOpts = {};
   };
 }

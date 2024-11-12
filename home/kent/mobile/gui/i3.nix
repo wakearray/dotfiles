@@ -11,16 +11,16 @@
       enable = true;
       config = {
         assigns = {
-          "1: t" = [ { class = "Alacritty"; } ];
-          "2: d" = [ { title = "Discord.*"; } ];
-          "3: y" = [ { title = ".*YouTube.*"; } ];
-          "4: f" = [ { class = "firefox"; } {class = "Navigator";} ];
-          "5: a" = [  ];
-          "6: b" = [  ];
-          "7: c" = [  ];
-          "8: d" = [  ];
-          "9: e" = [  ];
-          "10: t" = [ { title = ".*Tidal.*"; } ];
+          "$pws_1" = [ { class = "Alacritty"; } ];
+          "$pws_2" = [ { title = "Discord.*"; } ];
+          "$pws_3" = [ { title = ".*YouTube.*"; } ];
+          "$pws_4" = [ { class = "firefox"; } {class = "Navigator";} ];
+          "$pws_5" = [  ];
+          "$pws_6" = [  ];
+          "$pws_7" = [  ];
+          "$pws_8" = [  ];
+          "$pws_9" = [  ];
+          "$pws_10" = [ { title = ".*Tidal.*"; } ];
         };
         bars = [  ];
         defaultWorkspace = "workspace number 1";
@@ -39,23 +39,25 @@
         };
         keybindings =
         let
-          menu     = config.xsession.windowManager.i3.config.menu;
-          terminal = config.xsession.windowManager.i3.config.terminal;
-          modifier = config.xsession.windowManager.i3.config.modifier;
+          rofi_todo  = "${pkgs.todofi-sh}/bin/todofi.sh";
+          #rofi_pass  = "";
+          #rofi_emoji = "${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
+          menu       = config.xsession.windowManager.i3.config.menu;
+          terminal   = config.xsession.windowManager.i3.config.terminal;
+          modifier   = config.xsession.windowManager.i3.config.modifier;
         in {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+Shift+q" = "kill";
           "${modifier}+d" = "exec ${menu}";
+          "${modifier}+t" = "exec ${rofi_todo}";
 
           "${modifier}+j" = "focus left";
           "${modifier}+k" = "focus down";
           "${modifier}+l" = "focus up";
-#          "${modifier}+\;" = "focus right";
 
           "${modifier}+Shift+j" = "move left";
           "${modifier}+Shift+k" = "move down";
           "${modifier}+Shift+l" = "move up";
-#~          "${modifier}+Shift+\;" = "move right";
 
           "${modifier}+h" = "split h";
           "${modifier}+v" = "split v";
@@ -73,37 +75,37 @@
           "${modifier}+Shift+minus" = "move scratchpad";
           "${modifier}+minus" = "scratchpad show";
 
-          "${modifier}+1" = "workspace number 1";
-          "${modifier}+2" = "workspace number 2";
-          "${modifier}+3" = "workspace number 3";
-          "${modifier}+4" = "workspace number 4";
-          "${modifier}+5" = "workspace number 5";
-          "${modifier}+6" = "workspace number 6";
-          "${modifier}+7" = "workspace number 7";
-          "${modifier}+8" = "workspace number 8";
-          "${modifier}+9" = "workspace number 9";
-          "${modifier}+0" = "workspace number 10";
+          "${modifier}+1" = "workspace number $pws_1";
+          "${modifier}+2" = "workspace number $pws_2";
+          "${modifier}+3" = "workspace number $pws_3";
+          "${modifier}+4" = "workspace number $pws_4";
+          "${modifier}+5" = "workspace number $pws_5";
+          "${modifier}+6" = "workspace number $pws_6";
+          "${modifier}+7" = "workspace number $pws_7";
+          "${modifier}+8" = "workspace number $pws_8";
+          "${modifier}+9" = "workspace number $pws_9";
+          "${modifier}+0" = "workspace number $pws_10";
 
           "${modifier}+Shift+1" =
-            "move container to workspace number 1";
+            "move container to workspace number $pws_1";
           "${modifier}+Shift+2" =
-            "move container to workspace number 2";
+            "move container to workspace number $pws_2";
           "${modifier}+Shift+3" =
-            "move container to workspace number 3";
+            "move container to workspace number $pws_3";
           "${modifier}+Shift+4" =
-            "move container to workspace number 4";
+            "move container to workspace number $pws_4";
           "${modifier}+Shift+5" =
-            "move container to workspace number 5";
+            "move container to workspace number $pws_5";
           "${modifier}+Shift+6" =
-            "move container to workspace number 6";
+            "move container to workspace number $pws_6";
           "${modifier}+Shift+7" =
-            "move container to workspace number 7";
+            "move container to workspace number $pws_7";
           "${modifier}+Shift+8" =
-            "move container to workspace number 8";
+            "move container to workspace number $pws_8";
           "${modifier}+Shift+9" =
-            "move container to workspace number 9";
+            "move container to workspace number $pws_9";
           "${modifier}+Shift+0" =
-            "move container to workspace number 10";
+            "move container to workspace number $pws_10";
 
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
@@ -133,19 +135,19 @@
           titlebar = false;
           commands = [
             {
-              command = "move to workspace number 2";
+              command = "move to workspace number $pws_2";
               criteria = {
-                title = "Discord.*";
+                title = "Discord .*";
               };
             }
             {
-              command = "move to workspace number 3";
+              command = "move to workspace number $pws_3";
               criteria = {
-                title = ".*YouTube.*";
+                title = ".* - YouTube .*";
               };
             }
             {
-              command = "move to workspace number 10";
+              command = "move to workspace number $pws_10";
               criteria = {
                 title = ".*Tidal.*";
               };
@@ -159,6 +161,18 @@
         };
         menu = "${config.programs.rofi.finalPackage}/bin/rofi -show drun";
       };
+    extraConfig = ''
+set $pws_1 "1: term"
+set $pws_2 "2: disc"
+set $pws_3 "3: yout"
+set $pws_4 "4: fire"
+set $pws_5 "5: fire"
+set $pws_6 "6: fire"
+set $pws_7 "7: fire"
+set $pws_8 "8: fire"
+set $pws_9 "9: dark"
+set $pws_10 "10: tida"
+    '';
     };
   };
 
@@ -183,45 +197,35 @@
     "i3wsr/config.toml" = {
       enable = true;
       force = true;
-      source = pkgs.writers.writeTOML "config.toml" {
-        "aliases.title" = {
-          # "<window_title_regex>" = "<alias>";
-          "Discord.*" = "discord";
-          ".*YouTube.*" = "youtube";
-          ".*Tidal.*" = "tidal";
-          "Photopea.*" = "photopea";
-          ".*Gmail.*" = "gmail";
-        };
-        "aliases.class" = {
-          # "<window_class_regex>" = "<alias>";
-          "Alacritty" = "alacritty";
-          firefox = "firefox";
-          darktable = "darktable";
-          keepassxc = "keepass";
-        };
-        icons = {
-          # alias = "icon";
-          discord = "";
-          youtube = "";
-          tidal = "";
-          photopea = "";
-          gmail = "󰊫";
-          alacritty = "";
-          firefox = "󰈹";
-          darktable = "󰄄";
-          localsend = "󱥸";
-          keepass = "";
-        };
-        general = {
-          separator = " ";
-          split_at = ":";
-          default_icon = "";
-        };
-        options = {
-          no_names = true;
-          no_icon_names = true;
-        };
-      };
+      text = ''
+[icons]
+Alacritty = ""
+darktable = "󰄄"
+discord = ""
+firefox = "󰈹"
+gmail = "󰊫"
+keepassxc = ""
+photopea = ""
+Signal = "󰭹"
+tidal = ""
+youtube = ""
+
+[aliases.name]
+".* - YouTube .*" = "youtube"
+".*Gmail.*" = "gmail"
+".*Tidal.*" = "tidal"
+"Photopea.*" = "photopea"
+"^Discord .*" = "discord"
+
+[options]
+no_icon_names = true
+no_names = true
+
+[general]
+default_icon = ""
+separator = " "
+split_at = ":"
+      '';
     };
   };
 }

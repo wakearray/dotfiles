@@ -84,14 +84,14 @@
         interval = "20";
         date = "";
         time = "%l:%M %P";
-        date-alt = "%a %b %d";
+        date-alt = "%a %b %d ";
         time-alt = "%l:%M %P";
 
         format = "╭ <label> ╮";
         format-background = "\${colors.bg_dim}";
         format-foreground = "\${colors.fg0}";
 
-        label = "%date% 󱑎 %time%";
+        label = "%date%󱑎 %time%";
         label-font = "1";
         label-foreground = "\${colors.fg0}";
       };

@@ -4,6 +4,9 @@
     ./i3.nix
     ./firefox.nix
     ../../alacritty.nix
+    ../../gui/todo.nix
+    ../../../common/gui/wthrr.nix
+    ../../../common/gui/mpv.nix
   ];
 
   home.packages = with pkgs; [
@@ -27,10 +30,14 @@
     pcmanfm
 
     # Keepassxc - Offline password manager
-    keepassxc
+    unstable.keepassxc
 
     # Mesa - OpenGL drivers
     unstable.mesa
+
+    # Signal Messenger for desktop
+    unstable.signal-desktop
+
   ];
 
   xsession.numlock.enable = true;

@@ -1,8 +1,8 @@
 { domain, config, ... }:
 {
+  imports = [ ./docker.nix ];
   virtualisation = {
     oci-containers = {
-      backend = "docker";
       containers = {
         # Redis server needed for bricksllm
         bricks-redis = {
@@ -67,7 +67,7 @@
     };
   };
 
-  # Docker network
+  # Docker Lobechat network
   systemd.services.init-lobechat-network = {
     description = "Create the lobechat-network";
     after = [ "network.target" ];

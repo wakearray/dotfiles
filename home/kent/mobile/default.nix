@@ -8,9 +8,17 @@
   imports = [
     ./nix.nix
     ./mobilefonts.nix
+    ./syncthing.nix
 
     ./gui
+
+    ../../../modules/host-options.nix
   ];
+
+  host-options = {
+    display-system = "x11";
+    host-type = "android";
+  };
 
   home = {
     packages = with pkgs; [
@@ -36,11 +44,8 @@
       # https://github.com/viperML/nh/tree/master
       # Use `nh home switch .#kent@mobile` to rebuild home-manager derivation
       nh
-
-      # libfaketime - modifies the system time for a single application
-      # https://github.com/wolfcw/libfaketime
-      libfaketime
     ];
+
     activation = {
       # Home-Manager frequently kills ssh-agent and
       # causes it to forget its keys
