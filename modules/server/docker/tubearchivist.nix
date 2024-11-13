@@ -18,7 +18,7 @@
         REDIS_HOST = "archivist-redis";       # don't add protocol
         HOST_UID = "1000";
         HOST_GID = "1000";
-        TA_HOST = "${config.networking.hostName}.local";      # set your host name
+        TA_HOST = "192.168.0.46";      # set your host name
         TZ = "America/New_York";
       };
       environmentFiles = [
