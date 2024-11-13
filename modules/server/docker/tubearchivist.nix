@@ -60,7 +60,7 @@
       ];
 
       extraOptions = [
-        "--ulimit memlock=-1:-1"
+        #"--ulimit memlock=-1:-1"
         "--network=archivist-network"
       ];
       volumes = [
