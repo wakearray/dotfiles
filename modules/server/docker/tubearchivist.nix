@@ -38,7 +38,7 @@
     archivist-redis = {
       image = "redis/redis-stack-server";
       autoStart = true;
-      expose = [ "6379" ];
+#      expose = [ "6379" ];
       volumes = [
         "redis:/data"
       ];
@@ -66,7 +66,7 @@
       volumes = [
         "es:/usr/share/elasticsearch/data"            # check for permission error when using bind mount, see readme
       ];
-      expose = [ "9200" ];
+#      expose = [ "9200" ];
     };
   };
 
