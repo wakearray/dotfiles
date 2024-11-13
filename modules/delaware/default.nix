@@ -17,6 +17,7 @@
     ./jellyfin.nix
 
     ### Docker
+    ../server/docker/tubearchivist.nix
     ../server/docker/lobechat.nix
     ../server/docker/wger.nix
 

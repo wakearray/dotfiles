@@ -18,12 +18,12 @@
         REDIS_HOST = "archivist-redis";       # don't add protocol
         HOST_UID = "1000";
         HOST_GID = "1000";
-        TA_HOST = "tubearchivist.local";      # set your host name
-        TA_USERNAME = "tubearchivist";        # your initial TA credentials
-        TA_PASSWORD = "verysecret";           # your initial TA credentials
-        ELASTIC_PASSWORD = "verysecret";      # set password for Elasticsearch
+        TA_HOST = "${config.networking.hostName}.local";      # set your host name
         TZ = "America/New_York";
       };
+      environmentFiles = [
+        config.sops.templates."ta.env".path
+      ];
       extraOptions = [
         "--health-cmd=curl -f http://localhost:8000/health"
         "--health-interval=2m"
@@ -50,12 +50,15 @@
       image = "bbilly1/tubearchivist-es";              # only for amd64, or use official es 8.14.3
       autoStart = true;
       environment = {
-        ELASTIC_PASSWORD = "verysecret";               # matching Elasticsearch password
         ES_JAVA_OPTS = "-Xms1g -Xmx1g";
         "xpack.security.enabled" = "true";
         "discovery.type" = "single-node";
         "path.repo" = "/usr/share/elasticsearch/data/snapshot";
       };
+      environmentFiles = [
+        config.sops.templates."ta.env".path
+      ];
+
       extraOptions = [
         "--ulimit memlock=-1:-1"
         "--network=archivist-network"
@@ -65,6 +68,23 @@
       ];
       expose = [ "9200" ];
     };
+  };
+
+  sops = {
+    secrets = {
+      ta_username = { sopsFile = ./tubearchivist.yaml; };
+      ta_password = { sopsFile = ./tubearchivist.yaml; };
+      elastic_password = { sopsFile = ./tubearchivist.yaml; };
+    };
+
+    templates."ta.env".content = ''
+      # your initial TA credentials
+      TA_USERNAME = "${config.sops.placeholder.ta_username}";
+      # your initial TA credentials
+      TA_PASSWORD = "${config.sops.placeholder.ta_password}";
+      # set password for Elasticsearch
+      ELASTIC_PASSWORD = "${config.sops.placeholder.elastic_password}";
+    '';
   };
 
   systemd.services.init-archivist-network = {

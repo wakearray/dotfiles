@@ -6,6 +6,7 @@
   # Using either Arch or Debian with the Nix package manager and home-manager
 
   imports = [
+    #inputs.sops-nix.homeManagerModules.sops
     ./nix.nix
     ./mobilefonts.nix
     ./syncthing.nix

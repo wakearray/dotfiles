@@ -5,7 +5,6 @@ keys:
 - &hosts: # nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
     - &greatblue age158lzfdas82aj2dayppkcv4xgs4u7m0uk7zul90sfpj8wxdavyuqqgv6ar2
     - &delaware age1fmnk97kf607jsgl3f9vcsvljsyc8lrwud6af8vel0jerfgsrpdwsvz83sk
-
     # Home manager installs:
     - &y700 age1ldfj8u2lmq7cntyu6hxtep9dy7z6gfesctltztuz4fwh2a7ww4qsywvjyn
     - &s24 age1ug0wd4d2tukuw2w7lzrpf2um8r2fxxr90xg7mphu07wwldnan3qsngdelh
@@ -15,14 +14,19 @@ keys:
 
 creation_rules:
     #path should be relative to location of this file (.sops.yaml)
-- path_regex: secrets/secrets.yaml$
+#  - path_regex: secrets/secrets.yaml$
+#    key_groups:
+#    - age:
+#      - *kent
+#      - *greatblue
+#      - *delaware
+#      - *y700
+#      - *s24
+#      - *p80
+#      - *boox_air_nova_c
+#      - *a9
+  - path_regex: modules/server/docker/.*.yaml$
     key_groups:
-    - age:
-      - *kent
-      - *greatblue
-      - *delaware
-      - *y700
-      - *s24
-      - *p80
-      - *boox_air_nova_c
-      - *a9
+      - age:
+        - *kent
+        - *delaware

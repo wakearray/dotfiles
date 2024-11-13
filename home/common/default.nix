@@ -11,6 +11,11 @@
     sessionVariables = {
       FLAKE = "${config.home.homeDirectory}/dotfiles";
     };
+    packages = with pkgs; [
+      # Simple and flexible tool for managing secrets
+      # https://github.com/getsops/sops
+      sops
+    ];
   };
 
   # Allows home-manager to manage the XDG variables and files
