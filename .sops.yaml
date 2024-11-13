@@ -30,3 +30,6 @@ creation_rules:
       - age:
         - *kent
         - *delaware
+        - *greatblue
+        - *y700
+        - *s24
