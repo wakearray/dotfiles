@@ -5,7 +5,7 @@
     containers = {
       wger = {
         image = "wger/server:latest";
-        dependsOn = [ "wger_db" "wger_cache" ];
+        dependsOn = [ "wger-db" "wger-cache" ];
         environmentFiles = [ ./config/prod.env ];
         volumes = [
           "static:/home/wger/static"
@@ -21,7 +21,7 @@
           "--restart=unless-stopped"
         ];
       };
-      wger_nginx = {
+      wger-nginx = {
         image = "nginx:stable";
         dependsOn = [ "wger" ];
         volumes = [
@@ -39,7 +39,7 @@
           "--restart=unless-stopped"
         ];
       };
-      wger_db = {
+      wger-db = {
         image = "postgres:15-alpine";
         environment = {
           POSTGRES_USER = "wger";
@@ -59,7 +59,7 @@
           "--restart=unless-stopped"
         ];
       };
-      wger_cache = {
+      wger-cache = {
         image = "redis";
         ports = [ "6379" ];
         volumes = [
@@ -74,7 +74,7 @@
           "--restart=unless-stopped"
         ];
       };
-      wger_celery_worker = {
+      wger-celery-worker = {
         image = "wger/server:latest";
         cmd = [ "/start-worker" ];
         environmentFiles = [ ./config/prod.env ];
@@ -90,14 +90,14 @@
           "--health-start-period=30s"
         ];
       };
-      wger_celery_beat = {
+      wger-celery-beat = {
         image = "wger/server:latest";
         cmd = [ "/start-beat" ];
         volumes = [
           "celery-beat:/home/wger/beat/"
         ];
         environmentFiles = [ ./config/prod.env ];
-        dependsOn = [ "wger_celery_worker" ];
+        dependsOn = [ "wger-celery-worker" ];
       };
     };
   };
@@ -141,12 +141,12 @@
       ${dockercli} pull wger/server:latest
       ${dockercli} pull nginx:stable
       ${dockercli} pull postgres:15-alpine
-      systemctl restart docker-wger_cache.service
-      systemctl restart docker-wger_db.service
+      systemctl restart docker-wger-cache.service
+      systemctl restart docker-wger-db.service
       systemctl restart docker-wger.service
-      systemctl restart docker-wger_nginx.service
-      systemctl restart docker-wger_celery_worker.service
-      systemctl restart docker-wger_celery_beat.service
+      systemctl restart docker-wger-nginx.service
+      systemctl restart docker-wger-celery-worker.service
+      systemctl restart docker-wger-celery-beat.service
     '';
     serviceConfig = {
       Type = "oneshot";
