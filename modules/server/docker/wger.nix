@@ -1,11 +1,11 @@
-{ domain, ... }:
+{ config, domain, ... }:
 {
   imports = [ ./docker.nix ];
   virtualisation.oci-containers = {
     containers = {
       wger = {
         image = "wger/server:latest";
-        dependsOn = [ "db" "cache" ];
+        dependsOn = [ "wger_db" "wger_cache" ];
         environmentFiles = [ ./config/prod.env ];
         volumes = [
           "static:/home/wger/static"
@@ -21,7 +21,7 @@
           "--restart=unless-stopped"
         ];
       };
-      nginx = {
+      wger_nginx = {
         image = "nginx:stable";
         dependsOn = [ "wger" ];
         volumes = [
@@ -39,7 +39,7 @@
           "--restart=unless-stopped"
         ];
       };
-      db = {
+      wger_db = {
         image = "postgres:15-alpine";
         environment = {
           POSTGRES_USER = "wger";
@@ -59,7 +59,7 @@
           "--restart=unless-stopped"
         ];
       };
-      cache = {
+      wger_cache = {
         image = "redis";
         ports = [ "6379" ];
         volumes = [
@@ -74,7 +74,7 @@
           "--restart=unless-stopped"
         ];
       };
-      celery_worker = {
+      wger_celery_worker = {
         image = "wger/server:latest";
         cmd = [ "/start-worker" ];
         environmentFiles = [ ./config/prod.env ];
@@ -90,14 +90,14 @@
           "--health-start-period=30s"
         ];
       };
-      celery_beat = {
+      wger_celery_beat = {
         image = "wger/server:latest";
         cmd = [ "/start-beat" ];
         volumes = [
           "celery-beat:/home/wger/beat/"
         ];
         environmentFiles = [ ./config/prod.env ];
-        dependsOn = [ "celery_worker" ];
+        dependsOn = [ "wger_celery_worker" ];
       };
     };
   };
@@ -112,6 +112,55 @@
           proxyPass = "http://localhost:8063";
         };
       };
+    };
+  };
+
+  systemd.services.init-wger-network = {
+    description = "Create the wger-network";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.Type = "oneshot";
+    script = let dockercli = "${config.virtualisation.docker.package}/bin/docker";
+    in ''
+      # Put a true at the end to prevent getting non-zero return code, which will
+      # crash the whole service.
+      check=$(${dockercli} network ls | grep "wger-network" || true)
+      if [ -z "$check" ]; then
+        ${dockercli} network create wger-network
+      else
+        echo "wger-network already exists in docker"
+      fi
+    '';
+  };
+
+  # Docker Container Update Timer
+  systemd.services."updateWgerDockerImages" = {
+    description = "Pull latest Docker images and restart services";
+    script = let dockercli = "${config.virtualisation.docker.package}/bin/docker";
+    in ''
+      ${dockercli} pull wger/server:latest
+      ${dockercli} pull nginx:stable
+      ${dockercli} pull postgres:15-alpine
+      systemctl restart docker-wger_cache.service
+      systemctl restart docker-wger_db.service
+      systemctl restart docker-wger.service
+      systemctl restart docker-wger_nginx.service
+      systemctl restart docker-wger_celery_worker.service
+      systemctl restart docker-wger_celery_beat.service
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
+
+  # Define the timer
+  systemd.timers.updateWgerDockerImagesTimer = {
+    description = "Daily timer to pull latest Docker images for Wger and restart services";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "06:00:00";
+      Persistent = true; # Ensures the timer catches up if it missed a run
+      Unit = "updateWgerDockerImages.service";
     };
   };
 }
