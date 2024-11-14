@@ -79,11 +79,11 @@
 
     templates."ta.env".content = ''
       # your initial TA credentials
-      TA_USERNAME=${config.sops.placeholder.ta_username};
+      TA_USERNAME=${config.sops.placeholder.ta_username}
       # your initial TA credentials
-      TA_PASSWORD=${config.sops.placeholder.ta_password};
+      TA_PASSWORD=${config.sops.placeholder.ta_password}
       # set password for Elasticsearch
-      ELASTIC_PASSWORD=${config.sops.placeholder.elastic_password};
+      ELASTIC_PASSWORD=${config.sops.placeholder.elastic_password}
     '';
   };
 
