@@ -37,13 +37,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixgl = {
-      url = "github:nix-community/nixGL";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,27 +54,25 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, nur, lix-module, home-manager, system-manager, nixgl, nix-system-graphics, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, nur, lix-module, home-manager, system-manager, nix-system-graphics, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
-    pkgsFor = system: import nixpkgs {
-      inherit system;
-      overlays = [ nixgl.overlay ];
-    };
+
+    systems = [
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
+
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in
   {
     inherit lib;
     #nixosModules = import ./modules/nixos;
     #homeManagerModules = import ./modules/home-manager;
-    #templates = import ./templates;
     overlays = import ./overlays {inherit inputs outputs;};
-    #hydraJobs = import ./hydra.nix {inherit inputs outputs;};
-
-    #packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
-    #devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
-    #formatter = forEachSystem (pkgs: pkgs.alejandra);
-
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -230,7 +221,8 @@
     };
 
     # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
+    # Available through `home-manager --flake .#your-username@your-hostname`
+    # or `nh home switch -c kent@mobile` if nh is available
     homeConfigurations = {
       "kent@mobile" = lib.homeManagerConfiguration {
         modules = [
@@ -239,7 +231,6 @@
           nixvim.homeManagerModules.nixvim
           sops-nix.homeManagerModules.sops
         ];
-        #pkgs = pkgsFor "aarch64-linux";
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };

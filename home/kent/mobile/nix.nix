@@ -4,6 +4,8 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.unstable-packages
+      outputs.overlays.modifications
+      outputs.overlays.additions
     ];
     config = { allowUnfree = true; };
   };
@@ -16,6 +18,7 @@
       frequency = "weekly";
     };
     # The contents of the nix.conf file
+    # Not needed when using lix
 #    settings = {
 #      experimental-features = [ "nix-command" "flakes" ];
 #      accept-flake-config = true;

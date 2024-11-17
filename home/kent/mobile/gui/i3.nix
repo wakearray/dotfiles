@@ -123,7 +123,7 @@
             notification = false;
           }
           { # i3wsr - updates workspace names with app icons
-            command = "${pkgs.i3wsr}/bin/i3wsr";
+            command = "${pkgs.i3wsr-3}/bin/i3wsr";
             always = true;
             notification = false;
           }
@@ -180,7 +180,7 @@ set $pws_10 "10: tida"
     packages = with pkgs; [
       # Work Space Renamer - Allows for changing the name based on the app
       # https://github.com/roosta/i3wsr
-      i3wsr
+      i3wsr-3
       # Handles hiding terminal windows that launch applications
       # https://github.com/jamesofarrell/i3-swallow
       i3-swallow

@@ -38,6 +38,13 @@
     # Signal Messenger for desktop
     unstable.signal-desktop
 
+    # scli - Terminal UI for Signal Messenger
+    # https://github.com/isamert/scli
+    unstable.scli
+
+    # signal-cli - An unofficial dbus interface for Signal
+    # https://github.com/AsamK/signal-cli
+    unstable.signal-cli
   ];
 
   xsession.numlock.enable = true;
