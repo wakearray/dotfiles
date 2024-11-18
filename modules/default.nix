@@ -3,6 +3,7 @@
   ## These are the defaults I want on every machine:
   imports =
   [
+    ./host-options.nix
     ./zsh.nix
     ./tui.nix
     ./nvim

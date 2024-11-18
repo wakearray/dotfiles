@@ -225,6 +225,7 @@ no_names = true
 default_icon = ""
 separator = " "
 split_at = ":"
+
       '';
     };
   };

@@ -9,7 +9,6 @@
     ./zfs.nix
 
     ## Servers
-
     ./nginx.nix
 
     ### Audio
@@ -46,6 +45,12 @@
   #   secrets = "/etc/nixos/secrets";
   #   domain = "voicelesscrimson.com";
   # }
+
+  host-options = {
+    display-system = "none";
+    host-type = "server";
+  };
+
 
   services.satisfactory = { enable = true; };
 }

@@ -73,6 +73,7 @@
     overlays = import ./overlays {inherit inputs outputs;};
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
+
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -131,7 +132,6 @@
       Lagurus = lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-            secrets = "/etc/nixos/secrets";
         };
         modules = [
           ./hosts/lagurus/configuration.nix
@@ -232,7 +232,9 @@
           sops-nix.homeManagerModules.sops
         ];
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {
+          inherit inputs outputs;
+        };
       };
     };
   };

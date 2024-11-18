@@ -3,8 +3,6 @@
   ## These are the defaults I want on GreatBlue only:
   imports =
   [
-    ../host-options.nix
-
     ./8bitdo.nix
     ./fingerprint_reader.nix
     ./pass.nix
