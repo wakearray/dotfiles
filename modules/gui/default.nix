@@ -3,30 +3,8 @@
   # Defaults for any GUI specific applications that I want on every GUI capable computer
   imports = [
     ./sound.nix
-  ];
-
-  environment.systemPackages = with pkgs; [
-    # Rust based teamviewer
-    rustdesk-flutter
-
-    # mpv - General-purpose media player, fork of MPlayer and mplayer2
-    # https://mpv.io/
-    mpv
-
-    # mpvc - A mpc-like control interface for mpv
-    # https://github.com/lwilletts/mpvc
-    mpvc
-
-    # yt-dlp - Command-line tool to download videos from YouTube.com and other sites (youtube-dl fork)
-    # https://github.com/yt-dlp/yt-dlp/
-    yt-dlp
-
-    # An aesthetically pleasing YouTube TUI written in Rust
-    # https://github.com/Siriusmart/youtube-tui
-    youtube-tui
-
-    # localsend
-    localsend
+    ./gaming.nix
+    ./wm
   ];
 
   fonts.packages = with pkgs; [

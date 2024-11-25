@@ -1,7 +1,4 @@
 { ... }:
-let
-
-in
 {
   # zellij - A terminal workspace with batteries included
   # https://github.com/zellij-org/zellij

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.mpv = {
     enable = true;
@@ -10,4 +10,10 @@
     #scripts = [];
     #scriptOpts = {};
   };
+
+  home.packages = with pkgs; [
+    # mpvc - A mpc-like control interface for mpv
+    # https://github.com/lwilletts/mpvc
+    mpvc
+  ];
 }

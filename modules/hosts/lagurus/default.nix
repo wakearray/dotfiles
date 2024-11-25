@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
-    ./starship.nix
+    ./vlc.nix
+    ../gui
   ];
 }

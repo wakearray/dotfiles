@@ -22,7 +22,6 @@
     };
 
     home-manager = {
-      # url = "github:nix-community/hom-manager/release-24.05";
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -115,6 +114,19 @@
           sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule
           lix-module.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+            };
+          }
         ];
       };
       SebrightBantam = lib.nixosSystem {
@@ -127,6 +139,19 @@
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           lix-module.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+            };
+          }
         ];
       };
       Lagurus = lib.nixosSystem {
@@ -138,6 +163,19 @@
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           lix-module.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+            };
+          }
         ];
       };
       Cichlid = lib.nixosSystem {

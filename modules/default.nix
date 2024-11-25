@@ -1,13 +1,12 @@
-{ outputs, pkgs, ... }:
+{ config, outputs, pkgs, ... }:
 {
   ## These are the defaults I want on every machine:
   imports =
   [
     ./host-options.nix
-    ./zsh.nix
-    ./tui.nix
-    ./nvim
-    ./ssh.nix
+    ./common
+    (if config.host-options.display-system != null then ./gui else null)
+    (if builtins.match "server" config.host-options.host-type != null then ./servers else null)
   ];
 
   # Environment variables
@@ -30,15 +29,6 @@
 
     # SSH File System
     sshfs
-
-    # Rust grep use `rg`
-    repgrep
-    ripgrep
-    ripgrep-all
-
-    # Rage - Rust implementation of age
-    # https://github.com/str4d/rage
-    rage
 
     # eza - Modern, maintained replacement for ls
     # https://github.com/eza-community/eza
@@ -69,7 +59,7 @@
   # boot.initrd.network.ssh.authorizedKeyFiles is a new option in the initrd ssh daemon module,
   # for adding authorized keys via list of files.
 
-  # Removes old Perl scripts (fixed in master branch only, unsure how to obtain that)
+  # Removes old Perl scripts
   #boot.initrd.systemd.enable = true;
   #system.etc.overlay.enable = true;
   #systemd.sysusers.enable = true;
@@ -78,8 +68,8 @@
   nixpkgs = {
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-      #outputs.overlays.additions
-      #outputs.overlays.modifications
+      outputs.overlays.additions
+      outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
       # You can also add overlays exported from other flakes:

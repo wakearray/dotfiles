@@ -16,8 +16,19 @@ in
     (if builtins.match "mobile" host-type != null then ./mobile else null)
   ];
 
-  home.packages = with pkgs; [
-    # Keepassxc - Offline password store
-    keepassxc
-  ];
+  home = {
+    packages = with pkgs; [
+      # Keepassxc - Offline password store
+      keepassxc
+    ];
+  };
+
+  programs = {
+    # yt-dlp - A feature-rich command-line audio/video downloader
+    # https://github.com/yt-dlp/yt-dlp#configuration
+    yt-dlp = {
+      enable = true;
+      # TODO: Fill in the settings later
+    };
+  };
 }

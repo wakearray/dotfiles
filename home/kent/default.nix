@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   home = {
     username = "kent";
@@ -10,10 +10,10 @@
     ../common
 
     ./git.nix
-    ./starship.nix
     ./zellij.nix
     ./ssh.nix
-    ./fonts.nix
+    (if config.host-options.display-system != null then ./gui else null)
+    (if builtins.match "Delaware" config.networking.hostname != null then ./hosts/delaware else null)
   ];
 
   # Editor Config helps enforce your preferences on editors
