@@ -139,16 +139,15 @@
         utpex = true;
       };
     };
-  };
-
-  networking.firewall = let
-    ports = [
-      config.servers.deluge.daemon-port
-      config.servers.deluge.listen-random-port
-    ] ++ config.servers.deluge.listen-ports;
-  in
-  {
-    allowedTCPPorts = ports;
-    allowedUDPPorts = ports;
+    networking.firewall = let
+      ports = [
+	config.servers.deluge.daemon-port
+	config.servers.deluge.listen-random-port
+      ] ++ config.servers.deluge.listen-ports;
+    in
+    {
+      allowedTCPPorts = ports;
+      allowedUDPPorts = ports;
+    };
   };
 }

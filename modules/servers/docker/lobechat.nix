@@ -8,7 +8,7 @@
       default = "lobe.localhost";
     };
   };
-  config = {
+  config = lib.mkIf config.servers.docker.lobechat.enable {
     virtualisation = {
       oci-containers = {
         containers = {

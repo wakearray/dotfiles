@@ -3,18 +3,13 @@
   ## These are the defaults I want on Delaware only:
   imports =
   [
-    ./printers.nix
-    #./rustdesk.nix
     ./systemd-mounts.nix
     ./zfs.nix
 
-    ## Servers
-    ../servers
-    ./nginx.nix
+    ../../servers
 
     ### Audio
     ./audiobookshelf.nix
-    # ./jellyfin.nix
 
     ### File
     ./nextcloud.nix
@@ -34,11 +29,6 @@
   #   secrets = "/etc/nixos/secrets";
   #   domain = "voicelesscrimson.com";
   # }
-
-  host-options = {
-    display-system = "none";
-    host-type = "server";
-  };
 
   servers = {
     deluge.enable = true;
