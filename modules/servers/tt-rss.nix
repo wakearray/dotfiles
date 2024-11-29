@@ -28,7 +28,6 @@
         selfUrlPath = "${config.servers.tt-rss.selfUrlPath}:${config.servers.tt-rss.port}";
       };
 
-      servers.nginx.enable = true;
       # Nginx reverse proxy
       nginx.virtualHosts = {
         "${config.servers.tt-rss.domain}" = {
@@ -42,5 +41,6 @@
         };
       };
     };
+    servers.nginx.enable = true;
   };
 }
