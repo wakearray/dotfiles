@@ -2,7 +2,6 @@
 {
   imports = [
     ./polybar.nix
-    ./rofi.nix
   ];
   # i3
   xsession = {

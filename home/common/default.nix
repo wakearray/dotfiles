@@ -1,11 +1,10 @@
-{ pkgs, config, ... }:
+{ pkgs, config, display-type, ... }:
 {
   imports = [
     ./zsh.nix
     ./ssh.nix
-
-    (if config.host-options.display-system != null then ./gui else null)
-    ../../modules/nvim/home.nix
+    (if builtins.match "none" display-type != null then ./headless.nix else ./gui)
+    ../../modules/common/nvim/home.nix
   ];
   home = {
     enableNixpkgsReleaseCheck = false;

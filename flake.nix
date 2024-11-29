@@ -77,6 +77,7 @@
     # host-type = (one of) "laptop" "desktop" "server" "android" "kiosk"
     # display-type = (one of) "wayland" "x11" "none"
     # host-options = (one or more of) "printers" "installer" "eink"
+    # current-system = (one of) "x86_64-linux" "aarch64-linux"
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -88,6 +89,7 @@
           host-type = "laptop";
           display-type = "wayland";
           host-options = "printers";
+          current-system = "x86_64-linux";
         };
         modules = [
           ./hosts/greatblue/configuration.nix
@@ -118,6 +120,7 @@
           host-type = "server";
           display-type = "none";
           host-options = "printers";
+          current-system = "x86_64-linux";
         };
         modules = [
           ./hosts/delaware/configuration.nix
@@ -147,6 +150,7 @@
           secrets = "/etc/nixos/secrets";
           host-type = "server";
           display-type = "none";
+          current-system = "x86_64-linux";
         };
         modules = [
           ./hosts/sebrightbantam/configuration.nix
@@ -174,6 +178,7 @@
           inherit inputs outputs;
           host-type = "kiosk";
           display-type = "wayland";
+          current-system = "x86_64-linux";
         };
         modules = [
           ./hosts/lagurus/configuration.nix
@@ -203,6 +208,7 @@
           host-type = "desktop";
           display-type = "wayland";
           host-options = "printers";
+          current-system = "x86_64-linux";
         };
         modules = [
           ./hosts/cichlid/configuration.nix
@@ -239,6 +245,7 @@
         host-type = "desktop";
         display-type = "wayland";
         host-options = "printers installer";
+        current-system = "x86_64-linux";
       };
       modules = [
         ./hosts/cichlid/configuration.nix
@@ -301,6 +308,7 @@
           host-type = "android";
           display-type = "x11";
           host-options = "";
+          current-system = "aarch64-linux";
         };
       };
     };

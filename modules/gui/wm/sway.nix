@@ -4,7 +4,7 @@
   options.gui.wm.sway = {
     enable = lib.mkEnableOption "Enable the Sway window manager.";
   };
-  config = lib.mkIf config.gui.wm.sway.enable {
+  config = lib.mkIf (config.gui.enable && config.gui.wm.sway.enable) {
     environment.systemPackages = with pkgs; [
       grim # screenshot functionality
       slurp # screenshot functionality

@@ -3,10 +3,6 @@
   imports = [
     ./i3.nix
     ./firefox.nix
-    ../../alacritty.nix
-    ../../gui/todo.nix
-    ../../../common/gui/wthrr.nix
-    ../../../common/gui/mpv.nix
   ];
 
   home.packages = with pkgs; [
@@ -28,9 +24,6 @@
 
     # pcmanfm - gui file manager
     pcmanfm
-
-    # Keepassxc - Offline password manager
-    unstable.keepassxc
 
     # Mesa - OpenGL drivers
     unstable.mesa

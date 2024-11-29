@@ -25,12 +25,6 @@
     };
   };
 
-  host-options = {
-    display-system = "none";
-    host-type = "server";
-    hasPrinters = true;
-  };
-
   # When true, no X11 libraries will be installed on this machine.
   # This needs to be false for deluge to install -_-
   environment.noXlibs = false;

@@ -1,17 +1,13 @@
-{ lib,
-  config,
-  outputs,
+{ outputs,
   pkgs,
-  host-type,
-  display-type,
   ... }:
 {
   ## These are the defaults I want on every machine:
   imports =
   [
     ./common
-    (if builtins.match "none" display-type != null then null else ./gui)
-    (if builtins.match "server" host-type != null then ./servers else null)
+    ./gui
+    ./servers
   ];
 
   config = {
@@ -94,10 +90,10 @@
 
     nix = {
       settings = {
-	# Enable flakes.
-	experimental-features = [ "nix-command" "flakes" ];
-	# Uses hard links to remove duplicates in the nix store
-	auto-optimise-store = true;
+        # Enable flakes.
+        experimental-features = [ "nix-command" "flakes" ];
+        # Uses hard links to remove duplicates in the nix store
+        auto-optimise-store = true;
       };
     };
 

@@ -4,7 +4,7 @@
     enable = lib.mkEnableOption "Enable the Gnome desktop environment.";
   };
 
-  config = lib.mkIf config.gui.wm.gnome.enable {
+  config = lib.mkIf (config.gui.enable && config.gui.wm.gnome.enable) {
     # Enable the Gnome Desktop Environment using Wayland.
     services = {
       xserver = {

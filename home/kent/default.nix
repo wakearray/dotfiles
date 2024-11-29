@@ -1,4 +1,4 @@
-{ config, ... }:
+{ display-type, ... }:
 {
   home = {
     username = "kent";
@@ -12,8 +12,7 @@
     ./git.nix
     ./zellij.nix
     ./ssh.nix
-    (if config.host-options.display-system != null then ./gui else null)
-    (if builtins.match "Delaware" config.networking.hostname != null then ./hosts/delaware else null)
+    (if builtins.match "none" display-type != null then ./headless.nix else ./gui)
   ];
 
   # Editor Config helps enforce your preferences on editors

@@ -3,7 +3,7 @@
   options.gui.gaming = {
     enable = lib.mkEnableOption "Enable Steam, GOG, etc.";
   };
-  config = lib.mkIf config.gui.gaming.enable {
+  config = lib.mkIf (config.gui.enable && config.gui.gaming.enable) {
     programs = {
       # Enable Steam
       steam = {

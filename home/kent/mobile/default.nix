@@ -10,16 +10,10 @@
     ./nix.nix
     ./mobilefonts.nix
     ./syncthing.nix
+    ./starship.nix
 
     ./gui
-
-    ../../../modules/host-options.nix
   ];
-
-  host-options = {
-    display-system = "x11";
-    host-type = "android";
-  };
 
   home = {
     packages = with pkgs; [
