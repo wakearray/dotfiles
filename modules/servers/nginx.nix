@@ -1,7 +1,7 @@
 { lib, config, ... }:
 {
   options.servers.nginx = {
-    enable = lib.mkEnableOption "Nginx" ;
+    enable = lib.mkEnableOption;
 
     domain = lib.mkOption {
       type = lib.types.str;

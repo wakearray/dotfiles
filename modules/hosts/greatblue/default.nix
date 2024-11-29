@@ -17,9 +17,10 @@
     ../gui/gnome.nix
   ];
 
-  host-options = {
-    display-system = "wayland";
-    host-type = "laptop";
+  gui = {
+    enable = true;
+    gaming = true;
+    wm.gnome.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

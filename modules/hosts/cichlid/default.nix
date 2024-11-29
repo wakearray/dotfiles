@@ -9,21 +9,12 @@
     # Software related
     ./git.nix
     ./syncthing.nix
-
-    # GUI related
-    ../gui
-    ../gui/gnome.nix
-    ../gui/steam.nix
   ];
-
-  host-options = {
-    display-system = "wayland";
-    host-type = "desktop";
-  };
 
   gui = {
     enable = true;
     gaming = true;
+    wm.gnome.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

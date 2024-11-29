@@ -1,27 +1,19 @@
-{ lib, config, outputs, pkgs, ... }:
+{ lib,
+  config,
+  outputs,
+  pkgs,
+  host-type,
+  display-type,
+  ... }:
 {
   ## These are the defaults I want on every machine:
   imports =
   [
     ./common
-    (if config.host-options.display-system != null then ./gui else null)
-    (if builtins.match "server" config.host-options.host-type != null then ./servers else null)
+    (if builtins.match "none" display-type != null then null else ./gui)
+    (if builtins.match "server" host-type != null then ./servers else null)
   ];
 
-  options.host-options = {
-    display-system = lib.mkOption {
-      type = lib.types.nullOr (lib.types.enum [ "wayland" "x11" ]);
-      default = null;
-      description = "Select which display system this host is using. Will determine some predefined options shared between devices using this display system.";
-    };
-    host-type = lib.mkOption {
-      type = lib.types.nullOr (lib.types.enum [ "laptop" "desktop" "server" "android" ]);
-      default = null;
-      description = "Select which type of device this is. Will determine some predefined options and programs shared between devices of this type.";
-    };
-    hasPrinters = lib.mkEnableOption "Enable printing locally on this device.";
-    canInstall = lib.mkEnableOption "Enable installation of nixos-install-tools";
-  };
   config = {
     # Environment variables
     environment.sessionVariables = {
@@ -81,21 +73,21 @@
     # nixpkgs allow unfree with unstable overlay.
     nixpkgs = {
       overlays = [
-	# Add overlays your own flake exports (from overlays and pkgs dir):
-	outputs.overlays.additions
-	outputs.overlays.modifications
-	outputs.overlays.unstable-packages
+        # Add overlays your own flake exports (from overlays and pkgs dir):
+        outputs.overlays.additions
+        outputs.overlays.modifications
+        outputs.overlays.unstable-packages
 
-	# You can also add overlays exported from other flakes:
-	# neovim-nightly-overlay.overlays.default
+        # You can also add overlays exported from other flakes:
+        # neovim-nightly-overlay.overlays.default
       ];
       config = {
-	allowUnfree = true;
-	packageOverrides = pkgs: {
-	  nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-	    inherit pkgs;
-	  };
-	};
+        allowUnfree = true;
+        packageOverrides = pkgs: {
+          nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+            inherit pkgs;
+          };
+        };
       };
     };
 
@@ -119,15 +111,15 @@
     i18n = {
       defaultLocale = "en_US.UTF-8";
       extraLocaleSettings = {
-	LC_ADDRESS = "en_US.UTF-8";
-	LC_IDENTIFICATION = "en_US.UTF-8";
-	LC_MEASUREMENT = "en_US.UTF-8";
-	LC_MONETARY = "en_US.UTF-8";
-	LC_NAME = "en_US.UTF-8";
-	LC_NUMERIC = "en_US.UTF-8";
-	LC_PAPER = "en_US.UTF-8";
-	LC_TELEPHONE = "en_US.UTF-8";
-	LC_TIME = "en_US.UTF-8";
+        LC_ADDRESS = "en_US.UTF-8";
+        LC_IDENTIFICATION = "en_US.UTF-8";
+        LC_MEASUREMENT = "en_US.UTF-8";
+        LC_MONETARY = "en_US.UTF-8";
+        LC_NAME = "en_US.UTF-8";
+        LC_NUMERIC = "en_US.UTF-8";
+        LC_PAPER = "en_US.UTF-8";
+        LC_TELEPHONE = "en_US.UTF-8";
+        LC_TIME = "en_US.UTF-8";
       };
     };
 
@@ -142,11 +134,11 @@
       direnv.enable = true;
       # Not Another Command Line Nix Helper
       nh = {
-	enable = true;
-	clean = {
-	  enable = true;
-	  extraArgs = "--keep-since 4d --keep 3";
-	};
+        enable = true;
+        clean = {
+          enable = true;
+          extraArgs = "--keep-since 4d --keep 3";
+        };
       };
     };
 
@@ -159,10 +151,10 @@
       # Use Avahi to make this computer discoverable and
       # to discover other computers.
       avahi = {
-	enable = true;
-	nssmdns4 = true;
-	openFirewall = true;
-	domainName = "wakenet";
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+        domainName = "wakenet";
       };
     };
   };

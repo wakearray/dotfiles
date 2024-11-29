@@ -8,9 +8,4 @@
 
     #./forgejo.nix
   ];
-
-  host-options = {
-    display-system = "none";
-    host-type = "server";
-  };
 }

@@ -73,6 +73,11 @@
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
 
+    # Special args can have a few variables to control what things are installed
+    # host-type = (one of) "laptop" "desktop" "server" "android" "kiosk"
+    # display-type = (one of) "wayland" "x11" "none"
+    # host-options = (one or more of) "printers" "installer" "eink"
+
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -80,6 +85,9 @@
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
+          host-type = "laptop";
+          display-type = "wayland";
+          host-options = "printers";
         };
         modules = [
           ./hosts/greatblue/configuration.nix
@@ -107,6 +115,9 @@
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
           domain = "voicelesscrimson.com";
+          host-type = "server";
+          display-type = "none";
+          host-options = "printers";
         };
         modules = [
           ./hosts/delaware/configuration.nix
@@ -129,10 +140,13 @@
           }
         ];
       };
+      # Old QNAP NAS
       SebrightBantam = lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
+          host-type = "server";
+          display-type = "none";
         };
         modules = [
           ./hosts/sebrightbantam/configuration.nix
@@ -154,9 +168,12 @@
           }
         ];
       };
+      # Cat's projector
       Lagurus = lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
+          host-type = "kiosk";
+          display-type = "wayland";
         };
         modules = [
           ./hosts/lagurus/configuration.nix
@@ -178,10 +195,14 @@
           }
         ];
       };
+      # Jess desktop
       Cichlid = lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
+          host-type = "desktop";
+          display-type = "wayland";
+          host-options = "printers";
         };
         modules = [
           ./hosts/cichlid/configuration.nix
@@ -215,6 +236,9 @@
       specialArgs = {
         inherit inputs outputs;
         secrets = "/etc/nixos/secrets";
+        host-type = "desktop";
+        display-type = "wayland";
+        host-options = "printers installer";
       };
       modules = [
         ./hosts/cichlid/configuration.nix
@@ -247,6 +271,8 @@
     # nix run 'github:numtide/system-manager' -- switch --flake '.#mobile'
     systemConfigs.mobile = system-manager.lib.makeSystemConfig {
       modules = [
+        # nix-system-graphics makes normal NixOS graphics packages
+        # available to non NixOS systems
         nix-system-graphics.systemModules.default
         {
           config = {
@@ -272,6 +298,9 @@
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
+          host-type = "android";
+          display-type = "x11";
+          host-options = "";
         };
       };
     };

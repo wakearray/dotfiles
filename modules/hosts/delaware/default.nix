@@ -1,4 +1,4 @@
-{ ... }:
+{ domain, ... }:
 {
   ## These are the defaults I want on Delaware only:
   imports =
@@ -34,12 +34,20 @@
     deluge.enable = true;
     docker = {
       enable = true;
-      lobechat.enable = true;
+      lobechat = {
+        enable = true;
+        domain = "lobe.${domain}";
+      };
       tubearchivist.enable = true;
+    };
+    nginx = {
+      enable = true;
+      domain = "lobe.${domain}";
     };
     satisfactory.enable = true;
     tt-rss = {
       enable = true;
+      domain = "lobe.${domain}";
     };
   };
 }

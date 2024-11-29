@@ -1,4 +1,4 @@
-{ lib, config, domain, ... }:
+{ lib, config, ... }:
 {
   options.servers.tt-rss = {
     enable = lib.mkEnableOption "tt-rss";

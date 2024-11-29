@@ -141,8 +141,8 @@
     };
     networking.firewall = let
       ports = [
-	config.servers.deluge.daemon-port
-	config.servers.deluge.listen-random-port
+        config.servers.deluge.daemon-port
+        config.servers.deluge.listen-random-port
       ] ++ config.servers.deluge.listen-ports;
     in
     {
