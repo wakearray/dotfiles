@@ -11,7 +11,12 @@
     ./zsh.nix
   ];
 
-  environment.systemPackages = [
-    (if builtins.match "installer" host-options != null then pkgs.nixos-install-tools else null)
-  ];
+  environment.systemPackages = (
+    if
+      builtins.match "installer" host-options != null
+    then
+      [ pkgs.nixos-install-tools ]
+    else
+      [ ]
+  );
 }
