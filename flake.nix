@@ -82,14 +82,20 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      GreatBlue = lib.nixosSystem {
+      GreatBlue = let
+        host-type = "laptop";
+        display-type = "wayland";
+        host-options = "printers";
+        current-system = "x86_64-linux";
+      in
+      lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
-          host-type = "laptop";
-          display-type = "wayland";
-          host-options = "printers";
-          current-system = "x86_64-linux";
+          host-type = host-type;
+          display-type = display-type;
+          host-options = host-options;
+          current-system = current-system;
         };
         modules = [
           ./hosts/greatblue/configuration.nix
@@ -108,19 +114,33 @@
                   nixvim.homeManagerModules.nixvim
                 ];
               };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                host-type = host-type;
+                display-type = display-type;
+                host-options = host-options;
+                current-system = current-system;
+              };
             };
           }
         ];
       };
-      Delaware = lib.nixosSystem {
+      Delaware =
+      let
+        host-type = "server";
+        display-type = "none";
+        host-options = "printers";
+        current-system = "x86_64-linux";
+      in
+      lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
           domain = "voicelesscrimson.com";
-          host-type = "server";
-          display-type = "none";
-          host-options = "printers";
-          current-system = "x86_64-linux";
+          host-type = host-type;
+          display-type = display-type;
+          host-options = host-options;
+          current-system = current-system;
         };
         modules = [
           ./hosts/delaware/configuration.nix
@@ -138,6 +158,13 @@
                   ./home/kent
                   nixvim.homeManagerModules.nixvim
                 ];
+              };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                host-type = host-type;
+                display-type = display-type;
+                host-options = host-options;
+                current-system = current-system;
               };
             };
           }
