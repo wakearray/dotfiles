@@ -21,7 +21,7 @@
       description = "";
     };
 
-    listenPorts = lib.mkOption {
+    listen-ports = lib.mkOption {
       type = lib.types.listOf lib.types.port;
       default = [ 6881 6891 ];
       description = "";
