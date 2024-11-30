@@ -154,6 +154,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "backup";
               users.kent = {
                 imports = [
                   ./home/kent
