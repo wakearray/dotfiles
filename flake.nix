@@ -111,6 +111,7 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  ./home/kent/greatblue
                   nixvim.homeManagerModules.nixvim
                 ];
               };
@@ -156,6 +157,7 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  ./home/kent/delaware
                   nixvim.homeManagerModules.nixvim
                 ];
               };
@@ -171,7 +173,12 @@
         ];
       };
       # Old QNAP NAS
-      SebrightBantam = lib.nixosSystem {
+      SebrightBantam = let
+        host-type = "server";
+        display-type = "none";
+        host-options = "";
+        current-system = "x86_64-linux";
+      in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
@@ -200,7 +207,12 @@
         ];
       };
       # Cat's projector
-      Lagurus = lib.nixosSystem {
+      Lagurus = let
+        host-type = "kiosk";
+        display-type = "wayland";
+        host-options = "";
+        current-system = "x86_64-linux";
+      in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           host-type = "kiosk";
@@ -228,7 +240,12 @@
         ];
       };
       # Jess desktop
-      Cichlid = lib.nixosSystem {
+      Cichlid = let
+        host-type = "desktop";
+        display-type = "wayland";
+        host-options = "printers";
+        current-system = "x86_64-linux";
+      in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
@@ -264,7 +281,12 @@
     };
     # Cichlid liveCD
     # Available through `nix build .#Cichlid`
-    Cichlid = nixos-generators.nixosGenerate {
+    Cichlid = let
+        host-type = "desktop";
+        display-type = "wayland";
+        host-options = "printers installer";
+        current-system = "x86_64-linux";
+      in nixos-generators.nixosGenerate {
       system = "x86_64-linux";
       specialArgs = {
         inherit inputs outputs;
@@ -322,7 +344,14 @@
     # Available through `home-manager --flake .#your-username@your-hostname`
     # or `nh home switch -c kent@mobile` if nh is available
     homeConfigurations = {
-      "kent@mobile" = lib.homeManagerConfiguration {
+      "kent@mobile" = let
+        system-details = {
+          host-type = "android";
+          display-type = "x11";
+          host-options = "";
+          current-system = "aarch64-linux";
+        };
+      in lib.homeManagerConfiguration {
         modules = [
           ./home/kent
           ./home/kent/mobile
@@ -332,10 +361,10 @@
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
-          host-type = "android";
-          display-type = "x11";
-          host-options = "";
-          current-system = "aarch64-linux";
+          host-type = system-details.host-type;
+          display-type = system-details.display-type;
+          host-options = system-details.host-options;
+          current-system = system-details.current-system;
         };
       };
     };
