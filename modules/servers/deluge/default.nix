@@ -9,6 +9,11 @@
       description = "Where you want your torrents downloaded to.";
     };
 
+    authFile = lib.mkOption {
+      type = lib.types.path;
+      default = "/var/lib/deluge/authFile";
+    };
+
     webUIPort = lib.mkOption {
       type = lib.types.port;
       default = 8112;
@@ -42,6 +47,7 @@
   config = lib.mkIf config.servers.deluge.enable {
     services.deluge = {
       enable = config.servers.deluge.enable;
+      authFile = config.servers.deluge.authFile;
       declarative = true;
       dataDir = "/var/lib/deluge";
       openFirewall = true;
