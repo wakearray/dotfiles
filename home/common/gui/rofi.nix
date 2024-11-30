@@ -1,4 +1,4 @@
-{ pkgs, lib, display-type, ...}:
+{ pkgs, lib, system-details, ...}:
 let
   rofi_plugins = with pkgs; [
     # Emoji picker for rofi
@@ -24,7 +24,7 @@ in
       enable = true;
       package = (
       if
-        builtins.match "wayland" display-type != null
+        builtins.match "wayland" system-details.display-type != null
       then
         pkgs.rofi-wayland.override {
           plugins = rofi_plugins;

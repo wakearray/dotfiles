@@ -1,9 +1,9 @@
-{ pkgs, config, display-type, ... }:
+{ pkgs, config, system-details, ... }:
 {
   imports = [
     ./zsh.nix
     ./ssh.nix
-    (if builtins.match "none" display-type != null then ./headless.nix else ./gui)
+    (if builtins.match "none" system-details.display-type != null then ./headless.nix else ./gui)
     ../../modules/common/nvim/home.nix
   ];
   home = {

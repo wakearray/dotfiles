@@ -1,4 +1,4 @@
-{ pkgs, host-type, current-system, ... }:
+{ pkgs, system-details, ... }:
 {
   imports = [
     ./alacritty.nix
@@ -8,7 +8,7 @@
 
     (
       if
-        builtins.match "aarch64-linux" current-system != null
+        builtins.match "aarch64-linux" system-details.current-system != null
       then
         ./aarch64-gui.nix
       else
@@ -16,7 +16,7 @@
     )
     (
       if
-        builtins.match "android" host-type != null
+        builtins.match "android" system-details.host-type != null
       then
         ./android
       else

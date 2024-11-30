@@ -83,19 +83,18 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       GreatBlue = let
-        host-type = "laptop";
-        display-type = "wayland";
-        host-options = "printers";
-        current-system = "x86_64-linux";
+        system-details = {
+          host-type = "laptop";
+          display-type = "wayland";
+          host-options = "printers";
+          current-system = "x86_64-linux";
+        };
       in
       lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
-          host-type = host-type;
-          display-type = display-type;
-          host-options = host-options;
-          current-system = current-system;
+          system-details = system-details;
         };
         modules = [
           ./hosts/greatblue/configuration.nix
@@ -117,10 +116,7 @@
               };
               extraSpecialArgs = {
                 inherit inputs outputs;
-                host-type = host-type;
-                display-type = display-type;
-                host-options = host-options;
-                current-system = current-system;
+                system-details = system-details;
               };
             };
           }
@@ -128,20 +124,19 @@
       };
       Delaware =
       let
-        host-type = "server";
-        display-type = "none";
-        host-options = "printers";
-        current-system = "x86_64-linux";
+        system-details = {
+          host-type = "server";
+          display-type = "none";
+          host-options = "printers";
+          current-system = "x86_64-linux";
+        };
       in
       lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
           domain = "voicelesscrimson.com";
-          host-type = host-type;
-          display-type = display-type;
-          host-options = host-options;
-          current-system = current-system;
+          system-details = system-details;
         };
         modules = [
           ./hosts/delaware/configuration.nix
@@ -164,10 +159,7 @@
               };
               extraSpecialArgs = {
                 inherit inputs outputs;
-                host-type = host-type;
-                display-type = display-type;
-                host-options = host-options;
-                current-system = current-system;
+                system-details = system-details;
               };
             };
           }
@@ -175,17 +167,17 @@
       };
       # Old QNAP NAS
       SebrightBantam = let
-        host-type = "server";
-        display-type = "none";
-        host-options = "";
-        current-system = "x86_64-linux";
+        system-details = {
+          host-type = "server";
+          display-type = "none";
+          host-options = "";
+          current-system = "x86_64-linux";
+        };
       in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
-          host-type = "server";
-          display-type = "none";
-          current-system = "x86_64-linux";
+          system-details = system-details;
         };
         modules = [
           ./hosts/sebrightbantam/configuration.nix
@@ -203,22 +195,26 @@
                   nixvim.homeManagerModules.nixvim
                 ];
               };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
             };
           }
         ];
       };
       # Cat's projector
       Lagurus = let
-        host-type = "kiosk";
-        display-type = "wayland";
-        host-options = "";
-        current-system = "x86_64-linux";
+        system-details = {
+          host-type = "kiosk";
+          display-type = "wayland";
+          host-options = "";
+          current-system = "x86_64-linux";
+        };
       in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          host-type = "kiosk";
-          display-type = "wayland";
-          current-system = "x86_64-linux";
+          system-details = system-details;
         };
         modules = [
           ./hosts/lagurus/configuration.nix
@@ -236,24 +232,27 @@
                   nixvim.homeManagerModules.nixvim
                 ];
               };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
             };
           }
         ];
       };
       # Jess desktop
       Cichlid = let
-        host-type = "desktop";
-        display-type = "wayland";
-        host-options = "printers";
-        current-system = "x86_64-linux";
-      in lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs;
-          secrets = "/etc/nixos/secrets";
+        system-details = {
           host-type = "desktop";
           display-type = "wayland";
           host-options = "printers";
           current-system = "x86_64-linux";
+        };
+      in lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+          secrets = "/etc/nixos/secrets";
+          system-details = system-details;
         };
         modules = [
           ./hosts/cichlid/configuration.nix
@@ -272,6 +271,10 @@
 		              catppuccin.homeManagerModules.catppuccin
 	              ];
               };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
 	          };
           }
           nixvim.nixosModules.nixvim
@@ -283,19 +286,18 @@
     # Cichlid liveCD
     # Available through `nix build .#Cichlid`
     Cichlid = let
+      system-details = {
         host-type = "desktop";
         display-type = "wayland";
         host-options = "printers installer";
         current-system = "x86_64-linux";
+      };
       in nixos-generators.nixosGenerate {
       system = "x86_64-linux";
       specialArgs = {
         inherit inputs outputs;
         secrets = "/etc/nixos/secrets";
-        host-type = "desktop";
-        display-type = "wayland";
-        host-options = "printers installer";
-        current-system = "x86_64-linux";
+        system-details = system-details;
       };
       modules = [
         ./hosts/cichlid/configuration.nix
@@ -313,6 +315,10 @@
                 ./home/jess
                 catppuccin.homeManagerModules.catppuccin
               ];
+            };
+            extraSpecialArgs = {
+              inherit inputs outputs;
+              system-details = system-details;
             };
           };
         }
@@ -362,10 +368,7 @@
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
-          host-type = system-details.host-type;
-          display-type = system-details.display-type;
-          host-options = system-details.host-options;
-          current-system = system-details.current-system;
+          system-details = system-details;
         };
       };
     };

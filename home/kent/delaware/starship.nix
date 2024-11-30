@@ -76,7 +76,7 @@
         git_branch = {
           symbol = " ";
           style = "bg:color_white";
-          format = "[[ $symbol $branch ](fg:color_white bg:color_black)]($style)";
+          format = "[[ $symbol $branch ](fg:color_black bg:color_white)]($style)";
         };
         git_status = {
           style = "bg:color_white";
@@ -142,7 +142,7 @@
           use_12hr = true;
           time_format = "%l:%M %P";
           style = "bg:color_white";
-          format = "[[  $time ](fg:color_white bg:color_black)]($style)";
+          format = "[[  $time ](fg:color_black bg:color_white)]($style)";
         };
         line_break = {
           disabled = false;
