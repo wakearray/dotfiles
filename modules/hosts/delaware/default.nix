@@ -42,12 +42,12 @@
     };
     nginx = {
       enable = true;
-      domain = "lobe.${domain}";
+      domain = "${domain}";
     };
     satisfactory.enable = true;
     tt-rss = {
       enable = true;
-      domain = "lobe.${domain}";
+      domain = "rss.${domain}";
     };
   };
 }
