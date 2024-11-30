@@ -25,7 +25,7 @@
     services = {
       tt-rss = {
         enable = true;
-        selfUrlPath = "${config.servers.tt-rss.selfUrlPath}:${config.servers.tt-rss.port}";
+        selfUrlPath = "${config.servers.tt-rss.selfUrlPath}:${builtins.toString config.servers.tt-rss.port}";
       };
 
       # Nginx reverse proxy
@@ -35,7 +35,7 @@
           forceSSL = true;
           locations = {
             "/" = {
-              proxyPass = "${config.servers.tt-rss.selfUrlPath}:${config.servers.tt-rss.port}";
+              proxyPass = "${config.servers.tt-rss.selfUrlPath}:${builtins.toString config.servers.tt-rss.port}";
             };
           };
         };
