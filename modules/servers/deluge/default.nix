@@ -64,7 +64,7 @@
         del_copy_torrent_file = false;
         dht = true;
         dont_count_slow_torrents = false;
-        download_location = "${config.downloadsDir}/partial";
+        download_location = "${config.servers.deluge.downloadsDir}/partial";
         download_location_paths_list = [];
         enabled_plugins = [];
         enc_in_policy = 1;
@@ -93,7 +93,7 @@
         max_upload_speed = "-1.0";
         max_upload_speed_per_torrent = -1;
         move_completed = false;
-        move_completed_path = "${config.downloadsDir}/completed";
+        move_completed_path = "${config.servers.deluge.downloadsDir}/completed";
         move_completed_paths_list = [];
         natpmp = true;
         new_release_check = true;
@@ -134,7 +134,7 @@
         stop_seed_at_ratio = false;
         stop_seed_ratio = "3.0";
         super_seeding = true;
-        torrentfiles_location = "${config.downloadsDir}/torrent-files";
+        torrentfiles_location = "${config.servers.deluge.downloadsDir}/torrent-files";
         upnp = true;
         utpex = true;
       };
