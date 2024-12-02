@@ -27,7 +27,7 @@
 
     environment.systemPackages = with pkgs; [
       # 7-Zip
-      p7zip
+      unstable._7zz
 
       # SSH File System
       sshfs

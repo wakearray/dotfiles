@@ -1,7 +1,4 @@
-{ lib, pkgs, config, ... }:
-let
-  cfg = config.fonts.fontconfig;
-in
+{ pkgs, ... }:
 {
   # Install font/emoji packages here
   home.packages = with pkgs; [

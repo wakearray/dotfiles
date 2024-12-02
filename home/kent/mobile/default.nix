@@ -1,60 +1,37 @@
-{ pkgs,
-  lib,
-  ... }:
+{ system-details, ... }:
 {
   # A standalone home-manager file for aarch64 Android devices
   # Using either Arch or Debian with the Nix package manager and home-manager
 
   imports = [
-    #inputs.sops-nix.homeManagerModules.sops
-    ./nix.nix
     ./mobilefonts.nix
     ./syncthing.nix
     ./starship.nix
-
-    ./gui
+    (
+    if
+      builtins.match "none" system-details.display-type != null
+    then
+      ./headless.nix
+    else
+      ./gui
+    )
   ];
 
-  home = {
-    packages = with pkgs; [
-      # 7-Zip
-      p7zip
-
-      # SSH File System
-      sshfs
-
-      # Rust grep use `rg`
-      repgrep
-      ripgrep
-      ripgrep-all
-
-      # Rage - Rust implementation of age
-      # https://github.com/str4d/rage
-      rage
-
-      # clipboard management
-      xclip
-
-      # nh - Yet another nix cli helper
-      # https://github.com/viperML/nh/tree/master
-      # Use `nh home switch .#kent@mobile` to rebuild home-manager derivation
-      nh
-    ];
-
-    activation = {
-      # Home-Manager frequently kills ssh-agent and
-      # causes it to forget its keys
-      # So far this only sometimes helps
-      activateSshAgent = lib.hm.dag.entryAfter [
-        "installPackages"
-        "reloadSystemd"
-        "checkFilesChanged"
-        "onFilesChange"
-        "linkGeneration"
-      ] ''
-        run sudo ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
-      '';
-    };
+#  home = {
+#    activation = {
+#      # Home-Manager frequently kills ssh-agent and
+#      # causes it to forget its keys
+#      # So far this only sometimes helps
+#      activateSshAgent = lib.hm.dag.entryAfter [
+#        "installPackages"
+#        "reloadSystemd"
+#        "checkFilesChanged"
+#        "onFilesChange"
+#        "linkGeneration"
+#      ] ''
+#        run /usr/bin/sudo ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+#      '';
+#    };
 #    file = {
 #      "startup.sh" = {
 #        #
@@ -80,21 +57,12 @@
 #        executable = true;
 #      };
 #    };
-  };
-
-  # Since we're not using NixOS
-  targets.genericLinux.enable = true;
+#  };
 
   programs = {
     # chrooted Arch in Termux keeps forgetting the path
     zsh.envExtra = ''
 PATH=/home/kent/.local/state/nix/profiles/profile/bin:/home/kent/.nix-profile/bin:/usr/local/sbin:/usr/local/bin:/usr/bin
     '';
-  };
-
-  # Fixes a haskell error
-  i18n.glibcLocales = pkgs.glibcLocales.override {
-    allLocales = false;
-    locales = [ "en_US.UTF-8/UTF-8" ];
   };
 }

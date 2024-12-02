@@ -3,7 +3,22 @@
   imports = [
     ./zsh.nix
     ./ssh.nix
-    (if builtins.match "none" system-details.display-type != null then ./headless.nix else ./gui)
+    (
+      if
+        builtins.match "android" system-details.host-type != null
+      then
+        ./android
+      else
+        ./nixos
+    )
+    (
+    if
+      builtins.match "none" system-details.display-type != null
+    then
+      ./headless.nix
+    else
+      ./gui
+    )
     ../../modules/common/nvim/home.nix
   ];
   home = {

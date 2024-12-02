@@ -85,6 +85,7 @@
       GreatBlue = let
         system-details = {
           host-type = "laptop";
+          host-name = "GreatBlue";
           display-type = "wayland";
           host-options = "printers";
           current-system = "x86_64-linux";
@@ -126,6 +127,7 @@
       let
         system-details = {
           host-type = "server";
+          host-name = "Delaware";
           display-type = "none";
           host-options = "printers";
           current-system = "x86_64-linux";
@@ -169,6 +171,7 @@
       SebrightBantam = let
         system-details = {
           host-type = "server";
+          host-name = "SebrightBantam";
           display-type = "none";
           host-options = "";
           current-system = "x86_64-linux";
@@ -207,6 +210,7 @@
       Lagurus = let
         system-details = {
           host-type = "kiosk";
+          host-name = "Lagurus";
           display-type = "wayland";
           host-options = "";
           current-system = "x86_64-linux";
@@ -244,6 +248,7 @@
       Cichlid = let
         system-details = {
           host-type = "desktop";
+          host-name = "Cichlid";
           display-type = "wayland";
           host-options = "printers";
           current-system = "x86_64-linux";
@@ -288,6 +293,7 @@
     Cichlid = let
       system-details = {
         host-type = "desktop";
+        host-name = "Cichlid";
         display-type = "wayland";
         host-options = "printers installer";
         current-system = "x86_64-linux";
@@ -349,11 +355,12 @@
 
     # Standalone home-manager configuration entrypoint
     # Available through `home-manager --flake .#your-username@your-hostname`
-    # or `nh home switch -c kent@mobile` if nh is available
+    # or `nh home switch -c user@host` if nh is available
     homeConfigurations = {
       "kent@mobile" = let
         system-details = {
           host-type = "android";
+          host-name = "kent@mobile";
           display-type = "x11";
           host-options = "";
           current-system = "aarch64-linux";

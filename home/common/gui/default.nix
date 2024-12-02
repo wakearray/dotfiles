@@ -14,14 +14,6 @@
       else
         ./x86_64-gui.nix
     )
-    (
-      if
-        builtins.match "android" system-details.host-type != null
-      then
-        ./android
-      else
-        ./notandroid.nix
-    )
   ];
 
   home = {

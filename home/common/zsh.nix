@@ -1,4 +1,4 @@
-{ ... }:
+{ system-details, ... }:
 {
   # zsh
   # More options found here:
@@ -53,32 +53,31 @@
         if [[ `git status --porcelain` ]]; then
           echo "Flake has been modified."
           git add .
-
-	  echo "Would you like to run a test build?"
-	  read -q ans
-	  if [[ "''$ans" == "y" ]]; then
-            echo "\n"
-	    testbuildflake
-
-	    echo "Would you like to rebuild the system now?"
-            read -q ans
-            if [[ "''$ans" == "y" ]]; then
-	      echo "\n"
-	      rebuildflake
-	      echo "Flake rebuild, complete."
-	    else
-              echo "Flake has been edited, but not built."
-	    fi
-	  fi
-          echo "-.-.-"
-	  git status
-	  echo "-.-.-"
-	  echo "Would you like to commit now?"
+          echo "Would you like to run a test build?"
           read -q ans
           if [[ "''$ans" == "y" ]]; then
-            echo "\nCommiting..."
-	    git commit
-	    echo -e "Would you like to push to remote?"
+                  echo "\n"
+            testbuildflake
+
+            echo "Would you like to rebuild the system now?"
+                  read -q ans
+                  if [[ "''$ans" == "y" ]]; then
+              echo "\n"
+              rebuildflake
+              echo "Flake rebuild, complete."
+            else
+                    echo "Flake has been edited, but not built."
+            fi
+          fi
+          echo "-.-.-"
+          git status
+          echo "-.-.-"
+          echo "Would you like to commit now?"
+                read -q ans
+                if [[ "''$ans" == "y" ]]; then
+                  echo "\nCommiting..."
+            git commit
+            echo -e "Would you like to push to remote?"
             read -q ans
             if [[ "''$ans" == "y" ]]; then
               echo "\nPushing to remote..."
@@ -90,7 +89,7 @@
         else
           echo "No updates found."
         fi
-	cd ''$CWD
+        cd ''$CWD
       }
 
       homeworkflow(){
@@ -123,7 +122,7 @@
       }
 
       rebuildhome(){
-        nh home switch -c kent@mobile
+        nh home switch -c ${system-details.host-name}
       }
 
       push(){
