@@ -1,9 +1,4 @@
-{ config, pkgs, ... }:
-let
-  #display-system = config.host-options.display-system;
-  host-type = config.host-options.host-type;
-  system = builtins.currentSystem;
-in
+{ pkgs, system-details, ... }:
 {
   imports = [
     ./alacritty.nix
@@ -11,13 +6,29 @@ in
     ./rofi.nix
     ./wthrr.nix
 
-    (if builtins.match "aarch64-linux" system != null then ./aarch64-gui.nix else null)
-    (if builtins.match "x86_64-linux" system != null then ./x86_64-gui.nix else null)
-    (if builtins.match "mobile" host-type != null then ./mobile else null)
+    (
+      if
+        builtins.match "aarch64-linux" system-details.current-system != null
+      then
+        ./aarch64-gui.nix
+      else
+        ./x86_64-gui.nix
+    )
   ];
 
-  home.packages = with pkgs; [
-    # Keepassxc - Offline password store
-    keepassxc
-  ];
+  home = {
+    packages = with pkgs; [
+      # Keepassxc - Offline password store
+      unstable.keepassxc
+    ];
+  };
+
+  programs = {
+    # yt-dlp - A feature-rich command-line audio/video downloader
+    # https://github.com/yt-dlp/yt-dlp#configuration
+    yt-dlp = {
+      enable = true;
+      # TODO: Fill in the settings later
+    };
+  };
 }

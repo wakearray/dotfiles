@@ -4,7 +4,7 @@
   [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules
-    ../../modules/delaware
+    ../../modules/hosts/delaware
     ../../users/kent
     ../../users/jess
   ];

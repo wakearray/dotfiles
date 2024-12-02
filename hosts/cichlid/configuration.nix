@@ -6,7 +6,7 @@
     ../../modules
     ../../modules/gui
     ../../modules/gui/themes/catppuccin.nix
-    ../../modules/cichlid
+    ../../modules/hosts/cichlid
     ../../users/jess
 
     ../../modules/installer.nix

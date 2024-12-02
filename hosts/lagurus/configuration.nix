@@ -9,7 +9,7 @@
   [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules
-    ../../modules/lagurus
+    ../../modules/hosts/lagurus
     ../../users/kent
     ../../users/entertainment
   ];

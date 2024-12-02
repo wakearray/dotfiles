@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    ../../common/gui
+    ./alacritty.nix
+    ./fonts.nix
     ./gurk.nix
     ./todo.nix
   ];

@@ -1,10 +1,25 @@
-{ pkgs, config, ... }:
+{ pkgs, config, system-details, ... }:
 {
   imports = [
     ./zsh.nix
     ./ssh.nix
-
-    ../../modules/nvim/home.nix
+    (
+      if
+        builtins.match "android" system-details.host-type != null
+      then
+        ./android
+      else
+        ./nixos
+    )
+    (
+    if
+      builtins.match "none" system-details.display-type != null
+    then
+      ./headless.nix
+    else
+      ./gui
+    )
+    ../../modules/common/nvim/home.nix
   ];
   home = {
     enableNixpkgsReleaseCheck = false;
@@ -15,6 +30,19 @@
       # Simple and flexible tool for managing secrets
       # https://github.com/getsops/sops
       sops
+
+      # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
+      # https://github.com/lemonade-command/lemonade/
+      lemonade
+
+      # Rust grep use `rg`
+      repgrep
+      ripgrep
+      ripgrep-all
+
+      # Rage - Rust implementation of age
+      # https://github.com/str4d/rage
+      rage
     ];
   };
 
@@ -77,13 +105,6 @@
     skim = {
       enable = true;
       enableZshIntegration = true;
-    };
-
-    # yt-dlp - A feature-rich command-line audio/video downloader
-    # https://github.com/yt-dlp/yt-dlp#configuration
-    yt-dlp = {
-      enable = true;
-      # TODO: Fill in the settings later
     };
 
     # yazi - Blazing Fast Terminal File Manager

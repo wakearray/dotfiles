@@ -22,7 +22,6 @@
     };
 
     home-manager = {
-      # url = "github:nix-community/hom-manager/release-24.05";
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -74,13 +73,29 @@
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
 
+    # Special args can have a few variables to control what things are installed
+    # host-type = (one of) "laptop" "desktop" "server" "android" "kiosk"
+    # display-type = (one of) "wayland" "x11" "none"
+    # host-options = (one or more of) "printers" "installer" "eink"
+    # current-system = (one of) "x86_64-linux" "aarch64-linux"
+
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      GreatBlue = lib.nixosSystem {
+      GreatBlue = let
+        system-details = {
+          host-type = "laptop";
+          host-name = "GreatBlue";
+          display-type = "wayland";
+          host-options = "printers";
+          current-system = "x86_64-linux";
+        };
+      in
+      lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
+          system-details = system-details;
         };
         modules = [
           ./hosts/greatblue/configuration.nix
@@ -96,18 +111,34 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  ./home/kent/greatblue
                   nixvim.homeManagerModules.nixvim
                 ];
+              };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
               };
             };
           }
         ];
       };
-      Delaware = lib.nixosSystem {
+      Delaware =
+      let
+        system-details = {
+          host-type = "server";
+          host-name = "Delaware";
+          display-type = "none";
+          host-options = "printers";
+          current-system = "x86_64-linux";
+        };
+      in
+      lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
           domain = "voicelesscrimson.com";
+          system-details = system-details;
         };
         modules = [
           ./hosts/delaware/configuration.nix
@@ -115,35 +146,118 @@
           sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule
           lix-module.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  ./home/kent/delaware
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
+            };
+          }
         ];
       };
-      SebrightBantam = lib.nixosSystem {
+      # Old QNAP NAS
+      SebrightBantam = let
+        system-details = {
+          host-type = "server";
+          host-name = "SebrightBantam";
+          display-type = "none";
+          host-options = "";
+          current-system = "x86_64-linux";
+        };
+      in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
+          system-details = system-details;
         };
         modules = [
           ./hosts/sebrightbantam/configuration.nix
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           lix-module.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
+            };
+          }
         ];
       };
-      Lagurus = lib.nixosSystem {
+      # Cat's projector
+      Lagurus = let
+        system-details = {
+          host-type = "kiosk";
+          host-name = "Lagurus";
+          display-type = "wayland";
+          host-options = "";
+          current-system = "x86_64-linux";
+        };
+      in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
+          system-details = system-details;
         };
         modules = [
           ./hosts/lagurus/configuration.nix
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           lix-module.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
+            };
+          }
         ];
       };
-      Cichlid = lib.nixosSystem {
+      # Jess desktop
+      Cichlid = let
+        system-details = {
+          host-type = "desktop";
+          host-name = "Cichlid";
+          display-type = "wayland";
+          host-options = "printers";
+          current-system = "x86_64-linux";
+        };
+      in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
           secrets = "/etc/nixos/secrets";
+          system-details = system-details;
         };
         modules = [
           ./hosts/cichlid/configuration.nix
@@ -162,6 +276,10 @@
 		              catppuccin.homeManagerModules.catppuccin
 	              ];
               };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
 	          };
           }
           nixvim.nixosModules.nixvim
@@ -172,11 +290,20 @@
     };
     # Cichlid liveCD
     # Available through `nix build .#Cichlid`
-    Cichlid = nixos-generators.nixosGenerate {
+    Cichlid = let
+      system-details = {
+        host-type = "desktop";
+        host-name = "Cichlid";
+        display-type = "wayland";
+        host-options = "printers installer";
+        current-system = "x86_64-linux";
+      };
+      in nixos-generators.nixosGenerate {
       system = "x86_64-linux";
       specialArgs = {
         inherit inputs outputs;
         secrets = "/etc/nixos/secrets";
+        system-details = system-details;
       };
       modules = [
         ./hosts/cichlid/configuration.nix
@@ -195,6 +322,10 @@
                 catppuccin.homeManagerModules.catppuccin
               ];
             };
+            extraSpecialArgs = {
+              inherit inputs outputs;
+              system-details = system-details;
+            };
           };
         }
         nixvim.nixosModules.nixvim
@@ -209,6 +340,8 @@
     # nix run 'github:numtide/system-manager' -- switch --flake '.#mobile'
     systemConfigs.mobile = system-manager.lib.makeSystemConfig {
       modules = [
+        # nix-system-graphics makes normal NixOS graphics packages
+        # available to non NixOS systems
         nix-system-graphics.systemModules.default
         {
           config = {
@@ -222,9 +355,17 @@
 
     # Standalone home-manager configuration entrypoint
     # Available through `home-manager --flake .#your-username@your-hostname`
-    # or `nh home switch -c kent@mobile` if nh is available
+    # or `nh home switch -c user@host` if nh is available
     homeConfigurations = {
-      "kent@mobile" = lib.homeManagerConfiguration {
+      "kent@mobile" = let
+        system-details = {
+          host-type = "android";
+          host-name = "kent@mobile";
+          display-type = "x11";
+          host-options = "";
+          current-system = "aarch64-linux";
+        };
+      in lib.homeManagerConfiguration {
         modules = [
           ./home/kent
           ./home/kent/mobile
@@ -234,6 +375,7 @@
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
+          system-details = system-details;
         };
       };
     };

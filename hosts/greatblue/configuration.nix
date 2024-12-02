@@ -4,7 +4,7 @@
   [
     ./hardware-configuration.nix
     ../../modules
-    ../../modules/greatblue
+    ../../modules/hosts/greatblue
     ../../users/kent
   ];
 

@@ -1,4 +1,4 @@
-{ ... }:
+{ system-details, ... }:
 {
   home = {
     username = "kent";
@@ -10,10 +10,9 @@
     ../common
 
     ./git.nix
-    ./starship.nix
     ./zellij.nix
     ./ssh.nix
-    ./fonts.nix
+    (if builtins.match "none" system-details.display-type != null then ./headless.nix else ./gui)
   ];
 
   # Editor Config helps enforce your preferences on editors

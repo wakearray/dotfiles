@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-
+{ ... }:
 {
   imports =
   [
     ./hardware-configuration.nix
     ../../modules
-    ../../modules/gui
-    ../../modules/jerboa
+    ../../modules/hosts/jerboa
     ../../users/kent
     ../../users/entertainment
   ];

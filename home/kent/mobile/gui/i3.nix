@@ -2,7 +2,6 @@
 {
   imports = [
     ./polybar.nix
-    ./rofi.nix
   ];
   # i3
   xsession = {
@@ -12,9 +11,9 @@
       config = {
         assigns = {
           "$pws_1" = [ { class = "Alacritty"; } ];
-          "$pws_2" = [ { title = "Discord.*"; } ];
+          "$pws_2" = [ { title = "Discord.*"; } { class = "Signal"; } ];
           "$pws_3" = [ { title = ".*YouTube.*"; } ];
-          "$pws_4" = [ { class = "firefox"; } {class = "Navigator";} ];
+          "$pws_4" = [ { class = "firefox"; } { class = "Navigator"; } ];
           "$pws_5" = [  ];
           "$pws_6" = [  ];
           "$pws_7" = [  ];
@@ -23,7 +22,7 @@
           "$pws_10" = [ { title = ".*Tidal.*"; } ];
         };
         bars = [  ];
-        defaultWorkspace = "workspace number 1";
+        defaultWorkspace = "$pws_1";
         fonts = {
           names = [ "SauceCodePro NFM" ];
           style = "Regular";

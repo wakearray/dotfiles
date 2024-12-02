@@ -3,10 +3,6 @@
   imports = [
     ./i3.nix
     ./firefox.nix
-    ../../alacritty.nix
-    ../../gui/todo.nix
-    ../../../common/gui/wthrr.nix
-    ../../../common/gui/mpv.nix
   ];
 
   home.packages = with pkgs; [
@@ -16,24 +12,6 @@
 
     # dconf - Gnome system config, wanted by darktable
     dconf
-
-    # Window Manager Required Stuff
-    xorg.libX11
-    xorg.xinit
-    xorg.xorgserver
-    xorg.xauth
-    xorg.xrdb
-    xorg.xwininfo
-    xorg.xprop
-
-    # pcmanfm - gui file manager
-    pcmanfm
-
-    # Keepassxc - Offline password manager
-    unstable.keepassxc
-
-    # Mesa - OpenGL drivers
-    unstable.mesa
 
     # Signal Messenger for desktop
     unstable.signal-desktop
