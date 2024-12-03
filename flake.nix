@@ -273,6 +273,48 @@
               users.jess = {
 	              imports = [
 	                ./home/jess
+                  ./home/jess/cichlid
+		              catppuccin.homeManagerModules.catppuccin
+	              ];
+              };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
+	          };
+          }
+          nixvim.nixosModules.nixvim
+          sops-nix.nixosModules.sops
+          lix-module.nixosModules.default
+        ];
+      };
+      # Jess SteamDeck
+      Shoebill = let
+        system-details = {
+          host-type = "laptop";
+          host-name = "Shoebill";
+          display-type = "wayland";
+          host-options = "printers";
+          current-system = "x86_64-linux";
+        };
+      in lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+          secrets = "/etc/nixos/secrets";
+          system-details = system-details;
+        };
+        modules = [
+          ./hosts/shoebill/configuration.nix
+	        catppuccin.nixosModules.catppuccin
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.jess = {
+	              imports = [
+	                ./home/jess
+                  ./home/jess/shoebill
 		              catppuccin.homeManagerModules.catppuccin
 	              ];
               };

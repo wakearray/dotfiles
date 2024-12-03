@@ -2,13 +2,10 @@
 {
   # Everything I want on Cichlid
   imports = [
-    # Harware related
-    ./nvidia.nix
-    ./rgb.nix
-
     # Software related
     ./git.nix
     ./syncthing.nix
+    ./jovian.nix
   ];
 
   gui = {
@@ -17,7 +14,6 @@
       enable = true;
       polkitPolicyOwners = [ "jess" ];
     };
-    gaming.enable = true;
     wm.gnome.enable = true;
   };
 

@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
     ../../modules
     ../../modules/gui/themes/catppuccin.nix
-    ../../modules/hosts/cichlid
+    ../../modules/hosts/shoebill
     ../../users/jess
   ];
 
@@ -20,7 +20,7 @@
   # Enable networking
   networking = {
     networkmanager.enable = true;
-    hostName = "Cichlid";
+    hostName = "Shoebill";
     firewall.enable = true;
   };
 
@@ -33,5 +33,5 @@
     keyboard.qmk.enable = true;
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
