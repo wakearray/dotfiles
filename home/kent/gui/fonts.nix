@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # Determine what fonts should be used where
   fonts = {
@@ -12,4 +12,7 @@
       };
     };
   };
+  home.packages = with pkgs; [
+    nerd-fonts.sauce-code-pro
+  ];
 }

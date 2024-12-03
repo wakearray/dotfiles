@@ -1,7 +1,4 @@
-{ ... }:
-let
-  secrets = "/etc/nixos/secrets";
-in
+{ secrets, ... }:
 {
   # Syncthing, a file syncing service
   services.syncthing = {

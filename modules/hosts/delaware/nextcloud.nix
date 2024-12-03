@@ -28,7 +28,7 @@
   # NextCloud
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud29;
+    package = pkgs.nextcloud30;
     home = "/sambazfs/nextcloud";
     hostName = "cloud.${domain}";
     autoUpdateApps.enable = true;
@@ -95,8 +95,8 @@
 
   systemd.services."nextcloudcron" = {
     serviceConfig = {
-      ExecCondition = "${pkgs.php} -f ${pkgs.nextcloud29}/occ status -e";
-      ExecStart = "${pkgs.php} -f ${pkgs.nextcloud29}/cron.php";
+      ExecCondition = "${pkgs.php} -f ${pkgs.nextcloud30}/occ status -e";
+      ExecStart = "${pkgs.php} -f ${pkgs.nextcloud30}/cron.php";
       KillMode = "process";
       User = "nextcloud";
     };

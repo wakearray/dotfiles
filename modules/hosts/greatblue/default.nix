@@ -5,21 +5,18 @@
   [
     ./8bitdo.nix
     ./fingerprint_reader.nix
-    ./pass.nix
-    ./printers.nix
-    ./samba.nix
     ./syncthing.nix
     ./tui.nix
     ./u2f.nix
-
-    ../gui
-    ../gui/steam.nix
-    ../gui/gnome.nix
   ];
 
   gui = {
     enable = true;
-    gaming = true;
+    _1pass = {
+      enable = true;
+      polkitPolicyOwners = [ "kent" ];
+    };
+    gaming.enable = true;
     wm.gnome.enable = true;
   };
 
@@ -27,13 +24,7 @@
     # GPD Specific Tool:
     # RyzenAdj for controlling many RyzenCPU/APU/GPU power settings
     # https://github.com/FlyGoat/RyzenAdj
-    unstable.ryzenadj
-
-    # aspell
-    aspell
-    aspellDicts.en
-    aspellDicts.en-computers
-    aspellDicts.en-science
+    ryzenadj
 
     # Drivers to support docks with HDMI ports
     displaylink
@@ -51,13 +42,6 @@
     # IDEs
     libsForQt5.kate
 
-    # Video player
-    vlc
-
-    # Atuin - Replacement for a shell history which records additional commands context with optional encrypted synchronization between machines
-    # https://atuin.sh/
-    unstable.atuin
-
     # TTS
     piper-tts
     sox
@@ -66,6 +50,7 @@
     discord
     element-desktop
     telegram-desktop
+    signal-desktop
 
     # Music
     tidal-hifi
@@ -83,18 +68,18 @@
     # glaxnimate
 
     # Keyboard firmware
-    # via
+    via
     vial
 
     # Linux support for handheld gaming devices like the Legion Go, ROG Ally, and GPD Win
     # https://github.com/hhd-dev/hhd
-    # unstable.handheld-daemon
+    # handheld-daemon
 
     # For playing audio from one device on another
     soundwireserver
 
     # OpenSCAD
-    unstable.openscad-unstable
+    openscad-unstable
 
     xorg.xcbutil
 
@@ -107,27 +92,11 @@
     usbutils
     android-tools
 
-    # Rust Tools
-    #rustc
-
     # Internet browsers
     firefox
     google-chrome
 
-    # commandline clipboad manipulation
-    xclip
-
     # Audio and video format converter
-    unstable.ffmpeg_7-full
-
-    # Bash floating point maths
-    bc
-
-    # Alacritty -
-    # https://github.com/alacritty/alacritty
-    unstable.alacritty
-    unstable.alacritty-theme
+    ffmpeg_7-full
   ];
-
-  home-manager.backupFileExtension = "backup";
 }

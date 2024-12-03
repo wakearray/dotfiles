@@ -1,9 +1,9 @@
 { pkgs, outputs, ... }:
 {
-  # nixpkgs allow unfree with unstable overlay.
+  # nixpkgs allow unfree with stable overlay.
   nixpkgs = {
     overlays = [
-      outputs.overlays.unstable-packages
+      outputs.overlays.stable-packages
       outputs.overlays.modifications
       outputs.overlays.additions
     ];

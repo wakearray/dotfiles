@@ -9,9 +9,7 @@ in
     key = "${secrets}/syncthing/key.pem";
     cert = "${secrets}/syncthing/cert.pem";
     user = "kent";
-    # overrides any devices added or deleted through the WebUI
     overrideDevices = true;
-    # overrides any folders added or deleted through the WebUI
     overrideFolders = true;
     settings = {
       devices = {
@@ -21,9 +19,7 @@ in
         };
       };
       folders = {
-        # Name of folder in Syncthing, also the folder ID
         "Family_Notes" = {
-	  # Which folder to add to Syncthing
           path = "/home/kent/notes/family/";
           devices = [ "Delaware" ];
         };

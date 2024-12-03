@@ -2,6 +2,6 @@
 {
   environment.systemPackages = with pkgs; [
     # Music player
-    unstable.clementine
+    clementine
   ];
 }

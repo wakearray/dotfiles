@@ -90,19 +90,6 @@
         "delete readonly" = "yes";
         "only user" = "yes";
       };
-      Personal_Kent = {
-        "path" = "/mnt/samba/personal_kent";
-        "browseable" = "yes";
-        "read only" = "no";
-        "writable" = "yes";
-        "guest ok" = "no";
-        "valid users" = [ "kent" ];
-        "write list" = "kent";
-        "create mask" = "0777";
-        "directory mask" = "0777";
-        "delete readonly" = "yes";
-        "only user" = "yes";
-      };
       Personal_Jess = {
         "path" = "/mnt/samba/personal_jess";
         "browseable" = "yes";

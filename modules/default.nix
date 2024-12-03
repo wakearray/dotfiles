@@ -11,6 +11,7 @@
   ];
 
   config = {
+
     # Environment variables
     environment.sessionVariables = {
       XDG_CACHE_HOME  = "$HOME/.cache";
@@ -27,30 +28,24 @@
 
     environment.systemPackages = with pkgs; [
       # 7-Zip
-      unstable._7zz
-
-      # SSH File System
-      sshfs
+      _7zz
 
       # eza - Modern, maintained replacement for ls
       # https://github.com/eza-community/eza
-      unstable.eza
+      eza
 
       # Zoxide - A fast cd command that learns your habits
       # https://github.com/ajeetdsouza/zoxide
       # https://www.youtube.com/watch?v=aghxkpyRVDY
-      unstable.zoxide
+      zoxide
 
       # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
       # https://starship.rs/
-      unstable.starship
+      starship
 
       # fzf - Command-line fuzzy finder written in Go
       # https://github.com/junegunn/fzf
       fzf
-
-      # zellij - Terminal Multiplexor written in Rust
-      zellij
 
       # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
       # https://github.com/lemonade-command/lemonade/
@@ -61,10 +56,8 @@
     # boot.initrd.network.ssh.authorizedKeyFiles is a new option in the initrd ssh daemon module,
     # for adding authorized keys via list of files.
 
-    # Removes old Perl scripts
-    #boot.initrd.systemd.enable = true;
-    #system.etc.overlay.enable = true;
-    #systemd.sysusers.enable = true;
+    # Enable userborn declarative user management
+    services.userborn.enable = true;
 
     # nixpkgs allow unfree with unstable overlay.
     nixpkgs = {
@@ -72,7 +65,7 @@
         # Add overlays your own flake exports (from overlays and pkgs dir):
         outputs.overlays.additions
         outputs.overlays.modifications
-        outputs.overlays.unstable-packages
+        outputs.overlays.stable-packages
 
         # You can also add overlays exported from other flakes:
         # neovim-nightly-overlay.overlays.default
@@ -120,6 +113,8 @@
     };
 
     programs = {
+      # Cross platform Airdrop replacement
+      localsend.enable = true;
       # Allows installing unpackaged binaries
       nix-ld.enable = true;
       # Installs git as a system program

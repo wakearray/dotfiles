@@ -55,7 +55,7 @@
     # https://github.com/ajeetdsouza/zoxide
     zoxide = {
       enable = true;
-      package = pkgs.unstable.zoxide;
+      package = pkgs.zoxide;
     };
 
     # eza - A modern replacement for ls
@@ -63,7 +63,7 @@
     eza = {
       enable = true;
       enableZshIntegration = true;
-      package = pkgs.unstable.eza;
+      package = pkgs.eza;
     };
 
     home-manager.enable = true;

@@ -23,6 +23,8 @@
     # unmap J,K,L,M
     # Assign J = bprevious, K = bnext, L =  Join N lines; default is 2, M = lookup Keyword under the cursor with 'keywordprg'
     plugins = {
+      # Dependency of many other plugins
+      web-devicons.enable = true;
 
       # nvim-treesitter - Nvim Treesitter configurations and abstraction layer
       # https://github.com/nvim-treesitter/nvim-treesitter
@@ -76,13 +78,13 @@
         # https://github.com/nvim-lualine/lualine.nvim/blob/master/README.md
       };
 
-      # hydra.nvim - Create custom submodes and menus
-      # https://github.com/nvimtools/hydra.nvim/
-      hydra = {
-        enable = true;
-        package = pkgs.unstable.vimPlugins.hydra-nvim;
-        settings.hint = false;
-      };
+#      # hydra.nvim - Create custom submodes and menus
+#      # https://github.com/nvimtools/hydra.nvim/
+#      hydra = {
+#        enable = true;
+#        package = pkgs.vimPlugins.hydra-nvim;
+#        settings.hint = false;
+#      };
 
       # markdown-preview.nvim - markdown preview plugin for (neo)vim
       # https://github.com/iamcco/markdown-preview.nvim/
@@ -90,7 +92,8 @@
         enable = true;
         settings = {
           theme = "dark";
-          auto_start = true;
+          auto_start = 0;
+          auto_close = 1;
         };
       };
 
@@ -155,15 +158,17 @@
       # https://github.com/akinsho/bufferline.nvim/
       bufferline = {
         enable = true;
-        #settings.options.diagnostics = "nvim_lsp";
-        numbers = {
-              __raw = ''
+        settings.options = {
+          diagnostics = "nvim_lsp";
+          numbers = {
+            __raw = ''
   function(opts)
     return string.format('%s|%s', opts.id, opts.raise(opts.ordinal))
   end
-              '';
+            '';
         # Lots and lots of settings:
         # https://nix-community.github.io/nixvim/plugins/bufferline/settings/index.html
+          };
         };
       };
 
@@ -189,12 +194,12 @@
         openOnSetupFile = true;
       };
 
-      # multicursors.nvim - A multi cursor plugin for Neovim.
-      # https://github.com/smoka7/multicursors.nvim
-      multicursors = {
-        enable = true;
-        # Many settings: https://nix-community.github.io/nixvim/plugins/multicursors/index.html
-      };
+#      # multicursors.nvim - A multi cursor plugin for Neovim.
+#      # https://github.com/smoka7/multicursors.nvim
+#      multicursors = {
+#        enable = true;
+#        # Many settings: https://nix-community.github.io/nixvim/plugins/multicursors/index.html
+#      };
 
       # nvim-spectre - Find the enemy and replace them with dark power.
       # https://github.com/nvim-pack/nvim-spectre/
@@ -222,14 +227,15 @@
             enable = true;
             package = pkgs.nixd;
           };
-          rust-analyzer = {
-            enable = true;
+          rust_analyzer = {
+            # This has to be disabled if Rustaceanvim is enabled
+            enable = false;
             installRustc = false;
             installCargo = false;
           };
           taplo.enable = true;
           marksman.enable = true;
-          lua-ls.enable = true;
+          lua_ls.enable = true;
           bashls.enable = true;
         };
       };

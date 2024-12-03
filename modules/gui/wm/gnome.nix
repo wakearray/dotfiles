@@ -29,16 +29,13 @@
     };
 
     # Exclude certain Gnome packages.
-    environment.gnome.excludePackages = (with pkgs; [
-      # for packages that are pkgs.***
+    environment.gnome.excludePackages = with pkgs; [
       gnome-tour
       gnome-connections
-    ]) ++ (with pkgs.gnome; [
-      # for packages that are pkgs.gnome.***
       epiphany # web browser
       geary # email reader
       evince # document viewer
-    ]);
+    ];
 
     services.gnome.gnome-browser-connector.enable = true;
 
@@ -48,13 +45,13 @@
       rofi-wayland
 
       # Gnome specific stuffs
-      gnome.gnome-tweaks
+      gnome-tweaks
 
       # Gnome Extensions
       gnomeExtensions.dash-to-panel
       gnome-menus
 
-      unstable.polkit_gnome
+      polkit_gnome
     ];
   };
 }

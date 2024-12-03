@@ -15,6 +15,10 @@
       bridge-utils
       docker-client
       docker-compose
+
+      # Oxker - A simple tui to view & control docker containers
+      # https://github.com/mrjackwills/oxker
+      oxker
     ];
 
     virtualisation = {

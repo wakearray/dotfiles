@@ -4,7 +4,7 @@
     packages = with pkgs; [
       # Signal Messenger client for terminal
       # https://github.com/boxdot/gurk-rs
-      unstable.gurk-rs
+      gurk-rs
     ];
 #      file.".config/gurk.toml" = {
 #        enable = true;

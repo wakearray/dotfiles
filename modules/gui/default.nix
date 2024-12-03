@@ -3,9 +3,10 @@
 {
   # Defaults for any GUI specific applications that I want on every GUI capable computer
   imports = [
-    ./sound.nix
-    ./gaming.nix
+    ./_1pass.nix
     ./fonts.nix
+    ./gaming.nix
+    ./sound.nix
     ./wm
   ];
   options.gui = {

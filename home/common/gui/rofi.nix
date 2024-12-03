@@ -62,7 +62,7 @@ in
     ## Required for keepmenu
     # Python library to interact with keepass databases (supports KDBX3 and KDBX4)
     # https://github.com/libkeepass/pykeepass
-    unstable.python312Packages.pykeepass
+    python312Packages.pykeepass
     # Command-line program for getting and setting the contents of the X selection
     xsel
     # Fake keyboard/mouse input, window management, and more

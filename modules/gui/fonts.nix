@@ -9,7 +9,7 @@
       twemoji-color-font
 
       # Nerdfonts
-      unstable.nerdfonts
+      nerd-fonts.sauce-code-pro
     ];
   };
 }

@@ -6,7 +6,7 @@
 
   home.packages = with pkgs; [
     # 7-Zip
-    unstable._7zz
+    _7zz
 
     # SSH File System
     sshfs

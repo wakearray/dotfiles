@@ -11,9 +11,11 @@
       u2f = {
         enable = true;
         control = "sufficient";
-        authFile = "/etc/u2f_mappings";
-        appId = "pam://NixOS";
-        origin = "pam://NixOS";
+        settings = {
+          authFile = "/etc/u2f_mappings";
+          appId = "pam://NixOS";
+          origin = "pam://NixOS";
+        };
       };
       services = {
         login.u2fAuth = true;

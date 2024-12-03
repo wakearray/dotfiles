@@ -19,7 +19,10 @@
   home = {
     packages = with pkgs; [
       # Keepassxc - Offline password store
-      unstable.keepassxc
+      keepassxc
+
+      # Video player
+      vlc
     ];
   };
 

@@ -4,8 +4,8 @@
 {
   imports = [
     ./nvim
-    #./emacs.nix
     (if builtins.match "printers" system-details.host-options != null then ./printers.nix else null)
+    ./spellcheck.nix
     ./ssh.nix
     ./tui.nix
     ./zsh.nix
