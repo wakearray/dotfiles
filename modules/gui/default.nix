@@ -8,6 +8,7 @@
     ./gaming.nix
     ./sound.nix
     ./wm
+    ./greeters
   ];
   options.gui = {
     enable = lib.mkEnableOption "Enable sound and nerdfonts on non headless hosts.";

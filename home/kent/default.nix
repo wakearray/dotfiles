@@ -1,4 +1,4 @@
-{ system-details, ... }:
+{ ... }:
 {
   home = {
     username = "kent";
@@ -8,10 +8,7 @@
 
   imports = [
     ../common
-
-    ./git.nix
-    ./zellij.nix
-    (if builtins.match "none" system-details.display-type != null then ./headless.nix else ./gui)
+    ./common
   ];
 
   programs.ssh.matchBlocks."*".user = "kent";

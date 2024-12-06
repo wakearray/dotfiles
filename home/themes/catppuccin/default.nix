@@ -1,5 +1,4 @@
 { pkgs, config, lib, ... }:
-
 {
   # Theme:
   # Catppuccin Macchiato
@@ -29,7 +28,7 @@
     style = {
       catppuccin = lib.mkOverride 10 {
         apply = true;
-	enable = true;
+        enable = true;
       };
       name = lib.mkOverride 10 "kvantum";
     };
@@ -49,13 +48,16 @@
     };
   };
 
-  programs.vscode.extensions = with pkgs.vscode-extensions; [
-    catppuccin.catppuccin-vsc
-    catppuccin.catppuccin-vsc-icons
-  ];
+  programs = {
+    vscode.extensions = with pkgs.vscode-extensions; [
+      catppuccin.catppuccin-vsc
+      catppuccin.catppuccin-vsc-icons
+    ];
+    eww.configDir = ./eww;
+  };
 
-  gui.rofi = {
-    theme =
+  gui = {
+    rofi.theme =
     let
       # Use `mkLiteral` for string-like values that should show without
       # quotes, e.g.:

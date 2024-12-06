@@ -1,0 +1,4 @@
+{ ... }:
+{
+  programs.eww.configDir = ./eww;
+}

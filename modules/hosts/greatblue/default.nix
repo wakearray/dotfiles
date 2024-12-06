@@ -18,6 +18,7 @@
     };
     gaming.enable = true;
     wm.hyprland.enable = true;
+    greeter.tuigreet.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

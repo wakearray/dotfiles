@@ -1,12 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [
-    ./alacritty.nix
-    ./fonts.nix
-    ./gurk.nix
-    ./todo.nix
-  ];
-
+  # home/jess/common/gui
   gtk = {
     enable = true;
     iconTheme = {
@@ -31,5 +25,10 @@
 
   home.packages = with pkgs; [
     pcmanfm
+    file-roller
+    # aseprite - Animated sprite editor & pixel art tool
+    # https://www.aseprite.org/
+    aseprite
   ];
+
 }
