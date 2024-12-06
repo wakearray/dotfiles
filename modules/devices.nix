@@ -1,7 +1,13 @@
 let
   devices = {
    # Kent
-    greatblue = {
+    kent-greatblue = {
+      ip = "192.168.0.11";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOGhJ+3+JajosnhJOFOg0Q202XigcatIgHIWqVdJr1O";
+      hosts = [ "greatblue" "delaware" "lagurus" "jerboa" "sebrightbantam" "orloff" "cichlid" ];
+      users = [ "kent" ];
+    };
+    root-greatblue = {
       ip = "192.168.0.11";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaDZyL98bjRWgVqI2xYKckBy05G3fDIh0Prw4VYz13Q";
       hosts = [ "greatblue" "delaware" "lagurus" "jerboa" "sebrightbantam" "orloff" "cichlid" ];
@@ -39,12 +45,19 @@ let
     };
 
     # Jess
-    cichlid = {
+    root-cichlid = {
       ip = "192.168.0.21";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDTbos7tHfhXlbGSg4l4j6AtT/9+xKtX6+6JANkndht";
       hosts = [ "greatblue" "delaware" "lagurus" "jerboa" "sebrightbantam" "orloff" "cichlid" ];
       users = [ "kent" "jess" ];
     };
+    jess-shoebill = {
+      ip = "192.168.0.21";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEGbcinCfjH5E5ZHFcrAVF1XFh3BzeEItEPUPgJLqaoW";
+      hosts = [ "greatblue" "delaware" "lagurus" "jerboa" "sebrightbantam" "orloff" "cichlid" ];
+      users = [ "kent" "jess" ];
+    };
+
 
     # Servers
     delaware = {

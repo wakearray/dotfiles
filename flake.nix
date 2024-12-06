@@ -22,7 +22,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -34,6 +34,30 @@
     nix-system-graphics = {
       url = "github:soupglasses/nix-system-graphics";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland.url = "github:hyprwm/Hyprland/v0.45.2";
+
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprgrass = {
+      url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland"; # IMPORTANT
+    };
+    hyprsplit = {
+      url = "github:shezdy/hyprsplit/v0.45.2";
+      inputs.hyprland.follows = "hyprland";
+    };
+    hyprspace = {
+      url = "github:KZDKM/Hyprspace";
+      inputs.hyprland.follows = "hyprland";
     };
 
     sops-nix = {
@@ -115,6 +139,7 @@
                   nixvim.homeManagerModules.nixvim
                 ];
               };
+              backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs outputs;
                 system-details = system-details;

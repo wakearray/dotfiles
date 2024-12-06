@@ -1,97 +1,204 @@
-{ pkgs, lib, system-details, ...}:
+{ pkgs, lib, config, system-details, ...}:
 let
-  rofi_plugins = with pkgs; [
-    # Emoji picker for rofi
-    # https://github.com/Mange/rofi-emoji
-    rofi-emoji
-
-    # An interface for top inside rofi
-    # https://github.com/davatorium/rofi-top
-    rofi-top
-
-    # Calculator for rofi
-    # https://github.com/svenstaro/rofi-calc
-    rofi-calc
-
-    # Bluetooth configuration in rofi
-    #
-    #rofi-bluetooth
-  ];
+  cfg = config.gui.rofi;
 in
 {
-  programs = {
-    rofi = {
-      enable = true;
-      package = (
-      if
-        builtins.match "wayland" system-details.display-type != null
-      then
-        pkgs.rofi-wayland.override {
-          plugins = rofi_plugins;
-        }
-      else
-        pkgs.rofi.override {
-          plugins = rofi_plugins;
-        }
-      );
-      extraConfig = {
-        location = 0;
-        yoffset = 0;
-        xoffset = 0;
-        modi = "drun,todo:todofi.sh,calc,top,filebrowser,keys";
-        show-icons = true;
-        steal-focus = true;
-        kb-primary-paste = "Control+V,Shift+Insert";
-        kb-secondary-paste = "Control+v,Insert";
-      };
-      font = "SauceCodePro NFM 16";
-      terminal = "${pkgs.alacritty}/bin/alacritty";
-      theme = lib.mkDefault "gruvbox-dark";
+  options.gui.rofi = with lib; {
+    enable = mkEnableOption "Enable an opionated Rofi configuration";
+
+    plugins = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
     };
 
-    zsh.sessionVariables = {
-      ROFI_SCREENSHOT_DATE_FORMAT = "+%Y-%m-%d-%H-%M-%S";
+    modi = mkOption {
+      type = types.commas;
+      default = "drun,window,todo:todofi.sh,filebrowser";
+    };
+
+    theme = mkOption {
+      type = types.nullOr types.attrs;
+      default = let
+        # Use `mkLiteral` for string-like values that should show without
+        # quotes, e.g.:
+        # {
+        #   foo = "abc"; => foo: "abc";
+        #   bar = mkLiteral "abc"; => bar: abc;
+        # };
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in {
+        # ROUNDED THEME FOR ROFI */
+        # Author: Newman Sanchez (https://github.com/newmanls) */
+        "*" = {
+          bg0 = mkLiteral "#212121F2";
+          bg1 = mkLiteral "#2A2A2A";
+          bg2 = mkLiteral "#3D3D3D80";
+          bg3 = mkLiteral "#4CAF50F2";
+          fg0 = mkLiteral "#E6E6E6";
+          fg1 = mkLiteral "#FFFFFF";
+          fg2 = mkLiteral "#969696";
+          fg3 = mkLiteral "#3D3D3D";
+
+          background-color = mkLiteral "transparent";
+          text-color = mkLiteral "@fg0";
+
+          margin = mkLiteral "0px";
+          padding = mkLiteral "0px";
+          spacing = mkLiteral "0px";
+        };
+
+        "window" = {
+          location = mkLiteral "north";
+          y-offset = mkLiteral "calc(50% - 176px)";
+          width = 480;
+          border-radius = mkLiteral "24px";
+
+          background-color = mkLiteral "@bg0";
+        };
+
+        "mainbox" = {
+          padding = mkLiteral "12px";
+        };
+
+        "inputbar" = {
+          background-color = mkLiteral "@bg1";
+          border-color = mkLiteral "@bg3";
+
+          border = mkLiteral "2px";
+          border-radius = mkLiteral "16px";
+
+          padding = mkLiteral "8px 16px";
+          spacing = mkLiteral "8px";
+          children = mkLiteral "[ prompt, entry ]";
+        };
+
+        "prompt" = {
+          text-color = mkLiteral "@fg2";
+        };
+
+        "entry" = {
+          placeholder = "Search";
+          placeholder-color = mkLiteral "@fg3";
+        };
+
+        "message" = {
+          margin = mkLiteral "12px 0 0";
+          border-radius = mkLiteral "16px";
+          border-color = mkLiteral "@bg2";
+          background-color = mkLiteral "@bg2";
+        };
+
+        "textbox" = {
+          padding = mkLiteral "8px 24px";
+        };
+
+        "listview" = {
+          background-color = mkLiteral "transparent";
+
+          margin = mkLiteral "12px 0 0";
+          lines = 8;
+          columns = 1;
+
+          fixed-height = false;
+        };
+
+        "element" = {
+          padding = mkLiteral "8px 16px";
+          spacing = mkLiteral "8px";
+          border-radius = mkLiteral "16px";
+        };
+
+        "element normal active" = {
+          text-color = mkLiteral "@bg3";
+        };
+
+        "element alternate active" = {
+          text-color = mkLiteral "@bg3";
+        };
+
+        "element selected normal, element selected active" = {
+          background-color = mkLiteral "@bg3";
+        };
+
+        "element-icon" = {
+          size = mkLiteral "1em";
+          vertical-align = mkLiteral "0.5";
+        };
+
+        "element-text" = {
+          text-color = mkLiteral "inherit";
+        };
+      };
+    };
+
+    iconTheme = mkOption {
+      type = types.nullOr types.str;
+      default = "Papirus-Dark";
     };
   };
 
-  home.packages = with pkgs; [
-    # Keepassxc menu for rofi
-    # https://github.com/firecat53/keepmenu
-    keepmenu
+  config = {
+    programs = {
+      rofi = {
+        enable = true;
+        package = (
+        if
+          builtins.match "wayland" system-details.display-type != null
+        then
+          pkgs.rofi-wayland.override {
+            plugins = cfg.plugins;
+          }
+        else
+          pkgs.rofi.override {
+            plugins = cfg.plugins;
+          }
+        );
+        extraConfig = {
+          location = 0;
+          yoffset = 0;
+          xoffset = 0;
+          icon-theme = cfg.iconTheme;
+          drun-display-format = "{icon} {name}";
+          hide-scrollbar = true;
+          display-drun = "   Apps ";
+          display-run = "   Run ";
+          display-window = " 󰕰  Window";
+          display-Network = " 󰤨  Network";
+          display-todo = "   Todo ";
+          display-top = " 󰾅  Top ";
+          display-filebrowser = "  File Browser";
+          display-calc = " 󰪚  Calculator";
+          display-emoji = "   Emoji";
+          sidebar-mode = true;
+          modi = cfg.modi;
+          show-icons = true;
+          steal-focus = true;
+          kb-primary-paste = "Control+V,Shift+Insert";
+          kb-secondary-paste = "Control+v,Insert";
+        };
+        font = "SauceCodePro NFM 16";
+        terminal = lib.mkDefault "${pkgs.alacritty}/bin/alacritty";
+        theme = cfg.theme;
+      };
+    };
+    home.packages = with pkgs; [
+      # A power menu for rofi
+      # Shows a Power/Lock menu with Rofi
+      # https://github.com/jluttine/rofi-power-menu
+      #rofi-power-menu
+      # Add `power-menu:rofi-power-menu` to `modi=` to enable
 
-    ## Required for keepmenu
-    # Python library to interact with keepass databases (supports KDBX3 and KDBX4)
-    # https://github.com/libkeepass/pykeepass
-    python312Packages.pykeepass
-    # Command-line program for getting and setting the contents of the X selection
-    xsel
-    # Fake keyboard/mouse input, window management, and more
-    # https://www.semicomplete.com/projects/xdotool/
-    xdotool
+      # todo.txt support for rofi
+      todofi-sh
+      todo
 
-    # Take screenshots with rofi
-    # https://github.com/ceuk/rofi-screenshot
-    rofi-screenshot
-
-    ## Required for rofi-screenshot
-    # Queries a selection from the user and prints to stdout
-    slop
-    # Run commands on rectangular screen regions
-    ffcast
-    # Tool to access the X clipboard from a console application
-    xclip
-
-    # A power menu for rofi
-    # Shows a Power/Lock menu with Rofi
-    # https://github.com/jluttine/rofi-power-menu
-    #rofi-power-menu
-    # Add `power-menu:rofi-power-menu` to `modi=` to enable
-
-    ## Possibly needed by rofi-calc
-    # Advanced calculator library
-    libqalculate
-  ];
+      # Papirus icons to support the default selected
+      papirus-icon-theme
+    ];
+  };
 }
+
+## DEFAULT ROFI CONFIGURATION
 #configuration {
 #      modes: "window,drun,run,ssh";*/
 #      font: "mono 12";*/

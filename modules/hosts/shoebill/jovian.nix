@@ -23,7 +23,7 @@
       autoStart = true;
 
       # Command to launch the Window Manager or DE
-      desktopSession = "";
+      desktopSession = "if uwsm check may-start; then exec uwsm start hyprland.desktop fi";
 
       # Environment variables to launch Steam with
       environment = {};

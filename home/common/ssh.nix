@@ -13,6 +13,17 @@ in
     };
   };
 
+  # Enable ssh and set its config
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "*" = {
+        identityFile = "~/.ssh/id_ed25519";
+        identitiesOnly = true;
+      };
+    };
+  };
+
   # Enable the ssh-agent
   services.ssh-agent.enable = true;
 }

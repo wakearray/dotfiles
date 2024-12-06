@@ -17,7 +17,7 @@
       polkitPolicyOwners = [ "kent" ];
     };
     gaming.enable = true;
-    wm.gnome.enable = true;
+    wm.hyprland.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

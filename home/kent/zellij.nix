@@ -230,37 +230,37 @@ pane_frames false
 //
 themes {
     gruvbox-light {
-        fg 124 111 100
-        bg 251 82 75
-        black 40 40 40
-        red 205 75 69
-        green 152 151 26
-        yellow 215 153 33
-        blue 69 133 136
-        magenta 177 98 134
-        cyan 104 157 106
-        white 213 196 161
-        orange 214 93 14
+        fg 124 111 100      // #7C6F64
+        bg 251 82 75        // #FB524B
+        black 40 40 40      // #282828
+        red 205 75 69       // #CD4B45
+        green 152 151 26    // #98971A
+        yellow 215 153 33   // #D79921
+        blue 69 133 136     // #458588
+        magenta 177 98 134  // #B16286
+        cyan 104 157 106    // #689D6A
+        white 213 196 161   // #D5C4A1
+        orange 214 93 14    // #D65D0E
     }
     gruvbox-dark {
-        fg 213 196 161
-        bg 40 40 40
-        black 60 56 54
-        red 204 36 29
-        green 152 151 26
-        yellow 215 153 33
-        blue 69 133 136
-        magenta 177 98 134
-        cyan 104 157 106
-        white 251 241 199
-        orange 214 93 14
+        fg 213 196 161      // #D5C4A1
+        bg 40 40 40         // #282828
+        black 60 56 54      // #3C3836
+        red 205 75 69       // #CD4B45
+        green 152 151 26    // #98971A
+        yellow 215 153 33   // #D79921
+        blue 69 133 136     // #458588
+        magenta 177 98 134  // #B16286
+        cyan 104 157 106    // #689D6A
+        white 251 241 199   // #FBF1C7
+        orange 214 93 14    // #D65D0E
     }
 }
 
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "gruvbox-light"
+theme "gruvbox-dark"
 
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with

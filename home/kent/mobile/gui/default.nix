@@ -3,6 +3,7 @@
   imports = [
     ./i3.nix
     ./firefox.nix
+    ./rofi.nix
   ];
 
   home.packages = with pkgs; [

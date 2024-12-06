@@ -8,4 +8,9 @@
     # https://sr.ht/~exec64/imv/
     imv.enable = true;
   };
+
+  home.wm.hyprland = {
+    enable = true;
+    modKey = "ALT";
+  };
 }

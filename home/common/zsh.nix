@@ -172,6 +172,7 @@
           mkdir ''$1 && cd ''$1
         fi
       }
+      eval `ssh-agent` && ssh-add && ssh-add ~/.ssh/signing_key
     '';
     sessionVariables = {
       EDITOR = "nvim";
