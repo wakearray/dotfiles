@@ -64,7 +64,7 @@
        :space-evenly false
        :halign "center"
     (label :truncate true
-           :text {music != "" ? "🎵''${music}" : ""})))
+           :text {music != "" ? "  ''${music}  " : ""})))
 
 (defwidget metric [image-path value onchange]
   (box :orientation "h"

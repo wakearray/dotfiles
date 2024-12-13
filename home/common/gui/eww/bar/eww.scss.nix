@@ -42,6 +42,11 @@ in
     margin-right: 20px;
   }
 
+  .music {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
   .icon {
     color: ${colors.accent-1};
   }
@@ -52,7 +57,7 @@ in
   }
 
   .circle-filled:hover {
-    background-color: ${colors.accent-2};
+    background-color: ${colors.accent-1};
     border-width: 0em;
   }
 
