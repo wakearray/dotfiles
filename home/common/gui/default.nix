@@ -2,9 +2,11 @@
 {
   imports = [
     ./alacritty.nix
+    ./cliphist.nix
     ./mpv.nix
     ./rofi.nix
     ./wthrr.nix
+    ./eww
 
     (
       if
@@ -23,6 +25,9 @@
 
       # Video player
       vlc
+
+      # Utilities for managing home files
+      xdg-utils
     ];
   };
 

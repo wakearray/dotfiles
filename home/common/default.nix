@@ -64,7 +64,10 @@
 
   # Allows home-manager to manage the XDG variables and files
   # https://nix-community.github.io/home-manager/options.xhtml#opt-xdg.enable
-  xdg.enable = true;
+  xdg = {
+    enable = true;
+    configHome = "${config.home.homeDirectory}/.config";
+  };
 
   programs = {
     # zoxide - A smarter cd command

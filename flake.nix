@@ -6,13 +6,16 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # Nix User Packages
     nur.url = "github:nix-community/NUR";
 
+    # Lix - A modern Rust based nix alternative
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Nvim configs handled with Nixlang/Flakes
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs = {
@@ -21,59 +24,76 @@
       };
     };
 
+    # Manage you dotfiles and local apps with Nixlang/Flakes
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Manage your systemd and /etc files on non NixOS Linux distros using Nixlang/Flakes
     system-manager = {
       url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Make NixOS graphics drivers available to home-manager installed programs on non NixOS systems
     nix-system-graphics = {
       url = "github:soupglasses/nix-system-graphics";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Declarative disk management using Nixlang/Flakes
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Hyprland + Plugins
     hyprland.url = "github:hyprwm/Hyprland/v0.45.2";
-
+    ## Official plugins
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+    ## Officially hosted unofficial plugins
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ## hyprland touch screen dispachers
     hyprgrass = {
       url = "github:horriblename/hyprgrass";
       inputs.hyprland.follows = "hyprland"; # IMPORTANT
     };
+    ## Additional hyprland multimonitor support
     hyprsplit = {
       url = "github:shezdy/hyprsplit/v0.45.2";
       inputs.hyprland.follows = "hyprland";
     };
+    ## Workspace overview feature for hyprland
     hyprspace = {
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
 
+    # Secrets management
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Declarative mailserver configured in Nixlang
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
     };
 
+    # Build ISOs, VM images, and more using Nixlang/Flakes
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Catppuccin theming for home-manager
     catppuccin.url = "github:catppuccin/nix";
   };
 

@@ -12,7 +12,7 @@ in
       description = "The command that is used to open the file manager.";
     };
     modKey = mkOption {
-      type = types.enum [ "SHIFT" "CAPS" "CTRL" "CONTROL" "ALT" "MOD2" "MOD3" "SUPER" "WIN" "LOGO" "MOD4" "MOD5" ];
+      type = types.enum [ "SHIFT" "CAPS" "CTRL" "ALT" "SUPER" ];
       default = "SUPER";
     };
     settings = mkOption {
@@ -34,7 +34,6 @@ in
         # https://github.com/horriblename/hyprgrass
         # inputs.hyprgrass.packages.${pkgs.system}.default
 
-        ## Errors, see notes.
         # hyprsplit - hyprland plugin for separate sets of workspaces on each monitor
         # https://github.com/shezdy/hyprsplit
         inputs.hyprsplit.packages.${pkgs.system}.default
@@ -49,10 +48,10 @@ in
       inputs.hyprland-contrib.packages.${pkgs.system}.hdrop
       inputs.hyprland-contrib.packages.${pkgs.system}.scratchpad
       inputs.hyprland-contrib.packages.${pkgs.system}.try_swap_workspace
+      #inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
       pkgs.glm
+      pkgs.eww
+      pkgs.playerctl
     ];
-    programs.eww = {
-      enable = true;
-    };
   };
 }

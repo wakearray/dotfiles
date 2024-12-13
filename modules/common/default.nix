@@ -4,11 +4,12 @@
 {
   imports = [
     ./nvim
-    (if builtins.match "printers" system-details.host-options != null then ./printers.nix else null)
+    ./printers.nix
     ./spellcheck.nix
     ./ssh.nix
     ./tui.nix
     ./zsh.nix
+    ./laptop.nix
   ];
 
   environment.systemPackages = (

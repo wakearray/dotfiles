@@ -27,16 +27,23 @@ in
             prettyName = "Hyprland";
             comment = "Hyprland compositor managed by UWSM";
             binPath = "/run/current-system/sw/bin/Hyprland";
-            #binPath = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland}/bin/hyprland";
           };
         };
       };
       hyprlock.enable = true;
     };
 
-    # hypridle - hyprland's idle deamon
-    # https://github.com/hyprwm/hypridle
-    # services.hypridle.enable = true;
+    security.pam.services.hyprlock = {};
+
+    services = {
+        playerctld = {
+        enable = true;
+      };
+      # hypridle - hyprland's idle deamon
+      # https://github.com/hyprwm/hypridle
+      #hypridle.enable = true;
+    };
+
 
     environment.systemPackages = [
       # A simple polkit authentication agent for Hyprland, written in QT/QML.
