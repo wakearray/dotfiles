@@ -4,7 +4,7 @@ let
   colors = cfg.bar.colors;
 in
 {
-  config = lib.mkIf (cfg.bar.enable && cfg.enable) {
+  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
     home.file."/.config/eww/eww.scss" = {
       enable = cfg.enable;
       force = true;

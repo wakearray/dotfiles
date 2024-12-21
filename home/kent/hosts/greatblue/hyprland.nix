@@ -149,5 +149,9 @@ in
         );
       };
     };
+    gui.eww = {
+      enable = true;
+      bar.enable = true;
+    };
   };
 }
