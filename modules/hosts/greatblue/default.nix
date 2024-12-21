@@ -12,10 +12,7 @@
 
   gui = {
     enable = true;
-    _1pass = {
-      enable = true;
-      polkitPolicyOwners = [ "kent" ];
-    };
+    _1pass.enable = true;
     gaming.enable = true;
     wm.hyprland.enable = true;
     greeter.tuigreet.enable = true;
@@ -43,25 +40,6 @@
     # IDEs
     libsForQt5.kate
 
-    # TTS
-    piper-tts
-    sox
-
-    # Chat apps
-    discord
-    element-desktop
-    telegram-desktop
-    signal-desktop
-
-    # Music
-    tidal-hifi
-
-    # Image editing
-    gimp-with-plugins
-    darktable
-    rawtherapee
-    exiftool
-    inkscape
 
     # Kdenlive is video editing software
     libsForQt5.kdenlive
@@ -69,7 +47,7 @@
     # glaxnimate
 
     # Keyboard firmware
-    via
+    #via
     vial
 
     # Linux support for handheld gaming devices like the Legion Go, ROG Ally, and GPD Win
@@ -84,18 +62,9 @@
 
     xorg.xcbutil
 
-    # Wayland things
-    # Sirula - Simple app launcher for wayland written in rust
-    # https://github.com/DorianRudolph/sirula
-    # sirula <- Waiting on PR: https://github.com/NixOS/nixpkgs/pull/281963
-
     # utils
     usbutils
     android-tools
-
-    # Internet browsers
-    firefox
-    google-chrome
 
     # Audio and video format converter
     ffmpeg_7-full

@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  # home/common/android/gui
   home.packages = with pkgs; [
     # clipboard management
     xclip
@@ -12,6 +13,7 @@
     xorg.xrdb
     xorg.xwininfo
     xorg.xprop
+    xorg.xev
 
     # pcmanfm - gui file manager
     pcmanfm

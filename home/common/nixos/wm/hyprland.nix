@@ -50,8 +50,6 @@ in
       inputs.hyprland-contrib.packages.${pkgs.system}.try_swap_workspace
       #inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
       pkgs.glm
-      pkgs.eww
-      pkgs.playerctl
     ];
   };
 }

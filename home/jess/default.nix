@@ -1,7 +1,8 @@
 { config, ... }:
 {
   imports = [
-    ./starship.nix
+    ./common
+    ../common
     ../themes/catppuccin.nix
   ];
 

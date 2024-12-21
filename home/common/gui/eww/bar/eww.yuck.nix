@@ -1,6 +1,9 @@
 { lib, config, ... }:
+let
+  cfg = config.gui.eww;
+in
 {
-  config = lib.mkIf config.gui.eww.bar.enable {
+  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
     home.file."/.config/eww/eww.yuck" = {
       enable = true;
       force = true;

@@ -22,4 +22,5 @@ in
     openssh.authorizedKeys.keys = userKeys;
   };
   nix.settings.trusted-users = [ "kent" ];
+  gui._1pass.polkitPolicyOwners = [ "kent" ];
 }

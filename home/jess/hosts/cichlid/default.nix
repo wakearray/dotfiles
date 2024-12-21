@@ -1,16 +1,11 @@
 { pkgs, ... }:
 {
-  # home/jess/common/gui
+  # home/jess/cichlid
   imports = [
-    ./rofi.nix
+    ../../themes/catppuccin
+    ./starship.nix
+    ./gnome.nix
   ];
-  gtk = {
-    enable = true;
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
-    };
-  };
 
   gui.rofi = {
     enable = true;
@@ -25,13 +20,4 @@
     ];
     modi = "drun,todo:todofi.sh,filebrowser,emoji";
   };
-
-  home.packages = with pkgs; [
-    pcmanfm
-    file-roller
-    # aseprite - Animated sprite editor & pixel art tool
-    # https://www.aseprite.org/
-    aseprite
-  ];
-
 }

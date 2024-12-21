@@ -192,6 +192,10 @@ in
       todofi-sh
       todo
 
+      # Emoji picker - Get a selection of emojis with dmenu or rofi
+      # https://github.com/thingsiplay/emojipick
+      emojipick
+
       # Papirus icons to support the default selected
       papirus-icon-theme
     ];

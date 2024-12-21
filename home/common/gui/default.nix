@@ -1,5 +1,6 @@
 { pkgs, system-details, ... }:
 {
+  # home/common/gui
   imports = [
     ./alacritty.nix
     ./cliphist.nix
@@ -7,7 +8,9 @@
     ./rofi.nix
     ./wthrr.nix
     ./eww
-
+    ./vscode.nix
+    ./fonts.nix
+    ./firefox.nix
     (
       if
         builtins.match "aarch64-linux" system-details.current-system != null
@@ -28,6 +31,9 @@
 
       # Utilities for managing home files
       xdg-utils
+
+      # Signal Messenger for desktop
+      signal-desktop
     ];
   };
 

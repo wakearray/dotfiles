@@ -1,4 +1,65 @@
 { pkgs, config, lib, ... }:
+let
+  # https://catppuccin.com/palette
+  colors = {
+    latte = {
+      rosewater = "#dc8a78";
+      flamingo  = "#dd7878";
+      pink      = "#ea76cb";
+      mauve     = "#8839ef";
+      red       = "#d20f39";
+      maroon    = "#e64553";
+      peach     = "#fe640b";
+      yellow    = "#df8e1d";
+      green     = "#40a02b";
+      teal      = "#179299";
+      sky       = "#04a5e5";
+      sapphire  = "#209fb5";
+      blue      = "#1e66f5";
+      lavender  = "#7287fd";
+      text      = "#4c4f69";
+      subtext-1 = "#5c5f77";
+      subtext-0 = "#6c6f85";
+      overlay-2 = "#7c7f93";
+      overlay-1 = "#8c8fa1";
+      overlay-0 = "#9ca0b0";
+      surface-2 = "#acb0be";
+      surface-1 = "#bcc0cc";
+      surface-0 = "#ccd0da";
+      base      = "#eff1f5";
+      mantle    = "#e6e9ef";
+      crust     = "#dce0e8";
+    };
+    macchiato = {
+      rosewater = "#f4dbd6";
+      flamingo  = "#f0c6c6";
+      pink      = "#f5bde6";
+      mauve     = "#c6a0f6";
+      red       = "#ed8796";
+      maroon    = "#ee99a0";
+      peach     = "#f5a97f";
+      yellow    = "#eed49f";
+      green     = "#a6da95";
+      teal      = "#8bd5ca";
+      sky       = "#91d7e3";
+      sapphire  = "#7dc4e4";
+      blue      = "#8aadf4";
+      lavender  = "#b7bdf8";
+      text      = "#cad3f5";
+      subtext-1 = "#b8c0e0";
+      subtext-0 = "#a5adcb";
+      overlay-2 = "#939ab7";
+      overlay-1 = "#8087a2";
+      overlay-0 = "#6e738d";
+      surface-2 = "#5b6078";
+      surface-1 = "#494d64";
+      surface-0 = "#363a4f";
+      base      = "#24273a";
+      mantle    = "#1e2030";
+      crust     = "#181926";
+    };
+  };
+in
 {
   # Theme:
   # Catppuccin Macchiato
@@ -53,10 +114,21 @@
       catppuccin.catppuccin-vsc
       catppuccin.catppuccin-vsc-icons
     ];
-    eww.configDir = ./eww;
   };
 
   gui = {
+    eww = {
+      bar = {
+        colors = {
+          fg-1 = colors.fg_0;
+          fg-2 = colors.fg_1;
+          bg-1 = colors.bg_0;
+          bg-2 = colors.bg_1;
+          accent-1 = colors.fg_orange;
+          accent-2 = colors.fg_yellow;
+        };
+      };
+    };
     rofi.theme =
     let
       # Use `mkLiteral` for string-like values that should show without

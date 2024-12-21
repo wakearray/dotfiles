@@ -48,9 +48,7 @@ in
   };
   config = {
     gui.eww = {
-      enable = true;
       bar = {
-        enable = true;
         colors = {
           fg-1 = colors.fg_0;
           fg-2 = colors.fg_1;

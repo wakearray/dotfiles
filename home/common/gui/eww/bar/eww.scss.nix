@@ -1,10 +1,10 @@
 { lib, config, ... }:
 let
-  cfg = config.gui.eww.bar;
-  colors = cfg.colors;
+  cfg = config.gui.eww;
+  colors = cfg.bar.colors;
 in
 {
-  config = lib.mkIf config.gui.eww.bar.enable {
+  config = lib.mkIf (cfg.bar.enable && cfg.enable) {
     home.file."/.config/eww/eww.scss" = {
       enable = cfg.enable;
       force = true;

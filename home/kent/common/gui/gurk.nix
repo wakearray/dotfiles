@@ -1,11 +1,18 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
+let
+  cfg = config.tui.gurk;
+in
 {
-  home = {
-    packages = with pkgs; [
-      # Signal Messenger client for terminal
-      # https://github.com/boxdot/gurk-rs
-      gurk-rs
-    ];
+  options.tui.gurk = with lib; {
+    enable = mkEnableOption "";
+  };
+  config = lib.mkIf cfg.enable {
+    home = {
+      packages = with pkgs; [
+        # Signal Messenger client for terminal
+        # https://github.com/boxdot/gurk-rs
+        gurk-rs
+      ];
 #      file.".config/gurk.toml" = {
 #        enable = true;
 #        force = true;
@@ -36,7 +43,7 @@
 #  alt-w = "copy_message selected"
 #        '';
 #      };
-  };
+    };
 
 ## Default keybindings
 #
@@ -98,5 +105,5 @@
 #  delete_character previous
 #  edit_message
 #  open_url
-
+  };
 }
