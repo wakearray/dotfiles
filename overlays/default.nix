@@ -20,4 +20,11 @@
       config.allowUnfree = true;
     };
   };
+
+  # An attempt at overriding nur into 'pkgs.nur'
+  nur-packages = final: _prev: {
+    nur = import inputs.nur {
+      system = final.system;
+    };
+  };
 }

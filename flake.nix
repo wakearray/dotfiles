@@ -118,9 +118,9 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
 
     # Special args can have a few variables to control what things are installed
-    # host-type = (one of) "laptop" "desktop" "server" "android" "kiosk"
-    # display-type = (one of) "wayland" "x11" "none"
-    # host-options = (one or more of) "printers" "installer" "eink"
+    # host-type      = (one of) "laptop" "desktop" "server" "android" "kiosk"
+    # display-type   = (one of) "wayland" "x11" "none"
+    # host-options   = (one or more of) "printers" "installer" "eink"
     # current-system = (one of) "x86_64-linux" "aarch64-linux"
 
     # NixOS configuration entrypoint

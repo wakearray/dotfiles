@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./i3.nix
+    ./polybar.nix
+  ];
   # home/common/android/gui
   home.packages = with pkgs; [
     # clipboard management
@@ -19,6 +23,6 @@
     pcmanfm
 
     # Mesa - OpenGL drivers
-    unstable.mesa
+    mesa
   ];
 }

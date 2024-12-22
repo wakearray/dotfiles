@@ -1,4 +1,7 @@
 { config, ... }:
+let
+  user = config.home.username;
+in
 {
   imports = [
     ./common
@@ -8,12 +11,9 @@
 
   home = {
     username = "jess";
-    homeDirectory = "/home/jess";
+    homeDirectory = "/home/${user}";
     stateVersion = "24.05";
-    sessionVariables = {
-      FLAKE = "${config.home.homeDirectory}";
-    };
   };
 
-  programs.ssh.matchBlocks."*".user = "jess";
+  programs.ssh.matchBlocks."*".user = user;
 }
