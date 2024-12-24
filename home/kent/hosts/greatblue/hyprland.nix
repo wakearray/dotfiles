@@ -76,7 +76,7 @@ in
           "firefox"
           "signal-desktop"
           "${pkgs.eww}/bin/eww daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open-many bar:primary"
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open-many bar"
         ];
         exec-shutdown = [
           "${pkgs.eww}/bin/eww close-all && pkill eww"

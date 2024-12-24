@@ -5,7 +5,7 @@ let
 in
 {
   config = lib.mkIf (cfg.enable && cfg.bar.enable) {
-    home.file."/.config/eww/eww.scss" = {
+    home.file."/.config/eww/bar/eww.scss" = {
       enable = cfg.enable;
       force = true;
       text = ''

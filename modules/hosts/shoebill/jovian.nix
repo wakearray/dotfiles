@@ -33,7 +33,6 @@
 
       user = "jess";
 
-
     };
     devices.steamdeck = {
       # Enable Steam Deck-specific configurations

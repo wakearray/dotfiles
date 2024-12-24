@@ -69,4 +69,6 @@
     # Audio and video format converter
     ffmpeg_7-full
   ];
+
+  services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
 }

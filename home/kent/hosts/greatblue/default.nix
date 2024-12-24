@@ -36,6 +36,10 @@
       rawtherapee
       exiftool
       inkscape
+
+      # 3D Modeling
+      blender
+      openscad-unstable
     ];
   };
 }

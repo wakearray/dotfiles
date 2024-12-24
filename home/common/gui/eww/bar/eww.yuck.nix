@@ -1,10 +1,22 @@
-{ lib, config, ... }:
+{ lib, config, system-details, ... }:
 let
   cfg = config.gui.eww;
+  defwindow = (
+    if
+      builtins.match "wayland" system-details.display-type != null
+    then
+      ''
+
+      ''
+    else
+      ''
+
+      ''
+  );
 in
 {
   config = lib.mkIf (cfg.enable && cfg.bar.enable) {
-    home.file."/.config/eww/eww.yuck" = {
+    home.file."/.config/eww/bar/eww.yuck" = {
       enable = true;
       force = true;
       text = ''
@@ -27,13 +39,13 @@ in
              :space-evenly true
              :icon-size 30
              :prepend-new true)
-    (metric :image-path "./img/volume-high.svg"
+    (metric :image-path "../img/volume-high.svg"
             :value volume
             :onchange "amixer -D pulse sset Master {}%")
-    (metric :image-path "./img/memory.svg"
+    (metric :image-path "../img/memory.svg"
             :value {EWW_RAM.used_mem_perc}
             :onchange "")
-    (metric :image-path "./img/battery-full.svg"
+    (metric :image-path "../img/battery-full.svg"
             :value {EWW_BATTERY["BAT0"].capacity}
             :onchange "")
     time))

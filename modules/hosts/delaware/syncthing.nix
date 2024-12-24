@@ -17,6 +17,7 @@
         "Kent_y700" = { id = "QA7LAZ2-36XZMTG-IQ6IKMK-C3RKD5O-Y5X53TV-J5NLKQM-NPOG6RU-TP7WTQE"; };
         "Kent_Boox" = { id = "T3U4VSV-7LPWYBK-7GNDAMU-GG7IMXO-OKCFZQB-4WMC2KP-RFANMLH-FFO3WQ7"; };
         "Kent_Hisense_A9" = { id = "S55WSYJ-K3C6MV7-YWEUAW5-YAYHAB2-FIZ7RNR-NE7KCTZ-PZNPO2I-6S3W4AT"; };
+        "Kent_Hibreak_Color" = { id = "PXINNDR-CVMSSUA-GQHDX4N-BGE27NZ-MKQSN63-YGUTHG7-OTMHYI6-7JV4XAN"; };
         "Kent_GreatBlue" = {
           id = "6B6CFWQ-AOVKOLS-AJ77Y7U-T5G7QPG-IQTPCSJ-NRPZNJR-4LMLIRS-FGMYSQ2";
           autoAcceptFolders = true;
@@ -36,6 +37,7 @@
             "Kent_y700"
             "Kent_Boox"
             "Kent_Hisense_A9"
+            "Kent_Hibreak_Color"
             "Kent_GreatBlue"
           ];
         };
@@ -47,6 +49,7 @@
             "Kent_y700"
             "Kent_Boox"
             "Kent_Hisense_A9"
+            "Kent_Hibreak_Color"
             "Kent_GreatBlue"
           ];
         };
@@ -62,6 +65,7 @@
             "Kent_y700"
             "Kent_Boox"
             "Kent_Hisense_A9"
+            "Kent_Hibreak_Color"
             "Kent_GreatBlue"
           ];
 	      };
