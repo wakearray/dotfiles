@@ -6,11 +6,6 @@ in
   options.home.wm.hyprland = with lib; {
     enable = mkEnableOption "Enable an opinionated hyperland home-manager configuration.";
 
-    fileManager = mkOption {
-      type = types.str;
-      default = "pcmanfm";
-      description = "The command that is used to open the file manager.";
-    };
     modKey = mkOption {
       type = types.enum [ "SHIFT" "CAPS" "CTRL" "ALT" "SUPER" ];
       default = "SUPER";

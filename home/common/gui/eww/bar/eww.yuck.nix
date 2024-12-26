@@ -4,13 +4,19 @@ let
   defwindow = (
     if
       builtins.match "wayland" system-details.display-type != null
-    then
+    then # Wayland config
       ''
-
+  :stacking "bg"
+  :exclusive true
+  :focusable false
+  :namespace "dock"
       ''
-    else
+    else # X11 config
       ''
-
+  :stacking "bg"
+  :wm-ignore true
+  :reserve (struts :distance "2%" :side "top")
+  :windowtype "dock"
       ''
   );
 in
@@ -22,9 +28,7 @@ in
       text = ''
 (defwindow bar
   :monitor 0
-  :stacking "bg"
-  :exclusive true
-  :focusable false
+${defwindow}
   :geometry (geometry :x "0%"
                       :y "10px"
                       :width "120%"
@@ -34,10 +38,11 @@ in
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (systray :spacing 5
+    (systray :class "systray"
+             :spacing 5
              :orientation "h"
              :space-evenly true
-             :icon-size 30
+             :icon-size 20
              :prepend-new true)
     (metric :image-path "../img/volume-high.svg"
             :value volume
@@ -97,7 +102,7 @@ in
            :onchange onchange)))
 
 (defwidget workspace_toggle [ workspace ]
-  (button :onclick "hyprctl dispatch split:workspace ''${workspace} && eww update active_workspace=''${workspace}"
+  (button :onclick "hyprctl dispatch split:workspace ''${workspace} && eww update -c ${config.xdg.configHome}/eww/bar active_workspace=''${workspace}"
           :class {active_workspace == "''${workspace}" ? "circle-filled" : "circle-empty"}))
 
 (deflisten music :initial ""
@@ -112,6 +117,7 @@ in
 (defvar active_workspace "1")
       '';
     };
+    gui.eww.scripts.getvol.enable = true;
   };
 }
 

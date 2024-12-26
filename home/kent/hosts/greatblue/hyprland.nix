@@ -9,10 +9,10 @@ in
       modKey = "SUPER";
       settings = {
         "$mod" = "${cfg.modKey}";
-        "$fileManager" = "${cfg.fileManager}";
         # https://wiki.hyprland.org/Configuring/Monitors/
         monitor = [
           "desc:Japan Display Inc. GPD1001H 0x00000001, 2560x1600@60.01Hz, auto-down, 1.666667"
+          "desc:AOC 2279WH AHXJ49A007682, 1920x1080@60.00Hz, auto-up, 1"
           ", preferred, auto, 1"
         ];
         windowrulev2 = [
@@ -20,6 +20,7 @@ in
           "workspace 2, class:^(Signal)(.*)"
           "workspace 2, class:^(Element)(.*)"
           "workspace 2, class:^(Telegram)(.*)"
+          "workspace 4, class:^(Firefox)(.*)"
           "workspace 8, class:^(1Password)(.*)"
         ];
         plugin = {
@@ -76,19 +77,16 @@ in
           "firefox"
           "signal-desktop"
           "${pkgs.eww}/bin/eww daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open-many bar"
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar"
         ];
         exec-shutdown = [
           "${pkgs.eww}/bin/eww close-all && pkill eww"
         ];
         bind = [
-          # Temporary eww launch
-          "$mod      , Z       , exec, ${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open-many bar"
-
           # App launcher shortcut
           "$mod      , D       , exec, rofi -show drun"
           # Open Alacritty on workspace 1
-          "$mod      , A       , exec, [workspace 1] alacritty"
+          "$mod      , A       , exec, alacritty"
           # Open Firefox on active workspace
           "$mod      , B       , exec, firefox"
           # Take a screenshot
@@ -142,9 +140,9 @@ in
           let ws = i + 1;
           in [
             "$mod, code:1${toString i}, split:workspace, ${toString ws}"
-            "$mod, code:1${toString i}, exec, eww update active_workspace='${toString ws}'"
+            "$mod, code:1${toString i}, exec, eww update -c ${config.xdg.configHome}/eww/bar active_workspace='${toString ws}'"
             "$mod SHIFT, code:1${toString i}, split:movetoworkspace, ${toString ws}"
-            "$mod SHIFT, code:1${toString i}, exec, eww update active_workspace='${toString ws}'"
+            "$mod SHIFT, code:1${toString i}, exec, eww update -c ${config.xdg.configHome}/eww/bar active_workspace='${toString ws}'"
           ])9)
         );
       };

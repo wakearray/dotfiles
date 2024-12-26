@@ -1,5 +1,6 @@
 { lib,
   config,
+  pkgs,
   ... }:
 {
   config = lib.mkIf config.gui.enable {
@@ -13,5 +14,8 @@
       };
       pulse.enable = true;
     };
+    environment.systemPackages = [
+      pkgs.pamixer
+    ];
   };
 }

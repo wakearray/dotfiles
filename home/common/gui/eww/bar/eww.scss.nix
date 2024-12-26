@@ -28,6 +28,11 @@ in
 
   // Styles on classes (see eww.yuck for more information)
 
+  .systray {
+    margin-right: 20px;
+  }
+
+
   .metric scale trough highlight {
     background-color: ${colors.accent-1};
     border-radius: 10px;
@@ -52,7 +57,10 @@ in
   }
 
   .workspaces {
-    margin: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
     padding: 0px;
   }
 

@@ -5,6 +5,7 @@ in
 {
   imports = [
     ./bar
+    ./scripts
   ];
   options.gui.eww = with lib; {
     enable = mkEnableOption "Enable eww";
