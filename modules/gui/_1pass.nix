@@ -14,6 +14,9 @@
       # Password Management
       _1password-cli
       _1password-gui
+
+      # Gnome Keyring is needed for 1Password to be able to store u2f tokens
+      gnome-keyring
     ];
 
   #  # This has some issues

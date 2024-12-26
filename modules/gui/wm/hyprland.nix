@@ -4,7 +4,8 @@ let
 in
 {
   options.gui.wm.hyprland = with lib; {
-    enable = mkEnableOption "Enable hyperland with UWSM.";
+    enable = mkEnableOption "Enable hyprland with UWSM.";
+    #hypridle = mkEnableOption "Eable hyprland's idle daemon.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -33,7 +34,12 @@ in
       hyprlock.enable = true;
     };
 
+    # A customizable lockscreen for hyprland
     security.pam.services.hyprlock = {};
+
+    # A simple polkit authentication agent for Hyprland, written in QT/QML.
+    # https://github.com/hyprwm/hyprpolkitagent
+    #security.polkit.package = pkgs.hyprpolkitagent;
 
     services = {
         playerctld = {
@@ -41,15 +47,8 @@ in
       };
       # hypridle - hyprland's idle deamon
       # https://github.com/hyprwm/hypridle
-      #hypridle.enable = true;
+      #hypridle.enable = cfg.hypridle;
     };
-
-
-    environment.systemPackages = [
-      # A simple polkit authentication agent for Hyprland, written in QT/QML.
-      # https://github.com/hyprwm/hyprpolkitagent
-      pkgs.hyprpolkitagent
-    ];
 
     # Compatibility settings:
     environment.sessionVariables.NIXOS_OZONE_WL = "1";

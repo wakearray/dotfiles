@@ -1,9 +1,8 @@
-{ pkgs, ... }:
+{ lib, system-details, pkgs, ... }:
 {
   # kent/common/gui
+  # All settings and packages should be compatible with Android profiles
   imports = [
-    ./alacritty.nix
-    ./fonts.nix
     ./gurk.nix
     ./todo.nix
     ../../../themes/gruvbox
@@ -18,7 +17,7 @@
     };
   };
 
-  gui.rofi = {
+  gui.rofi = lib.mkIf (builtins.match "wayland" system-details.display-type != null) {
     enable = true;
     plugins = with pkgs; [
       # Bluetooth configuration in rofi

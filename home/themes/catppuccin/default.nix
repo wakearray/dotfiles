@@ -1,181 +1,255 @@
 { pkgs, config, lib, ... }:
-{
-  # Theme:
-  # Catppuccin Macchiato
-  # https://catppuccin.com/palette#flavor-macchiato
-  #
-  # #181926  #a5adcb  #eed49f
-  # #1e2030  #b8c0e0  #f5a97f
-  # #24273a  #cad3f5  #ee99a0
-  # #363a4f  #b7bdf8  #ed8796
-  # #494d64  #8aadf4  #c6a0f6
-  # #5b6078  #7dc4e4  #f5bde6
-  # #6e738d  #91d7e3  #f0c6c6
-  # #8087a2  #8bd5ca  #f4dbd6
-  # #939ab7  #a6da95
-  #
-  catppuccin = {
-    # Enable the Catppuccin Macchiato theme globally
-    enable = true;
-    flavor = "macchiato";
-    pointerCursor = {
-      enable = true;
+let
+  # https://catppuccin.com/palette
+  colors = {
+    # Altered for better color e-paper use
+    latte = {
+      rosewater = "#dc8a78";
+      flamingo  = "#dd7878";
+      pink      = "#ea76cb";
+      mauve     = "#8839ef";
+      red       = "#d20f39";
+      maroon    = "#e64553";
+      peach     = "#fe640b";
+      yellow    = "#df8e1d";
+      green     = "#40a02b";
+      teal      = "#179299";
+      sky       = "#04a5e5";
+      sapphire  = "#209fb5";
+      blue      = "#1e66f5";
+      lavender  = "#7287fd";
+      text      = "#000000";
+      subtext-1 = "#202020";
+      subtext-0 = "#303035";
+      overlay-2 = "#7c7f93";
+      overlay-1 = "#8c8fa1";
+      overlay-0 = "#9ca0b0";
+      surface-2 = "#acb0be";
+      surface-1 = "#bcc0cc";
+      surface-0 = "#ccd0da";
+      base      = "#ffffff";
+      mantle    = "#ffffff";
+      crust     = "#ffffff";
+    };
+    macchiato = {
+      rosewater = "#f4dbd6";
+      flamingo  = "#f0c6c6";
+      pink      = "#f5bde6";
+      mauve     = "#c6a0f6";
+      red       = "#ed8796";
+      maroon    = "#ee99a0";
+      peach     = "#f5a97f";
+      yellow    = "#eed49f";
+      green     = "#a6da95";
+      teal      = "#8bd5ca";
+      sky       = "#91d7e3";
+      sapphire  = "#7dc4e4";
+      blue      = "#8aadf4";
+      lavender  = "#b7bdf8";
+      text      = "#cad3f5";
+      subtext-1 = "#b8c0e0";
+      subtext-0 = "#a5adcb";
+      overlay-2 = "#939ab7";
+      overlay-1 = "#8087a2";
+      overlay-0 = "#6e738d";
+      surface-2 = "#5b6078";
+      surface-1 = "#494d64";
+      surface-0 = "#363a4f";
+      base      = "#24273a";
+      mantle    = "#1e2030";
+      crust     = "#181926";
     };
   };
+  cfg = config.themes.catppuccin;
+in
+{
+  options.themes.catppuccin = with lib; {
+    enable = mkEnableOption "Enable an opinionated catppuccin theme.";
 
-  qt = {
-    enable = true;
-    style = {
-      catppuccin = lib.mkOverride 10 {
-        apply = true;
+    flavor = mkOption {
+      type = types.str;
+      default = "macchiato";
+    };
+  };
+  config = lib.mkIf cfg.enable {
+    catppuccin = {
+      # Enable the Catppuccin Macchiato theme globally
+      enable = true;
+      flavor = cfg.flavor;
+      pointerCursor = {
         enable = true;
       };
-      name = lib.mkOverride 10 "kvantum";
-    };
-    platformTheme.name = lib.mkOverride 10 "kvantum";
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      package = pkgs.catppuccin-gtk;
-      name = "macchiato";
     };
 
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus";
+    qt = {
+      enable = true;
+      style = {
+        catppuccin = lib.mkOverride 10 {
+          apply = true;
+          enable = true;
+        };
+        name = lib.mkOverride 10 "kvantum";
+      };
+      platformTheme.name = lib.mkOverride 10 "kvantum";
     };
-  };
 
-  programs = {
-    vscode.extensions = with pkgs.vscode-extensions; [
-      catppuccin.catppuccin-vsc
-      catppuccin.catppuccin-vsc-icons
-    ];
-    eww.configDir = ./eww;
-  };
-
-  gui = {
-    rofi.theme =
-    let
-      # Use `mkLiteral` for string-like values that should show without
-      # quotes, e.g.:
-      # {
-      #   foo = "abc"; => foo: "abc";
-      #   bar = mkLiteral "abc"; => bar: abc;
-      # };
-      inherit (config.lib.formats.rasi) mkLiteral;
-    in {
-      "*" = {
-        bg-col = mkLiteral "#24273A";
-        bg-col-light = mkLiteral "#24273A";
-        border-col = mkLiteral "#24273A";
-        selected-col = mkLiteral "#24273A";
-        blue = mkLiteral "#8AADf4";
-        fg-col = mkLiteral "#CAD3F5";
-        fg-col2 = mkLiteral "#ED8796";
-        grey = mkLiteral "#6e738d";
-
-        width = 600;
+    gtk = {
+      enable = true;
+      theme = {
+        package = pkgs.catppuccin-gtk;
+        name = cfg.flavor;
       };
 
-      "element-text, element-icon , mode-switcher" = {
-        background-color = mkLiteral "inherit";
-        text-color = mkLiteral "inherit";
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus";
       };
+    };
 
-      "window" = {
-        height = mkLiteral "360px";
-        border = mkLiteral "3px";
-        border-color = mkLiteral "@border-col";
-        background-color = mkLiteral "@bg-col";
+    programs = {
+      vscode.extensions = with pkgs.vscode-extensions; [
+        catppuccin.catppuccin-vsc
+        catppuccin.catppuccin-vsc-icons
+      ];
+    };
+
+    gui = {
+      eww = {
+        bar = {
+          colors = let
+            c = colors.${cfg.flavor};
+          in
+          {
+            fg-1 = c.pink;
+            fg-2 = c.mauve;
+            bg-1 = c.base;
+            bg-2 = c.crust;
+            accent-1 = c.pink;
+            accent-2 = c.mauve;
+          };
+        };
       };
+      rofi.theme =
+      let
+        # Use `mkLiteral` for string-like values that should show without
+        # quotes, e.g.:
+        # {
+        #   foo = "abc"; => foo: "abc";
+        #   bar = mkLiteral "abc"; => bar: abc;
+        # };
+        inherit (config.lib.formats.rasi) mkLiteral;
+        c = colors.${cfg.flavor};
+      in {
+        "*" = {
+          bg-col = mkLiteral c.crust;
+          bg-col-light = mkLiteral c.crust;
+          border-col = mkLiteral c.crust;
+          selected-col = mkLiteral c.crust;
+          blue = mkLiteral c.blue;
+          fg-col = mkLiteral c.text;
+          fg-col2 = mkLiteral c.red;
+          grey = mkLiteral c.overlay-0;
 
-      "mainbox" = {
-        background-color = mkLiteral "@bg-col";
-      };
+          width = 600;
+        };
 
-      "inputbar" = {
-        children = mkLiteral "[prompt,entry]";
-        background-color = mkLiteral "@bg-col";
-        border-radius = mkLiteral "5px";
-        padding = mkLiteral "2px";
-      };
+        "element-text, element-icon , mode-switcher" = {
+          background-color = mkLiteral "inherit";
+          text-color = mkLiteral "inherit";
+        };
 
-      "prompt" = {
-        background-color = mkLiteral "@blue";
-        padding = mkLiteral "6px";
-        text-color = mkLiteral "@bg-col";
-        border-radius = mkLiteral "3px";
-        margin = mkLiteral "20px 0px 0px 20px";
-      };
+        "window" = {
+          height = mkLiteral "360px";
+          border = mkLiteral "3px";
+          border-color = mkLiteral "@border-col";
+          background-color = mkLiteral "@bg-col";
+        };
 
-      "textbox-prompt-colon" = {
-        expand = false;
-        str = ":";
-      };
+        "mainbox" = {
+          background-color = mkLiteral "@bg-col";
+        };
 
-      "entry" = {
-        padding = mkLiteral "6px";
-        margin = mkLiteral "20px 0px 0px 10px";
-        text-color = mkLiteral "@fg-col";
-        background-color = mkLiteral "@bg-col";
-      };
+        "inputbar" = {
+          children = mkLiteral "[prompt,entry]";
+          background-color = mkLiteral "@bg-col";
+          border-radius = mkLiteral "5px";
+          padding = mkLiteral "2px";
+        };
 
-      "listview" = {
-        border = mkLiteral "0px 0px 0px";
-        padding = mkLiteral "6px 0px 0px";
-        margin = mkLiteral "10px 0px 0px 20px";
-        columns = mkLiteral "2";
-        lines = mkLiteral "5";
-        background-color = mkLiteral "@bg-col";
-      };
+        "prompt" = {
+          background-color = mkLiteral "@blue";
+          padding = mkLiteral "6px";
+          text-color = mkLiteral "@bg-col";
+          border-radius = mkLiteral "3px";
+          margin = mkLiteral "20px 0px 0px 20px";
+        };
 
-      "element" = {
-        padding = mkLiteral "5px";
-        background-color = mkLiteral "@bg-col";
-        text-color = mkLiteral "@fg-col";
-      };
+        "textbox-prompt-colon" = {
+          expand = false;
+          str = ":";
+        };
 
-      "element-icon" = {
-        size = mkLiteral "25px";
-      };
+        "entry" = {
+          padding = mkLiteral "6px";
+          margin = mkLiteral "20px 0px 0px 10px";
+          text-color = mkLiteral "@fg-col";
+          background-color = mkLiteral "@bg-col";
+        };
 
-      "element selected" = {
-        background-color = mkLiteral "@selected-col ";
-        text-color = mkLiteral "@fg-col2";
-      };
+        "listview" = {
+          border = mkLiteral "0px 0px 0px";
+          padding = mkLiteral "6px 0px 0px";
+          margin = mkLiteral "10px 0px 0px 20px";
+          columns = mkLiteral "2";
+          lines = mkLiteral "5";
+          background-color = mkLiteral "@bg-col";
+        };
 
-      "mode-switcher" = {
-        spacing = mkLiteral "0";
-      };
+        "element" = {
+          padding = mkLiteral "5px";
+          background-color = mkLiteral "@bg-col";
+          text-color = mkLiteral "@fg-col";
+        };
 
-      "button" = {
-        padding = mkLiteral "10px";
-        background-color = mkLiteral "@bg-col-light";
-        text-color = mkLiteral "@grey";
-        vertical-align = mkLiteral "0.5";
-        horizontal-align = mkLiteral "0.5";
-      };
+        "element-icon" = {
+          size = mkLiteral "25px";
+        };
 
-      "button selected" = {
-        background-color = mkLiteral "@bg-col";
-        text-color = mkLiteral "@blue";
-      };
+        "element selected" = {
+          background-color = mkLiteral "@selected-col ";
+          text-color = mkLiteral "@fg-col2";
+        };
 
-      "message" = {
-        background-color = mkLiteral "@bg-col-light";
-        margin = mkLiteral "2px";
-        padding = mkLiteral "2px";
-        border-radius = mkLiteral "5px";
-      };
+        "mode-switcher" = {
+          spacing = mkLiteral "0";
+        };
 
-      "textbox" = {
-        padding = mkLiteral "6px";
-        margin = mkLiteral "20px 0px 0px 20px";
-        text-color = mkLiteral "@blue";
-        background-color = mkLiteral "@bg-col-light";
+        "button" = {
+          padding = mkLiteral "10px";
+          background-color = mkLiteral "@bg-col-light";
+          text-color = mkLiteral "@grey";
+          vertical-align = mkLiteral "0.5";
+          horizontal-align = mkLiteral "0.5";
+        };
+
+        "button selected" = {
+          background-color = mkLiteral "@bg-col";
+          text-color = mkLiteral "@blue";
+        };
+
+        "message" = {
+          background-color = mkLiteral "@bg-col-light";
+          margin = mkLiteral "2px";
+          padding = mkLiteral "2px";
+          border-radius = mkLiteral "5px";
+        };
+
+        "textbox" = {
+          padding = mkLiteral "6px";
+          margin = mkLiteral "20px 0px 0px 20px";
+          text-color = mkLiteral "@blue";
+          background-color = mkLiteral "@bg-col-light";
+        };
       };
     };
   };

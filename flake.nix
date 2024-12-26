@@ -118,9 +118,9 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
 
     # Special args can have a few variables to control what things are installed
-    # host-type = (one of) "laptop" "desktop" "server" "android" "kiosk"
-    # display-type = (one of) "wayland" "x11" "none"
-    # host-options = (one or more of) "printers" "installer" "eink"
+    # host-type      = (one of) "laptop" "desktop" "server" "android" "kiosk"
+    # display-type   = (one of) "wayland" "x11" "none"
+    # host-options   = (one or more of) "printers" "installer" "eink"
     # current-system = (one of) "x86_64-linux" "aarch64-linux"
 
     # NixOS configuration entrypoint
@@ -155,7 +155,7 @@
               users.kent = {
                 imports = [
                   ./home/kent
-                  ./home/kent/greatblue
+                  ./home/kent/hosts/greatblue
                   nixvim.homeManagerModules.nixvim
                 ];
               };
@@ -168,6 +168,8 @@
           }
         ];
       };
+      # Dell Optiplex 7050 tower
+      ## i7-7700 / 32GB DDR4-2300
       Delaware =
       let
         system-details = {
@@ -200,7 +202,7 @@
               users.kent = {
                 imports = [
                   ./home/kent
-                  ./home/kent/delaware
+                  ./home/kent/hosts/delaware
                   nixvim.homeManagerModules.nixvim
                 ];
               };
@@ -240,6 +242,7 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  ./home/kent/hosts/sebrightbantam
                   nixvim.homeManagerModules.nixvim
                 ];
               };
@@ -278,6 +281,8 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  ./home/entertainment
+                  ./home/entertainment/hosts/lagurus
                   nixvim.homeManagerModules.nixvim
                 ];
               };
@@ -424,9 +429,10 @@
     };
 
     # Non-NixOS System Configuration
-    # nix run 'github:numtide/system-manager' -- switch --flake '.#mobile'
-    systemConfigs.mobile = system-manager.lib.makeSystemConfig {
+    # nix run 'github:numtide/system-manager' -- switch --flake '.#android'
+    systemConfigs.android = system-manager.lib.makeSystemConfig {
       modules = [
+        ./system-manager
         # nix-system-graphics makes normal NixOS graphics packages
         # available to non NixOS systems
         nix-system-graphics.systemModules.default
@@ -441,13 +447,14 @@
     };
 
     # Standalone home-manager configuration entrypoint
-    # Available through `home-manager --flake .#your-username@your-hostname`
+    # Available through `home-manager --flake .#user@host`
     # or `nh home switch -c user@host` if nh is available
     homeConfigurations = {
-      "kent@mobile" = let
+      # General Android configuration
+      "kent@android" = let
         system-details = {
           host-type = "android";
-          host-name = "kent@mobile";
+          host-name = "kent@android";
           display-type = "x11";
           host-options = "";
           current-system = "aarch64-linux";
@@ -455,7 +462,29 @@
       in lib.homeManagerConfiguration {
         modules = [
           ./home/kent
-          ./home/kent/mobile
+          ./home/kent/hosts/android
+          nixvim.homeManagerModules.nixvim
+          sops-nix.homeManagerModules.sops
+        ];
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          system-details = system-details;
+        };
+      };
+      # Jess' Boox Tab Ultra C Pro
+      "jess@toucan" = let
+        system-details = {
+          host-type = "android";
+          host-name = "jess@toucan";
+          display-type = "x11";
+          host-options = "eink";
+          current-system = "aarch64-linux";
+        };
+      in lib.homeManagerConfiguration {
+        modules = [
+          ./home/jess
+          ./home/jess/hosts/toucan
           nixvim.homeManagerModules.nixvim
           sops-nix.homeManagerModules.sops
         ];

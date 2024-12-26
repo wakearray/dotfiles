@@ -1,11 +1,11 @@
 { lib, config, ... }:
 let
-  cfg = config.gui.eww.bar;
-  colors = cfg.colors;
+  cfg = config.gui.eww;
+  colors = cfg.bar.colors;
 in
 {
-  config = lib.mkIf config.gui.eww.bar.enable {
-    home.file."/.config/eww/eww.scss" = {
+  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
+    home.file."/.config/eww/bar/eww.scss" = {
       enable = cfg.enable;
       force = true;
       text = ''
@@ -27,6 +27,11 @@ in
   }
 
   // Styles on classes (see eww.yuck for more information)
+
+  .systray {
+    margin-right: 20px;
+  }
+
 
   .metric scale trough highlight {
     background-color: ${colors.accent-1};
@@ -52,7 +57,10 @@ in
   }
 
   .workspaces {
-    margin: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
     padding: 0px;
   }
 

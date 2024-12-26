@@ -21,6 +21,7 @@
     )
     ../../modules/common/nvim/home.nix
   ];
+
   home = {
     enableNixpkgsReleaseCheck = false;
     sessionVariables = {
@@ -43,6 +44,12 @@
       # Rage - Rust implementation of age
       # https://github.com/str4d/rage
       rage
+
+      # aspell - english spellcheck
+      aspell
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
     ];
   };
 

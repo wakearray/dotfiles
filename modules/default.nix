@@ -20,9 +20,7 @@
 
       # Not officially in the specification
       XDG_BIN_HOME    = "$HOME/.local/bin";
-      PATH = [
-	"$HOME/.local/bin"
-      ];
+      PATH = [ "$HOME/.local/bin" ];
     };
 
     environment.systemPackages = with pkgs; [
@@ -49,6 +47,9 @@
       # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
       # https://github.com/lemonade-command/lemonade/
       lemonade
+
+      # https://www.gnu.org/software/wget/
+      wget
     ];
 
     # TODO: Consider using this:
@@ -112,8 +113,6 @@
     };
 
     programs = {
-      # Cross platform Airdrop replacement
-      localsend.enable = true;
       # Allows installing unpackaged binaries
       nix-ld.enable = true;
       # Installs git as a system program
@@ -131,9 +130,6 @@
         };
       };
     };
-
-    # Policy Kit, necessary for some things like hyperland, 1Pass, etc
-    security.polkit.enable = true;
 
     # Services.
     services = {

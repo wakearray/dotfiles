@@ -1,15 +1,34 @@
-{ lib, config, ... }:
+{ lib, config, system-details, ... }:
+let
+  cfg = config.gui.eww;
+  defwindow = (
+    if
+      builtins.match "wayland" system-details.display-type != null
+    then # Wayland config
+      ''
+  :stacking "bg"
+  :exclusive true
+  :focusable false
+  :namespace "dock"
+      ''
+    else # X11 config
+      ''
+  :stacking "bg"
+  :wm-ignore true
+  :reserve (struts :distance "2%" :side "top")
+  :windowtype "dock"
+      ''
+  );
+in
 {
-  config = lib.mkIf config.gui.eww.bar.enable {
-    home.file."/.config/eww/eww.yuck" = {
+  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
+    home.file."/.config/eww/bar/eww.yuck" = {
       enable = true;
       force = true;
       text = ''
 (defwindow bar
   :monitor 0
-  :stacking "bg"
-  :exclusive true
-  :focusable false
+${defwindow}
   :geometry (geometry :x "0%"
                       :y "10px"
                       :width "120%"
@@ -19,18 +38,19 @@
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (systray :spacing 5
+    (systray :class "systray"
+             :spacing 5
              :orientation "h"
              :space-evenly true
-             :icon-size 30
+             :icon-size 20
              :prepend-new true)
-    (metric :image-path "./img/volume-high.svg"
+    (metric :image-path "../img/volume-high.svg"
             :value volume
             :onchange "amixer -D pulse sset Master {}%")
-    (metric :image-path "./img/memory.svg"
+    (metric :image-path "../img/memory.svg"
             :value {EWW_RAM.used_mem_perc}
             :onchange "")
-    (metric :image-path "./img/battery-full.svg"
+    (metric :image-path "../img/battery-full.svg"
             :value {EWW_BATTERY["BAT0"].capacity}
             :onchange "")
     time))
@@ -82,7 +102,7 @@
            :onchange onchange)))
 
 (defwidget workspace_toggle [ workspace ]
-  (button :onclick "hyprctl dispatch split:workspace ''${workspace} && eww update active_workspace=''${workspace}"
+  (button :onclick "hyprctl dispatch split:workspace ''${workspace} && eww update -c ${config.xdg.configHome}/eww/bar active_workspace=''${workspace}"
           :class {active_workspace == "''${workspace}" ? "circle-filled" : "circle-empty"}))
 
 (deflisten music :initial ""
@@ -97,6 +117,7 @@
 (defvar active_workspace "1")
       '';
     };
+    gui.eww.scripts.getvol.enable = true;
   };
 }
 

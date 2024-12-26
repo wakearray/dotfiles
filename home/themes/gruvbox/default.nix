@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   # The expression colors includes all colors
   # found in the gruvbox material medium dark theme.
@@ -41,16 +41,15 @@ let
     fg_grey_1        = "#928374";
     fg_grey_2        = "#A89984";
   };
+  cfg = config.gui.themes.gruvbox;
 in
 {
   options.gui.themes.gruvbox = with lib; {
     enable = mkEnableOption "Enable the Gruvbox theme.";
   };
-  config = {
+  config = lib.mkIf cfg.enable {
     gui.eww = {
-      enable = true;
       bar = {
-        enable = true;
         colors = {
           fg-1 = colors.fg_0;
           fg-2 = colors.fg_1;
