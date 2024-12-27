@@ -1,9 +1,17 @@
 { config, pkgs, ... }:
+let
+  user = config.home.username;
+in
 {
+  imports = [
+    ./common
+    ../common
+  ];
+
   home = {
     username = "entertainment";
-    homeDirectory = "/home/entertainment";
-    stateVersion = "24.05";
+    homeDirectory = "/home/${user}";
+    stateVersion = "24.11";
 
     pointerCursor = {
       name = "Adwaita";

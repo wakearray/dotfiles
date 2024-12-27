@@ -3,6 +3,8 @@
   options.gui._1pass = with lib; {
     enable = mkEnableOption "Enable 1Password";
 
+    sshAuthSock = mkEnableOption "Enable if you want to use SSH certificates that are stored inside the vault";
+
     polkitPolicyOwners = mkOption {
       type = types.listOf types.str;
       default = [ "nobody" ];
@@ -17,13 +19,14 @@
 
       # Gnome Keyring is needed for 1Password to be able to store u2f tokens
       gnome-keyring
+      libgnome-keyring
     ];
 
-  #  # This has some issues
-  #  environment.sessionVariables = {
-  #    # Makes SSH work with 1Password
-  #    SSH_AUTH_SOCK="~/.1password/agent.sock";
-  #  };
+    # This has some issues when using it with VSCode and in other circumstances.
+    environment.sessionVariables = lib.mkIf config.gui._1pass.sshAuthSock  {
+      # Makes SSH work with 1Password
+      SSH_AUTH_SOCK="~/.1password/agent.sock";
+    };
 
     # Make 1Password work correctly
     programs = {

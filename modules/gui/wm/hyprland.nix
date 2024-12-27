@@ -5,7 +5,6 @@ in
 {
   options.gui.wm.hyprland = with lib; {
     enable = mkEnableOption "Enable hyprland with UWSM.";
-    #hypridle = mkEnableOption "Eable hyprland's idle daemon.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -45,9 +44,6 @@ in
         playerctld = {
         enable = true;
       };
-      # hypridle - hyprland's idle deamon
-      # https://github.com/hyprwm/hypridle
-      #hypridle.enable = cfg.hypridle;
     };
 
     # Compatibility settings:
