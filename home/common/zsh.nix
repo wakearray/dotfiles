@@ -1,4 +1,102 @@
-{ system-details, ... }:
+{ config, system-details, ... }:
+let
+  editflake = (if builtins.match "nixos" system-details.host-type != null
+    then # Do this when running NixOS
+      ''
+CWD=''$(pwd)
+cd ''$HOME/dotfiles
+if [[ `git status --porcelain` ]]; then
+  echo "Flake has been modified."
+  git add .
+  while true; do
+    echo "What would you like to do?"
+    cat <<'END_CAT'
+  1) Run a test build
+  2) Rebuild system
+  3) Make a commit
+  4) Push current branch to remote
+  5) Update flake
+
+  Press any other key to leave this menu.
+END_CAT
+
+    git status
+
+    echo ""
+
+    read -k 1 ans
+    case $ans in
+      1)
+        nh os test -c ${system-details.host-name} ${config.home.homeDirectory}/dotfiles
+        ;;
+      2)
+        nh os switch -c ${system-details.host-name} ${config.home.homeDirectory}/dotfiles
+        ;;
+      3)
+        git commit
+        ;;
+      4)
+        git push origin ''$(git rev-parse --abbrev-ref HEAD)
+        ;;
+      5)
+        nix flake update
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+fi
+      ''
+    else # Do this when running any other Linux OS
+      ''
+CWD=''$(pwd)
+cd ''$HOME/dotfiles
+if [[ `git status --porcelain` ]]; then
+  echo "Flake has been modified."
+  git add .
+  while true; do
+    echo "What would you like to do?"
+    cat <<'END_CAT'
+  1) Run a test build
+  2) Rebuild system
+  3) Make a commit
+  4) Push current branch to remote
+  5) Update flake
+
+  Press any other key to leave this menu.
+END_CAT
+
+    git status
+
+    echo ""
+
+    read -k 1 ans
+    case $ans in
+      1)
+        nh home switch -v -c ${system-details.host-name}
+        ;;
+      2)
+        nh os switch
+        ;;
+      3)
+        git commit
+        ;;
+      4)
+        git push origin ''$(git rev-parse --abbrev-ref HEAD)
+        ;;
+      5)
+        nix flake update
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+fi
+      ''
+  );
+in
 {
   # zsh
   # More options found here:
@@ -37,96 +135,13 @@
         flakeworkflow
       }
 
-      edithome(){
-        nvim ''$HOME/dotfiles/
-        homeworkflow
-      }
-
       editflake(){
         nvim ''$HOME/dotfiles
         flakeworkflow
       }
 
       flakeworkflow(){
-        CWD=''$(pwd)
-        cd ''$HOME/dotfiles
-        if [[ `git status --porcelain` ]]; then
-          echo "Flake has been modified."
-          git add .
-          echo "Would you like to run a test build?"
-          read -q ans
-          if [[ "''$ans" == "y" ]]; then
-                  echo "\n"
-            testbuildflake
-
-            echo "Would you like to rebuild the system now?"
-                  read -q ans
-                  if [[ "''$ans" == "y" ]]; then
-              echo "\n"
-              rebuildflake
-              echo "Flake rebuild, complete."
-            else
-                    echo "Flake has been edited, but not built."
-            fi
-          fi
-          echo "-.-.-"
-          git status
-          echo "-.-.-"
-          echo "Would you like to commit now?"
-                read -q ans
-                if [[ "''$ans" == "y" ]]; then
-                  echo "\nCommiting..."
-            git commit
-            echo -e "Would you like to push to remote?"
-            read -q ans
-            if [[ "''$ans" == "y" ]]; then
-              echo "\nPushing to remote..."
-              push
-            else
-              echo "Not pushing to remote."
-            fi
-          fi
-        else
-          echo "No updates found."
-        fi
-        cd ''$CWD
-      }
-
-      homeworkflow(){
-        CWD=''$(pwd)
-        cd ''$HOME/dotfiles
-        if [[ `git status --porcelain` ]]; then
-          echo "Flake has been modified."
-          git add .
-	        echo "Would you like to rebuild the home-manager derivation now?"
-          read -q ans
-          if [[ "''$ans" == "y" ]]; then
-	          echo "\n"
-	          rebuildhome
-            echo "Flake rebuild, complete."
-	        else
-            echo "Flake has been edited, but not built."
-	        fi
-        else
-          echo "The flake has not been modified."
-        fi
-	      cd ''$CWD
-      }
-
-      testbuildflake(){
-        nh os test .
-      }
-
-      rebuildflake(){
-        nh os switch .
-      }
-
-      rebuildhome(){
-        nh home switch -c ${system-details.host-name}
-      }
-
-      push(){
-        git push origin ''$(git rev-parse --abbrev-ref HEAD)
+        ${editflake}
       }
 
       clean(){
@@ -172,7 +187,9 @@
           mkdir ''$1 && cd ''$1
         fi
       }
-      eval `ssh-agent` > /dev/null && ssh-add > /dev/null && ssh-add ~/.ssh/signing_key > /dev/null
+
+      eval `ssh-agent` && ssh-add && ssh-add ~/.ssh/signing_key
+      clear
     '';
     sessionVariables = {
       EDITOR = "nvim";
