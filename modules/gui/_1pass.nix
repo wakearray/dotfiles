@@ -22,6 +22,8 @@
       libgnome-keyring
     ];
 
+    services.gnome.gnome-keyring.enable = true;
+
     # This has some issues when using it with VSCode and in other circumstances.
     environment.sessionVariables = lib.mkIf config.gui._1pass.sshAuthSock  {
       # Makes SSH work with 1Password
