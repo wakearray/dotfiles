@@ -1,5 +1,9 @@
 # This file defines overlays
-{inputs, ...}: {
+{inputs, ...}:
+let
+  nixpkgs = inputs.nixpkgs;
+in
+{
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs {pkgs = final;};
 
@@ -24,7 +28,8 @@
   # An attempt at overriding nur into 'pkgs.nur'
   nur-packages = final: _prev: {
     nur = import inputs.nur {
-      system = final.system;
+        inherit nixpkgs;
+      #system = final.system;
     };
   };
 }

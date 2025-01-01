@@ -1,18 +1,18 @@
 { config, system-details, ... }:
 let
-  editflake = (if builtins.match "nixos" system-details.host-type != null
-    then # Do this when running NixOS
+  editflake = (if builtins.match "android" system-details.host-type != null
+    then # Do this when on Android
       ''
 CWD=''$(pwd)
 cd ''$HOME/dotfiles
 if [[ `git status --porcelain` ]]; then
   echo "Flake has been modified."
   git add .
+  git status
   while true; do
     echo "What would you like to do?"
     cat <<'END_CAT'
-  1) Run a test build
-  2) Rebuild system
+  1) Build home-manager derivation
   3) Make a commit
   4) Push current branch to remote
   5) Update flake
@@ -20,17 +20,12 @@ if [[ `git status --porcelain` ]]; then
   Press any other key to leave this menu.
 END_CAT
 
-    git status
-
     echo ""
 
     read -k 1 ans
     case $ans in
       1)
-        nh os test -c ${system-details.host-name} ${config.home.homeDirectory}/dotfiles
-        ;;
-      2)
-        nh os switch -c ${system-details.host-name} ${config.home.homeDirectory}/dotfiles
+        nh home switch -v -c ${system-details.host-name}
         ;;
       3)
         git commit
@@ -48,13 +43,14 @@ END_CAT
   done
 fi
       ''
-    else # Do this when running any other Linux OS
+    else # Do this when not on Android (should only be NixOS)
       ''
 CWD=''$(pwd)
 cd ''$HOME/dotfiles
 if [[ `git status --porcelain` ]]; then
   echo "Flake has been modified."
   git add .
+  git status
   while true; do
     echo "What would you like to do?"
     cat <<'END_CAT'
@@ -67,17 +63,15 @@ if [[ `git status --porcelain` ]]; then
   Press any other key to leave this menu.
 END_CAT
 
-    git status
-
     echo ""
 
     read -k 1 ans
     case $ans in
       1)
-        nh home switch -v -c ${system-details.host-name}
+        nh os test ${config.home.homeDirectory}/dotfiles
         ;;
       2)
-        nh os switch
+        nh os switch ${config.home.homeDirectory}/dotfiles
         ;;
       3)
         git commit

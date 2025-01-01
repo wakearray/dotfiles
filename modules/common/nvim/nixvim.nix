@@ -87,6 +87,10 @@
 #      };
 
       # markdown-preview.nvim - markdown preview plugin for (neo)vim
+      # Start the preview
+      # :MarkdownPreview
+      # " Stop the preview"
+      # :MarkdownPreviewStop
       # https://github.com/iamcco/markdown-preview.nvim/
       markdown-preview = {
         enable = true;

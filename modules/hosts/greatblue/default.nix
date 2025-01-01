@@ -14,8 +14,9 @@
     enable = true;
     _1pass.enable = true;
     gaming.enable = true;
+    office.enable = true;
     wm.hyprland.enable = true;
-    greeter.regreet.enable = true;
+    greeter.tuigreet.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

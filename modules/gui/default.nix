@@ -11,6 +11,7 @@ in
     ./_1pass.nix
     ./fonts.nix
     ./gaming.nix
+    ./office.nix
     ./sound.nix
     ./wm
     ./greeters

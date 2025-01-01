@@ -109,8 +109,11 @@ in
           # Toggle grouping on the currently active app
           "$mod      , G       , togglegroup"
           # Switch which window in active group is visible b = backwards
+          # code:59 = ,
           "$mod      , code:59 , changegroupactive, b"
           # Switch which window in active group is visible f = forwards
+          # code:60 = .
+          # Use `wev` to find the key code for additional keys
           "$mod      , code:60 , changegroupactive, f"
           # Toggle fullscreen on the currently active app
           "$mod      , F       , fullscreen"

@@ -1,4 +1,4 @@
-{ lib, config, pkgs, inputs, ... }:
+{ lib, config, pkgs, ... }:
 let
   cfg = config.gui.greeter.regreet;
 in
@@ -12,7 +12,7 @@ in
       enable = true;
       settings = {
         default_session = {
-          command = "${config.programs.regreet.package}/bin/regreet --time --cmd '${pkgs.uwsm}/bin/uwsm start -- hyprland-uwsm.desktop'";
+          command = "${config.programs.regreet.package}/bin/regreet; '${pkgs.uwsm}/bin/uwsm start -- hyprland-uwsm.desktop'";
           user = "greeter";
         };
       };
