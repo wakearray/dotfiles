@@ -20,9 +20,6 @@
     };
 
     home.packages = with pkgs; [
-      wev
-      wlprop
-
       # TTS
       piper-tts
       sox
@@ -31,7 +28,7 @@
       google-chrome
 
       # Image editing
-      gimp-with-plugins
+      #gimp-with-plugins
       darktable
       rawtherapee
       exiftool

@@ -82,6 +82,8 @@ in
         exec-shutdown = [
           "${pkgs.eww}/bin/eww close-all && pkill eww"
         ];
+        # Key bindings
+        # https://wiki.hyprland.org/Configuring/Binds/
         bind = [
           # App launcher shortcut
           "$mod      , D       , exec, rofi -show drun"
@@ -135,7 +137,6 @@ in
           "$mod SHIFT, right   , movewindow, r"
           "$mod SHIFT, up      , movewindow, u"
           "$mod SHIFT, down    , movewindow, d"
-
         ] ++ (
         # workspaces
         # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
@@ -148,6 +149,45 @@ in
             "$mod SHIFT, code:1${toString i}, exec, eww update -c ${config.xdg.configHome}/eww/bar active_workspace='${toString ws}'"
           ])9)
         );
+        # Flags:
+        # m -> mouse, see below.
+        # https://wiki.hyprland.org/Configuring/Binds/#mouse-binds
+        bindm = [
+          # Grab and move floating windows with mod + left mouse button
+          "$mod      , mouse:272, movewindow"
+
+          # Resize and maintain aspect ratio of floating windows using mod + right
+          "$mod      , mouse:273, resizewindow 1"
+
+          # Resize floating windows using mod + shift + right
+          "$mod SHIFT, mouse:273, resizewindow"
+        ];
+        # Flags:
+        # e -> repeat, will repeat when held.
+        # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
+        bindel = [
+          # Map the volume up/down keys on keyboards to increase/decrease volume by 5% using pamixer
+          ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+          ", XF86AudioRaiseVolume, exec, eww update -c ${config.xdg.configHome}/eww/bar volume='\$(pamixer --get-volume)'"
+          ", XF86AudioLowerVolume, exec, pamixer -d 5"
+          ", XF86AudioLowerVolume, exec, eww update -c ${config.xdg.configHome}/eww/bar volume='\$(pamixer --get-volume)'"
+        ];
+        # Flags:
+        # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
+        bindl = [
+          # Bind mute key to toggle mute
+          ", XF86AudioMute, exec, pamixer -t"
+          # Also have it update an eww variable
+          ", XF86AudioMute, exec, eww update -c ${config.xdg.configHome}/eww/bar mute_status='\$(pamixer --get-mute)'"
+
+          # Bind play/pause key to play-pause functionality
+          ", XF86AudioPlay, exec, playerctl play-pause"
+
+          # Bind previous key to previous functionality
+          ", XF86AudioPrev, exec, playerctl previous"
+          #  Bind previous key to previous functionality
+          ", XF86AudioNext, exec, playerctl next"
+        ];
       };
     };
     gui.eww = {

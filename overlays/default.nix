@@ -25,7 +25,7 @@ in
     };
   };
 
-  # An attempt at overriding nur into 'pkgs.nur'
+  # A failed attempt at overriding nur into 'pkgs.nur'
   nur-packages = final: _prev: {
     nur = import inputs.nur {
         inherit nixpkgs;

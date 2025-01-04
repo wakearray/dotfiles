@@ -12,10 +12,11 @@ if [[ `git status --porcelain` ]]; then
   while true; do
     echo "What would you like to do?"
     cat <<'END_CAT'
-  1) Build home-manager derivation
+  2) Build home-manager derivation
   3) Make a commit
   4) Push current branch to remote
   5) Update flake
+  6) Continue editing flake
 
   Press any other key to leave this menu.
 END_CAT
@@ -24,7 +25,7 @@ END_CAT
 
     read -k 1 ans
     case $ans in
-      1)
+      2)
         nh home switch -v -c ${system-details.host-name}
         ;;
       3)
@@ -35,6 +36,9 @@ END_CAT
         ;;
       5)
         nix flake update
+        ;;
+      6)
+        nvim ${config.home.homeDirectory}/dotfiles
         ;;
       *)
         break
@@ -59,6 +63,7 @@ if [[ `git status --porcelain` ]]; then
   3) Make a commit
   4) Push current branch to remote
   5) Update flake
+  6) Continue editing flake
 
   Press any other key to leave this menu.
 END_CAT
@@ -81,6 +86,9 @@ END_CAT
         ;;
       5)
         nix flake update
+        ;;
+      6)
+        nvim ${config.home.homeDirectory}/dotfiles
         ;;
       *)
         break

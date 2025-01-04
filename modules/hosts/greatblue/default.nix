@@ -3,7 +3,8 @@
   ## These are the defaults I want on GreatBlue only:
   imports =
   [
-    ./8bitdo.nix
+   # xboxdrv has been discontinued in favor of built in kernal drivers
+   #./8bitdo.nix
     ./fingerprint_reader.nix
     ./syncthing.nix
     ./tui.nix

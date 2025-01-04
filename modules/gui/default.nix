@@ -26,5 +26,9 @@ in
 
     # Cross platform Airdrop replacement
     programs.localsend.enable = true;
+
+    # Command-line utility and library for controlling media players that implement MPRIS
+    # https://github.com/altdesktop/playerctl
+    services.playerctld.enable = true;
   };
 }

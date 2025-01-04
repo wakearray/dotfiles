@@ -40,12 +40,6 @@ in
     # https://github.com/hyprwm/hyprpolkitagent
     #security.polkit.package = pkgs.hyprpolkitagent;
 
-    services = {
-        playerctld = {
-        enable = true;
-      };
-    };
-
     # Compatibility settings:
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
   };

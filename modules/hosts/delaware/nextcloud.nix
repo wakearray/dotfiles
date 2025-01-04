@@ -78,7 +78,9 @@
         "OC\\Preview\\TXT"
         "OC\\Preview\\XBitmap"
         "OC\\Preview\\HEIC"
-        "OS\\Preview\\Videos"
+        "OS\\Preview\\Movie"
+        "OS\\Preview\\SVG"
+        "OS\\Preview\\Font"
       ];
     };
   };

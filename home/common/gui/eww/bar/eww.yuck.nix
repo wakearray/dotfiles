@@ -44,14 +44,18 @@ ${defwindow}
              :space-evenly true
              :icon-size 20
              :prepend-new true)
-    (metric :image-path "../img/volume-high.svg"
+    (metric :onclick "pamixer -t"
+            :tooltip "{volume}%"
+            :image-path "../img/volume-high.svg"
             :value volume
-            :onchange "amixer -D pulse sset Master {}%")
-    (metric :image-path "../img/memory.svg"
+            :onchange "pamixer --set-volume {}")
+    (metric :tooltip "Available RAM: {EWW_RAM.available_mem}"
+            :image-path "../img/memory.svg"
             :value {EWW_RAM.used_mem_perc}
             :onchange "")
-    (metric :image-path "../img/battery-full.svg"
-            :value {EWW_BATTERY["BAT0"].capacity}
+    (metric :tooltip "Capacity: {EWW_BATTERY["${cfg.battery}"].capacity}% \nStatus: {EWW_BATTERY["${cfg.battery}"].status}"
+            :image-path "../img/battery-full.svg"
+            :value {EWW_BATTERY["${cfg.battery}"].capacity}
             :onchange "")
     time))
 
@@ -86,20 +90,27 @@ ${defwindow}
     (label :truncate true
            :text {music != "" ? "  ''${music}  " : ""})))
 
-(defwidget metric [image-path value onchange]
-  (box :orientation "h"
-       :class "metric"
-       :space-evenly false
-    (box (image :class "icon"
-                :path image-path
-                :image-height 20
-                :image-width 20
-                :preserve-aspect-ratio true))
-    (scale :min 0
-           :max 101
-           :active {onchange != ""}
-           :value value
-           :onchange onchange)))
+(defwidget metric [tooltip image-path value onclick onmiddleclick onrightclick onhover onscroll onchange]
+  (eventbox :onclick onclick
+            :onmiddleclick onmiddleclick
+            :onrightclick onrightclick
+            :onhover onhover
+            :onhoverlost onhoverlost
+            :onscroll onscroll
+    (box :orientation "h"
+         :class "metric"
+         :space-evenly false
+         :tooltip tooltip
+      (box (image :class "icon"
+                  :path image-path
+                  :image-height 20
+                  :image-width 20
+                  :preserve-aspect-ratio true))
+      (scale :min 0
+             :max 101
+             :active {onchange != ""}
+             :value value
+             :onchange onchange))))
 
 (defwidget workspace_toggle [ workspace ]
   (button :onclick "hyprctl dispatch split:workspace ''${workspace} && eww update -c ${config.xdg.configHome}/eww/bar active_workspace=''${workspace}"
@@ -108,16 +119,17 @@ ${defwindow}
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
-(defpoll volume :interval "1s"
-  "scripts/getvol")
+(defpoll volume :interval "5s"
+  "pamixer --get-volume")
 
 (defpoll time :interval "10s"
   "date '+%I:%M %b %d, %Y'")
 
+(defvar mute_status "false")
+
 (defvar active_workspace "1")
       '';
     };
-    gui.eww.scripts.getvol.enable = true;
   };
 }
 
