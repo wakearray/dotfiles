@@ -1,10 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # Wayland tools
-    wev
-    wlprop
-
     # Rust based teamviewer
     rustdesk-flutter
 

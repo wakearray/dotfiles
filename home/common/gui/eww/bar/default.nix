@@ -1,50 +1,77 @@
-{ lib, ... }:
+{ config, lib, ... }:
+let
+  cfg = config.gui.eww;
+  colors = cfg.bar.colors;
+in
 {
   imports = [
     ./eww.scss.nix
     ./eww.yuck.nix
-    ./img
   ];
 
   options.gui.eww.bar = with lib; {
     enable = mkEnableOption "Enable a generic bar config for eww.";
 
     colors = {
-      fg-1 = mkOption {
-        type = types.str;
-        default = "#D4BE98";
-        description = "A color to use for foreground elements like text";
-      };
-
-      fg-2 = mkOption {
+      text = mkOption {
         type = types.str;
         default = "#DDC7A1";
-        description = "A color to use for foreground elements like text";
+        description = "Which color to use for text and icons, bar text, tooltip text, and icon colors can be assigned separately if preferred.";
       };
 
-      bg-1 = mkOption {
+      bar-fg = mkOption {
         type = types.str;
-        default = "#282828";
-        description = "A color to use for background elements";
+        default = colors.text;
+        description = "Which color to use for the bar's text.";
       };
 
-      bg-2 = mkOption {
+      bar-bg = mkOption {
         type = types.str;
         default = "#32302F";
-        description = "A color to use for background elements";
+        description = "Which color to use for the bar's background.";
       };
 
-      accent-1 = mkOption {
+      tooltip-fg = mkOption {
+        type = types.str;
+        default = colors.text;
+        description = "Which color to use for tooltip text.";
+      };
+
+      tooltip-bg = mkOption {
+        type = types.str;
+        default = colors.bar-bg;
+        description = "Which color to use for tooltip background.";
+      };
+
+      metric-fg = mkOption {
         type = types.str;
         default = "#E78A4E";
-        description = "A color to use for primary accent elements";
+        description = "Which color to use for the highlight color on the scale for things like volume, memory, and battery.";
       };
 
-      accent-2 = mkOption {
+      metric-bg = mkOption {
+        type = types.str;
+        default = "#45403D";
+        description = "Which color to use for the background color on the scale for things like volume, memory, and battery.";
+      };
+
+      workspace-active = mkOption {
+        type = types.str;
+        default = "#E78A4E";
+        description = "Which color to use for the circle representing the active workspace.";
+      };
+
+      workspace-inactive = mkOption {
         type = types.str;
         default = "#D8A657";
-        description = "A color to use for secondary accent elements";
+        description = "Which color to use for the circles representing the inactive workspaces.";
       };
+    };
+  };
+
+  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
+    gui.eww = {
+      icons.enable = true;
     };
   };
 }

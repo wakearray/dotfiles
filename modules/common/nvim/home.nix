@@ -2,6 +2,7 @@
 {
   imports = [
     ./nixvim.nix
+    ./markdown-oxide.nix
   ];
 
   programs.nixvim.clipboard = {

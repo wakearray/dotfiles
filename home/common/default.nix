@@ -1,4 +1,4 @@
-{ pkgs, outputs, config, system-details, ... }:
+{ pkgs, config, system-details, ... }:
 {
   imports = [
     ./zsh.nix
@@ -28,7 +28,11 @@
       FLAKE = "${config.home.homeDirectory}/dotfiles";
     };
     packages = with pkgs; [
-      # Simple and flexible tool for managing secrets
+      # socat - Utility for bidirectional data transfer between two independent data channels
+      # http://www.dest-unreach.org/socat/
+      socat
+
+      # sops - Simple and flexible tool for managing secrets
       # https://github.com/getsops/sops
       sops
 
@@ -50,6 +54,10 @@
       aspellDicts.en
       aspellDicts.en-computers
       aspellDicts.en-science
+
+      # manix - A fast CLI documentation searcher for Nix
+      # https://github.com/nix-community/manix
+      manix
     ];
   };
 

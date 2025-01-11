@@ -48,15 +48,51 @@ in
     enable = mkEnableOption "Enable the Gruvbox theme.";
   };
   config = lib.mkIf cfg.enable {
-    gui.eww = {
-      bar = {
+    gui = {
+      eww = {
+        bar = {
+          colors = {
+            text = colors.fg_1;
+            bar-fg = colors.fg_1;
+            bar-bg = colors.bg_1;
+            tooltip-fg = colors.fg_1;
+            tooltip-bg = colors.bg_1;
+            metric-fg = colors.fg_orange;
+            metric-bg = colors.bg_2;
+            workspace-active = colors.fg_orange;
+            workspace-inactive = colors.fg_yellow;
+          };
+        };
+        icons.colors = {
+          battery-full = colors.fg_green;
+          battery-charging = colors.fg_yellow;
+          battery-discharging = colors.fg_yellow;
+          battery-low = colors.fg_orange;
+          battery-critical = colors.fg_red;
+          volume-mute = colors.fg_grey_2;
+          volume-low = colors.fg_yellow;
+          volume-medium = colors.fg_yellow;
+          volume-high = colors.fg_yellow;
+          volume-critical-high = colors.fg_red;
+          memory-useage-low = colors.fg_yellow;
+          memory-useage-medium = colors.fg_yellow;
+          memory-useage-high = colors.fg_orange;
+          memory-useage-critical-high = colors.fg_red;
+          brightness-low = colors.fg_yellow;
+          brightness-medium = colors.fg_yellow;
+          brightness-high = colors.fg_yellow;
+        };
+      };
+    };
+    home = {
+      wm.hyprland = {
         colors = {
-          fg-1 = colors.fg_0;
-          fg-2 = colors.fg_1;
-          bg-1 = colors.bg_0;
-          bg-2 = colors.bg_1;
-          accent-1 = colors.fg_orange;
-          accent-2 = colors.fg_yellow;
+          general = {
+            inactiveBorder      = (builtins.replaceStrings ["#"] ["0xff"] colors.bg_1 );
+            activeBorder        = (builtins.replaceStrings ["#"] ["0xff"] colors.fg_orange );
+            noGroupBorder       = (builtins.replaceStrings ["#"] ["0xff"] colors.bg_2 );
+            noGroupAorderActive = (builtins.replaceStrings ["#"] ["0xff"] colors.fg_yellow );
+          };
         };
       };
     };

@@ -28,7 +28,19 @@
 
       # nvim-treesitter - Nvim Treesitter configurations and abstraction layer
       # https://github.com/nvim-treesitter/nvim-treesitter
-      treesitter.enable = true;
+      treesitter = {
+        enable = true;
+        autoLoad = true;
+        # Settings:
+        # https://nix-community.github.io/nixvim/plugins/treesitter/settings/index.html
+        settings = {
+          auto_install = true;
+          ensure_installed = "all";
+          highlight = {
+            enable = true;
+          };
+        };
+      };
 
       # wtf - Delicious diagnostic debugging in Neovim
       # https://github.com/piersolenski/wtf.nvim
@@ -72,7 +84,7 @@
       # https://github.com/nvim-lualine/lualine.nvim/
       lualine = {
         enable = true;
-        #settings.options.theme = "gruvbox-material";
+        settings.options.theme = "gruvbox-material";
         # Additional settings:
         # https://nix-community.github.io/nixvim/plugins/lualine/settings/index.html
         # https://github.com/nvim-lualine/lualine.nvim/blob/master/README.md
@@ -114,7 +126,7 @@
 
       # nvim-colorizer.lua - The fastest Neovim colorizer. (Highlights color codes)
       # https://github.com/norcalli/nvim-colorizer.lua
-      nvim-colorizer.enable = true;
+      colorizer.enable = true;
 
       # qmk.nvim - Format qmk and zmk keymaps in neovim
       # https://github.com/codethread/qmk.nvim/
@@ -181,7 +193,9 @@
       floaterm = {
         enable = true;
         # Settings: https://nix-community.github.io/nixvim/plugins/floaterm/index.html
-        autoinsert = true;
+        settings = {
+          autoinsert = true;
+        };
       };
 
       # nvim-tree - A file explorer tree for nvim
@@ -222,6 +236,22 @@
         # https://nix-community.github.io/nixvim/plugins/which-key/index.html
       };
 
+      # Adds yazi floating window access into nvim.
+      # https://github.com/mikavilpas/yazi.nvim/
+      yazi = {
+        enable = true;
+        # Settings:
+        # https://nix-community.github.io/nixvim/plugins/yazi/settings/index.html
+        settings = {
+          enable_mouse_support = true;
+          floating_window_scaling_factor = 0.5;
+          log_level = "debug";
+          open_for_directories = false;
+          yazi_floating_window_border = "single";
+          yazi_floating_window_winblend = 50;
+        };
+      };
+
       # neovim’s built-in LSP
       # https://nix-community.github.io/nixvim/plugins/lsp/index.html
       lsp = {
@@ -236,6 +266,10 @@
             enable = false;
             installRustc = false;
             installCargo = false;
+          };
+          markdown_oxide = {
+            enable = true;
+            autostart = true;
           };
           taplo.enable = true;
           marksman.enable = true;

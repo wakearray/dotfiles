@@ -1,6 +1,7 @@
 { lib, config, pkgs, inputs, ... }:
 let
   cfg = config.gui.wm.hyprland;
+  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   options.gui.wm.hyprland = with lib; {
@@ -31,6 +32,10 @@ in
         };
       };
       hyprlock.enable = true;
+    };
+
+    hardware.graphics = {
+      package = pkgs-unstable.mesa.drivers;
     };
 
     # A customizable lockscreen for hyprland

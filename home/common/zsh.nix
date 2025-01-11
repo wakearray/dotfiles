@@ -58,7 +58,7 @@ if [[ `git status --porcelain` ]]; then
   while true; do
     echo "What would you like to do?"
     cat <<'END_CAT'
-  1) Run a test build
+  1) Run a test build with --show-trace
   2) Rebuild system
   3) Make a commit
   4) Push current branch to remote
@@ -73,7 +73,7 @@ END_CAT
     read -k 1 ans
     case $ans in
       1)
-        nh os test ${config.home.homeDirectory}/dotfiles
+        nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
         ;;
       2)
         nh os switch ${config.home.homeDirectory}/dotfiles
@@ -86,6 +86,8 @@ END_CAT
         ;;
       5)
         nix flake update
+        git add .
+        git status
         ;;
       6)
         nvim ${config.home.homeDirectory}/dotfiles

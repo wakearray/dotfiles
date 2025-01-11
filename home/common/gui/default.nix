@@ -13,6 +13,14 @@
     ./firefox.nix
     (
       if
+        builtins.match "wayland" system-details.display-type != null
+      then
+        ./wayland
+      else
+        ./x11
+    )
+    (
+      if
         builtins.match "aarch64-linux" system-details.current-system != null
       then
         ./aarch64-gui.nix
