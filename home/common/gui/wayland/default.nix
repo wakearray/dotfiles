@@ -8,6 +8,11 @@ in
       # Wayland tools
       wev
       wlprop
+      wlr-randr
+
+      # Possibly needed by hyprland?
+      # Nvidia compatibility things
+      #egl-wayland
     ];
   };
 }

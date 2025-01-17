@@ -4,7 +4,6 @@
     environment.systemPackages = with pkgs; [
       brightnessctl
       acpi
-      wev
     ];
 
     services.acpid = {

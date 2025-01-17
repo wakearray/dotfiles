@@ -2,6 +2,7 @@
 let
   cfg = config.gui.eww;
   colors = cfg.bar.colors;
+  iconColors = cfg.icons.colors;
 in
 {
   config = lib.mkIf (cfg.enable && cfg.bar.enable) {
@@ -48,60 +49,34 @@ in
     margin-right     : 10px;
   };
 
-  .battery scale trough highlight {
-    border-radius    : 10px;
-  }
-
-  .battery scale trough {
-    border-radius    : 50px;
-    min-height       : 5px;
-    min-width        : 15px;
+  .battery-charging {
+    color : ${iconColors.battery-charging};
     margin-left      : 0px;
-    margin-right     : 0px;
+    margin-right     : 10px;
   }
 
-  .battery-critical scale trough highlight {
-    background-color : ${colors.metric-fg};
+  .battery-critical {
+    color : ${iconColors.battery-critical};
+    margin-left      : 0px;
+    margin-right     : 10px;
   }
 
-  .battery-critical scale trough {
-    background-color : ${colors.metric-bg};
+  .battery-discharging {
+    color : ${iconColors.battery-discharging};
+    margin-left      : 0px;
+    margin-right     : 10px;
   }
 
-  .battery-low scale trough highlight {
-    background-color : ${colors.metric-fg};
+  .battery-low {
+    color : ${iconColors.battery-low};
+    margin-left      : 0px;
+    margin-right     : 10px;
   }
 
-  .battery-low scale trough {
-    background-color : ${colors.metric-bg};
-  }
-
-  .battery-full scale trough highlight {
-    background-color : ${colors.metric-fg};
-  }
-
-  .battery-full scale trough {
-    background-color : ${colors.metric-bg};
-  }
-
-  .battery-charging scale trough highlight {
-    background-color : ${colors.metric-fg};
-  }
-
-  .battery-charging scale trough {
-    background-color : ${colors.metric-bg};
-  }
-
-  .battery-discharging scale trough highlight {
-    background-color : ${colors.metric-fg};
-  }
-
-  .battery-discharging scale trough {
-    background-color : ${colors.metric-bg};
-  }
-
-  .metric:hover {
-
+  .battery-full {
+    color : ${iconColors.battery-full};
+    margin-left      : 0px;
+    margin-right     : 10px;
   }
 
   .metric scale trough highlight {

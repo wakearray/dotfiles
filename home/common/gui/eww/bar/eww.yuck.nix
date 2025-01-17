@@ -14,9 +14,10 @@ let
   :reserve (struts :distance \"2%\" :side \"top\")
   :windowtype \"dock\" "
   );
+  bar = cfg.bar;
 in
 {
-  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
+  config = lib.mkIf (cfg.enable && bar.enable) {
     home.file."/.config/eww/bar/eww.yuck" = {
       enable = true;
       force = true;
@@ -26,8 +27,9 @@ in
   ${defwindow}
   :geometry (geometry :x "0%"
                       :y "10px"
-                      :width "118%"
-                      :height "2%"
+                      :width "${bar.width}"
+                      ;:width "100%"
+                      :height "${bar.height}"
                       :anchor "top center")
   (bar))
 
@@ -56,16 +58,9 @@ Mute  : ''${mute_status}"
             :bool ui_memory_visible
             :value {EWW_RAM.used_mem_perc}
             :onchange "")
-    (metric :onclick ""
-            :onscroll ""
-            :tooltip "Capacity: ''${EWW_BATTERY["${cfg.battery.identifier}"].capacity}%
-Status  : ''${EWW_BATTERY["${cfg.battery.identifier}"].status}"
-            :image-path "../img/battery-full.svg"
-            :bool-name "ui_battery_visible"
-            :bool ui_battery_visible
-            :value {EWW_BATTERY["${cfg.battery.identifier}"].capacity}
-            :onchange "")
-    (battery_widget)
+    (label :class battery_class
+           :text battery_icon)
+    (label :text "''${EWW_BATTERY["${cfg.battery.identifier}"].capacity}% | ")
     time))
 
 (defwidget bar []
@@ -130,18 +125,11 @@ Status  : ''${EWW_BATTERY["${cfg.battery.identifier}"].status}"
     (label :class "tooltiptext"
            :text "Capacity: ''${battery_capacity}%
 Status  : ''${battery_status}")
-    (overlay :class "battery"
-      (image :class "icon"
-             :path battery_icon
-             :image-height 20
-             :image-width 20
-             :preserve-aspect-ratio true)
-      (scale :min 0
-             :max 100
-             :value battery_capacity))))
+    (box :orientation "h"
+      (label :text "''${battery_icon} ''${EWW_BATTERY["${cfg.battery.identifier}"].capacity}% | "))))
 
 (defwidget workspace_toggle [ workspace ]
-  (button :onclick "hyprctl dispatch split:workspace ''${workspace} && eww update -c ${config.xdg.configHome}/eww/bar active_workspace=''${workspace}"
+  (button :onclick "hyprctl dispatch split:workspace ''${workspace}"
           :class {active_workspace == "''${workspace}" ? "workspace-active" : "workspace-inactive"}))
 
 (deflisten music :initial ""
@@ -155,10 +143,10 @@ Status  : ''${battery_status}")
 
 (defvar mute_status false)
 
-(defvar battery_status "Full")
-(defvar battery_capacity 100)
-(defvar battery_icon "../img/battery-full.svg")
-
+(defvar battery_status "")
+(defvar battery_capacity 0)
+(defvar battery_icon "󰂎!")
+(defvar battery_class "battery-discharging")
 
 (defvar active_workspace "1")
 

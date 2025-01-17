@@ -72,5 +72,13 @@
     ffmpeg_7-full
   ];
 
-  services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
+  services = {
+    xserver.videoDrivers = [ "displaylink" "modesetting" ];
+    logind = {
+      lidSwitch = "ignore";
+    };
+  };
+
+  # Enables kernel module needed for ryzenadj to work
+  hardware.cpu.amd.ryzen-smu.enable = true;
 }

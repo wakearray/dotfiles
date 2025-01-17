@@ -38,7 +38,7 @@ END_CAT
         nix flake update
         ;;
       6)
-        nvim ${config.home.homeDirectory}/dotfiles
+        nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
         ;;
       *)
         break
@@ -62,7 +62,7 @@ if [[ `git status --porcelain` ]]; then
   2) Rebuild system
   3) Make a commit
   4) Push current branch to remote
-  5) Update flake
+  5) Update flake and run a test build
   6) Continue editing flake
 
   Press any other key to leave this menu.
@@ -87,10 +87,11 @@ END_CAT
       5)
         nix flake update
         git add .
+        nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
         git status
         ;;
       6)
-        nvim ${config.home.homeDirectory}/dotfiles
+        nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
         ;;
       *)
         break
@@ -135,13 +136,17 @@ in
       ## Flake Functions
 
       editzsh(){
-        nvim ''$HOME/dotfiles/home/common/zsh.nix
+        zellij action rename-tab "Edit .zshrc"
+        nvim --listen /tmp/nvim ''$HOME/dotfiles/home/common/zsh.nix
         flakeworkflow
+        zellij action rename-tab "Tab #1"
       }
 
       editflake(){
-        nvim ''$HOME/dotfiles
+        zellij action rename-tab "Edit Flake"
+        nvim --listen /tmp/nvim ''$HOME/dotfiles
         flakeworkflow
+        zellij action rename-tab "Tab #1"
       }
 
       flakeworkflow(){
@@ -175,7 +180,9 @@ in
       ## Misc Shell Functions
 
       notes(){
+        zellij action rename-tab Notes
         nvim ~/notes
+        zellij action rename-tab Tab
       }
 
       killCurrentSessionSpawn(){
@@ -196,27 +203,32 @@ in
       clear
     '';
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "nvim --listen /tmp/nvim";
     };
     shellAliases = {
       l = "eza -la --tree --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore --level=1";
       c = "clear";
+
       # use zoxide instead of cd.
       cd = "z";
       cdi = "zi";
+
+      # Launch neovim with a named server
+      nvim = "nvim --listen /tmp/nvim";
+
       # SSH Hosts
       lhosts = ''
-	echo " \n \
-	The available hosts for ssh are:      \n \
-	                                      \n \
-	greatblue        GPD Win 2 2023       \n \
-	delaware         Dell Optiplex Server \n \
-	lagurus          Cat Projector        \n \
-	jerboa           Livingroom TV        \n \
-	sebrightbantam   QNAP TS-251          \n \
-	orloff           Odroid HC4           \n \
-	cichlid          Jess' Desktop"
-	'';
+        echo " \n \
+        The available hosts for ssh are:      \n \
+                                              \n \
+        greatblue        GPD Win 2 2023       \n \
+        delaware         Dell Optiplex Server \n \
+        lagurus          Cat Projector        \n \
+        jerboa           Livingroom TV        \n \
+        sebrightbantam   QNAP TS-251          \n \
+        orloff           Odroid HC4           \n \
+        cichlid          Jess' Desktop"
+      '';
       greatblue = "ssh 192.168.0.11"; # GPD Win 2 2023
       delaware = "ssh 192.168.0.46"; # NextCloud Server
       lagurus = "ssh 192.168.0.65"; # Cat's Projector

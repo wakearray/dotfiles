@@ -72,8 +72,10 @@ in
           "alacritty"
           "firefox"
           "signal-desktop"
-          "${pkgs.eww}/bin/eww daemon"
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar"
+          "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh > /dev/null 2>&1"
+          "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/hyprland.sh > /dev/null 2>&1"
         ];
         description = "A list of command line arguments you want run when hyprland starts.";
       };
@@ -146,9 +148,7 @@ in
           let ws = i + 1;
           in [
             "$mod, code:1${toString i}, split:workspace, ${toString ws}"
-            "$mod, code:1${toString i}, exec, eww update -c ${config.xdg.configHome}/eww/bar active_workspace='${toString ws}'"
             "$mod SHIFT, code:1${toString i}, split:movetoworkspace, ${toString ws}"
-            "$mod SHIFT, code:1${toString i}, exec, eww update -c ${config.xdg.configHome}/eww/bar active_workspace='${toString ws}'"
           ])9)
         );
         description = "Key bindings as described here: https://wiki.hyprland.org/Configuring/Binds/ use $mod to reference your assigned mod key.";
@@ -215,18 +215,6 @@ in
           hyprsplit = {
             num_workspaces = 9;
           };
-          # https://github.com/hyprwm/hyprland-plugins/tree/main/hyprbars
-          hyprbars = {
-            # example config
-            bar_height = 20;
-
-            # example buttons (R -> L)
-            # hyprbars-button = color, size, on-click
-            hyprbars-button = [
-              "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
-              "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
-            ];
-          };
         };
         general = {
           # <int>  Window border in pixels
@@ -237,7 +225,7 @@ in
           gaps_in = 5;
           # <int>  Gaps around screen edge/eww bar
           gaps_out = 12;
-          # <int>  Gaps between workspaces (not sure what this means)
+          # <int>  Gaps between workspaces (not sure what this means since workspaces are displayed 1 at a time)
           gaps_workspaces = 0;
           # border color for inactive windows
           "col.inactive_border" = cfg.colors.general.inactiveBorder;
@@ -433,8 +421,9 @@ in
       inputs.hyprland-contrib.packages.${pkgs.system}.hdrop
       inputs.hyprland-contrib.packages.${pkgs.system}.scratchpad
       inputs.hyprland-contrib.packages.${pkgs.system}.try_swap_workspace
-      #inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
       pkgs.glm
+      # an xprop replacement for hyprland
+      pkgs.hyprprop
     ];
     gui.eww = {
       enable = true;

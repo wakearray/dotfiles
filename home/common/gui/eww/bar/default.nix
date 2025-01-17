@@ -12,6 +12,18 @@ in
   options.gui.eww.bar = with lib; {
     enable = mkEnableOption "Enable a generic bar config for eww.";
 
+    width = mkOption {
+      type = types.str;
+      default = "100%";
+      description = "Width needs to be adjusted per device when dealing with different resolutions and scaling options. String is either a % of screen width or pixels as px.";
+    };
+
+    height = mkOption {
+      type = types.str;
+      default = "2%";
+      description = "Width needs to be adjusted per device when dealing with different resolutions and scaling options. String is either a % of screen width or pixels as px.";
+    };
+
     colors = {
       text = mkOption {
         type = types.str;
