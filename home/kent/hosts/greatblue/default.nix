@@ -37,6 +37,9 @@
       # 3D Modeling
       blender
       openscad-unstable
+
+      # Signal
+      gurk-rs
     ];
   };
 }

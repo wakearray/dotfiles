@@ -52,31 +52,31 @@ in
   .battery-charging {
     color : ${iconColors.battery-charging};
     margin-left      : 0px;
-    margin-right     : 10px;
+    margin-right     : 5px;
   }
 
   .battery-critical {
     color : ${iconColors.battery-critical};
     margin-left      : 0px;
-    margin-right     : 10px;
+    margin-right     : 5px;
   }
 
   .battery-discharging {
     color : ${iconColors.battery-discharging};
     margin-left      : 0px;
-    margin-right     : 10px;
+    margin-right     : 5px;
   }
 
   .battery-low {
     color : ${iconColors.battery-low};
     margin-left      : 0px;
-    margin-right     : 10px;
+    margin-right     : 5px;
   }
 
   .battery-full {
     color : ${iconColors.battery-full};
     margin-left      : 0px;
-    margin-right     : 10px;
+    margin-right     : 5px;
   }
 
   .metric scale trough highlight {

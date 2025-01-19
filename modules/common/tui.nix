@@ -17,5 +17,9 @@
     # right in your terminal
     # https://github.com/extrawurst/gitui
     gitui
+
+    # bluetui - TUI for managing bluetooth on Linux
+    # https://github.com/pythops/bluetui
+    bluetui
   ];
 }

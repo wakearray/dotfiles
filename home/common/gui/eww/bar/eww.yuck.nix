@@ -22,16 +22,15 @@ in
       enable = true;
       force = true;
       text = /*yuck*/ ''
-(defwindow bar
+(defwindow bar [ width offset ]
   :monitor 0
   ${defwindow}
   :geometry (geometry :x "0%"
                       :y "10px"
-                      :width "${bar.width}"
-                      ;:width "100%"
+                      :width width
                       :height "${bar.height}"
                       :anchor "top center")
-  (bar))
+  (bar :offset offset))
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
@@ -63,27 +62,36 @@ Mute  : ''${mute_status}"
     (label :text "''${EWW_BATTERY["${cfg.battery.identifier}"].capacity}% | ")
     time))
 
-(defwidget bar []
+(defwidget bar [ offset ]
   (centerbox :orientation "h"
-    (workspaces)
+    (workspaces :offset offset)
     (music)
     (sidestuff)))
 
-(defwidget workspaces []
+(defwidget workspaces [ offset ]
   (box :class "workspaces"
        :orientation "h"
        :space-evenly true
        :halign "start"
        :spacing 15
-    (workspace_toggle :workspace 1)
-    (workspace_toggle :workspace 2)
-    (workspace_toggle :workspace 3)
-    (workspace_toggle :workspace 4)
-    (workspace_toggle :workspace 5)
-    (workspace_toggle :workspace 6)
-    (workspace_toggle :workspace 7)
-    (workspace_toggle :workspace 8)
-    (workspace_toggle :workspace 9)
+    (workspace_toggle :workspace 1
+                      :offset offset)
+    (workspace_toggle :workspace 2
+                      :offset offset)
+    (workspace_toggle :workspace 3
+                      :offset offset)
+    (workspace_toggle :workspace 4
+                      :offset offset)
+    (workspace_toggle :workspace 5
+                      :offset offset)
+    (workspace_toggle :workspace 6
+                      :offset offset)
+    (workspace_toggle :workspace 7
+                      :offset offset)
+    (workspace_toggle :workspace 8
+                      :offset offset)
+    (workspace_toggle :workspace 9
+                      :offset offset)
   ))
 
 (defwidget music []
@@ -128,9 +136,9 @@ Status  : ''${battery_status}")
     (box :orientation "h"
       (label :text "''${battery_icon} ''${EWW_BATTERY["${cfg.battery.identifier}"].capacity}% | "))))
 
-(defwidget workspace_toggle [ workspace ]
+(defwidget workspace_toggle [ workspace offset ]
   (button :onclick "hyprctl dispatch split:workspace ''${workspace}"
-          :class {active_workspace == "''${workspace}" ? "workspace-active" : "workspace-inactive"}))
+          :class {active_workspace == "''${offset + workspace}" ? "workspace-active" : "workspace-inactive"}))
 
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")

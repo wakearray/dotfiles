@@ -125,8 +125,8 @@ in
           "$mod      , F       , fullscreen"
           # Toggle pinning the active floating app to the monitor rather than workspace
           "$mod      , P       , pin"
-          # Lock the computer
-          "$mod      , L       , exec, hyprlock --immediate"
+          # Lock and suspend the computer
+          "$mod      , L       , exec, systemctl suspend && hyprlock --immediate"
 
           # Exits hyperland
           "$mod SHIFT, Q       , exec, uwsm stop"
@@ -214,6 +214,7 @@ in
         plugin = {
           hyprsplit = {
             num_workspaces = 9;
+            persistent_workspaces = true;
           };
         };
         general = {

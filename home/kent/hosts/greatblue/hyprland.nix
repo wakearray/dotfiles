@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, system-details, ... }:
+let
+  hostname = system-details.host-name;
+in
 {
   config = {
     home.wm.hyprland = {
@@ -38,7 +41,8 @@
           "firefox"
           "signal-desktop"
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar"
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id primary   --screen 0 --arg width=\"118%\" --arg offset=\"0\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id secondary --screen 1 --arg width=\"99%\" --arg offset=\"9\""
           "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh > /dev/null 2>&1 &"
           "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/hyprland.sh > /dev/null 2>&1 &"
         ];
@@ -60,9 +64,15 @@
           ", XF86AudioNext, exec, playerctl next"
 
           # Disable built in-monitor when closing the lid
-          ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, disable\""
+          #", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, disable\""
           # Re-enable built-in monitor when opening the lid
-          ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, 2560x1600, 0x0, 1\""
+          #", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, 2560x1600, 0x0, 1.67\""
+
+          # Disable built in-monitor when closing the lid
+          ", switch:on:Lid Switch, exec, export ${hostname}_LID=\"closed\""
+          # Re-enable built-in monitor when opening the lid
+          ", switch:off:Lid Switch, exec, export ${hostname}_LID=\"open\""
+
         ];
       };
     };
@@ -70,9 +80,6 @@
     # Enables battery life display on eww
     gui.eww = {
       battery.enable = true;
-      bar = {
-        width = "118%";
-      };
     };
   };
 }

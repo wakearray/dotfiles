@@ -77,12 +77,12 @@ do
           #echo "$BATT_CAPACITY >=81<=90"
           change_icon "󰂁󱐋" "battery-discharging"
         ;;
-        ($((BATT_CAPACITY<99))*)
-          #echo "$BATT_CAPACITY >=91<=99"
+        ($((BATT_CAPACITY<98))*)
+          #echo "$BATT_CAPACITY >=91<=98"
           change_icon "󰂂󱐋" "battery-discharging"
         ;;
-        ($((BATT_CAPACITY<100))*)
-          #echo "$BATT_CAPACITY >=100<=100"
+        ($((BATT_CAPACITY<101))*)
+          #echo "$BATT_CAPACITY >=99<=101"
           change_icon "󰁹󱐋" "battery-discharging"
         ;;
       esac
@@ -138,12 +138,12 @@ do
           #echo "$BATT_CAPACITY >=81<=90"
           change_icon "󰂁" "battery-discharging"
         ;;
-        ($((BATT_CAPACITY<99))*)
-          #echo "$BATT_CAPACITY >=91<=99"
+        ($((BATT_CAPACITY<98))*)
+          #echo "$BATT_CAPACITY >=91<=98"
           change_icon "󰂂" "battery-discharging"
         ;;
-        ($((BATT_CAPACITY<100))*)
-          #echo "$BATT_CAPACITY >=100<=100"
+        ($((BATT_CAPACITY<101))*)
+          #echo "$BATT_CAPACITY >=99<=101"
           change_icon "󰁹" "battery-discharging"
         ;;
       esac
