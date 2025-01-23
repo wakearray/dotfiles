@@ -64,6 +64,7 @@ Mute  : ''${mute_status}"
 
 (defwidget bar [ offset ]
   (centerbox :orientation "h"
+             :class "barwidget"
     (workspaces :offset offset)
     (music)
     (sidestuff)))

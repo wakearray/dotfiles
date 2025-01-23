@@ -16,14 +16,11 @@ in
 
   // Global Styles
   .bar {
-    //background       : rgba(255, 255, 255, 0.0); // only way to make the background invisible
-    background-color : ${colors.bar-bg};
-    color            : ${colors.bar-fg};
-    border-radius    : 6px;
+    background       : rgba(255, 255, 255, 0.0); // only way to make the background invisible
     padding-top      : 0px;
     padding-bottom   : 0px;
-    padding-left     : 10px;
-    padding-right    : 10px;
+    padding-left     : 0px;
+    padding-right    : 0px;
     margin-top       : 0px;
     margin-bottom    : 0px;
     margin-left      : 0px;
@@ -31,6 +28,20 @@ in
   }
 
   // Styles on classes (see eww.yuck for more information)
+
+  .barwidget {
+    background-color : #32302F;
+    color            : #DDC7A1;
+    border-radius    : 6px;
+    padding-top      : 0px;
+    padding-bottom   : 0px;
+    padding-left     : 10px;
+    padding-right    : 10px;
+    margin-top       : 0px;
+    margin-bottom    : 0px;
+    margin-left      : 12px;
+    margin-right     : 12px;
+  }
 
   .systray {
     margin-right     : 20px;

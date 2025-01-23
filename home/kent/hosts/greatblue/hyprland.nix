@@ -24,13 +24,17 @@ in
           ", preferred, auto, 1"
         ];
         windowRules = [
-          "workspace 2, class:^(discord)(.*)"
-          "workspace 2, class:^(signal)(.*)"
-          "workspace 2, class:^(element)(.*)"
-          "workspace 2, class:^(telegram)(.*)"
-          "workspace 3, title:^(.*)( - YouTube — Mozilla Firefox)$"
-          "workspace 4, class:^(firefox)(.*)"
-          "workspace 8, class:^(1Password)(.*)"
+#          "split:workspace 2, class:^(discord)(.*)"
+#          "split:workspace 2, class:^(signal)(.*)"
+#          "split:workspace 2, class:^(element)(.*)"
+#          "split:workspace 2, class:^(telegram)(.*)"
+#          "split:workspace 4, class:^(firefox)(.*)"
+          "group set, class:firefox, title:^(.*)!(Mozilla Firefox Private Browsing)$"
+#          "split:workspace 3, title:^(.*)( - YouTube — Mozilla Firefox)$"
+          "float, class:(firefox), title:(Picture-in-Picture)"
+          "pin, class:(firefox), title:(Picture-in-Picture), floating:1"
+          "size 20% 20%, class:(firefox), title:(Picture-in-Picture), floating:1, pinned:1"
+#          "split:workspace 8, class:^(1Password)(.*)"
         ];
         animations = {
           enable = true;
@@ -41,8 +45,10 @@ in
           "firefox"
           "signal-desktop"
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id primary   --screen 0 --arg width=\"118%\" --arg offset=\"0\""
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id secondary --screen 1 --arg width=\"99%\" --arg offset=\"9\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0   --screen 0 --arg width=\"120%\" --arg offset=\"0\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg offset=\"9\""
+        ];
+        exec = [
           "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh > /dev/null 2>&1 &"
           "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/hyprland.sh > /dev/null 2>&1 &"
         ];

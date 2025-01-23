@@ -63,21 +63,24 @@ handle() {
     "monitoraddedv2>>1,DP-2,Stargate Technology F156P1 0x00001111")
         ${hyprctl} notify 0 10000 "rgb(ff1ea3)" "Stargate monitor connected, moving workspaces..."
         move_windows 0 1
-        ${ewwCommand} open bar --id secondary --screen 1 --arg width="100%" --arg offset="9"
+        ${ewwCommand} open bar --id mon_1 --screen 1 --arg width="100%" --arg offset="9"
       ;;
     "monitoraddedv2>>1,DP-1,DZX Z1-9 0000000000000")
         ${hyprctl} notify 0 10000 "rgb(ff1ea3)" "QQH monitor connected, moving workspaces..."
         move_windows 0 1
-        ${ewwCommand} open bar --id secondary --screen 1 --arg width="100%" --arg offset="9"
+        ${ewwCommand} open bar --id mon_1 --screen 1 --arg width="100%" --arg offset="9"
       ;;
     "monitoraddedv2>>1"*)
         ${hyprctl} notify 0 10000 "rgb(ff1ea3)" "Monitor connected, moving workspaces..."
         move_windows 0 1
-        ${ewwCommand} open bar --id secondary --screen 1 --arg width="100%" --arg offset="9"
+        ${ewwCommand} open bar --id mon_1 --screen 1 --arg width="100%" --arg offset="9"
       ;;
-    "monitoraddedv2>>2"*)
-        ${hyprctl} notify 0 10000 "rgb(ff1ea3)" "Monitor connected, moving workspaces..."
-        ${ewwCommand} open bar --id tertiary --screen 2 --arg width="100%" --arg offset="18"
+    "monitoraddedv2>>"*)
+        monitor="''${1#"monitoraddedv2>>"}"
+        monitor_num="''${1%",DP"*}"
+        workspaces_offset=$((9 * monitor_num))
+        ${hyprctl} notify 0 10000 "rgb(ff1ea3)" "Monitor $monitor connected, moving workspaces..."
+        ${ewwCommand} open bar --id "mon_$monitor_num" --screen $monitor_num --arg width="99%" --arg offset="$workspaces_offset"
       ;;
     monitorremoved\>\>*)
         # Use a for loop to move workspaces from previous workspace
@@ -85,7 +88,7 @@ handle() {
         move_windows 1 0
         # Grab any missed windows
         ${hyprctl} dispatch split:grabroguewindows
-        ${ewwCommand} open bar --id primary --screen 0 --arg width="118%" --arg offset="0"
+        ${ewwCommand} open bar --id mon_0 --screen 0 --arg width="120%" --arg offset="0"
       ;;
     workspace\>\>*)
         ws_num="''${1#"workspace>>"}"

@@ -73,9 +73,15 @@ in
           "firefox"
           "signal-desktop"
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar"
-          "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh > /dev/null 2>&1"
-          "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/hyprland.sh > /dev/null 2>&1"
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0   --screen 0 --arg width=\"100%\" --arg offset=\"0\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg offset=\"9\""
+        ];
+        description = "A list of command line arguments you want run when hyprland starts.";
+      };
+      exec = mkOption {
+        type = types.listOf types.str;
+        default = [
+          "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/hyprland.sh > /dev/null 2>&1 &"
         ];
         description = "A list of command line arguments you want run when hyprland starts.";
       };
@@ -387,6 +393,7 @@ in
           workspace_back_and_forth = true;
         };
         exec-once = s.execOnce;
+        exec = s.exec;
         exec-shutdown = s.execShutdown;
         # Key bindings
         # https://wiki.hyprland.org/Configuring/Binds/
