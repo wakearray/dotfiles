@@ -3,6 +3,7 @@ let
   user = config.home.username;
 in
 {
+  # /home/kent
   imports = [
     ./common
     ../common

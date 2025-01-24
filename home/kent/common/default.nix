@@ -1,5 +1,6 @@
 { system-details, ... }:
 {
+  # /home/kent/common
   imports = [
     ./git.nix
     ./zellij.nix

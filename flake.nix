@@ -325,6 +325,7 @@
 	                ./home/jess
                   ./home/jess/cichlid
 		              catppuccin.homeManagerModules.catppuccin
+                  nixvim.homeManagerModules.nixvim
 	              ];
               };
               extraSpecialArgs = {
@@ -366,6 +367,7 @@
 	                ./home/jess
                   ./home/jess/shoebill
 		              catppuccin.homeManagerModules.catppuccin
+                  nixvim.homeManagerModules.nixvim
 	              ];
               };
               extraSpecialArgs = {
@@ -412,6 +414,50 @@
               imports = [
                 ./home/jess
                 catppuccin.homeManagerModules.catppuccin
+                nixvim.homeManagerModules.nixvim
+              ];
+            };
+            extraSpecialArgs = {
+              inherit inputs outputs;
+              system-details = system-details;
+            };
+          };
+        }
+        nixvim.nixosModules.nixvim
+        sops-nix.nixosModules.sops
+        lix-module.nixosModules.default
+      ];
+      format = "iso";
+      # https://github.com/nix-community/nixos-generators#using-in-a-flake
+    };
+    # CustomInstaller liveCD
+    # Available through `nix build .#CustomInstaller`
+    CustomInstaller = let
+      system-details = {
+        host-type = "server";
+        host-name = "CustomInstaller";
+        display-type = "none";
+        host-options = "printers installer";
+        current-system = "x86_64-linux";
+      };
+      in nixos-generators.nixosGenerate {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs outputs;
+        secrets = "/etc/nixos/secrets";
+        system-details = system-details;
+      };
+      modules = [
+        ./hosts/custominstaller/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.kent = {
+              imports = [
+                ./home/kent
+                nixvim.homeManagerModules.nixvim
               ];
             };
             extraSpecialArgs = {

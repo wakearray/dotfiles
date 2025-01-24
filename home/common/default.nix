@@ -1,5 +1,6 @@
 { pkgs, config, system-details, ... }:
 {
+  # /home/common
   imports = [
     ./zsh.nix
     ./ssh.nix
@@ -11,14 +12,7 @@
       else
         ./nixos
     )
-    (
-      if
-        builtins.match "none" system-details.display-type != null
-      then
-        ./headless.nix
-      else
-        ./gui
-    )
+    ./gui
     ../../modules/common/nvim/home.nix
   ];
 

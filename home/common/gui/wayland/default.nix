@@ -3,6 +3,10 @@ let
   wayland = (builtins.match "wayland" system-details.display-type != null);
 in
 {
+  imports = [
+    ./wm
+  ];
+
   config = lib.mkIf wayland {
     home.packages = with pkgs; [
       # Wayland tools

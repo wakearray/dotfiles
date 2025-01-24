@@ -53,8 +53,6 @@ move_windows() {
   sleep $sleep_time
   ${hyprctl} dispatch split:workspace 1
   sleep $sleep_time
-
-  ${ewwCommand} open bar --screen "$to_monitor"
 }
 
 handle() {
