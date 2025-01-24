@@ -18,6 +18,7 @@
     package = pkgs.sambaFull;
     openFirewall = true;
     securityType = "user";
+    #TODO: This needs to be replaced with services.samba.settings instead
     extraConfig = ''
       load printers = yes
       printing = cups

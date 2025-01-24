@@ -13,7 +13,7 @@
 
     ### File
     ./nextcloud.nix
-    ./samba.nix
+    #./samba.nix
     ./syncthing.nix
 
     ### Git
