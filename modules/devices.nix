@@ -62,7 +62,7 @@ let
     # Servers
     delaware = {
       ip = "192.168.0.46";
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBZ2xTcSdudbG+E3z7ebHHxVJ4MiN/euWYzZ9RsTonGR";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIyh4x/us/WXIsqGjbfOCIKKX50mEyYg37ZMJ9VW7nnN";
       hosts = [ "greatblue" "delaware" "lagurus" "jerboa" "sebrightbantam" "orloff" "cichlid" ];
       users = [ "kent" ];
     };
