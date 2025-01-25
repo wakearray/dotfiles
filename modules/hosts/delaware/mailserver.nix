@@ -17,17 +17,17 @@
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     loginAccounts = {
       "admin@${domain}" = {
-        hashedPasswordFile = "${secrets}/nixos-mailserver/admin";
+        hashedPasswordFile = "/run/secrets/mail-server-admin";
         aliases = [ "postmaster@${domain}" "security@${domain}" "abuse@${domain}" ];
       };
       "noreply@${domain}" = {
-        hashedPasswordFile = "${secrets}/nixos-mailserver/noreply";
+        hashedPasswordFile = "/run/secrets/mail-server-noreply";
       };
       "kent@${domain}" = {
-        hashedPasswordFile = "${secrets}/nixos-mailserver/kent";
+        hashedPasswordFile = "/run/secrets/mail-server-kent";
       };
       "jess@${domain}" = {
-        hashedPasswordFile = "${secrets}/nixos-mailserver/jess";
+        hashedPasswordFile = "/run/secrets/mail-server-jess";
       };
     };
 
@@ -35,6 +35,16 @@
     # down nginx and opens port 80.
     certificateScheme = "acme-nginx";
   };
+
+  sops = {
+    secrets = {
+      mail-server-admin = { sopsFile = ./mailserver.yaml; };
+      mail-server-noreply = { sopsFile = ./mailserver.yaml; };
+      mail-server-kent = { sopsFile = ./mailserver.yaml; };
+      mail-server-jess = { sopsFile = ./mailserver.yaml; };
+    };
+  };
+
 
    # mailserver.openFirewall = true; Should be opening all these ports
    #

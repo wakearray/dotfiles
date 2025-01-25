@@ -13,7 +13,7 @@ keys:
     - &a9 age1h4x9vcyms6kkfwxgz5y8k3yk4g6vg0rn5wvenhmc632w8gvgascser0xqr
 
 creation_rules:
-    #path should be relative to location of this file (.sops.yaml)
+     # path should be relative to location of this file (.sops.yaml)
 #  - path_regex: secrets/secrets.yaml$
 #    key_groups:
 #    - age:
@@ -25,7 +25,16 @@ creation_rules:
 #      - *p80
 #      - *boox_air_nova_c
 #      - *a9
+    #
   - path_regex: modules/servers/docker/.*.yaml$
+    key_groups:
+      - age:
+        - *kent
+        - *delaware
+        - *greatblue
+        - *y700
+        - *s24
+  - path_regex: modules/hosts/delaware/.*.yaml$
     key_groups:
       - age:
         - *kent
