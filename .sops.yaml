@@ -4,7 +4,7 @@ keys:
     - &kent age1em9n3fvg9jphpsx055cv0t8u5wnxs64x2auddxsvjtuvg85kmerqp0wjg0
 - &hosts: # nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
     - &greatblue age158lzfdas82aj2dayppkcv4xgs4u7m0uk7zul90sfpj8wxdavyuqqgv6ar2
-    - &delaware age1fmnk97kf607jsgl3f9vcsvljsyc8lrwud6af8vel0jerfgsrpdwsvz83sk
+    - &delaware age1pddnp2as3e76uqhk9uh3ff48jcua5st5px3cp35nmk2urem2xewq7vn6m4
     # Home manager installs:
     - &y700 age1ldfj8u2lmq7cntyu6hxtep9dy7z6gfesctltztuz4fwh2a7ww4qsywvjyn
     - &s24 age1ug0wd4d2tukuw2w7lzrpf2um8r2fxxr90xg7mphu07wwldnan3qsngdelh
@@ -25,7 +25,7 @@ creation_rules:
 #      - *p80
 #      - *boox_air_nova_c
 #      - *a9
-  - path_regex: modules/server/docker/.*.yaml$
+  - path_regex: modules/servers/docker/.*.yaml$
     key_groups:
       - age:
         - *kent
