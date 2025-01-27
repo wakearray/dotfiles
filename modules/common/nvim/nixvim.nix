@@ -20,8 +20,10 @@
   end
 '';
     # keymaps
-    # unmap J,K,L,M
+    # TODO:unmap J,K,L,M
     # Assign J = bprevious, K = bnext, L =  Join N lines; default is 2, M = lookup Keyword under the cursor with 'keywordprg'
+
+    # plugins
     plugins = {
       # Dependency of many other plugins
       web-devicons.enable = true;
@@ -278,5 +280,14 @@
         };
       };
     };
+    extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
+      name = "todo.txt-vim";
+      src = pkgs.fetchFromGitHub {
+        owner = "freitass";
+        repo = "todo.txt-vim";
+        rev = "3bb5f9cf0d6c7ee91b476a97054c336104d2b6f5";
+        hash = "sha256-s9ycwKgnDF5wWz3y3rHohDjq6mH066yDVr4xYReS6Ik=";
+      };
+    })];
   };
 }

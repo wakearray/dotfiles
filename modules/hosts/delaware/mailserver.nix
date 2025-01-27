@@ -1,4 +1,4 @@
-{ domain, secrets, ... }:
+{ domain, ... }:
 {
   mailserver = {
     enable = true;

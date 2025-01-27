@@ -27,6 +27,14 @@ in
           path = "/home/kent/notes/personal/";
           devices = [ "Delaware" ];
         };
+        "Kent_Backup_Android" = {
+          path = "/home/kent/Kent_Backup_Android";
+          devices = [ "Delaware" ];
+        };
+        "Kent_Backup_PC" = {
+          path = "/home/kent/Kent_Backup_PC";
+          devices = [ "Delaware" ];
+        };
       };
     };
   };

@@ -81,12 +81,9 @@ handle() {
         ${ewwCommand} open bar --id "mon_$monitor_num" --screen $monitor_num --arg width="99%" --arg offset="$workspaces_offset"
       ;;
     monitorremoved\>\>*)
-        # Use a for loop to move workspaces from previous workspace
         ${hyprctl} notify 0 10000 "rgb(ff1ea3)" "monitor ''${1#"monitorremoved>>"} disconnected, moving workspaces..."
-        move_windows 1 0
         # Grab any missed windows
         ${hyprctl} dispatch split:grabroguewindows
-        ${ewwCommand} open bar --id mon_0 --screen 0 --arg width="120%" --arg offset="0"
       ;;
     workspace\>\>*)
         ws_num="''${1#"workspace>>"}"

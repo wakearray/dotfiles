@@ -3,6 +3,9 @@ let
   cfg = config.gui.rofi;
 in
 {
+  imports = [
+    ./todofi.nix
+  ];
   options.gui.rofi = with lib; {
     enable = mkEnableOption "Enable an opionated Rofi configuration";
 
@@ -188,10 +191,6 @@ in
       #rofi-power-menu
       # Add `power-menu:rofi-power-menu` to `modi=` to enable
 
-      # todo.txt support for rofi
-      todofi-sh
-      todo
-
       # Emoji picker - Get a selection of emojis with dmenu or rofi
       # https://github.com/thingsiplay/emojipick
       emojipick
@@ -199,6 +198,8 @@ in
       # Papirus icons to support the default selected
       papirus-icon-theme
     ];
+
+    gui.rofi.todofi.enable = true;
   };
 }
 

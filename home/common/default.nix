@@ -4,6 +4,8 @@
   imports = [
     ./zsh.nix
     ./ssh.nix
+    ./tui.nix
+    ./yazi.nix
     (
       if
         builtins.match "android" system-details.host-type != null
@@ -131,13 +133,6 @@
     # More options found here:
     # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.skim.enable
     skim = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-
-    # yazi - Blazing Fast Terminal File Manager
-    # https://github.com/sxyazi/yazi
-    yazi = {
       enable = true;
       enableZshIntegration = true;
     };
