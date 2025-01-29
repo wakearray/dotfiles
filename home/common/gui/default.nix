@@ -6,6 +6,7 @@
     ./cliphist.nix
     ./mpv.nix
     ./rofi.nix
+    ./scripts
     ./wthrr.nix
     ./eww
     ./vscode.nix

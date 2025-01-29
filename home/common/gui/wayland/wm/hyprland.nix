@@ -97,10 +97,16 @@ in
         default = [
           # App launcher shortcut
           "$mod      , D       , exec, rofi -show drun"
+          # Rofi move window to current workspace
+          "$mod SHIFT, D       , exec, rofi -show hyprland-clients -modi \"hyprland-clients:rofihyprlandclients\""
           # Open Alacritty on workspace 1
           "$mod      , A       , exec, alacritty"
           # Open Firefox on active workspace
           "$mod      , B       , exec, firefox"
+          # Move workspaces from monitor 0 to monitor 1
+          "$mod      , M       , exec, monitorswitch 0 1"
+          # Move workspaces from monitor 1 to monitor 0
+          "$mod SHIFT, M       , exec, monitorswitch 1 0"
           # Take a screenshot
           "          , Print   , exec, grimblast copy area"
 
@@ -109,8 +115,6 @@ in
           # Send active window to scratchpad
           "$mod SHIFT, S       , exec, scratchpad -g"
 
-          # Swap the workspaces onactive monitor with the monitor to it's right
-          "$mod SHIFT, D       , split:swapactiveworkspaces, current +1"
           # Finds all windows that are in invalid workspaces and moves them
           # to the current workspace. Useful when unplugging monitors.
           "$mod SHIFT, G       , split:grabroguewindows"
@@ -120,13 +124,16 @@ in
           "$mod      , T       , togglefloating"
           # Toggle grouping on the currently active app
           "$mod      , G       , togglegroup"
+
           # Switch which window in active group is visible b = backwards
           # code:59 = ,
           "$mod      , code:59 , changegroupactive, b"
+
           # Switch which window in active group is visible f = forwards
           # code:60 = .
           # Use `wev` to find the key code for additional keys
           "$mod      , code:60 , changegroupactive, f"
+
           # Toggle fullscreen on the currently active app
           "$mod      , F       , fullscreen"
           # Toggle pinning the active floating app to the monitor rather than workspace
@@ -437,5 +444,6 @@ in
       enable = true;
       bar.enable = true;
     };
+    scripts.monitorswitch.enable = true;
   };
 }

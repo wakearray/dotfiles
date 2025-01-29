@@ -3,7 +3,6 @@
   ## These are the defaults I want on Delaware only:
   imports =
   [
-    ./systemd-mounts.nix
     ./zfs.nix
 
     ../../servers
@@ -13,7 +12,6 @@
 
     ### File
     ./nextcloud.nix
-    #./samba.nix
     ./syncthing.nix
 
     ### Git
@@ -22,13 +20,6 @@
     ### Mail
     ./mailserver.nix
   ];
-
-  # Where needed:
-  # {secrets, domain, ...}:
-  # {
-  #   secrets = "/etc/nixos/secrets";
-  #   domain = "voicelesscrimson.com";
-  # }
 
   servers = {
     deluge.enable = true;
@@ -39,6 +30,10 @@
         domain = "lobe.${domain}";
       };
       tubearchivist.enable = true;
+    };
+    mail = {
+      enable = true;
+      domain = "${domain}";
     };
     nginx = {
       enable = true;

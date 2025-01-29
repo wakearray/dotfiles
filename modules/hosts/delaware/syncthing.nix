@@ -8,8 +8,10 @@
     key = "/run/secrets/delaware-syncthing-key-pem";
     cert = "/run/secrets/delaware-syncthing-cert-pem";
     user = "syncthing";
+    guiAddress = "127.0.0.1:8384";
     overrideDevices = true;     # overrides any devices added or deleted through the WebUI
     overrideFolders = true;     # overrides any folders added or deleted through the WebUI
+    openDefaultPorts = true;
     settings = {
       devices = {
         "Kent_S24_Ultra" = { id = "SD6ZVE2-JPJEKJM-I2VHZBK-A42GUPM-EGIZIG7-QKI3H5B-KG3XEPL-MDETKQZ"; };
@@ -24,7 +26,7 @@
       };
       folders = {
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
-          path = "/mnt/syncthing/shared_family/notes";    # Which folder to add to Syncthing
+          path = "/data/userdata/family/notes";    # Which folder to add to Syncthing
           devices = [
             "Jess_S20_Ultra"
 	          "Jess_Cichlid"
@@ -39,7 +41,7 @@
           ];
         };
         "Kent_Notes" = {
-          path = "/mnt/syncthing/kent_personal/notes";
+          path = "/data/userdata/kent/notes";
           devices = [
             "Kent_S24_Ultra"
             "Kent_P80"
@@ -51,11 +53,11 @@
           ];
         };
         "Kent_DCIM" = {
-          path = "/mnt/syncthing/kent_personal/DCIM";
+          path = "/data/userdata/kent/DCIM";
           devices = [ "Kent_S24_Ultra" ];
         };
 	      "Kent_Backup_Android" = {
-          path = "/mnt/syncthing/kent_personal/Backups/Android";
+          path = "/data/userdata/kent/Backups/Android";
 	        devices = [
             "Kent_S24_Ultra"
             "Kent_P80"
@@ -67,18 +69,18 @@
           ];
 	      };
         "Kent_Backup_PC" = {
-          path = "/mnt/syncthing/kent_personal/Backups/PC";
+          path = "/data/userdata/kent/Backups/PC";
 	        devices = [ "Kent_GreatBlue" ];
 	      };
         "Jess_Notes" = {
-          path = "/mnt/syncthing/jess_personal/notes";
+          path = "/data/userdata/jess/notes";
           devices = [
 	          "Jess_S20_Ultra"
 	          "Jess_Cichlid"
 	        ];
         };
         "Jess_DCIM" = {
-          path = "/mnt/syncthing/jess_personal/DCIM";
+          path = "/data/userdata/jess/DCIM";
           devices = [ "Jess_S20_Ultra" ];
         };
       };

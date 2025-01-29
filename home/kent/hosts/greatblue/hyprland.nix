@@ -24,17 +24,10 @@ in
           ", preferred, auto, 1"
         ];
         windowRules = [
-#          "split:workspace 2, class:^(discord)(.*)"
-#          "split:workspace 2, class:^(signal)(.*)"
-#          "split:workspace 2, class:^(element)(.*)"
-#          "split:workspace 2, class:^(telegram)(.*)"
-#          "split:workspace 4, class:^(firefox)(.*)"
           "group set, class:firefox, title:^(.*)!(Mozilla Firefox Private Browsing)$"
-#          "split:workspace 3, title:^(.*)( - YouTube — Mozilla Firefox)$"
           "float, class:(firefox), title:(Picture-in-Picture)"
           "pin, class:(firefox), title:(Picture-in-Picture), floating:1"
           "size 20% 20%, class:(firefox), title:(Picture-in-Picture), floating:1, pinned:1"
-#          "split:workspace 8, class:^(1Password)(.*)"
         ];
         animations = {
           enable = true;

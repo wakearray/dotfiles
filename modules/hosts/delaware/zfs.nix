@@ -6,7 +6,7 @@
     zfs = {
       forceImportRoot = false;
       # Enable ZFS pool (native).
-      extraPools = [ "sambazfs" ];
+      extraPools = [ "seagate8tb" ];
     };
   };
   networking.hostId = "ae67779a";

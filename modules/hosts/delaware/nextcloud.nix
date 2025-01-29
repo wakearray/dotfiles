@@ -29,7 +29,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud30;
-    home = "/sambazfs/nextcloud";
+    home = "/data/nextcloud";
     hostName = "cloud.${domain}";
     autoUpdateApps.enable = true;
     nginx.hstsMaxAge = 15552000;
@@ -39,9 +39,9 @@
       dbuser = "nextcloud";
       dbhost = "/run/postgresql"; # nextcloud will add /.s.PGSQL.5432 by itself
       dbname = "nextcloud";
-      dbpassFile = "/var/nextcloud-db-pass";
+      dbpassFile = "/run/secrets/nextclouddbpass";
 
-      adminpassFile = "/var/nextcloud-admin-pass";
+      adminpassFile = "/run/secrets/nextcloudadminpass";
       adminuser = "admin";
     };
     appstoreEnable = true;
@@ -83,6 +83,11 @@
         "OS\\Preview\\Font"
       ];
     };
+  };
+
+  sops.secrets = {
+    nextcloudadminpass = { sopsFile = ./nextcloud.yaml; };
+    nextclouddbpass = { sopsFile = ./nextcloud.yaml; };
   };
 
   # NextCloud Cron service
