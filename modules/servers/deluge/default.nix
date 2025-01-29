@@ -5,13 +5,8 @@
 
     downloadsDir = lib.mkOption {
       type = lib.types.str;
-      default = "/sambazfs/torrents";
+      default = "/data/torrents";
       description = "Where you want your torrents downloaded to.";
-    };
-
-    authFile = lib.mkOption {
-      type = lib.types.path;
-      default = "/var/lib/deluge/authFile";
     };
 
     webUIPort = lib.mkOption {
@@ -23,7 +18,7 @@
     daemon-port = lib.mkOption {
       type = lib.types.port;
       default = 58846;
-      description = "";
+      description = "The port for the deluge daemon to use";
     };
 
     listen-ports = lib.mkOption {
@@ -47,7 +42,9 @@
   config = lib.mkIf config.servers.deluge.enable {
     services.deluge = {
       enable = config.servers.deluge.enable;
-      authFile = config.servers.deluge.authFile;
+      # each line contains a username:password:level tuple in plaintext
+      # https://deluge-torrent.org/userguide/authentication/
+      authFile = "/run/secrets/delugeauthfile";
       declarative = true;
       dataDir = "/var/lib/deluge";
       openFirewall = true;
@@ -154,6 +151,9 @@
     {
       allowedTCPPorts = ports;
       allowedUDPPorts = ports;
+    };
+    sops.secrets = {
+      delugeauthfile = { sopsFile = ./deluge.yaml; };
     };
   };
 }

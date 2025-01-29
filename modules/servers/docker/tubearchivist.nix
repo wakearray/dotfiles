@@ -13,8 +13,8 @@
         autoStart = true;
         ports = [ "8062:8000" ];
         volumes = [
-          "/sambazfs/tubearchivist/media:/youtube"
-          "/sambazfs/tubearchivist/cache:/cache"
+          "/data/tubearchivist/media:/youtube"
+          "/data/tubearchivist/cache:/cache"
         ];
         environment = {
           ES_URL = "http://archivist-es:9200";  # needs protocol e.g. http and port
@@ -43,7 +43,7 @@
         autoStart = true;
         #      expose = [ "6379" ];
         volumes = [
-          "/sambazfs/tubearchivist/redis:/data"
+          "/data/tubearchivist/redis:/data"
         ];
         dependsOn = [ "archivist-es" ];
         extraOptions = [ "--network=archivist-network" ];
@@ -66,7 +66,7 @@
           "--network=archivist-network"
         ];
         volumes = [
-          "/sambazfs/tubearchivist/es:/usr/share/elasticsearch/data"            # check for permission error when using bind mount, see readme
+          "/data/tubearchivist/es:/usr/share/elasticsearch/data"            # check for permission error when using bind mount, see readme
         ];
   #      expose = [ "9200" ];
       };

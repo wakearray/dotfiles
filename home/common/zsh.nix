@@ -1,17 +1,13 @@
 { config, system-details, ... }:
 let
-  editflake = (if builtins.match "android" system-details.host-type != null
+  flakeworkflow = (if builtins.match "android" system-details.host-type != null
     then # Do this when on Android
       ''
-CWD=''$(pwd)
-cd ''$HOME/dotfiles
-if [[ `git status --porcelain` ]]; then
-  echo "Flake has been modified."
-  git add .
-  git status
-  while true; do
-    echo "What would you like to do?"
-    cat <<'END_CAT'
+git -c "$FLAKE" add .
+git -c "$FLAKE" status
+while true; do
+  echo "What would you like to do?"
+  cat <<'END_CAT'
   2) Build home-manager derivation
   3) Make a commit
   4) Push current branch to remote
@@ -21,43 +17,40 @@ if [[ `git status --porcelain` ]]; then
   Press any other key to leave this menu.
 END_CAT
 
-    echo ""
+  echo ""
 
-    read -k 1 ans
-    case $ans in
-      2)
-        nh home switch -v -c ${system-details.host-name}
-        ;;
-      3)
-        git commit
-        ;;
-      4)
-        git push origin ''$(git rev-parse --abbrev-ref HEAD)
-        ;;
-      5)
-        nix flake update
-        ;;
-      6)
-        nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
-        ;;
-      *)
-        break
-        ;;
-    esac
-  done
-fi
+  read -k 1 ans
+  case $ans in
+    2)
+      nh home switch -v -c ${system-details.host-name}
+      ;;
+    3)
+      git -c "$FLAKE" commit
+      ;;
+    4)
+      git -c "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
+      ;;
+    5)
+      nix flake update
+      ;;
+    6)
+      nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
       ''
     else # Do this when not on Android (should only be NixOS)
       ''
 CWD=''$(pwd)
 cd ''$HOME/dotfiles
-if [[ `git status --porcelain` ]]; then
-  echo "Flake has been modified."
-  git add .
-  git status
-  while true; do
-    echo "What would you like to do?"
-    cat <<'END_CAT'
+git -c "$FLAKE" add .
+git -c "$FLAKE" status
+while true; do
+  echo "What would you like to do?"
+  cat <<'END_CAT'
   1) Run a test build with --show-trace
   2) Rebuild system
   3) Make a commit
@@ -68,37 +61,36 @@ if [[ `git status --porcelain` ]]; then
   Press any other key to leave this menu.
 END_CAT
 
-    echo ""
+  echo ""
 
-    read -k 1 ans
-    case $ans in
-      1)
-        nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
-        ;;
-      2)
-        nh os switch ${config.home.homeDirectory}/dotfiles
-        ;;
-      3)
-        git commit
-        ;;
-      4)
-        git push origin ''$(git rev-parse --abbrev-ref HEAD)
-        ;;
-      5)
-        nix flake update
-        git add .
-        nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
-        git status
-        ;;
-      6)
-        nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
-        ;;
-      *)
-        break
-        ;;
-    esac
-  done
-fi
+  read -k 1 ans
+  case $ans in
+    1)
+      nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
+      ;;
+    2)
+      nh os switch ${config.home.homeDirectory}/dotfiles
+      ;;
+    3)
+      git -c "$FLAKE" commit
+      ;;
+    4)
+      git -c "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
+      ;;
+    5)
+      nix flake update
+      git -c "$FLAKE" add .
+      nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
+      git -c "$FLAKE" status
+      ;;
+    6)
+      nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
       ''
   );
 in
@@ -116,7 +108,8 @@ in
       strategy = [ "history" ];
     };
     dirHashes = {
-      dots = "$HOME/dotfiles";
+      dotfiles = "$FLAKE";
+      flake = "$FLAKE";
     };
     history = {
       append = true;
@@ -137,20 +130,22 @@ in
 
       editzsh(){
         zellij action rename-tab "Edit .zshrc"
-        nvim --listen /tmp/nvim ''$HOME/dotfiles/home/common/zsh.nix
-        flakeworkflow
-        zellij action rename-tab "Tab #1"
+        nvim --listen /tmp/nvim ''$FLAKE/home/common/zsh.nix
+        if [[ `git -c "$FLAKE" status --porcelain` ]]; then
+          flakeworkflow
+        fi
       }
 
       editflake(){
         zellij action rename-tab "Edit Flake"
-        nvim --listen /tmp/nvim ''$HOME/dotfiles
-        flakeworkflow
-        zellij action rename-tab "Tab #1"
+        nvim --listen /tmp/nvim ''$FLAKE
+        if [[ `git -c "$FLAKE" status --porcelain` ]]; then
+          flakeworkflow
+        fi
       }
 
       flakeworkflow(){
-        ${editflake}
+        ${flakeworkflow}
       }
 
       clean(){
@@ -182,7 +177,6 @@ in
       notes(){
         zellij action rename-tab Notes
         nvim ~/notes
-        zellij action rename-tab Tab
       }
 
       killCurrentSessionSpawn(){
@@ -197,6 +191,11 @@ in
         else
           mkdir ''$1 && cd ''$1
         fi
+      }
+
+      function llm {
+        zellij action rename-tab 'GPT-4o'
+        tenere
       }
 
       eval `ssh-agent` && ssh-add && ssh-add ~/.ssh/signing_key

@@ -26,7 +26,7 @@ creation_rules:
 #      - *boox_air_nova_c
 #      - *a9
     #
-  - path_regex: modules/servers/docker/.*.yaml$
+  - path_regex: modules/servers/.*/.*.yaml$
     key_groups:
       - age:
         - *kent
