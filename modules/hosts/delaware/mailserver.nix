@@ -34,7 +34,7 @@ in
     };
 
     secrets = mkOption {
-      type = typs.attrs;
+      type = types.attrs;
       default = {
         mail-server-admin = { sopsFile = ./mailserver.yaml; };
         mail-server-noreply = { sopsFile = ./mailserver.yaml; };
