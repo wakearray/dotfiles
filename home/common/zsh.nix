@@ -22,16 +22,20 @@ END_CAT
   read -k 1 ans
   case $ans in
     2)
+      git -c "$FLAKE" add .
       nh home switch -v -c ${system-details.host-name}
       ;;
     3)
+      git -c "$FLAKE" add .
       git -c "$FLAKE" commit
       ;;
     4)
       git -c "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
       ;;
     5)
+      git -c "$FLAKE" add .
       nix flake update --flake "$FLAKE"
+      git -c "$FLAKE" add .
       ;;
     6)
       nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
@@ -64,18 +68,22 @@ END_CAT
   read -k 1 ans
   case $ans in
     1)
+      git -c "$FLAKE" add .
       nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
       ;;
     2)
+      git -c "$FLAKE" add .
       nh os switch ${config.home.homeDirectory}/dotfiles
       ;;
     3)
+      git -c "$FLAKE" add .
       git -c "$FLAKE" commit
       ;;
     4)
       git -c "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
       ;;
     5)
+      git -c "$FLAKE" add .
       nix flake update
       git -c "$FLAKE" add .
       nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace

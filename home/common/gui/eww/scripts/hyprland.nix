@@ -15,46 +15,6 @@ in
         text = /*bash*/ ''
 #!/usr/bin/env bash
 
-sleep_time=0.07
-
-move_windows() {
-  # Switch all windows from from_monitor to to_secondary monitor
-
-  from_monitor=$1
-  to_monitor=$2
-
-  ${hyprctl} dispatch focusmonitor "$to_monitor"
-  sleep $sleep_time
-  # move hyprland to a temporary workspace that doesn't have windows on it
-  # to prevent issues with binds.workspace_back_and_forth
-  ${hyprctl} dispatch split:workspace 400
-  sleep $sleep_time
-  ${hyprctl} dispatch focusmonitor "$from_monitor"
-  sleep $sleep_time
-  ${hyprctl} dispatch split:workspace 400
-  sleep $sleep_time
-
-  for workspace in 1 2 3 4 5 6 7 8 9
-  do
-    echo "Workspace: $workspace"
-    ${hyprctl} dispatch focusmonitor "$to_monitor"
-    sleep $sleep_time
-    ${hyprctl} dispatch split:workspace "$workspace"
-    sleep $sleep_time
-    ${hyprctl} dispatch focusmonitor "$from_monitor"
-    sleep $sleep_timeOr
-    ${hyprctl} dispatch split:workspace "$workspace"
-    sleep $sleep_time
-    ${hyprctl} dispatch split:swapactiveworkspaces "$from_monitor" "$to_monitor"
-    sleep $sleep_time
-  done
-
-  ${hyprctl} dispatch focusmonitor "$to_monitor"
-  sleep $sleep_time
-  ${hyprctl} dispatch split:workspace 1
-  sleep $sleep_time
-}
-
 handle() {
   echo "$1"
   case $1 in
@@ -62,14 +22,15 @@ handle() {
         monitor="''${1#"monitoraddedv2>>"}"
         monitor_num="''${1%",DP"*}"
         workspaces_offset=$((9 * monitor_num))
-        ${hyprctl} notify 0 10000 "rgb(ff1ea3)" "Monitor $monitor connected, moving workspaces..."
+        ${hyprctl} notify 0 20000 "rgb(ff1ea3)" "Monitor $monitor connected"
         if [ $monitor_num == 1 ]; then
-          move_windows 0 1
+          sleep 1
+          bash monitorswitch 0 1
         fi
         ${ewwCommand} open bar --id "mon_$monitor_num" --screen $monitor_num --arg width="100%" --arg offset="$workspaces_offset"
       ;;
     monitorremoved\>\>*)
-        ${hyprctl} notify 0 10000 "rgb(ff1ea3)" "monitor ''${1#"monitorremoved>>"} disconnected, moving workspaces..."
+        # ${hyprctl} notify 0 20000 "rgb(ff1ea3)" "monitor ''${1#"monitorremoved>>"} disconnected"
         # Grab any missed windows
         ${hyprctl} dispatch split:grabroguewindows
       ;;

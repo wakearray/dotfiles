@@ -35,11 +35,19 @@ in
 
     secrets = mkOption {
       type = types.attrs;
-      default = {
-        mail-server-admin = { sopsFile = ./mailserver.yaml; };
-        mail-server-noreply = { sopsFile = ./mailserver.yaml; };
-        mail-server-kent = { sopsFile = ./mailserver.yaml; };
-        mail-server-jess = { sopsFile = ./mailserver.yaml; };
+      default = let
+        opts = {
+          sopsFile = ./mailserver.yaml;
+          mode     = "0400";
+          owner    = "virtualMail";
+          group    = "virtualMail";
+        };
+      in
+      {
+        mail-server-admin = opts;
+        mail-server-noreply = opts;
+        mail-server-kent = opts;
+        mail-server-jess = opts;
       };
       description = "Include the hashed password files from the SOPS /mailserver.yaml file.";
     };

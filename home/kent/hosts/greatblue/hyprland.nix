@@ -67,11 +67,10 @@ in
           # Re-enable built-in monitor when opening the lid
           #", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, 2560x1600, 0x0, 1.67\""
 
-          # Disable built in-monitor when closing the lid
-          ", switch:on:Lid Switch, exec, export ${hostname}_LID=\"closed\""
-          # Re-enable built-in monitor when opening the lid
-          ", switch:off:Lid Switch, exec, export ${hostname}_LID=\"open\""
-
+          # Turn off built-in monitor when closing the lid
+          ", switch:on:Lid Switch, exec, export ${hostname}_LID=\"closed\" && sleep 1 && hyprctl dispatch dpms off eDP-1"
+          # Turn on  built-in monitor when opening the lid
+          ", switch:off:Lid Switch, exec, export ${hostname}_LID=\"open\" && sleep 1 && hyprctl dispatch dpms on eDP-1"
         ];
       };
     };

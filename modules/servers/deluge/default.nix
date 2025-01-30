@@ -152,8 +152,17 @@
       allowedTCPPorts = ports;
       allowedUDPPorts = ports;
     };
-    sops.secrets = {
-      delugeauthfile = { sopsFile = ./deluge.yaml; };
+
+    sops.secrets = let
+      opts = {
+        sopsFile = ./deluge.yaml;
+        mode     = "0400";
+        owner    = "deluge";
+        group    = "deluge";
+      };
+    in
+    {
+      delugeauthfile = opts;
     };
   };
 }

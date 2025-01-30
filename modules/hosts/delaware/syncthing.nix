@@ -98,11 +98,17 @@
     };
   };
 
-  sops = {
-    secrets = {
-      delaware-syncthing-key-pem = { sopsFile = ./syncthing.yaml; };
-      delaware-syncthing-cert-pem = { sopsFile = ./syncthing.yaml; };
+  sops.secrets = let
+    opts = {
+      sopsFile = ./syncthing.yaml;
+      mode     = "0400";
+      owner    = "syncthing";
+      group    = "syncthing";
     };
+  in
+  {
+    delaware-syncthing-key-pem = opts;
+    delaware-syncthing-cert-pem = opts;
   };
 
   networking.firewall = {

@@ -85,9 +85,17 @@
     };
   };
 
-  sops.secrets = {
-    nextcloudadminpass = { sopsFile = ./nextcloud.yaml; };
-    nextclouddbpass = { sopsFile = ./nextcloud.yaml; };
+  sops.secrets = let
+    opts = {
+      sopsFile = ./nextcloud.yaml;
+      mode     = "0400";
+      owner    = "nextcloud";
+      group    = "nextcloud";
+    };
+  in
+  {
+    nextcloudadminpass = opts;
+    nextclouddbpass = opts;
   };
 
   # NextCloud Cron service
