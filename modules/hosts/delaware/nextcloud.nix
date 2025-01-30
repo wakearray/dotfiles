@@ -88,7 +88,7 @@
   sops.secrets = let
     opts = {
       sopsFile = ./nextcloud.yaml;
-      mode     = "0400";
+      mode     = "0440";
       owner    = "nextcloud";
       group    = "nextcloud";
     };
