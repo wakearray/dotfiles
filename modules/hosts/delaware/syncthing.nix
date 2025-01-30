@@ -26,7 +26,7 @@
       };
       folders = {
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
-          path = "/data/userdata/family/notes";    # Which folder to add to Syncthing
+          path = "/data/userdata/Family/Notes";    # Which folder to add to Syncthing
           devices = [
             "Jess_S20_Ultra"
 	          "Jess_Cichlid"
@@ -41,7 +41,7 @@
           ];
         };
         "Kent_Notes" = {
-          path = "/data/userdata/kent/notes";
+          path = "/data/userdata/Kent/Notes";
           devices = [
             "Kent_S24_Ultra"
             "Kent_P80"
@@ -52,12 +52,12 @@
             "Kent_GreatBlue"
           ];
         };
-        "Kent_DCIM" = {
-          path = "/data/userdata/kent/DCIM";
+        "Kent_S24_Ultra" = {
+          path = "/data/userdata/Kent/Pictures/S24_Ultra";
           devices = [ "Kent_S24_Ultra" ];
         };
 	      "Kent_Backup_Android" = {
-          path = "/data/userdata/kent/Backups/Android";
+          path = "/data/userdata/Kent/Backups/Android";
 	        devices = [
             "Kent_S24_Ultra"
             "Kent_P80"
@@ -69,18 +69,29 @@
           ];
 	      };
         "Kent_Backup_PC" = {
-          path = "/data/userdata/kent/Backups/PC";
+          path = "/data/userdata/Kent/Backups/PC";
 	        devices = [ "Kent_GreatBlue" ];
 	      };
+	      "Jess_Backup_Android" = {
+          path = "/data/userdata/Jess/Backups/Android";
+	        devices = [
+            "Jess_S20_Ultra"
+	          "Jess_Cichlid"
+          ];
+	      };
+        "Jess_Backup_PC" = {
+          path = "/data/userdata/Jess/Backups/PC";
+	        devices = [ "Jess_Cichlid" ];
+	      };
         "Jess_Notes" = {
-          path = "/data/userdata/jess/notes";
+          path = "/data/userdata/Jess/Notes";
           devices = [
 	          "Jess_S20_Ultra"
 	          "Jess_Cichlid"
 	        ];
         };
-        "Jess_DCIM" = {
-          path = "/data/userdata/jess/DCIM";
+        "Jess_S20_Ultra" = {
+          path = "/data/userdata/Jess/Pictures/S20_Ultra";
           devices = [ "Jess_S20_Ultra" ];
         };
       };

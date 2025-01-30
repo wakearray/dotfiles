@@ -3,9 +3,9 @@ let
   flakeworkflow = (if builtins.match "android" system-details.host-type != null
     then # Do this when on Android
       ''
-git -c "$FLAKE" add .
-git -c "$FLAKE" status
 while true; do
+  git -c "$FLAKE" add .
+  git -c "$FLAKE" status
   echo "What would you like to do?"
   cat <<'END_CAT'
   2) Build home-manager derivation
@@ -31,7 +31,7 @@ END_CAT
       git -c "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
       ;;
     5)
-      nix flake update
+      nix flake update --flake "$FLAKE"
       ;;
     6)
       nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
@@ -44,11 +44,9 @@ done
       ''
     else # Do this when not on Android (should only be NixOS)
       ''
-CWD=''$(pwd)
-cd ''$HOME/dotfiles
-git -c "$FLAKE" add .
-git -c "$FLAKE" status
 while true; do
+  git -c "$FLAKE" add .
+  git -c "$FLAKE" status
   echo "What would you like to do?"
   cat <<'END_CAT'
   1) Run a test build with --show-trace
@@ -217,7 +215,7 @@ in
 
       # SSH Hosts
       lhosts = ''
-        echo " \n \
+        echo " \
         The available hosts for ssh are:      \n \
                                               \n \
         greatblue        GPD Win 2 2023       \n \
@@ -226,19 +224,21 @@ in
         jerboa           Livingroom TV        \n \
         sebrightbantam   QNAP TS-251          \n \
         orloff           Odroid HC4           \n \
-        cichlid          Jess' Desktop"
+        cichlid          Jess' Desktop        \n \
+        p80              Cubot P80 phone      \n \
+        mountp80         Mount a data directory on the P80"
       '';
-      greatblue = "ssh 192.168.0.11"; # GPD Win 2 2023
-      delaware = "ssh 192.168.0.46"; # NextCloud Server
-      lagurus = "ssh 192.168.0.65"; # Cat's Projector
-      jerboa = "ssh 192.168.0.32"; # Living Room TV
+      greatblue = "zellij action rename-tab 'Great Blue' && ssh 192.168.0.11"; # GPD Win 2 2023
+      delaware = "zellij action rename-tab 'Delaware' && ssh 192.168.0.46"; # NextCloud Server
+      lagurus = "zellij action rename-tab 'Lagurus' && ssh 192.168.0.65"; # Cat's Projector
+      jerboa = "zellij action rename-tab 'Jerboa' && ssh 192.168.0.32"; # Living Room TV
       cichlid = "echo 'This computer isn't setup yet'"; # Jess' Desktop
-      sebrightbantam = "ssh 192.168.0.80";  # QNAP TS-251
+      sebrightbantam = "zellij action rename-tab 'Sebright Bantam' && ssh 192.168.0.80";  # QNAP TS-251
       orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
 
       # Phones
-      p80 = "ssh u0_a183@192.168.0.10 -p8022";
-      mountp80 = "sshfs u0_a183@192.168.0.10:/data/data/com.termux/files /mnt/phones/p80 -p8022";
+      p80 = "zellij action rename-tab 'P80' && ssh u0_a183@192.168.0.10 -p8022";
+      mountp80 = "zellij action rename-tab 'P80' && sshfs u0_a183@192.168.0.10:/data/data/com.termux/files /mnt/phones/p80 -p8022";
 
       kcp = "killCurrentSessionSpawn";
 
