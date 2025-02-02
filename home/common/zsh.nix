@@ -2,7 +2,7 @@
 let
   flakeworkflow = (if builtins.match "android" system-details.host-type != null
     then # Do this when on Android
-      ''
+      /*sh*/ ''
 while true; do
   git -C "$FLAKE" add .
   git -C "$FLAKE" status
@@ -30,7 +30,7 @@ END_CAT
       git -C "$FLAKE" commit
       ;;
     4)
-      git -C "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
+      git -C "$FLAKE" push origin ''$(git -C "$FLAKE" rev-parse --abbrev-ref HEAD)
       ;;
     5)
       git -C "$FLAKE" add .
@@ -47,7 +47,7 @@ END_CAT
 done
       ''
     else # Do this when not on Android (should only be NixOS)
-      ''
+      /*sh*/ ''
 while true; do
   git -C "$FLAKE" add .
   git -C "$FLAKE" status
@@ -80,7 +80,7 @@ END_CAT
       git -C "$FLAKE" commit
       ;;
     4)
-      git -C "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
+      git -C "$FLAKE" push origin $(git -C "$FLAKE" rev-parse --abbrev-ref HEAD)
       ;;
     5)
       git -C "$FLAKE" add .
@@ -129,7 +129,7 @@ in
       enable = true;
     };
     # Things to put in the .zshrc file
-    initExtra = ''
+    initExtra = /*sh*/ ''
       # Functions
 
       ## Flake Functions
