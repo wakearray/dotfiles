@@ -7,6 +7,7 @@
     ./printers.nix
     ./spellcheck.nix
     ./ssh.nix
+    ./syncthing.nix
     ./tui.nix
     ./zsh.nix
     ./laptop.nix

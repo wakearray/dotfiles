@@ -42,3 +42,8 @@ creation_rules:
         - *greatblue
         - *y700
         - *s24
+  - path_regex: modules/hosts/greatblue/.*.yaml$
+    key_groups:
+      - age:
+        - *kent
+        - *greatblue

@@ -4,8 +4,8 @@ let
     then # Do this when on Android
       ''
 while true; do
-  git -c "$FLAKE" add .
-  git -c "$FLAKE" status
+  git -C "$FLAKE" add .
+  git -C "$FLAKE" status
   echo "What would you like to do?"
   cat <<'END_CAT'
   2) Build home-manager derivation
@@ -22,20 +22,20 @@ END_CAT
   read -k 1 ans
   case $ans in
     2)
-      git -c "$FLAKE" add .
+      git -C "$FLAKE" add .
       nh home switch -v -c ${system-details.host-name}
       ;;
     3)
-      git -c "$FLAKE" add .
-      git -c "$FLAKE" commit
+      git -C "$FLAKE" add .
+      git -C "$FLAKE" commit
       ;;
     4)
-      git -c "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
+      git -C "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
       ;;
     5)
-      git -c "$FLAKE" add .
+      git -C "$FLAKE" add .
       nix flake update --flake "$FLAKE"
-      git -c "$FLAKE" add .
+      git -C "$FLAKE" add .
       ;;
     6)
       nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
@@ -49,8 +49,8 @@ done
     else # Do this when not on Android (should only be NixOS)
       ''
 while true; do
-  git -c "$FLAKE" add .
-  git -c "$FLAKE" status
+  git -C "$FLAKE" add .
+  git -C "$FLAKE" status
   echo "What would you like to do?"
   cat <<'END_CAT'
   1) Run a test build with --show-trace
@@ -68,26 +68,26 @@ END_CAT
   read -k 1 ans
   case $ans in
     1)
-      git -c "$FLAKE" add .
+      git -C "$FLAKE" add .
       nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
       ;;
     2)
-      git -c "$FLAKE" add .
+      git -C "$FLAKE" add .
       nh os switch ${config.home.homeDirectory}/dotfiles
       ;;
     3)
-      git -c "$FLAKE" add .
-      git -c "$FLAKE" commit
+      git -C "$FLAKE" add .
+      git -C "$FLAKE" commit
       ;;
     4)
-      git -c "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
+      git -C "$FLAKE" push origin ''$(git rev-parse --abbrev-ref HEAD)
       ;;
     5)
-      git -c "$FLAKE" add .
+      git -C "$FLAKE" add .
       nix flake update
-      git -c "$FLAKE" add .
+      git -C "$FLAKE" add .
       nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
-      git -c "$FLAKE" status
+      git -C "$FLAKE" status
       ;;
     6)
       nvim --listen /tmp/nvim ${config.home.homeDirectory}/dotfiles
@@ -137,7 +137,7 @@ in
       editzsh(){
         zellij action rename-tab "Edit .zshrc"
         nvim --listen /tmp/nvim ''$FLAKE/home/common/zsh.nix
-        if [[ `git -c "$FLAKE" status --porcelain` ]]; then
+        if [[ `git -C "$FLAKE" status --porcelain` ]]; then
           flakeworkflow
         fi
       }
@@ -145,7 +145,7 @@ in
       editflake(){
         zellij action rename-tab "Edit Flake"
         nvim --listen /tmp/nvim ''$FLAKE
-        if [[ `git -c "$FLAKE" status --porcelain` ]]; then
+        if [[ `git -C "$FLAKE" status --porcelain` ]]; then
           flakeworkflow
         fi
       }
