@@ -73,7 +73,7 @@ in
           "firefox"
           "signal-desktop"
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0   --screen 0 --arg width=\"100%\" --arg offset=\"0\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg offset=\"0\""
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg offset=\"9\""
         ];
         description = "A list of command line arguments you want run when hyprland starts.";

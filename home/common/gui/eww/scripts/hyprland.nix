@@ -20,7 +20,7 @@ handle() {
   case $1 in
     "monitoraddedv2>>"*)
         monitor="''${1#"monitoraddedv2>>"}"
-        monitor_num="''${1%",DP"*}"
+        monitor_num="''${1%",DP-"*}"
         workspaces_offset=$((9 * monitor_num))
         ${hyprctl} notify 0 20000 "rgb(ff1ea3)" "Monitor $monitor connected"
         if [ $monitor_num == 1 ]; then
