@@ -140,7 +140,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf (config.gui.enable && cfg.enable) {
     programs = {
       rofi = {
         enable = true;

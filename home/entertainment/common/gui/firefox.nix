@@ -69,20 +69,6 @@
             }
           ];
         }
-        {
-          name = "ASMR";
-          toolbar = true;
-          bookmarks = [
-            {
-              name = "Ann Ann ASMR";
-              url = "https://m.youtube.com/@annannasmr";
-            }
-            {
-              name = "Abby ASMR";
-              url = "https://m.youtube.com/@AbbyASMR";
-            }
-          ];
-        }
       ];
       #extensions =
       # Search

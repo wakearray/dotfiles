@@ -6,7 +6,7 @@ in
   options.gui.vscode = with lib; {
     enable = mkEnableOption "Enable and opinionated VSCodium setup";
   };
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (config.gui.enable && cfg.enable) {
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib ]);

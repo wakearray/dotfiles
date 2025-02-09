@@ -294,6 +294,46 @@
           }
         ];
       };
+      # Cat's projector
+      Jerboa = let
+        system-details = {
+          host-type = "kiosk";
+          host-name = "Jerboa";
+          display-type = "wayland";
+          host-options = "";
+          current-system = "x86_64-linux";
+        };
+      in lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+          system-details = system-details;
+        };
+        modules = [
+          ./hosts/jerboa/configuration.nix
+          nixvim.nixosModules.nixvim
+          sops-nix.nixosModules.sops
+          lix-module.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  ./home/entertainment
+                  ./home/entertainment/hosts/jerboa
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                system-details = system-details;
+              };
+            };
+          }
+        ];
+      };
       # Jess desktop
       Cichlid = let
         system-details = {

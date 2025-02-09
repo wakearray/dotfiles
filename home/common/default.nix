@@ -4,7 +4,6 @@
   imports = [
     ./zsh.nix
     ./ssh.nix
-    ./tui.nix
     ./yazi.nix
     (
       if

@@ -1,10 +1,13 @@
 { lib, config, pkgs, ... }:
+let
+  cliphist = config.gui.cliphist;
+in
 {
   options.gui.cliphist = with lib; {
     enable = mkEnableOption "Enable cliphist, a wayland clipboard manager.";
   };
 
-  config = lib.mkIf config.gui.cliphist.enable {
+  config = lib.mkIf (config.gui.enable && cliphist.enable) {
     services.cliphist = {
       enable = true;
       allowImages = true;

@@ -1,6 +1,13 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.gui.firefox;
+in
 {
-  config = {
+  options.gui.firefox = with lib; {
+    enable = mkEnableOption "Enable an opinionated Firefox config with Tridactyl enabled.";
+  };
+
+  config = lib.mkIf (config.gui.enable && cfg.enable) {
     programs.firefox = {
       enable = true;
       nativeMessagingHosts = with pkgs; [

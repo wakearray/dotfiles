@@ -17,18 +17,21 @@
     };
   };
 
-  gui.rofi = lib.mkIf (builtins.match "wayland" system-details.display-type != null) {
-    enable = true;
-    plugins = with pkgs; [
-      # Bluetooth configuration in rofi
-      # https://github.com/nickclyde/rofi-bluetooth
-      rofi-bluetooth
+  gui = {
+    rofi = lib.mkIf (builtins.match "wayland" system-details.display-type != null) {
+      enable = true;
+      plugins = with pkgs; [
+        # Bluetooth configuration in rofi
+        # https://github.com/nickclyde/rofi-bluetooth
+        rofi-bluetooth
 
-      # Emoji picker for rofi - Built against rofi-wayland
-      # https://github.com/Mange/rofi-emoji
-      rofi-emoji-wayland
-    ];
-    modi = "drun,todo:todofi.sh,filebrowser,emoji";
+        # Emoji picker for rofi - Built against rofi-wayland
+        # https://github.com/Mange/rofi-emoji
+        rofi-emoji-wayland
+      ];
+      modi = "drun,todo:todofi.sh,filebrowser,emoji";
+    };
+    firefox.enable = true;
   };
 
   home.packages = with pkgs; [

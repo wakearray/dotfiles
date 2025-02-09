@@ -1,30 +1,31 @@
-{ pkgs, lib, system-details, ... }:
+{ pkgs, lib, config, system-details, ... }:
 {
   # home/common/gui
   imports = [
     ./alacritty.nix
     ./cliphist.nix
+    ./eww
+    ./firefox.nix
+    ./fonts.nix
     ./mpv.nix
     ./rofi.nix
     ./scripts
-    ./wthrr.nix
-    ./eww
+    ./tui.nix
     ./vscode.nix
-    ./fonts.nix
-    ./firefox.nix
     ./wayland
-    ./x11
-    (
-      if
-        builtins.match "aarch64-linux" system-details.current-system != null
-      then
-        ./aarch64-gui.nix
-      else
-        ./x86_64-gui.nix
-    )
+    ./wthrr.nix
+    ./x86_64-gui.nix
   ];
 
-  config = lib.mkIf ((builtins.match "x11" system-details.display-type != null) || (builtins.match "wayland" system-details.display-type != null)) {
+  options.gui = with lib; {
+    enable = mkOption {
+      type = types.bool;
+      default = ((builtins.match "x11" system-details.display-type != null) || (builtins.match "wayland" system-details.display-type != null));
+      description = "Default `true` if `system-details.display-type` is set to `x11` or `wayland` in `flake.nix`.";
+    };
+  };
+
+  config = lib.mkIf config.gui.enable {
     home = {
       packages = with pkgs; [
         # Keepassxc - Offline password store

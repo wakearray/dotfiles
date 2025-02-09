@@ -55,7 +55,7 @@ in
       };
     };
   };
-  config = lib.mkIf (cfg.enable && todofi.enable) {
+  config = lib.mkIf (config.gui.enable && (cfg.enable && todofi.enable)) {
     home = {
       packages = with pkgs; [ todo ];
       file = {

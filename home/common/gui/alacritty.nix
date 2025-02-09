@@ -60,7 +60,7 @@ in
       description = "An attribute set of attribute sets of strings of fonts as defined by alacritty documentation. https://alacritty.org/config-alacritty.html#font";
     };
   };
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (config.gui.enable && cfg.enable) {
     programs =  {
       # alacritty - A cross-platform, OpenGL terminal emulator
       # https://github.com/alacritty/alacritty
