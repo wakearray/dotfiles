@@ -12,14 +12,6 @@
 
       # dconf - Gnome system config, wanted by darktable
       dconf
-
-      # scli - Terminal UI for Signal Messenger
-      # https://github.com/isamert/scli
-      scli
-
-      # signal-cli - An unofficial dbus interface for Signal
-      # https://github.com/AsamK/signal-cli
-      signal-cli
     ];
 
     xsession.numlock.enable = true;
@@ -28,7 +20,13 @@
 
     gui = {
       wm.i3.enable = true;
-      polybar.enable = true;
+      eww = {
+        enable = true;
+        battery = {
+          enable = true;
+          identifier = "battery";
+        };
+      };
       themes.gruvbox.enable = true;
     };
   };

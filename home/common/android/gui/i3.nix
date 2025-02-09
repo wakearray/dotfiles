@@ -226,7 +226,6 @@ in
   discord = ""
   firefox = "󰈹"
   gmail = "󰊫"
-  keepassxc = ""
   photopea = ""
   Signal = "󰭹"
   tidal = ""
@@ -247,7 +246,6 @@ in
   default_icon = ""
   separator = " "
   split_at = ":"
-
         '';
       };
     };

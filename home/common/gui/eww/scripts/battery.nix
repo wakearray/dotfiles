@@ -13,7 +13,7 @@ in
         force = true;
         executable = true;
         text = /*sh*/ ''
-#!/bin/bash
+#!/usr/bin/env bash
 
 function change_icon () {
   ICON="$1"

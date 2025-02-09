@@ -28,9 +28,6 @@
   config = lib.mkIf config.gui.enable {
     home = {
       packages = with pkgs; [
-        # Keepassxc - Offline password store
-        keepassxc
-
         # Video player
         vlc
 
