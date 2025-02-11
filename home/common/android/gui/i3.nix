@@ -7,8 +7,8 @@ in
     enable = mkEnableOption "Enable a very opinionated i3 config intended for use inside Termux.";
 
     modifier = mkOption {
-      type = types.str;
-      default = "mod4";
+      type = types.enum [ "Shift" "Control" "Mod1" "Mod2" "Mod3" "Mod4" "Mod5" ];
+      default = "Mod4";
       description = ''
         A modifier key for use with various hotkeys. Available options are based on output of `xmodmap -pm`
         ```bash
@@ -21,7 +21,7 @@ in
         mod4        Super_R (0x86),  Super_L (0xce),  Hyper_L (0xcf)
         mod5        ISO_Level3_Shift (0x5c),  ISO_Level3_Shift (0x6c),  Mode_switch (0x85),  Mode_switch (0xcb)
         ```
-        So the options are one of "shift", "lock", "control", "mod1", "mod2", "mod3", "mod4", "mod5"
+        Due to home manager's implementation, the available options are slightly different.
       '';
     };
   };
@@ -61,7 +61,7 @@ in
           };
           keybindings =
           let
-            rofi_todo  = "${pkgs.todofi-sh}/bin/todofi.sh";
+            rofi_todo  = "${config.home.homeDirectory}.local/bin/todofi.sh";
             #rofi_pass  = "";
             #rofi_emoji = "${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
             menu       = config.xsession.windowManager.i3.config.menu;
@@ -139,16 +139,26 @@ in
           startup = lib.mkOverride 1001 [
             { command = "alacritty"; }
             { command = "firefox"; }
-            { # polybar
-              command = "${config.home.file.".config/i3/polybar.sh".source} &";
+            (lib.mkIf config.gui.polybar.enable { # polybar
+              command = "${config.home.file.".config/polybar/polybar.sh".source} &";
               always = true;
               notification = false;
-            }
-            { # i3wsr - updates workspace names with app icons
+            })
+            (lib.mkIf config.gui.polybar.enable { # i3wsr - updates workspace names with app icons
               command = "${pkgs.i3wsr-3}/bin/i3wsr";
               always = true;
               notification = false;
-            }
+            })
+            (lib.mkIf config.gui.eww.enable { # launch eww
+              command = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"120%\" --arg offset=\"0\"";
+              always = true;
+              notification = false;
+            })
+            (lib.mkIf (config.gui.eww.enable && config.gui.eww.battery.enable) { # launch eww battery monitoring script
+              command = "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh  > /dev/null 2>&1 &";
+              always = true;
+              notification = false;
+            })
           ];
           terminal = lib.mkOverride 1001 "alacritty";
           window = lib.mkOverride 1001 {
@@ -217,7 +227,7 @@ in
 
     xdg.configFile = {
       "i3wsr/config.toml" = {
-        enable = true;
+        enable = config.gui.polybar.enable;
         force = true;
         text = ''
   [icons]
@@ -248,6 +258,9 @@ in
   split_at = ":"
         '';
       };
+    };
+    gui.rofi = {
+      enable = true;
     };
   };
 }

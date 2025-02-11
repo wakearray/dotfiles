@@ -3,11 +3,13 @@ let
   cfg = config.gui.eww;
 in
 {
+  # home/common/gui/eww/
   imports = [
     ./bar
     ./scripts
     ./img
   ];
+
   options.gui.eww = with lib; {
     enable = mkEnableOption "Enable eww";
 

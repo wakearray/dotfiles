@@ -1,4 +1,4 @@
 { pkgs, ... }:
 {
-  i3wsr-3 = pkgs.unstable.callPackage ./i3wsr-3 {};
+  i3wsr-3 = pkgs.callPackage ./i3wsr-3 {};
 }

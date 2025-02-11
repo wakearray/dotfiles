@@ -1,7 +1,9 @@
 { system-details, lib, pkgs, ... }:
 {
+  # home/kent/hosts/android/gui
   imports = [
     ./rofi.nix
+    ./wayland
   ];
 
   config = lib.mkIf (builtins.match "x11" system-details.display-type != null) {
@@ -14,6 +16,7 @@
       dconf
     ];
 
+    android.gui.wayland.enable = true;
     xsession.numlock.enable = true;
 
     programs.alacritty.settings.font.size = 18;
@@ -25,6 +28,9 @@
         battery = {
           enable = true;
           identifier = "battery";
+        };
+        bar = {
+          enable = true;
         };
       };
       themes.gruvbox.enable = true;
