@@ -14,6 +14,7 @@
     ./vscode.nix
     ./wayland
     ./wthrr.nix
+    ./x11
     ./x86_64-gui.nix
   ];
 

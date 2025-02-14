@@ -1,6 +1,9 @@
-{ lib, system-details, pkgs, ... }:
+{ lib, config, pkgs, ... }:
+let
+  cfg = config.android.gui;
+in
 {
-  config = lib.mkIf (builtins.match "x11" system-details.display-type != null) {
+  config = lib.mkIf cfg.enable {
     gui.rofi = {
       enable = true;
       plugins = with pkgs; [
@@ -16,7 +19,8 @@
         # https://github.com/svenstaro/rofi-calc
         rofi-calc
       ];
-      modi = "drun,todo:todofi.sh,calc,top,filebrowser,keys";
+      #modi = "drun,todo:todofi.sh,calc,top,filebrowser,keys";
+      modi = "drun,calc,top,filebrowser,keys";
     };
 
     home.packages = with pkgs; [

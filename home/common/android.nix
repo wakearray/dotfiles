@@ -1,16 +1,14 @@
 { lib, config, system-details, pkgs, outputs, ... }:
 let
+  isAndroid = (builtins.match "android" system-details.host-type != null);
   user = config.home.username;
 in
 {
   # home/common/android
   # All settings should pertain to non-gui related options and packages
-  imports = [
-    ./gui
-  ];
-
-  config = lib.mkIf (builtins.match "android" system-details.host-type != null) {
+  config = lib.mkIf isAndroid {
     home = {
+      # On NixOS profiles, these packages should be installed at the system level
       packages = with pkgs; [
         # 7-Zip
         _7zz
@@ -45,9 +43,7 @@ in
 
     programs = {
       # chrooted Arch in Termux keeps forgetting the path
-      zsh.envExtra = ''
-  PATH=/home/${user}/.local/state/nix/profiles/profile/bin:/home/${user}/.nix-profile/bin:/usr/local/sbin:/usr/local/bin:/usr/bin
-      '';
+      zsh.envExtra = "PATH=/home/${user}/.local/bin:/home/${user}/.local/state/nix/profiles/profile/bin:/home/${user}/.nix-profile/bin:/usr/local/sbin:/usr/local/bin:/usr/bin";
     };
 
     # nixpkgs allow unfree with stable overlay.
@@ -69,15 +65,17 @@ in
         frequency = "weekly";
       };
       # The contents of the nix.conf file
+      # Some settings will be needed when installing/using Nix on Android
       # Not needed when using lix
-  #    settings = {
-  #      experimental-features = [ "nix-command" "flakes" ];
-  #      accept-flake-config = true;
-  #      auto-optimise-store = true;
-  #      fallback = true;
-  #      max-jobs = "auto";
-  #      download-buffer-size = 268435456;
-  #    };
+      #
+      # settings = {
+      #   experimental-features = [ "nix-command" "flakes" ];
+      #   accept-flake-config = true;
+      #   auto-optimise-store = true;
+      #   fallback = true;
+      #   max-jobs = "auto";
+      #   download-buffer-size = 268435456;
+      # };
     };
   };
 }

@@ -11,7 +11,7 @@ let
     else # X11 config
       ":stacking \"bg\"
   :wm-ignore true
-  :reserve (struts :distance \"2%\" :side \"top\")
+  :reserve (struts :distance {height || \"2%\"} :side \"top\")
   :windowtype \"dock\" "
   );
   bar = cfg.bar;
@@ -22,13 +22,13 @@ in
       enable = true;
       force = true;
       text = /*yuck*/ ''
-(defwindow bar [ width offset ]
+(defwindow bar [ width height offset ]
   :monitor 0
   ${defwindow}
   :geometry (geometry :x "0%"
                       :y "10px"
                       :width width
-                      :height "${bar.height}"
+                      :height {height || "2%"}
                       :anchor "top center")
   (bar :offset offset))
 

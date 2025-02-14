@@ -33,16 +33,15 @@ in
         config = {
           modifier = cfg.modifier;
           assigns = lib.mkOverride 1001 {
-            "$pws_1" = [ { class = "Alacritty"; } ];
-            "$pws_2" = [ { title = "Discord.*"; } { class = "Signal"; } ];
+            "$pws_1" = [ { class = "Alacritty";   } ];
+            "$pws_2" = [ { title = "Discord.*";   } { class = "Signal";   } ];
             "$pws_3" = [ { title = ".*YouTube.*"; } ];
-            "$pws_4" = [ { class = "firefox"; } { class = "Navigator"; } ];
+            "$pws_4" = [ { class = "firefox";     } { class = "Navigator"; } ];
             "$pws_5" = [  ];
             "$pws_6" = [  ];
             "$pws_7" = [  ];
             "$pws_8" = [  ];
-            "$pws_9" = [  ];
-            "$pws_10" = [ { title = ".*Tidal.*"; } ];
+            "$pws_9" = [ { title = ".*Tidal.*";  } ];
           };
           bars = [  ];
           defaultWorkspace = "$pws_1";
@@ -61,17 +60,14 @@ in
           };
           keybindings =
           let
-            rofi_todo  = "${config.home.homeDirectory}.local/bin/todofi.sh";
-            #rofi_pass  = "";
-            #rofi_emoji = "${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
-            menu       = config.xsession.windowManager.i3.config.menu;
-            terminal   = config.xsession.windowManager.i3.config.terminal;
-            modifier   = config.xsession.windowManager.i3.config.modifier;
+            rofiTodo     = "${config.home.homeDirectory}.local/bin/todofi.sh";
+            menu         = config.xsession.windowManager.i3.config.menu;
+            quitPolybar  = "${config.home.homeDirectory}.config/polybar/quit_polybar.sh";
+            modifier     = config.xsession.windowManager.i3.config.modifier;
           in lib.mkOverride 1001 {
-            "${modifier}+Return" = "exec ${terminal}";
-            "${modifier}+Shift+q" = "kill";
+            "${modifier}+q" = "kill";
             "${modifier}+d" = "exec ${menu}";
-            "${modifier}+t" = "exec ${rofi_todo}";
+            #"${modifier}+t" = "exec ${rofiTodo}";
 
             "${modifier}+j" = "focus left";
             "${modifier}+k" = "focus down";
@@ -85,17 +81,17 @@ in
             "${modifier}+v" = "split v";
             "${modifier}+f" = "fullscreen toggle";
 
-            "${modifier}+s" = "layout stacking";
-            "${modifier}+w" = "layout tabbed";
+            "${modifier}+Alt+s" = "layout stacking";
+            "${modifier}+g" = "layout tabbed";
             "${modifier}+e" = "layout toggle split";
 
-            "${modifier}+Shift+space" = "floating toggle";
-            "${modifier}+space" = "focus mode_toggle";
+            "${modifier}+t" = "floating toggle";
+            #"${modifier}+space" = "focus mode_toggle";
 
             "${modifier}+a" = "focus parent";
 
-            "${modifier}+Shift+minus" = "move scratchpad";
-            "${modifier}+minus" = "scratchpad show";
+            "${modifier}+s" = "move scratchpad";
+            "${modifier}+Shift+s" = "scratchpad show";
 
             "${modifier}+1" = "workspace number $pws_1";
             "${modifier}+2" = "workspace number $pws_2";
@@ -106,7 +102,6 @@ in
             "${modifier}+7" = "workspace number $pws_7";
             "${modifier}+8" = "workspace number $pws_8";
             "${modifier}+9" = "workspace number $pws_9";
-            "${modifier}+0" = "workspace number $pws_10";
 
             "${modifier}+Shift+1" =
               "move container to workspace number $pws_1";
@@ -126,18 +121,17 @@ in
               "move container to workspace number $pws_8";
             "${modifier}+Shift+9" =
               "move container to workspace number $pws_9";
-            "${modifier}+Shift+0" =
-              "move container to workspace number $pws_10";
 
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
 
             "${modifier}+r" = "mode resize";
-            "${modifier}+Shift+e" = "exit";
+            "${modifier}+Shift+q" = "exit";
+            "${modifier}+Ctrl+q" = "exec ${quitPolybar}";
 
           };
           startup = lib.mkOverride 1001 [
-            { command = "alacritty"; }
+            { command = "${pkgs.alacritty}/bin/alacritty"; }
             { command = "firefox"; }
             (lib.mkIf config.gui.polybar.enable { # polybar
               command = "${config.home.file.".config/polybar/polybar.sh".source} &";
@@ -150,17 +144,17 @@ in
               notification = false;
             })
             (lib.mkIf config.gui.eww.enable { # launch eww
-              command = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"120%\" --arg offset=\"0\"";
+              command = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg height=\"3%\" --arg offset=\"0\"";
               always = true;
               notification = false;
             })
             (lib.mkIf (config.gui.eww.enable && config.gui.eww.battery.enable) { # launch eww battery monitoring script
-              command = "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh  > /dev/null 2>&1 &";
+              command = "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh > /dev/null 2>&1 &";
               always = true;
               notification = false;
             })
           ];
-          terminal = lib.mkOverride 1001 "alacritty";
+          terminal = lib.mkOverride 1001 "${pkgs.alacritty}/bin/alacritty";
           window = lib.mkOverride 1001 {
             border = 0;
             hideEdgeBorders = "both";
@@ -179,7 +173,7 @@ in
                 };
               }
               {
-                command = "move to workspace number $pws_10";
+                command = "move to workspace number $pws_9";
                 criteria = {
                   title = ".*Tidal.*";
                 };

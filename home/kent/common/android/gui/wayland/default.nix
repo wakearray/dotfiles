@@ -1,6 +1,7 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.android.gui.wayland;
+  cfg = config.android.gui;
+  wayland = cfg.wayland;
 in
 {
   imports = [
@@ -10,16 +11,20 @@ in
     enable = mkEnableOption "Enable hyprland on Android in Termux using Termux:x11 and cage";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && wayland.enable) {
     home.packages = with pkgs; [
-      # Minimal x11 window manager to launch cage in
-      openbox
-
-      # Wayland kiosk that runs a single Wayland application
-      cage
-
       # A basic Wayland compositor example
       weston
+
+      # Verification of GPU accel
+      glmark2
+      mesa-demos
+      vulkan-tools
+
+      # A wayland compositor known to work in cage oin termux using proot
+      phoc
+      phosh
+      phosh-mobile-settings
     ];
   };
 }

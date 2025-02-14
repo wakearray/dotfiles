@@ -8,7 +8,7 @@ in
 
     font-0 = mkOption {
       type = types.str;
-      default = "SauceCodePro NFM:size=15;0";
+      default = "SauceCodePro NFM:size=10;0";
       description = ''
       The font to use in the bar.
       Formatted as `<fontconfig pattern>;<int: vertical offset in pixels>`. The fontconfig pattern looks like: `<string: font name><string: options>` options are formatted like: `:size=<float: font size>` or `:style=Regular` or `:weight=Bold`
@@ -18,57 +18,57 @@ in
 
     colors = {
       foreground = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = "#d4be98";
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       background = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = "#141617";
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       time-foreground = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = polybar.colors.foreground;
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       time-background = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = polybar.colors.background;
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       urgent-foreground = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = "#ea6962";
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       urgent-background = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = polybar.colors.background;
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       focused-foreground = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = "#d8a657";
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       focused-background = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = polybar.colors.background;
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       unfocused-foreground = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = polybar.colors.foreground;
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       unfocused-background = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = polybar.colors.background;
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
       visible-underline = mkOption {
-        type = types.strMatching "#[0-9A-F]{6}";
+        type = types.strMatching "#[0-9A-Fa-f]{6}";
         default = polybar.colors.foreground;
         description = "A 6 digit hex color code beginning with a `#` in the standard format of #RRGGBB.";
       };
@@ -246,6 +246,19 @@ in
 
   # Launch polybar
   polybar top &
+        '';
+      };
+      ".config/polybar/quit_polybar.sh" = {
+        enable = true;
+        executable = true;
+        force = true;
+        text = ''
+  #!/usr/bin/env sh
+
+  # Terminate running bar instances
+  polybar-msg cmd quit
+  wait 2
+  sudo pkill polybar
         '';
       };
     };

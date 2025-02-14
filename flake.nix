@@ -548,7 +548,27 @@
       in lib.homeManagerConfiguration {
         modules = [
           ./home/kent
-          ./home/kent/hosts/android
+          nixvim.homeManagerModules.nixvim
+          sops-nix.homeManagerModules.sops
+        ];
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          system-details = system-details;
+        };
+      };
+      "kent@y700" = let
+        system-details = {
+          host-type = "android";
+          host-name = "kent@y700";
+          display-type = "x11";
+          host-options = "";
+          current-system = "aarch64-linux";
+        };
+      in lib.homeManagerConfiguration {
+        modules = [
+          ./home/kent
+          ./home/kent/hosts/y700
           nixvim.homeManagerModules.nixvim
           sops-nix.homeManagerModules.sops
         ];
