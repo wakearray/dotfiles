@@ -7,7 +7,11 @@ let
 in
 {
   options.scripts.rofihyprlandclients = with lib; {
-    enable = mkEnableOption "Enable a script that moves windows/workspaces from a given monitor to a different monitor.";
+    enable = mkOption {
+      type = types.bool;
+      default = (wayland.enable && (rofi.enable && hyprland.enable));
+      description = "Enable a script that moves windows/workspaces from a given monitor to a different monitor.";
+    };
   };
   config = lib.mkIf (wayland.enable && (hyprland.enable && (rofi.enable && clients.enable))) {
     home.file.".local/bin/rofihyprlandclients" = {

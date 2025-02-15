@@ -1,5 +1,7 @@
 { lib, config, pkgs, ... }:
 let
+  isAndroid = config.home.systemDetails.isAndroid;
+  isLaptop = config.home.systemDetails.isLaptop;
   gui = config.gui;
   eww = gui.eww;
 in
@@ -15,7 +17,11 @@ in
     enable = mkEnableOption "Enable eww";
 
     battery = {
-      enable = mkEnableOption "Tell eww to display battery status.";
+      enable = mkOption {
+        type = types.bool;
+        default = (isAndroid || isLaptop);
+        description = "Tell eww to display battery status. Defaults to `true` if `systemDetails.hostType` is either `laptop` or `android`";
+      };
 
       identifier = mkOption {
         type = types.str;

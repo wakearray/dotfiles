@@ -1,9 +1,7 @@
-{ pkgs, lib, config, ...}:
+{ pkgs, lib, config, systemDetails, ...}:
 let
   gui = config.gui;
   rofi = gui.rofi;
-
-  isWayland = config.home.systemDetails.display.wayland;
 in
 {
   options.gui.rofi = with lib; {
@@ -146,7 +144,7 @@ in
         enable = true;
         package = (
         if
-          isWayland
+          (builtins.match "wayland" systemDetails.display != null)
         then
           pkgs.rofi-wayland.override {
             plugins = rofi.plugins;

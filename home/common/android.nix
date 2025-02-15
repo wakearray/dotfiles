@@ -23,6 +23,9 @@ in
       ];
     };
 
+    # On Android in `chroot` environments `/sys/class/power_supply` contains `battery`
+    gui.eww.battery.identifier = lib.mkDefault "battery";
+
     # Since we're not using NixOS
     targets.genericLinux.enable = true;
 

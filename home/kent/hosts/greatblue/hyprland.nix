@@ -1,6 +1,6 @@
-{ config, pkgs, systemDetails, ... }:
+{ config, pkgs, ... }:
 let
-  hostname = systemDetails.hostname;
+  hostname = config.home.systemDetails.hostName;
 in
 {
   config = {
@@ -73,11 +73,6 @@ in
           ", switch:off:Lid Switch, exec, export ${hostname}_LID=\"open\" && sleep 1 && hyprctl dispatch dpms on eDP-1"
         ];
       };
-    };
-    # I should automate this making anything listed as Android or laptop enable.
-    # Enables battery life display on eww
-    gui.eww = {
-      battery.enable = true;
     };
   };
 }

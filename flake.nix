@@ -560,7 +560,7 @@
         systemDetails = {
           hostType = "android";
           hostName = "kent@y700";
-          display = "x11";
+          display = "wayland";
           features = "";
           architecture = "aarch64-linux";
         };

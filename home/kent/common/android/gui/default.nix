@@ -8,7 +8,7 @@ in
   # home/kent/common/android/gui
   imports = [
     ./rofi.nix
-    ./wayland
+    #./wayland
   ];
 
   options.android.gui = with lib; {
