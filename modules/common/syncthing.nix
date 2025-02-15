@@ -1,7 +1,4 @@
 { lib, config, pkgs, ... }:
-let
-
-in
 {
   config = lib.mkIf config.services.syncthing.enable {
     # Makes syncthing available on the command line

@@ -1,9 +1,13 @@
 { lib, config, pkgs, ... }:
+let
+  gui = config.gui;
+  gaming = gui.gaming;
+in
 {
   options.gui.gaming = {
     enable = lib.mkEnableOption "Enable Steam, GOG, etc.";
   };
-  config = lib.mkIf (config.gui.enable && config.gui.gaming.enable) {
+  config = lib.mkIf (gui.enable && gaming.enable) {
     programs = {
       # Enable Steam
       steam = {

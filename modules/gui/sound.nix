@@ -1,9 +1,9 @@
-{ lib,
-  config,
-  pkgs,
-  ... }:
+{ lib, config, pkgs, ... }:
+let
+  gui = config.gui;
+in
 {
-  config = lib.mkIf config.gui.enable {
+  config = lib.mkIf gui.enable {
     # Enable sound with pipewire.
     security.rtkit.enable = true;
     services = {

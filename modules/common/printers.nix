@@ -1,6 +1,9 @@
-{ lib, pkgs, system-details, ... }:
+{ lib, pkgs, config, ... }:
+let
+  printers = config.modules.systemDetails.features.printers;
+in
 {
-  config = lib.mkIf (builtins.match "printers" system-details.host-options != null) {
+  config = lib.mkIf printers {
     environment.systemPackages = with pkgs; [
       # Cups-filters for printing PNG to Dymo XL4
       cups-filters
