@@ -1,7 +1,9 @@
 { lib, config, pkgs, inputs, ... }:
 let
-  cfg = config.home.wm.hyprland;
-  s = cfg.settings;
+  gui = config.gui;
+  wayland = gui.wayland;
+  hyprland = config.home.wm.hyprland;
+  s = hyprland.settings;
 in
 {
   options.home.wm.hyprland = with lib; {
@@ -212,7 +214,7 @@ in
     };
   };
 
-  config = lib.mkIf (config.gui.enable && cfg.enable) {
+  config = lib.mkIf (gui.enable && (wayland.enable && (hyprland.enable))) {
     wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -220,7 +222,7 @@ in
       # https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#uwsm
       systemd.enable = false;
       settings = {
-        "$mod" = "${cfg.modKey}";
+        "$mod" = "${hyprland.modKey}";
         # https://wiki.hyprland.org/Configuring/Monitors/
         monitor = s.monitors;
         windowrulev2 = s.windowRules;
@@ -242,13 +244,13 @@ in
           # <int>  Gaps between workspaces (not sure what this means since workspaces are displayed 1 at a time)
           gaps_workspaces = 0;
           # border color for inactive windows
-          "col.inactive_border" = cfg.colors.general.inactiveBorder;
+          "col.inactive_border" = hyprland.colors.general.inactiveBorder;
           # border color for the active window
-          "col.active_border" = cfg.colors.general.activeBorder;
+          "col.active_border" = hyprland.colors.general.activeBorder;
           # inactive border color for window that cannot be added to a group
-          "col.nogroup_border" = cfg.colors.general.noGroupBorder;
+          "col.nogroup_border" = hyprland.colors.general.noGroupBorder;
           # active border color for window that cannot be added to a group
-          "col.nogroup_border_active" = cfg.colors.general.noGroupAorderActive;
+          "col.nogroup_border_active" = hyprland.colors.general.noGroupAorderActive;
           # <enum> of "master", "dwindle"
           # Sets the order and position of how new windows spawn into a workspace
           layout = "master";
@@ -444,6 +446,6 @@ in
       enable = true;
       bar.enable = true;
     };
-    scripts.monitorswitch.enable = true;
+    scripts.monitorSwitch.enable = true;
   };
 }

@@ -1,4 +1,7 @@
-{ pkgs, lib, config, system-details, ... }:
+{ pkgs, lib, config, ... }:
+let
+  sd = config.home.systemDetails.display;
+in
 {
   # home/common/gui
   imports = [
@@ -10,6 +13,7 @@
     ./mpv.nix
     ./rofi.nix
     ./scripts
+    ./todo
     ./tui.nix
     ./vscode.nix
     ./wayland
@@ -21,8 +25,8 @@
   options.gui = with lib; {
     enable = mkOption {
       type = types.bool;
-      default = ((builtins.match "x11" system-details.display-type != null) || (builtins.match "wayland" system-details.display-type != null));
-      description = "Default `true` if `system-details.display-type` is set to `x11` or `wayland` in `flake.nix`.";
+      default = (sd.wayland || sd.x11);
+      description = "Default `true` if `systemDetails.display` is set to `x11` or `wayland` in `flake.nix`.";
     };
   };
 

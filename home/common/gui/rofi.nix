@@ -1,11 +1,11 @@
-{ pkgs, lib, config, system-details, ...}:
+{ pkgs, lib, config, ...}:
 let
-  cfg = config.gui.rofi;
+  gui = config.gui;
+  rofi = gui.rofi;
+
+  isWayland = config.home.systemDetails.display.wayland;
 in
 {
-  imports = [
-    ./todofi.nix
-  ];
   options.gui.rofi = with lib; {
     enable = mkEnableOption "Enable an opionated Rofi configuration";
 
@@ -140,27 +140,27 @@ in
     };
   };
 
-  config = lib.mkIf (config.gui.enable && cfg.enable) {
+  config = lib.mkIf (gui.enable && rofi.enable) {
     programs = {
       rofi = {
         enable = true;
         package = (
         if
-          builtins.match "wayland" system-details.display-type != null
+          isWayland
         then
           pkgs.rofi-wayland.override {
-            plugins = cfg.plugins;
+            plugins = rofi.plugins;
           }
         else
           pkgs.rofi.override {
-            plugins = cfg.plugins;
+            plugins = rofi.plugins;
           }
         );
         extraConfig = {
           location = 0;
           yoffset = 0;
           xoffset = 0;
-          icon-theme = cfg.iconTheme;
+          icon-theme = rofi.iconTheme;
           drun-display-format = "{icon} {name}";
           hide-scrollbar = true;
           display-drun = "  Apps";
@@ -173,7 +173,7 @@ in
           display-calc = " 󰪚 Calculator";
           display-emoji = "  Emoji";
           sidebar-mode = true;
-          modi = cfg.modi;
+          modi = rofi.modi;
           show-icons = true;
           steal-focus = true;
           kb-primary-paste = "Control+V,Shift+Insert";
@@ -181,7 +181,7 @@ in
         };
         font = "SauceCodePro NFM 16";
         terminal = lib.mkDefault "${pkgs.alacritty}/bin/alacritty";
-        theme = cfg.theme;
+        theme = rofi.theme;
       };
     };
     home.packages = with pkgs; [
@@ -198,8 +198,6 @@ in
       # Papirus icons to support the default selected
       papirus-icon-theme
     ];
-
-    gui.rofi.todofi.enable = true;
   };
 }
 

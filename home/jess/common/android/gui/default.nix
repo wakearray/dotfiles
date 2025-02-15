@@ -1,18 +1,25 @@
-{ ... }:
+{ lib, config, ... }:
+let
+  isAndroid = config.home.systemDetails.isAndroid;
+  gui = config.gui;
+  agui = config.android.gui;
+in
 {
   # home/jess/common/android/gui
   # GUI progams and settings for all Android devices
-  # Use the following inside modules to ensure that they only build on hosts running an x11 window manager:
-  #
-  # { lib, system-details, ... }:{
-  #   config = lib.mkIf (builtins.match "x11" system-details.display-type != null) {};
-  # }
-  #
   imports = [
     ./rofi.nix
   ];
 
-  config = {
+  options.android.gui = with lib; {
+    enable = mkOption {
+      type = types.bool;
+      default = (isAndroid && gui.enable);
+      description = "Defaults to true if device is Android and systemDetails.display isn't `cli`.";
+    };
+  };
+
+  config = lib.mkIf agui.enable {
     gui = {
       wm.i3.enable = true;
       polybar.enable = true;

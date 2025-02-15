@@ -1,10 +1,12 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.gui.rofi;
-  todofi = cfg.todofi;
+  gui = config.gui;
+  rofi = gui.rofi;
+  todo = gui.todo;
+  todofi = todo.todofi;
 in
 {
-  options.gui.rofi.todofi = with lib; {
+  options.gui.todo.todofi = with lib; {
     enable = mkEnableOption "Enable Todofi.sh, a rofi plugin for todo-txt formatting and editing.";
 
     colors = {
@@ -55,9 +57,8 @@ in
       };
     };
   };
-  config = lib.mkIf (config.gui.enable && (cfg.enable && todofi.enable)) {
+  config = lib.mkIf (gui.enable && (todo.enable && (rofi.enable && todofi.enable))) {
     home = {
-      packages = with pkgs; [ todo ];
       file = {
         ".local/bin/todofi.sh" = {
           executable = true;

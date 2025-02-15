@@ -1,6 +1,6 @@
-{ lib, config, system-details, pkgs, outputs, ... }:
+{ lib, config, pkgs, outputs, ... }:
 let
-  isAndroid = (builtins.match "android" system-details.host-type != null);
+  isAndroid = config.home.systemDetails.isAndroid;
   user = config.home.username;
 in
 {
@@ -15,15 +15,6 @@ in
 
         # SSH File System
         sshfs
-
-        # Rust grep use `rg`
-        repgrep
-        ripgrep
-        ripgrep-all
-
-        # Rage - Rust implementation of age
-        # https://github.com/str4d/rage
-        rage
 
         # nh - Yet another nix cli helper
         # https://github.com/viperML/nh/tree/master
@@ -64,6 +55,7 @@ in
         automatic = true;
         frequency = "weekly";
       };
+
       # The contents of the nix.conf file
       # Some settings will be needed when installing/using Nix on Android
       # Not needed when using lix

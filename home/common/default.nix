@@ -1,139 +1,231 @@
-{ pkgs, config, system-details, ... }:
+{ lib, pkgs, config, systemDetails, ... }:
 {
   # /home/common
   imports = [
-    ./zsh.nix
+    ./android.nix
+    ./gui
     ./ssh.nix
     ./yazi.nix
-    (
-      if
-        builtins.match "android" system-details.host-type != null
-      then
-        ./android
-      else
-        ./nixos
-    )
-    ./gui
+    ./zsh.nix
     ../../modules/common/nvim/home.nix
   ];
 
-  home = {
-    enableNixpkgsReleaseCheck = false;
-    sessionVariables = {
-      FLAKE = "${config.home.homeDirectory}/dotfiles";
+  options.home.systemDetails = with lib; {
+    # systemDetails is found and can be edited in each host's configuration in flake.nix
+    # It can be overriden in a given host's configuration, but that's not the intended usecase.
+    #
+    # hostName     = (string of) hostname or home-manager configuration
+    # hostType     = (one of) "laptop" "desktop" "server" "android" "kiosk"
+    # display      = (one of) "wayland" "x11" "cli"
+    # features     = (none, one, or more of) "printers" "installer" "einkBW" "einkColor"
+    # architecture = (one of) "x86_64-linux" "aarch64-linux"
+
+    # Hostname
+    hostName = mkOption {
+      type = types.str;
+      default = systemDetails.hostName;
+      description = "Set to the host's hostname to make accessing the hostname in scripts easier.";
     };
-    packages = with pkgs; [
-      # socat - Utility for bidirectional data transfer between two independent data channels
-      # http://www.dest-unreach.org/socat/
-      socat
 
-      # sops - Simple and flexible tool for managing secrets
-      # https://github.com/getsops/sops
-      sops
+    # Host Type: [ "laptop" "desktop" "server" "android" "kiosk" ]
+    isLaptop = mkOption {
+      type = types.bool;
+      default = (builtins.match "laptop" systemDetails.hostType != null);
+      description = "True if host is a laptop (or laptop like portable).";
+    };
+    isDesktop = mkOption {
+      type = types.bool;
+      default = (builtins.match "desktop" systemDetails.hostType != null);
+      description = "True if host is a desktop.";
+    };
+    isServer = mkOption {
+      type = types.bool;
+      default = (builtins.match "server" systemDetails.hostType != null);
+      description = "True if host is a server.";
+    };
+    isAndroid = mkOption {
+      type = types.bool;
+      default = (builtins.match "android" systemDetails.hostType != null);
+      description = "True if host is Android.";
+    };
+    isKiosk = mkOption {
+      type = types.bool;
+      default = (builtins.match "kiosk" systemDetails.hostType != null);
+      description = "True if host is intended to be used like a kiosk.";
+    };
 
-      # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
-      # https://github.com/lemonade-command/lemonade/
-      lemonade
+    # Display [ "wayland" "x11" "cli" ]
+    display = {
+      wayland = mkOption {
+        type = types.bool;
+        default = (builtins.match "wayland" systemDetails.display != null);
+        description = "True if device uses wayland.";
+      };
+      x11 = mkOption {
+        type = types.bool;
+        default = (builtins.match "x11" systemDetails.display != null);
+        description = "True if device uses x11.";
+      };
+      cli = mkOption {
+        type = types.bool;
+        default = (builtins.match "cli" systemDetails.display != null);
+        description = "True if host does not use x11 or wayland.";
+      };
+    };
 
-      # Rust grep use `rg`
-      repgrep
-      ripgrep
-      ripgrep-all
+    # Features [ "printers" "installer" "eink" "einkColor" ]
+    # (`installer` and `printer` options aren't included in home-manager)
+    eink = {
+      enable = mkOption {
+        type = types.bool;
+        default = (builtins.match "eink" systemDetails.features != null);
+        description = "True if host is eink.";
+      };
+      Color = mkOption {
+        type = types.bool;
+        default = (builtins.match "einkColor" systemDetails.features != null);
+        description = "True if host is a color enabled eink device.";
+      };
+    };
 
-      # Rage - Rust implementation of age
-      # https://github.com/str4d/rage
-      rage
-
-      # aspell - english spellcheck
-      aspell
-      aspellDicts.en
-      aspellDicts.en-computers
-      aspellDicts.en-science
-
-      # manix - A fast CLI documentation searcher for Nix
-      # https://github.com/nix-community/manix
-      manix
-    ];
-  };
-
-  # Editor Config helps enforce your preferences on editors
-  editorconfig = {
-    enable = true;
-    settings = {
-      "*" = {
-        charset = "utf-8";
-        end_of_line = "lf";
-        trim_trailing_whitespace = true;
-        insert_final_newline = true;
-        max_line_width = 78;
-        indent_style = "space";
-        indent_size = 2;
+    # Architecture
+    architecture = {
+      text = mkOption {
+        type = types.str;
+        default = systemDetails.architecture;
+        description = "The text, as a string, of the current host's architecture.";
+      };
+      isx86_64 = mkOption {
+        type = types.bool;
+        default = (builtins.match "x86_64-linux" systemDetails.architecture != null);
+        description = "True if host is using an x86_64 CPU.";
+      };
+      isAarch64 = mkOption {
+        type = types.bool;
+        default = (builtins.match "aarch64-linux" systemDetails.architecture != null);
+        description = "True if host is using an aarch64 SOC.";
       };
     };
   };
+  config = {
+    home = {
+      enableNixpkgsReleaseCheck = false;
+      sessionVariables = {
+        FLAKE = "${config.home.homeDirectory}/dotfiles";
+      };
+      packages = with pkgs; [
+        # socat - Utility for bidirectional data transfer between two independent data channels
+        # http://www.dest-unreach.org/socat/
+        socat
 
-  # Allows home-manager to manage the XDG variables and files
-  # https://nix-community.github.io/home-manager/options.xhtml#opt-xdg.enable
-  xdg = {
-    enable = true;
-    configHome = "${config.home.homeDirectory}/.config";
-  };
+        # sops - Simple and flexible tool for managing secrets
+        # https://github.com/getsops/sops
+        sops
 
-  programs = {
-    # zoxide - A smarter cd command
-    # https://github.com/ajeetdsouza/zoxide
-    zoxide = {
-      enable = true;
-      package = pkgs.zoxide;
+        # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
+        # https://github.com/lemonade-command/lemonade/
+        lemonade
+
+        # Rust grep use `rg`
+        repgrep
+        ripgrep
+        ripgrep-all
+
+        # Rage - Rust implementation of age
+        # https://github.com/str4d/rage
+        rage
+
+        # aspell - english spellcheck
+        aspell
+        aspellDicts.en
+        aspellDicts.en-computers
+        aspellDicts.en-science
+
+        # manix - A fast CLI documentation searcher for Nix
+        # https://github.com/nix-community/manix
+        manix
+      ];
     };
 
-    # eza - A modern replacement for ls
-    # https://github.com/eza-community/eza
-    eza = {
+    # Editor Config helps enforce your preferences on editors
+    editorconfig = {
       enable = true;
-      enableZshIntegration = true;
-      package = pkgs.eza;
+      settings = {
+        "*" = {
+          charset = "utf-8";
+          end_of_line = "lf";
+          trim_trailing_whitespace = true;
+          insert_final_newline = true;
+          max_line_width = 78;
+          indent_style = "space";
+          indent_size = 2;
+        };
+      };
     };
 
-    home-manager.enable = true;
-
-    # bat - a cat clone with wings written in Rust
-    # https://github.com/sharkdp/bat
-    # More options found here:
-    # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.bat.enable
-    bat.enable = true;
-
-    # btop - Resource monitor that shows usage and stats
-    # https://github.com/aristocratos/btop
-    # More options found here:
-    # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.btop.enable
-    btop.enable = true;
-
-    # fzf - The most supported command line fuzzy finder
-    # https://github.com/junegunn/fzf
-    # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.fzf.enable
-    fzf = {
+    # Allows home-manager to manage the XDG variables and files
+    # https://nix-community.github.io/home-manager/options.xhtml#opt-xdg.enable
+    xdg = {
       enable = true;
-      enableZshIntegration = true;
+      configHome = "${config.home.homeDirectory}/.config";
     };
 
-    # git
-    # More options found here:
-    # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
-    git = {
-      enable = true;
-      # delta - A syntax-highlighting pager for git, diff, grep, and blame output
-      # https://github.com/dandavison/delta
-      delta.enable = true;
-    };
+    programs = {
+      # zoxide - A smarter cd command
+      # https://github.com/ajeetdsouza/zoxide
+      zoxide = {
+        enable = true;
+        package = pkgs.zoxide;
+      };
 
-    # skim - `sk` - Fuzzy Finder in rust!
-    # https://github.com/lotabout/skim
-    # More options found here:
-    # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.skim.enable
-    skim = {
-      enable = true;
-      enableZshIntegration = true;
+      # eza - A modern replacement for ls
+      # https://github.com/eza-community/eza
+      eza = {
+        enable = true;
+        enableZshIntegration = true;
+        package = pkgs.eza;
+      };
+
+      home-manager.enable = true;
+
+      # bat - a cat clone with wings written in Rust
+      # https://github.com/sharkdp/bat
+      # More options found here:
+      # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.bat.enable
+      bat.enable = true;
+
+      # btop - Resource monitor that shows usage and stats
+      # https://github.com/aristocratos/btop
+      # More options found here:
+      # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.btop.enable
+      btop.enable = true;
+
+      # fzf - The most supported command line fuzzy finder
+      # https://github.com/junegunn/fzf
+      # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.fzf.enable
+      fzf = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+
+      # git
+      # More options found here:
+      # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
+      git = {
+        enable = true;
+        # delta - A syntax-highlighting pager for git, diff, grep, and blame output
+        # https://github.com/dandavison/delta
+        delta.enable = true;
+      };
+
+      # skim - `sk` - Fuzzy Finder in rust!
+      # https://github.com/lotabout/skim
+      # More options found here:
+      # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.skim.enable
+      skim = {
+        enable = true;
+        enableZshIntegration = true;
+      };
     };
   };
 }

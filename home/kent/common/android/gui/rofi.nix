@@ -1,9 +1,9 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.android.gui;
+  agui = config.android.gui;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf agui.enable {
     gui.rofi = {
       enable = true;
       plugins = with pkgs; [
@@ -19,8 +19,8 @@ in
         # https://github.com/svenstaro/rofi-calc
         rofi-calc
       ];
-      #modi = "drun,todo:todofi.sh,calc,top,filebrowser,keys";
-      modi = "drun,calc,top,filebrowser,keys";
+      modi = "drun,todo:todofi.sh,calc,top,filebrowser,keys";
+      #modi = "drun,calc,top,filebrowser,keys";
     };
 
     home.packages = with pkgs; [

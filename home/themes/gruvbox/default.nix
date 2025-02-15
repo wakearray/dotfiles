@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
   # The expression colors includes all colors
   # found in the gruvbox material medium dark theme.
@@ -95,6 +95,12 @@ in
           };
         };
       };
+    };
+
+    programs.vscode = {
+      extensions = with pkgs.vscode-extensions; [
+        jdinhlife.gruvbox
+      ];
     };
   };
 }

@@ -1,7 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.gui.eww;
-  colors = cfg.bar.colors;
+  gui = config.gui;
+  eww = gui.eww;
+  bar = eww.bar;
+  colors = bar.colors;
 in
 {
   imports = [
@@ -11,12 +13,6 @@ in
 
   options.gui.eww.bar = with lib; {
     enable = mkEnableOption "Enable a generic bar config for eww.";
-
-    height = mkOption {
-      type = types.str;
-      default = "2%";
-      description = "Width needs to be adjusted per device when dealing with different resolutions and scaling options. String is either a % of screen width or pixels as px.";
-    };
 
     colors = {
       text = mkOption {
@@ -75,7 +71,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
+  config = lib.mkIf (gui.enable && (eww.enable && bar.enable)) {
     gui.eww = {
       icons.enable = true;
     };

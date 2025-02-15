@@ -1,6 +1,7 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.gui.eww;
+  gui = config.gui;
+  eww = gui.eww;
 in
 {
   # home/common/gui/eww/
@@ -23,10 +24,10 @@ in
       };
     };
   };
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      playerctl
-      eww
+  config = lib.mkIf (gui.enable && eww.enable) {
+    home.packages = [
+      pkgs.playerctl
+      pkgs.eww
     ];
   };
 }

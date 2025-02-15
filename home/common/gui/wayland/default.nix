@@ -1,7 +1,7 @@
-{ lib, config, pkgs, system-details, ... }:
+{ lib, config, pkgs, ... }:
 let
-  isWayland = (builtins.match "wayland" system-details.display-type != null);
-  isAndroid = (builtins.match "android" system-details.host-type != null);
+  isWayland = config.home.systemDetails.display.wayland;
+  isAndroid = config.home.systemDetails.isAndroid;
   wayland = config.gui.wayland;
 in
 {
@@ -13,7 +13,7 @@ in
     enable = mkOption {
       type = types.bool;
       default = (isWayland && (!isAndroid));
-      description = "Defaults to true when system-details.display-type is wayland and system-details.host-type is not android.";
+      description = "Defaults to true when systemDetails.display is wayland and systemDetails.hostType is not android.";
     };
   };
   config = lib.mkIf wayland.enable {

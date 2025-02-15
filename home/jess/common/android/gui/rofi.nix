@@ -1,7 +1,11 @@
-{ lib, system-details, pkgs, ... }:
+{ lib, config, pkgs, ... }:
+let
+  agui = config.android.gui;
+  x11 = config.home.systemDetails.display.x11;
+in
 {
   # Rofi config for Android using Termux:X11
-  config = lib.mkIf (builtins.match "x11" system-details.display-type != null) {
+  config = lib.mkIf (agui.enable && x11) {
     gui.rofi = {
       enable = true;
       plugins = with pkgs; [

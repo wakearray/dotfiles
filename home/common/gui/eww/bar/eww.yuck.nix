@@ -1,9 +1,11 @@
-{ lib, config, system-details, ... }:
+{ lib, config, systemDetails, ... }:
 let
-  cfg = config.gui.eww;
+  gui = config.gui;
+  eww = gui.eww;
+  bar = eww.bar;
   defwindow = (
     if
-      builtins.match "wayland" system-details.display-type != null
+      (builtins.match "wayland" systemDetails.display != null)
     then # Wayland config
       ":stacking \"bg\"
   :exclusive true
@@ -14,10 +16,9 @@ let
   :reserve (struts :distance {height || \"2%\"} :side \"top\")
   :windowtype \"dock\" "
   );
-  bar = cfg.bar;
 in
 {
-  config = lib.mkIf (cfg.enable && bar.enable) {
+  config = lib.mkIf (gui.enable && (eww.enable && bar.enable)) {
     home.file."/.config/eww/bar/eww.yuck" = {
       enable = true;
       force = true;
@@ -59,7 +60,7 @@ Mute  : ''${mute_status}"
             :onchange "")
     (label :class battery_class
            :text battery_icon)
-    (label :text "''${EWW_BATTERY["${cfg.battery.identifier}"].capacity}% | ")
+    (label :text "''${EWW_BATTERY["${eww.battery.identifier}"].capacity}% | ")
     time))
 
 (defwidget bar [ offset ]
@@ -135,7 +136,7 @@ Mute  : ''${mute_status}"
            :text "Capacity: ''${battery_capacity}%
 Status  : ''${battery_status}")
     (box :orientation "h"
-      (label :text "''${battery_icon} ''${EWW_BATTERY["${cfg.battery.identifier}"].capacity}% | "))))
+      (label :text "''${battery_icon} ''${EWW_BATTERY["${eww.battery.identifier}"].capacity}% | "))))
 
 (defwidget workspace_toggle [ workspace offset ]
   (button :onclick "hyprctl dispatch split:workspace ''${workspace}"

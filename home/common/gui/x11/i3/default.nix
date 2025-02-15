@@ -1,8 +1,16 @@
 { lib, pkgs, config, ... }:
 let
-  cfg = config.gui.wm.i3;
+  gui = config.gui;
+  x11 = gui.x11;
+  i3 = gui.wm.i3;
+  polybar = gui.polybar;
+  eww = gui.eww;
 in
 {
+  imports = [
+    ./i3wsr.nix
+  ];
+
   options.gui.wm.i3 = with lib; {
     enable = mkEnableOption "Enable a very opinionated i3 config intended for use inside Termux.";
 
@@ -25,13 +33,14 @@ in
       '';
     };
   };
-  config = lib.mkIf cfg.enable {
+
+  config = lib.mkIf (gui.enable && (x11.enable && i3.enable)) {
     xsession = {
       enable = true;
       windowManager.i3 = {
         enable = true;
         config = {
-          modifier = cfg.modifier;
+          modifier = i3.modifier;
           assigns = lib.mkOverride 1001 {
             "$pws_1" = [ { class = "Alacritty";   } ];
             "$pws_2" = [ { title = "Discord.*";   } { class = "Signal";   } ];
@@ -60,48 +69,50 @@ in
           };
           keybindings =
           let
-            rofiTodo     = "${config.home.homeDirectory}.local/bin/todofi.sh";
+          # rofiTodo     = "${config.home.homeDirectory}.local/bin/todofi.sh";
             menu         = config.xsession.windowManager.i3.config.menu;
             quitPolybar  = "${config.home.homeDirectory}.config/polybar/quit_polybar.sh";
             modifier     = config.xsession.windowManager.i3.config.modifier;
           in lib.mkOverride 1001 {
-            "${modifier}+q" = "kill";
-            "${modifier}+d" = "exec ${menu}";
-            #"${modifier}+t" = "exec ${rofiTodo}";
+            "${modifier}+q"       = "kill";
+            "${modifier}+d"       = "exec ${menu}";
+          # "${modifier}+t"       = "exec ${rofiTodo}";
 
-            "${modifier}+j" = "focus left";
-            "${modifier}+k" = "focus down";
-            "${modifier}+l" = "focus up";
+            "${modifier}+j"       = "focus left";
+            "${modifier}+k"       = "focus down";
+            "${modifier}+l"       = "focus up";
+          # "${modifier}+;"       = "focus right";
 
             "${modifier}+Shift+j" = "move left";
             "${modifier}+Shift+k" = "move down";
             "${modifier}+Shift+l" = "move up";
+          # "${modifier}+Shift+;" = "move right";
 
-            "${modifier}+h" = "split h";
-            "${modifier}+v" = "split v";
-            "${modifier}+f" = "fullscreen toggle";
+            "${modifier}+h"       = "split h";
+            "${modifier}+v"       = "split v";
+            "${modifier}+f"       = "fullscreen toggle";
 
-            "${modifier}+Alt+s" = "layout stacking";
-            "${modifier}+g" = "layout tabbed";
-            "${modifier}+e" = "layout toggle split";
+            "${modifier}+Alt+s"   = "layout stacking";
+            "${modifier}+g"       = "layout tabbed";
+            "${modifier}+e"       = "layout toggle split";
 
-            "${modifier}+t" = "floating toggle";
-            #"${modifier}+space" = "focus mode_toggle";
+            "${modifier}+t"       = "floating toggle";
+          # "${modifier}+space"   = "focus mode_toggle";
 
-            "${modifier}+a" = "focus parent";
+            "${modifier}+a"       = "focus parent";
 
-            "${modifier}+s" = "move scratchpad";
+            "${modifier}+s"       = "move scratchpad";
             "${modifier}+Shift+s" = "scratchpad show";
 
-            "${modifier}+1" = "workspace number $pws_1";
-            "${modifier}+2" = "workspace number $pws_2";
-            "${modifier}+3" = "workspace number $pws_3";
-            "${modifier}+4" = "workspace number $pws_4";
-            "${modifier}+5" = "workspace number $pws_5";
-            "${modifier}+6" = "workspace number $pws_6";
-            "${modifier}+7" = "workspace number $pws_7";
-            "${modifier}+8" = "workspace number $pws_8";
-            "${modifier}+9" = "workspace number $pws_9";
+            "${modifier}+1"       = "workspace number $pws_1";
+            "${modifier}+2"       = "workspace number $pws_2";
+            "${modifier}+3"       = "workspace number $pws_3";
+            "${modifier}+4"       = "workspace number $pws_4";
+            "${modifier}+5"       = "workspace number $pws_5";
+            "${modifier}+6"       = "workspace number $pws_6";
+            "${modifier}+7"       = "workspace number $pws_7";
+            "${modifier}+8"       = "workspace number $pws_8";
+            "${modifier}+9"       = "workspace number $pws_9";
 
             "${modifier}+Shift+1" =
               "move container to workspace number $pws_1";
@@ -125,30 +136,30 @@ in
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
 
-            "${modifier}+r" = "mode resize";
+            "${modifier}+r"       = "mode resize";
             "${modifier}+Shift+q" = "exit";
-            "${modifier}+Ctrl+q" = "exec ${quitPolybar}";
+            "${modifier}+Ctrl+q"  = "exec ${quitPolybar}";
 
           };
           startup = lib.mkOverride 1001 [
             { command = "${pkgs.alacritty}/bin/alacritty"; }
             { command = "firefox"; }
-            (lib.mkIf config.gui.polybar.enable { # polybar
+            (lib.mkIf polybar.enable { # polybar
               command = "${config.home.file.".config/polybar/polybar.sh".source} &";
               always = true;
               notification = false;
             })
-            (lib.mkIf config.gui.polybar.enable { # i3wsr - updates workspace names with app icons
+            (lib.mkIf polybar.enable { # i3wsr - updates workspace names with app icons
               command = "${pkgs.i3wsr-3}/bin/i3wsr";
               always = true;
               notification = false;
             })
-            (lib.mkIf config.gui.eww.enable { # launch eww
+            (lib.mkIf eww.enable { # launch eww
               command = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg height=\"3%\" --arg offset=\"0\"";
               always = true;
               notification = false;
             })
-            (lib.mkIf (config.gui.eww.enable && config.gui.eww.battery.enable) { # launch eww battery monitoring script
+            (lib.mkIf (eww.enable && eww.battery.enable) { # launch eww battery monitoring script
               command = "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh > /dev/null 2>&1 &";
               always = true;
               notification = false;
@@ -204,9 +215,6 @@ in
 
     home = {
       packages = with pkgs; [
-        # Work Space Renamer - Allows for changing the name based on the app
-        # https://github.com/roosta/i3wsr
-        i3wsr-3
         # Handles hiding terminal windows that launch applications
         # https://github.com/jamesofarrell/i3-swallow
         i3-swallow
@@ -219,42 +227,9 @@ in
       ];
     };
 
-    xdg.configFile = {
-      "i3wsr/config.toml" = {
-        enable = config.gui.polybar.enable;
-        force = true;
-        text = ''
-  [icons]
-  Alacritty = ""
-  darktable = "󰄄"
-  discord = ""
-  firefox = "󰈹"
-  gmail = "󰊫"
-  photopea = ""
-  Signal = "󰭹"
-  tidal = ""
-  youtube = ""
-
-  [aliases.name]
-  ".* - YouTube .*" = "youtube"
-  ".*Gmail.*" = "gmail"
-  ".*Tidal.*" = "tidal"
-  "Photopea.*" = "photopea"
-  "^Discord .*" = "discord"
-
-  [options]
-  no_icon_names = true
-  no_names = true
-
-  [general]
-  default_icon = ""
-  separator = " "
-  split_at = ":"
-        '';
-      };
-    };
-    gui.rofi = {
-      enable = true;
+    gui = {
+      rofi.enable = lib.mkDefault true;
+      wm.i3.i3wsr.enable = lib.mkDefault true;
     };
   };
 }

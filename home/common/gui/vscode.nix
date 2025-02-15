@@ -1,12 +1,13 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.gui.vscode;
+  gui = config.gui;
+  vscode = gui.vscode;
 in
 {
   options.gui.vscode = with lib; {
     enable = mkEnableOption "Enable and opinionated VSCodium setup";
   };
-  config = lib.mkIf (config.gui.enable && cfg.enable) {
+  config = lib.mkIf (gui.enable && vscode.enable) {
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib ]);
@@ -23,7 +24,6 @@ in
         rust-lang.rust-analyzer
         rubymaniac.vscode-paste-and-indent
         ms-vsliveshare.vsliveshare
-        jdinhlife.gruvbox
       ];
     };
   };

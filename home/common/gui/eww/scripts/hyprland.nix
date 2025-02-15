@@ -1,12 +1,13 @@
 { lib, pkgs, config, ... }:
 let
-  eww = config.gui.eww;
+  gui = config.gui;
+  eww = gui.eww;
   hyprland = config.home.wm.hyprland;
   ewwCommand = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
 in
 {
-  config = lib.mkIf (eww.enable && hyprland.enable) {
+  config = lib.mkIf (gui.enable && (eww.enable && hyprland.enable)) {
     home = {
       file."/.config/eww/scripts/hyprland.sh" = {
         enable = true;

@@ -1,6 +1,6 @@
-{ config, pkgs, system-details, ... }:
+{ config, pkgs, systemDetails, ... }:
 let
-  hostname = system-details.host-name;
+  hostname = systemDetails.hostname;
 in
 {
   config = {
