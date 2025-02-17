@@ -22,7 +22,7 @@ in
     };
 
     gui = {
-      rofi = lib.mkIf (wayland.enable && (!isAndroid)) {
+      rofi = lib.mkIf (wayland.enable) {
         enable = true;
         plugins = with pkgs; [
           # Bluetooth configuration in rofi
@@ -35,12 +35,20 @@ in
         ];
         modi = "drun,todo:todofi.sh,filebrowser,emoji";
       };
+      todo = {
+        enable = true;
+        todofi.enable = true;
+      };
       firefox.enable = true;
     };
 
     home.packages = with pkgs; [
+      # File manager
       pcmanfm
+      # Archive manager
       file-roller
+      # Bluetooth GUI written in Rust
+      overskride
     ];
   };
 }

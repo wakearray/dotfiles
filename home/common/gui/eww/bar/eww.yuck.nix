@@ -11,10 +11,12 @@ let
   :exclusive true
   :focusable false"
     else # X11 config
-      ":stacking \"bg\"
+      ''
+:stacking "bg"
   :wm-ignore true
-  :reserve (struts :distance {height || \"2%\"} :side \"top\")
-  :windowtype \"dock\" "
+  :reserve (struts :distance ''${height} :side "top")
+  :windowtype "dock"
+  ''
   );
 in
 {
@@ -29,7 +31,7 @@ in
   :geometry (geometry :x "0%"
                       :y "10px"
                       :width width
-                      :height {height || "2%"}
+                      :height height
                       :anchor "top center")
   (bar :offset offset))
 

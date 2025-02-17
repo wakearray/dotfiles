@@ -38,8 +38,9 @@ in
           "firefox"
           "signal-desktop"
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"120%\" --arg offset=\"0\""
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg offset=\"9\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"120%\" --arg height=\"2%\" --arg offset=\"0\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"9\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_2 --screen 2 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"18\""
         ];
         exec = [
           "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh  > /dev/null 2>&1 &"
