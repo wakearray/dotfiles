@@ -3,10 +3,9 @@
   ## These are the defaults I want on GreatBlue only:
   imports =
   [
-   # xboxdrv has been discontinued in favor of built in kernal drivers
+   # xboxdrv has been discontinued in favor of built in kernel drivers
    #./8bitdo.nix
     ./fingerprint_reader.nix
-    ./syncthing.nix
     ./tui.nix
     ./u2f.nix
   ];
@@ -14,6 +13,11 @@
   gui = {
     enable = true;
     _1pass.enable = true;
+    syncthing = {
+      enable = true;
+      user = "kent";
+      sopsFile = ./syncthing.yaml;
+    };
     gaming.enable = true;
     office.enable = true;
     wm.hyprland.enable = true;
@@ -62,8 +66,6 @@
     # OpenSCAD
     openscad-unstable
 
-    xorg.xcbutil
-
     # utils
     usbutils
     android-tools
@@ -73,7 +75,9 @@
   ];
 
   services = {
+    # Needed to make NixOS work with displaylink docks
     xserver.videoDrivers = [ "displaylink" "modesetting" ];
+    # Let the window manager choose how to handle lid open/close events
     logind = {
       lidSwitch = "ignore";
     };

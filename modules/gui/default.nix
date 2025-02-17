@@ -12,6 +12,7 @@ in
     ./gaming.nix
     ./office.nix
     ./sound.nix
+    ./syncthing.nix
     ./wm
     ./greeters
   ];

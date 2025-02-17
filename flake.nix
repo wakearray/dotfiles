@@ -137,7 +137,6 @@
       lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          secrets = "/etc/nixos/secrets";
           systemDetails = systemDetails;
         };
         modules = [
@@ -182,7 +181,6 @@
       lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          secrets = "/etc/nixos/secrets";
           domain = "voicelesscrimson.com";
           systemDetails = systemDetails;
         };
@@ -225,7 +223,6 @@
       in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          secrets = "/etc/nixos/secrets";
           systemDetails = systemDetails;
         };
         modules = [
@@ -345,7 +342,6 @@
       in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          secrets = "/etc/nixos/secrets";
           systemDetails = systemDetails;
         };
         modules = [
@@ -390,7 +386,6 @@
       in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          secrets = "/etc/nixos/secrets";
           systemDetails = systemDetails;
         };
         modules = [
@@ -435,7 +430,6 @@
       system = "x86_64-linux";
       specialArgs = {
         inherit inputs outputs;
-        secrets = "/etc/nixos/secrets";
         systemDetails = systemDetails;
       };
       modules = [
@@ -483,7 +477,6 @@
       system = "x86_64-linux";
       specialArgs = {
         inherit inputs outputs;
-        secrets = "/etc/nixos/secrets";
         systemDetails = systemDetails;
       };
       modules = [
