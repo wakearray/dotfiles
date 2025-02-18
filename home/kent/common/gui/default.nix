@@ -2,7 +2,6 @@
 let
   gui = config.gui;
   wayland = config.gui.wayland;
-  isAndroid = config.home.systemDetails.isAndroid;
 in
 {
   # kent/common/gui
