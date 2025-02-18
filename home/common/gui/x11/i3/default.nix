@@ -5,6 +5,36 @@ let
   i3 = gui.wm.i3;
   polybar = gui.polybar;
   eww = gui.eww;
+
+  colorSetModule = with lib; types.submodule {
+    options = {
+      border = mkOption {
+        type = types.str;
+        visible = false;
+      };
+
+      childBorder = mkOption {
+        type = types.str;
+        visible = false;
+      };
+
+      background = mkOption {
+        type = types.str;
+        visible = false;
+      };
+
+      text = mkOption {
+        type = types.str;
+        visible = false;
+      };
+
+      indicator = mkOption {
+        type = types.str;
+        visible = false;
+      };
+    };
+  };
+
 in
 {
   imports = [
@@ -32,7 +62,95 @@ in
         Due to home manager's implementation, the available options are slightly different.
       '';
     };
-  };
+    colors = mkOption {
+      type = types.submodule {
+        options = {
+          background = mkOption {
+            type = types.str;
+            default = "#ffffff";
+            description = ''
+              Background color of the window. Only applications which do not cover
+              the whole area expose the color.
+            '';
+          };
+
+          focused = mkOption {
+            type = colorSetModule;
+            default = {
+              border = "#4c7899";
+              background = "#285577";
+              text = "#ffffff";
+              indicator = "#2e9ef4";
+              childBorder = "#285577";
+            };
+            description = "A window which currently has the focus.";
+          };
+
+          focusedInactive = mkOption {
+            type = colorSetModule;
+            default = {
+              border = "#333333";
+              background = "#5f676a";
+              text = "#ffffff";
+              indicator = "#484e50";
+              childBorder = "#5f676a";
+            };
+            description = ''
+              A window which is the focused one of its container,
+              but it does not have the focus at the moment.
+            '';
+          };
+
+          unfocused = mkOption {
+            type = colorSetModule;
+            default = {
+              border = "#333333";
+              background = "#222222";
+              text = "#888888";
+              indicator = "#292d2e";
+              childBorder = "#222222";
+            };
+            description = "A window which is not focused.";
+          };
+
+          urgent = mkOption {
+            type = colorSetModule;
+            default = {
+              border = "#2f343a";
+              background = "#900000";
+              text = "#ffffff";
+              indicator = "#900000";
+              childBorder = "#900000";
+            };
+            description = "A window which has its urgency hint activated.";
+          };
+
+          placeholder = mkOption {
+            type = colorSetModule;
+            default = {
+              border = "#000000";
+              background = "#0c0c0c";
+              text = "#ffffff";
+              indicator = "#000000";
+              childBorder = "#0c0c0c";
+            };
+            description = ''
+              Background and text color are used to draw placeholder window
+              contents (when restoring layouts). Border and indicator are ignored.
+            '';
+          };
+        };
+      };
+      default = { };
+      description = ''
+        Color settings. All color classes can be specified using submodules
+        with 'border', 'background', 'text', 'indicator' and 'childBorder' fields
+        and RGB color hex-codes as values. See default values for the reference.
+        Note that '${moduleName}.config.colors.background' parameter takes a single RGB value.
+
+        See <https://i3wm.org/docs/userguide.html#_changing_colors>.
+      '';
+    };  };
 
   config = lib.mkIf (gui.enable && (x11.enable && i3.enable)) {
     xsession = {
@@ -167,8 +285,8 @@ in
           ];
           terminal = lib.mkOverride 1001 "${pkgs.alacritty}/bin/alacritty";
           window = lib.mkOverride 1001 {
-            border = 0;
-            hideEdgeBorders = "both";
+            border = 1;
+            #hideEdgeBorders = "both";
             titlebar = false;
             commands = [
               {
@@ -197,6 +315,30 @@ in
             wrapping = "no";
           };
           menu = "${config.programs.rofi.finalPackage}/bin/rofi -show drun";
+          gaps = {
+            outer = 12;
+            inner = 5;
+          };
+          colors = {
+            background      = i3.colors.background;
+            focused         = i3.colors.focused;
+            focusedInactive = i3.colors.focusedInactive;
+            placeholder     = i3.colors.placeholder;
+            unfocused       = i3.colors.unfocused;
+            urgent          = i3.colors.urgent;
+          };
+          floating = {
+            # A window which has its urgency hint activated.Floating windows border width.
+            border = 1;
+            # List of criteria for windows that should be opened in a floating mode.
+            criteria = [
+              { title = "Picture-in-Picture"; class = "firefox"; }
+            ];
+            # Modifier key or keys that can be used to drag floating windows.
+            modifier = i3.modifier;
+            # Whether to show floating window titlebars.
+            titlebar = false;
+          };
         };
       extraConfig = lib.mkOverride 1001 ''
   set $pws_1 "1: term"

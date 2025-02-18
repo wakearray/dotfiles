@@ -14,7 +14,7 @@ let
       ''
 :stacking "bg"
   :wm-ignore true
-  :reserve (struts :distance ''${height} :side "top")
+  :reserve (struts :distance height :side "top")
   :windowtype "dock"
   ''
   );

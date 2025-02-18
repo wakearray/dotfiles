@@ -49,6 +49,46 @@ in
   };
   config = lib.mkIf cfg.enable {
     gui = {
+      wm = {
+        i3.colors = {
+          background = colors.fg_0;
+          focused = {
+            border = colors.fg_orange;
+            background = colors.fg_yellow;
+            text = colors.fg_0;
+            indicator = colors.fg_orange;
+            childBorder = colors.fg_yellow;
+          };
+          focusedInactive = {
+            border = colors.bg_statusline_1;
+            background = colors.bg_statusline_3;
+            text = colors.fg_0;
+            indicator = colors.bg_statusline_3;
+            childBorder = colors.bg_statusline_1;
+          };
+          unfocused = {
+            border      = colors.bg_statusline_1; # #32302F
+            background  = colors.bg_dim;          # #1B1B1B
+            text        = colors.fg_0;            # #D4BE98
+            indicator   = colors.bg_2;            # #45403D
+            childBorder = colors.bg_dim;          # #1B1B1B
+          };
+          urgent = {
+            border = colors.bg_diff_red;
+            background = colors.fg_red;
+            text = colors.fg_0;
+            indicator = colors.fg_red;
+            childBorder = colors.fg_red;
+          };
+          placeholder = {
+            border = colors.bg_dim;
+            background = colors.bg_0;
+            text = colors.fg_0;
+            indicator = colors.bg_dim;
+            childBorder = colors.bg_0;
+          };
+        };
+      };
       eww = {
         bar = {
           colors = {

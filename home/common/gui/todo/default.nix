@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, systemDetails, ... }:
 let
   gui = config.gui;
   todo = gui.todo;
@@ -17,9 +17,11 @@ in
     home.packages = with pkgs; [
       # todo.txt cli interface
       todo-txt-cli
-
-      # Typescript based GUI for todo.txt files
-      sleek-todo
-    ];
+    ] ++ (if builtins.match "x86_64-linux" systemDetails.architecture != null
+        then with pkgs; [
+          # Typescript based GUI for todo.txt files
+          sleek-todo
+        ]
+      else [ ]);
   };
 }
