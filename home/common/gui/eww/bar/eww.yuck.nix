@@ -13,8 +13,8 @@ let
     else # X11 config
       ''
 :stacking "bg"
-  :wm-ignore true
-  :reserve (struts :distance height :side "top")
+  :wm-ignore false
+  :reserve (struts :distance "2%" :side "top")
   :windowtype "dock"
   ''
   );

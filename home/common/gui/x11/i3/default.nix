@@ -12,22 +12,18 @@ let
         type = types.str;
         visible = false;
       };
-
       childBorder = mkOption {
         type = types.str;
         visible = false;
       };
-
       background = mkOption {
         type = types.str;
         visible = false;
       };
-
       text = mkOption {
         type = types.str;
         visible = false;
       };
-
       indicator = mkOption {
         type = types.str;
         visible = false;
@@ -62,6 +58,7 @@ in
         Due to home manager's implementation, the available options are slightly different.
       '';
     };
+
     colors = mkOption {
       type = types.submodule {
         options = {
@@ -150,15 +147,18 @@ in
 
         See <https://i3wm.org/docs/userguide.html#_changing_colors>.
       '';
-    };  };
+    };
+  };
 
   config = lib.mkIf (gui.enable && (x11.enable && i3.enable)) {
     xsession = {
       enable = true;
       windowManager.i3 = {
         enable = true;
+        package = pkgs.i3-rounded;
         config = {
           modifier = i3.modifier;
+
           assigns = lib.mkOverride 1001 {
             "$pws_1" = [ { class = "Alacritty";   } ];
             "$pws_2" = [ { title = "Discord.*";   } { class = "Signal";   } ];
@@ -170,13 +170,17 @@ in
             "$pws_8" = [  ];
             "$pws_9" = [ { title = ".*Tidal.*";  } ];
           };
+
           bars = [  ];
+
           defaultWorkspace = "$pws_1";
+
           fonts = {
             names = [ "SauceCodePro NFM" ];
             style = "Regular";
             size = 16.0;
           };
+
           keycodebindings =
           let
             modifier = config.xsession.windowManager.i3.config.modifier;
@@ -185,6 +189,7 @@ in
             "${modifier}+47" = "focus right";
             "${modifier}+Shift+47" = "move right";
           };
+
           keybindings =
           let
           # rofiTodo     = "${config.home.homeDirectory}.local/bin/todofi.sh";
@@ -215,7 +220,9 @@ in
             "${modifier}+e"       = "layout toggle split";
 
             "${modifier}+t"       = "floating toggle";
-          # "${modifier}+space"   = "focus mode_toggle";
+            "${modifier}+p"       = "sticky toggle";
+            # Toggle focus between floating and tiled
+            "${modifier}+space"   = "focus mode_toggle";
 
             "${modifier}+a"       = "focus parent";
 
@@ -257,8 +264,8 @@ in
             "${modifier}+r"       = "mode resize";
             "${modifier}+Shift+q" = "exit";
             "${modifier}+Ctrl+q"  = "exec ${quitPolybar}";
-
           };
+
           startup = lib.mkOverride 1001 [
             { command = "${pkgs.alacritty}/bin/alacritty"; }
             { command = "firefox"; }
@@ -273,7 +280,7 @@ in
               notification = false;
             })
             (lib.mkIf eww.enable { # launch eww
-              command = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg height=\"3%\" --arg offset=\"0\"";
+              command = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"0\"";
               always = true;
               notification = false;
             })
@@ -283,9 +290,11 @@ in
               notification = false;
             })
           ];
+
           terminal = lib.mkOverride 1001 "${pkgs.alacritty}/bin/alacritty";
+
           window = lib.mkOverride 1001 {
-            border = 1;
+            border = 2;
             #hideEdgeBorders = "both";
             titlebar = false;
             commands = [
@@ -309,16 +318,21 @@ in
               }
             ];
           };
+
           workspaceAutoBackAndForth = lib.mkOverride 1001 true;
+
           focus = lib.mkOverride 1001 {
             followMouse = false;
             wrapping = "no";
           };
+
           menu = "${config.programs.rofi.finalPackage}/bin/rofi -show drun";
+
           gaps = {
             outer = 12;
             inner = 5;
           };
+
           colors = {
             background      = i3.colors.background;
             focused         = i3.colors.focused;
@@ -327,9 +341,10 @@ in
             unfocused       = i3.colors.unfocused;
             urgent          = i3.colors.urgent;
           };
+
           floating = {
             # A window which has its urgency hint activated.Floating windows border width.
-            border = 1;
+            border = 2;
             # List of criteria for windows that should be opened in a floating mode.
             criteria = [
               { title = "Picture-in-Picture"; class = "firefox"; }
@@ -351,6 +366,8 @@ in
   set $pws_8 "8: fire"
   set $pws_9 "9: dark"
   set $pws_10 "10: tida"
+
+  border_radius 5
       '';
       };
     };
