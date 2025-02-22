@@ -7,16 +7,18 @@ let
     if
       (builtins.match "wayland" systemDetails.display != null)
     then # Wayland config
-      ":stacking \"bg\"
+      ''
+:stacking "bg"
   :exclusive true
-  :focusable false"
+  :focusable false
+      ''
     else # X11 config
       ''
 :stacking "bg"
   :wm-ignore false
   :reserve (struts :distance "2%" :side "top")
   :windowtype "dock"
-  ''
+      ''
   );
 in
 {
@@ -62,7 +64,7 @@ Mute  : ''${mute_status}"
             :onchange "")
     (label :class battery_class
            :text battery_icon)
-    (label :text "''${EWW_BATTERY["${eww.battery.identifier}"].capacity}% | ")
+    (label :text "''${battery_capacity}% | ")
     time))
 
 (defwidget bar [ offset ]
@@ -141,7 +143,7 @@ Status  : ''${battery_status}")
       (label :text "''${battery_icon} ''${EWW_BATTERY["${eww.battery.identifier}"].capacity}% | "))))
 
 (defwidget workspace_toggle [ workspace offset ]
-  (button :onclick "hyprctl dispatch split:workspace ''${workspace}"
+  (button :onclick "~/.config/eww/scripts/set_workspace.sh ''${workspace}"
           :class {active_workspace == "''${offset + workspace}" ? "workspace-active" : "workspace-inactive"}))
 
 (deflisten music :initial ""

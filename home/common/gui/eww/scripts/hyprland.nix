@@ -47,6 +47,58 @@ handle() {
 ${pkgs.socat}/bin/socat -U - UNIX-CONNECT:"$XDG_RUNTIME_DIR"/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock | while read -r line; do handle "$line"; done
       '';
       };
+      file."/.config/eww/scripts/set_workspace.sh" = {
+        enable = true;
+        force = true;
+        executable = true;
+        text = /*bash*/ ''
+#!/usr/bin/env bash
+
+WS1="1"
+WS2="2"
+WS3="3"
+WS4="4"
+WS5="5"
+WS6="6"
+WS7="7"
+WS8="8"
+WS9="9"
+
+change_workspace() {
+  ${hyprctl} dispatch split:workspace "$1"
+}
+
+case $1 in
+  "1")
+    change_workspace "$WS1"
+  ;;
+  "2")
+    change_workspace "$WS2"
+  ;;
+  "3")
+    change_workspace "$WS3"
+  ;;
+  "4")
+    change_workspace "$WS4"
+  ;;
+  "5")
+    change_workspace "$WS5"
+  ;;
+  "6")
+    change_workspace "$WS6"
+  ;;
+  "7")
+    change_workspace "$WS7"
+  ;;
+  "8")
+    change_workspace "$WS8"
+  ;;
+  "9")
+    change_workspace "$WS9"
+  ;;
+esac
+        '';
+      };
     };
   };
 }

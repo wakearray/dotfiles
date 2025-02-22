@@ -215,7 +215,8 @@ in
             "${modifier}+v"       = "split v";
             "${modifier}+f"       = "fullscreen toggle";
 
-            "${modifier}+Alt+s"   = "layout stacking";
+            # $mod + Alt + s
+            "${modifier}+mod1+s"  = "layout stacking";
             "${modifier}+g"       = "layout tabbed";
             "${modifier}+e"       = "layout toggle split";
 
@@ -266,6 +267,17 @@ in
             "${modifier}+Ctrl+q"  = "exec ${quitPolybar}";
           };
 
+          modes = {
+            resize = {
+              Down = "resize grow height 10 px or 10 ppt";
+              Escape = "mode default";
+              Left = "resize shrink width 10 px or 10 ppt";
+              Return = "mode default";
+              Right = "resize grow width 10 px or 10 ppt";
+              Up = "resize shrink height 10 px or 10 ppt";
+            };
+          };
+
           startup = lib.mkOverride 1001 [
             { command = "${pkgs.alacritty}/bin/alacritty"; }
             { command = "firefox"; }
@@ -284,6 +296,11 @@ in
               always = true;
               notification = false;
             })
+            (lib.mkIf eww.enable { # launch eww
+              command = "~/.config/eww/scripts/i3_listen_active_workspace.sh > /dev/null 2>&1 &";
+              always = true;
+              notification = false;
+            })
             (lib.mkIf (eww.enable && eww.battery.enable) { # launch eww battery monitoring script
               command = "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh > /dev/null 2>&1 &";
               always = true;
@@ -294,14 +311,26 @@ in
           terminal = lib.mkOverride 1001 "${pkgs.alacritty}/bin/alacritty";
 
           window = lib.mkOverride 1001 {
-            border = 2;
-            #hideEdgeBorders = "both";
+            border = 3;
             titlebar = false;
             commands = [
               {
                 command = "move to workspace number $pws_2";
                 criteria = {
                   title = "Discord .*";
+                };
+              }
+              {
+                command = "sticky enable";
+                criteria = {
+                  floating_from = "user";
+                };
+              }
+              {
+                command = "sticky enable";
+                criteria = {
+                  floating = true;
+                  title = "Picture-in-Picture";
                 };
               }
               {
@@ -343,8 +372,8 @@ in
           };
 
           floating = {
-            # A window which has its urgency hint activated.Floating windows border width.
-            border = 2;
+            # Floating windows border width.
+            border = 3;
             # List of criteria for windows that should be opened in a floating mode.
             criteria = [
               { title = "Picture-in-Picture"; class = "firefox"; }
@@ -356,16 +385,15 @@ in
           };
         };
       extraConfig = lib.mkOverride 1001 ''
-  set $pws_1 "1: term"
-  set $pws_2 "2: disc"
-  set $pws_3 "3: yout"
-  set $pws_4 "4: fire"
-  set $pws_5 "5: fire"
-  set $pws_6 "6: fire"
-  set $pws_7 "7: fire"
-  set $pws_8 "8: fire"
-  set $pws_9 "9: dark"
-  set $pws_10 "10: tida"
+  set $pws_1 "1: 4a70"
+  set $pws_2 "2: d772"
+  set $pws_3 "3: 91b3"
+  set $pws_4 "4: 4a1d"
+  set $pws_5 "5: bfa0"
+  set $pws_6 "6: 4fcd"
+  set $pws_7 "7: 742e"
+  set $pws_8 "8: f458"
+  set $pws_9 "9: 3107"
 
   border_radius 5
       '';

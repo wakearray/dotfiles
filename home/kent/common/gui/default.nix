@@ -1,7 +1,8 @@
-{ lib, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 let
   gui = config.gui;
   wayland = config.gui.wayland;
+  system = config.home.systemDetails.architecture.text;
 in
 {
   # kent/common/gui
@@ -48,6 +49,6 @@ in
       file-roller
       # Bluetooth GUI written in Rust
       overskride
-    ];
+    ] ++ [ inputs.zen-browser.packages."${system}".default ];
   };
 }
