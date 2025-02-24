@@ -25,6 +25,7 @@ in
         discord
         element-desktop
         telegram-desktop
+        signal-desktop
       ]
     );
   };

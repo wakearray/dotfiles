@@ -35,6 +35,7 @@ in
 {
   imports = [
     ./i3wsr.nix
+    ./i3launcher.nix
   ];
 
   options.gui.wm.i3 = with lib; {
@@ -201,15 +202,15 @@ in
             "${modifier}+d"       = "exec ${menu}";
           # "${modifier}+t"       = "exec ${rofiTodo}";
 
-            "${modifier}+j"       = "focus left";
-            "${modifier}+k"       = "focus down";
-            "${modifier}+l"       = "focus up";
-          # "${modifier}+;"       = "focus right";
+            "${modifier}+Left"    = "focus left";
+            "${modifier}+Down"    = "focus down";
+            "${modifier}+Up"      = "focus up";
+            "${modifier}+Right"   = "focus right";
 
-            "${modifier}+Shift+j" = "move left";
-            "${modifier}+Shift+k" = "move down";
-            "${modifier}+Shift+l" = "move up";
-          # "${modifier}+Shift+;" = "move right";
+            "${modifier}+Shift+Left"  = "move left";
+            "${modifier}+Shift+Down"  = "move down";
+            "${modifier}+Shift+Up"    = "move up";
+            "${modifier}+Shift+Right" = "move right";
 
             "${modifier}+h"       = "split h";
             "${modifier}+v"       = "split v";

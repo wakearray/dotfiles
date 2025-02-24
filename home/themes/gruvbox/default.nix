@@ -137,8 +137,8 @@ in
       };
     };
 
-    programs.vscode = {
-      extensions = with pkgs.vscode-extensions; [
+    programs.vscode.profiles = lib.mkIf config.gui.vscode.enable {
+      default.extensions = with pkgs.vscode-extensions; [
         jdinhlife.gruvbox
       ];
     };

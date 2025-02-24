@@ -39,8 +39,10 @@ in
         # Utilities for managing home files
         xdg-utils
 
+        # Waiting on pull request to be accepted
+        # https://github.com/NixOS/nixpkgs/pull/384032
         # Signal Messenger for desktop
-        signal-desktop
+        #signal-desktop
       ];
     };
 

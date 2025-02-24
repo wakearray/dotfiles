@@ -27,6 +27,11 @@ in
 
       # dconf - Gnome system config, wanted by darktable
       dconf
+
+      # Signal-desktop, specifically for arch
+      # Waiting on pull request to be accepted
+      # https://github.com/NixOS/nixpkgs/pull/384032
+      signal-desktop-arch
     ];
 
     xsession.numlock.enable = true;

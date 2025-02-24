@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # home/kent/hosts/y700
 
