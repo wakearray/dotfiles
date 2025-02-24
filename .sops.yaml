@@ -2,9 +2,15 @@
 keys:
 - &users:
     - &kent age1em9n3fvg9jphpsx055cv0t8u5wnxs64x2auddxsvjtuvg85kmerqp0wjg0
-- &hosts: # nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
+    - &jess age18j6d63zlrw2t4fd3sdqsxgv3yl6dn9rvzz3rxvf7lq96zwt27pesc7jmuy
+- &hosts:
+    # nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
+    # Kent
     - &greatblue age158lzfdas82aj2dayppkcv4xgs4u7m0uk7zul90sfpj8wxdavyuqqgv6ar2
     - &delaware age1pddnp2as3e76uqhk9uh3ff48jcua5st5px3cp35nmk2urem2xewq7vn6m4
+    # Jess
+    - &cichlid age1vhze94ngfzzsgtp45q6d8s4v9zt0234hxcnrk9x45ttz7r289vcq5yu7hw
+    - &shoebill age1pddnp2as3e76uqhk9uh3ff48jcua5st5px3cp35nmk2urem2xewq7vn6m4
     # Home manager installs:
     - &y700 age1ldfj8u2lmq7cntyu6hxtep9dy7z6gfesctltztuz4fwh2a7ww4qsywvjyn
     - &s24 age1ug0wd4d2tukuw2w7lzrpf2um8r2fxxr90xg7mphu07wwldnan3qsngdelh
@@ -13,7 +19,7 @@ keys:
     - &a9 age1h4x9vcyms6kkfwxgz5y8k3yk4g6vg0rn5wvenhmc632w8gvgascser0xqr
 
 creation_rules:
-     # path should be relative to location of this file (.sops.yaml)
+# path should be relative to location of this file (.sops.yaml)
 #  - path_regex: secrets/secrets.yaml$
 #    key_groups:
 #    - age:
@@ -25,7 +31,7 @@ creation_rules:
 #      - *p80
 #      - *boox_air_nova_c
 #      - *a9
-    #
+
   - path_regex: modules/servers/.*/.*.yaml$
     key_groups:
       - age:
@@ -47,3 +53,20 @@ creation_rules:
       - age:
         - *kent
         - *greatblue
+  - path_regex: modules/hosts/cichlid/.*.yaml$
+    key_groups:
+      - age:
+        - *kent
+        - *jess
+        - *greatblue
+        - *y700
+        - *cichlid
+  - path_regex: modules/hosts/shoebill/.*.yaml$
+    key_groups:
+      - age:
+        - *kent
+        - *jess
+        - *greatblue
+        - *y700
+        - *cichlid
+        - *shoebill

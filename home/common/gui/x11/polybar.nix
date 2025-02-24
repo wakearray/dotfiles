@@ -1,6 +1,9 @@
 { lib, config, pkgs, ... }:
 let
-  polybar = config.gui.polybar;
+  gui = config.gui;
+  x11 = gui.x11;
+  polybar = gui.polybar;
+  i3 = gui.wm.i3;
 in
 {
   options.gui.polybar = with lib; {
@@ -74,7 +77,7 @@ in
       };
     };
   };
-  config = lib.mkIf polybar.enable {
+  config = lib.mkIf (gui.enable && (x11.enable && (i3.enable && polybar.enable))) {
     services.polybar = {
       enable = true;
       config = {

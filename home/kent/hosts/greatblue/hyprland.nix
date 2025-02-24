@@ -1,6 +1,6 @@
-{ config, pkgs, system-details, ... }:
+{ config, pkgs, ... }:
 let
-  hostname = system-details.host-name;
+  hostname = config.home.systemDetails.hostName;
 in
 {
   config = {
@@ -38,8 +38,9 @@ in
           "firefox"
           "signal-desktop"
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"120%\" --arg offset=\"0\""
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg offset=\"9\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"120%\" --arg height=\"2%\" --arg offset=\"0\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"9\""
+          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_2 --screen 2 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"18\""
         ];
         exec = [
           "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh  > /dev/null 2>&1 &"
@@ -73,11 +74,6 @@ in
           ", switch:off:Lid Switch, exec, export ${hostname}_LID=\"open\" && sleep 1 && hyprctl dispatch dpms on eDP-1"
         ];
       };
-    };
-    # I should automate this making anything listed as Android or laptop enable.
-    # Enables battery life display on eww
-    gui.eww = {
-      battery.enable = true;
     };
   };
 }

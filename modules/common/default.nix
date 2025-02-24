@@ -1,6 +1,4 @@
-{ pkgs,
-  system-details,
-  ... }:
+{ pkgs, systemDetails, ... }:
 {
   imports = [
     ./nvim
@@ -15,7 +13,7 @@
 
   environment.systemPackages = (
     if
-      builtins.match "installer" system-details.host-options != null
+      builtins.match "installer" systemDetails.features != null
     then
       [ pkgs.nixos-install-tools ]
     else

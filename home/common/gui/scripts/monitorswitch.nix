@@ -1,12 +1,14 @@
 { config, lib, ... }:
 let
-  cfg = config.scripts.monitorswitch;
+  wayland = config.gui.wayland;
+  hyprland = config.home.wm.hyprland;
+  monitorSwitch = config.scripts.monitorSwitch;
 in
 {
-  options.scripts.monitorswitch = with lib; {
+  options.scripts.monitorSwitch = with lib; {
     enable = mkEnableOption "Enable a script that moves windows/workspaces from a given monitor to a different monitor.";
   };
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (wayland.enable && (hyprland.enable && monitorSwitch.enable)) {
     home.file.".local/bin/monitorswitch" = {
       enable = true;
       force = true;

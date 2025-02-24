@@ -1,20 +1,17 @@
-{ config, pkgs, ... }:
+{ lib, config, ... }:
+let
+  gui = config.gui;
+  todo = gui.todo;
+in
 {
-  home = {
-    packages = with pkgs; [
-      # todo.txt support in rofi
-      # https://github.com/hugokernel/todofi.sh
-      todofi-sh
-
-      ## Required for Todofi
-      # cli for processing todo.txt
-      todo-txt-cli
-    ];
-    file = {
-      ".config/todo/config" = {
-        enable = true;
-        force = true;
-        text = ''
+  config = lib.mkIf (gui.enable && todo.enable) {
+    home = {
+      file = {
+        ".config/todo/config" = {
+          enable = true;
+          executable = true;
+          force = true;
+          text = /*sh*/ ''
 # === EDIT FILE LOCATIONS BELOW ===
 
 # Your todo.txt directory (this should be an absolute path)
@@ -113,7 +110,8 @@ export REPORT_FILE="$TODO_DIR/report.txt"
 # just before the list output is displayed.
 #
 # export TODOTXT_FINAL_FILTER='cat'
-        '';
+          '';
+        };
       };
     };
   };

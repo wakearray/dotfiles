@@ -1,6 +1,9 @@
 { lib, config, pkgs, ... }:
+let
+  gui = config.gui;
+in
 {
-  config = lib.mkIf config.gui.enable {
+  config = lib.mkIf gui.enable {
     home = {
       packages = with pkgs; [
         # A rust tui for getting the weather

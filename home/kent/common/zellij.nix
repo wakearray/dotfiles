@@ -9,7 +9,7 @@
   };
 
   # home.file.<name>.text = ''
-  home.file.".config/zellij/config.kdl".text = ''
+  home.file.".config/zellij/config.kdl".text = /*kdl*/ ''
 keybinds {
     normal {
         // uncomment this and adjust key if using copy_on_select=false

@@ -1,12 +1,13 @@
 { pkgs, lib, config, ... }:
 let
-  cfg = config.gui;
+  gui = config.gui;
+  office = gui.office;
 in
 {
   options.gui.office = with lib; {
     enable = mkEnableOption "Turn on office software.";
   };
-  config = lib.mkIf (cfg.enable && cfg.office.enable) {
+  config = lib.mkIf (gui.enable && office.enable) {
     environment.systemPackages = with pkgs; [
       libreoffice-qt6-fresh
 

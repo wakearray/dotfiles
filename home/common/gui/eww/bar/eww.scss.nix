@@ -1,13 +1,15 @@
 { lib, config, ... }:
 let
-  cfg = config.gui.eww;
-  colors = cfg.bar.colors;
-  iconColors = cfg.icons.colors;
+  gui = config.gui;
+  eww = gui.eww;
+  bar = eww.bar;
+  colors = bar.colors;
+  iconColors = eww.icons.colors;
 in
 {
-  config = lib.mkIf (cfg.enable && cfg.bar.enable) {
+  config = lib.mkIf (gui.enable && (eww.enable && bar.enable)) {
     home.file."/.config/eww/bar/eww.scss" = {
-      enable = cfg.enable;
+      enable = true;
       force = true;
       text = /*scss*/ ''
   * {

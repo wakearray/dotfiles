@@ -1,7 +1,4 @@
 { lib, config, pkgs, ... }:
-let
-
-in
 {
   config = lib.mkIf config.services.syncthing.enable {
     # Makes syncthing available on the command line
@@ -12,8 +9,8 @@ in
 
     # Syncthing service
     services.syncthing = {
-      overrideDevices = true;     # overrides any devices added or deleted through the WebUI
-      overrideFolders = true;     # overrides any folders added or deleted through the WebUI
+      overrideDevices  = true;     # overrides any devices added or deleted through the WebUI
+      overrideFolders  = true;     # overrides any folders added or deleted through the WebUI
       openDefaultPorts = true;
       settings = {
         devices = {
@@ -27,6 +24,7 @@ in
           "Kent_GreatBlue"     = { id = "6B6CFWQ-AOVKOLS-AJ77Y7U-T5G7QPG-IQTPCSJ-NRPZNJR-4LMLIRS-FGMYSQ2"; };
           "Jess_S20_Ultra"     = { id = "F436IQN-OOP5KEX-CNCY7VA-4CKUSOR-6YUHIO2-TTESNNW-TMMSMNI-CQZNUAZ"; };
           "Jess_Cichlid"       = { id = "GS6LSCL-ANDVRKL-M3DOWQF-PIQJKUK-WB2K7FT-KOANCWV-4P5CHNF-FPJNWA2"; };
+          "Jess_Shoebill"      = { id = "R2VMOYW-EQETCQR-EMZIPV2-UYOVJ4H-TCLE6EY-26CUXGY-K5XVJ7N-F27HSQF"; };
         };
       };
     };

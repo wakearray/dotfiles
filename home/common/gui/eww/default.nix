@@ -1,6 +1,9 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.gui.eww;
+  isAndroid = config.home.systemDetails.isAndroid;
+  isLaptop = config.home.systemDetails.isLaptop;
+  gui = config.gui;
+  eww = gui.eww;
 in
 {
   # home/common/gui/eww/
@@ -14,7 +17,11 @@ in
     enable = mkEnableOption "Enable eww";
 
     battery = {
-      enable = mkEnableOption "Tell eww to display battery status.";
+      enable = mkOption {
+        type = types.bool;
+        default = (isAndroid || isLaptop);
+        description = "Tell eww to display battery status. Defaults to `true` if `systemDetails.hostType` is either `laptop` or `android`";
+      };
 
       identifier = mkOption {
         type = types.str;
@@ -23,10 +30,10 @@ in
       };
     };
   };
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      playerctl
-      eww
+  config = lib.mkIf (gui.enable && eww.enable) {
+    home.packages = [
+      pkgs.playerctl
+      pkgs.eww
     ];
   };
 }

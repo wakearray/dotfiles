@@ -1,9 +1,9 @@
-{ pkgs,
-  lib,
-  config,
-  ... }:
+{ pkgs, lib, config, ... }:
+let
+  gui = config.gui;
+in
 {
-  config = lib.mkIf config.gui.enable {
+  config = lib.mkIf gui.enable {
     fonts = {
       packages = with pkgs; [
         # Better emojis

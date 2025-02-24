@@ -3,8 +3,9 @@
   imports = [
     ./starship.nix
     ./hyprland.nix
-    ./hyprlock.nix
+  # ./hyprlock.nix
   ];
+
   config = {
     programs = {
       # imv - a command line image viewer intended for use with tiling window managers

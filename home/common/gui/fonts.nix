@@ -1,9 +1,10 @@
 { lib, config, pkgs, ... }:
 let
+  gui = config.gui;
   user = config.home.username;
 in
 {
-  config = lib.mkIf config.gui.enable {
+  config = lib.mkIf gui.enable {
     # home/common/gui/fonts
     # Determine what fonts should be used where
     fonts = {

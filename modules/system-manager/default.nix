@@ -1,8 +1,8 @@
-{ system-details, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   # A config for adding the default fontconfig file that home-manager fails to properly add.
   config = {
-    nixpkgs.hostPlatform = system-details.current-system;
+    nixpkgs.hostPlatform = config.modules.systemDetails.architecture.text;
 
     environment = {
       etc = {

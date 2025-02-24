@@ -1,6 +1,9 @@
-{ lib, pkgs, system-details, ... }:
+{ lib, pkgs, config, ... }:
+let
+  isLaptop = config.modules.systemDetails.isLaptop;
+in
 {
-  config = lib.mkIf (builtins.match "laptop" system-details.host-type != null) {
+  config = lib.mkIf isLaptop {
     environment.systemPackages = with pkgs; [
       brightnessctl
       acpi

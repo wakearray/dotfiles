@@ -1,14 +1,18 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # home/kent/hosts/y700
 
   imports = [
     ./starship.nix
+    #./hyprland.nix
   ];
 
   config = {
     gui = {
-      wm.i3.enable = true;
+      wm.i3 = {
+        enable = true;
+        i3wsr.enable = false;
+      };
       #polybar.enable = true;
       eww = {
         enable = true;
@@ -24,7 +28,5 @@
     };
 
     programs.alacritty.settings.font.size = 18;
-
-    android.gui.wayland.enable = true;
   };
 }

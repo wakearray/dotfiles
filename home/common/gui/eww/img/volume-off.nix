@@ -1,10 +1,12 @@
-{ config, lib, ... }:
+{ lib, config, ... }:
 let
-  cfg = config.gui.eww;
-  colors = cfg.icons.colors;
+  gui = config.gui;
+  eww = gui.eww;
+  bar = eww.bar;
+  colors = eww.icons.colors;
 in
 {
-  config = lib.mkIf (cfg.enable && cfg.icons.enable) {
+  config = lib.mkIf (gui.enable && (eww.enable && bar.enable)) {
     home.file."/.config/eww/img/volume-off.svg" = {
       enable = true;
       force = true;

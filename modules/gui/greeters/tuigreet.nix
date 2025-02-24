@@ -1,13 +1,14 @@
-{ lib, config, pkgs, inputs, ... }:
+{ lib, config, pkgs, ... }:
 let
-  cfg = config.gui.greeter.tuigreet;
+  gui = config.gui;
+  tuigreet = gui.greeter.tuigreet;
 in
 {
   options.gui.greeter.tuigreet = with lib; {
     enable = mkEnableOption "Enable greetd with tui-greet to launch hyprland";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (gui.enable && tuigreet.enable) {
     services.greetd = {
       enable = true;
       settings = {

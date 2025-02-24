@@ -1,6 +1,8 @@
-{ config, system-details, ... }:
+{ config, systemDetails, ... }:
 let
-  flakeworkflow = (if builtins.match "android" system-details.host-type != null
+  hostname = config.home.systemDetails.hostName;
+  flakeworkflow = (if
+      (builtins.match "android" systemDetails.hostType != null)
     then # Do this when on Android
       /*sh*/ ''
 while true; do
@@ -23,7 +25,7 @@ END_CAT
   case $ans in
     2)
       git -C "$FLAKE" add .
-      nh home switch -v -c ${system-details.host-name}
+      nh home switch -v -c ${hostname}
       ;;
     3)
       git -C "$FLAKE" add .

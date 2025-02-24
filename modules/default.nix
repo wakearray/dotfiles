@@ -1,6 +1,4 @@
-{ outputs,
-  pkgs,
-  ... }:
+{ outputs, pkgs, lib, systemDetails, ... }:
 {
   ## These are the defaults I want on every machine:
   imports =
@@ -10,6 +8,99 @@
     ./servers
   ];
 
+  options.modules.systemDetails = with lib; {
+    # systemDetails is found and can be edited in each host's configuration in flake.nix
+    # It can be overriden in a given host's configuration, but that's not the intended usecase.
+    #
+    # hostName     = (string of) hostname or home-manager configuration
+    # hostType     = (one of) "laptop" "desktop" "server" "android" "kiosk"
+    # display      = (one of) "wayland" "x11" "cli"
+    # features     = (none, one, or more of) "printers" "installer" "einkBW" "einkColor"
+    # architecture = (one of) "x86_64-linux" "aarch64-linux"
+
+    # Hostname
+    hostName = mkOption {
+      type = types.str;
+      default = systemDetails.hostName;
+      description = "Set to the host's hostname to make accessing the hostname in scripts easier.";
+    };
+
+    # Host Type: [ "laptop" "desktop" "server" "android" "kiosk" ]
+    # Android can't use full NixOS on any of my devices, so isn't here
+    isLaptop = mkOption {
+      type = types.bool;
+      default = (builtins.match "laptop" systemDetails.hostType != null);
+      description = "True if host is a laptop (or laptop like portable).";
+    };
+    isDesktop = mkOption {
+      type = types.bool;
+      default = (builtins.match "desktop" systemDetails.hostType != null);
+      description = "True if host is a desktop.";
+    };
+    isServer = mkOption {
+      type = types.bool;
+      default = (builtins.match "server" systemDetails.hostType != null);
+      description = "True if host is a server.";
+    };
+    isKiosk = mkOption {
+      type = types.bool;
+      default = (builtins.match "kiosk" systemDetails.hostType != null);
+      description = "True if host is intended to be used like a kiosk.";
+    };
+
+    # Display [ "wayland" "x11" "cli" ]
+    display = {
+      wayland = mkOption {
+        type = types.bool;
+        default = (builtins.match "wayland" systemDetails.display != null);
+        description = "True if device uses wayland.";
+      };
+      x11 = mkOption {
+        type = types.bool;
+        default = (builtins.match "x11" systemDetails.display != null);
+        description = "True if device uses x11.";
+      };
+      cli = mkOption {
+        type = types.bool;
+        default = (builtins.match "cli" systemDetails.display != null);
+        description = "True if host does not use x11 or wayland.";
+      };
+    };
+
+    # Features [ "printers" "installer" "eink" "einkColor" ]
+    # (`installer` and `printer` options aren't included in home-manager)
+    features = {
+      printers = mkOption {
+        type = types.bool;
+        default = (builtins.match "printers" systemDetails.features != null);
+        description = "True if host should have printer access.";
+      };
+      installer = mkOption {
+        type = types.bool;
+        default = (builtins.match "installer" systemDetails.features != null);
+        description = "True if derivation needs .";
+      };
+    };
+
+    # Architecture
+    architecture = {
+      text = mkOption {
+        type = types.str;
+        default = systemDetails.architecture;
+        description = "The text, as a string, of the current host's architecture.";
+      };
+      isx86_64 = mkOption {
+        type = types.bool;
+        default = (builtins.match "x86_64-linux" systemDetails.architecture != null);
+        description = "True if host is using an x86_64 CPU.";
+      };
+      isAarch64 = mkOption {
+        type = types.bool;
+        default = (builtins.match "aarch64-linux" systemDetails.architecture != null);
+        description = "True if host is using an aarch64 SOC.";
+      };
+    };
+  };
   config = {
     # Environment variables
     environment.sessionVariables = {

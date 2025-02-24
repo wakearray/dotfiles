@@ -1,9 +1,12 @@
-{ lib, config, system-details, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 let
-  isx86_64 = (builtins.match "x86_64-linux" system-details.current-system != null);
+  gui = config.gui;
+  isx86_64 = config.home.systemDetails.architecture.isx86_64;
+  isKiosk  = config.home.systemDetails.isKiosk;
 in
 {
-  config = lib.mkIf (config.gui.enable && isx86_64) {
+  # This file is exclusively for common GUI packages that do not have aarch64 support
+  config = lib.mkIf (gui.enable && isx86_64) {
     home.packages = with pkgs; [
       # Rust based teamviewer
       rustdesk-flutter
@@ -13,7 +16,7 @@ in
     ] ++ (
     if
       # If the host is a kiosk, don't install chat apps.
-      builtins.match "kiosk" system-details.host-type != null
+      isKiosk
     then
       [ ]
     else
@@ -22,6 +25,7 @@ in
         discord
         element-desktop
         telegram-desktop
+        signal-desktop
       ]
     );
   };

@@ -1,8 +1,7 @@
-{ lib,
-  config,
-  ... }:
+{ lib, config, ... }:
 let
-  cfg = config.gui;
+  sd = config.modules.systemDetails.display;
+  gui = config.gui;
 in
 {
   # modules/common/gui
@@ -13,14 +12,20 @@ in
     ./gaming.nix
     ./office.nix
     ./sound.nix
+    ./syncthing.nix
     ./wm
     ./greeters
   ];
+
   options.gui = with lib; {
-    enable = mkEnableOption "Enable sound and nerdfonts on non headless hosts.";
+    enable = mkOption {
+      type = types.bool;
+      default = (sd.wayland || sd.x11);
+      description = "Enable sound and nerdfonts on non headless hosts.";
+    };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf gui.enable {
     # Policy Kit, enables elevating the priviledges of GUI applications
     security.polkit.enable = true;
 

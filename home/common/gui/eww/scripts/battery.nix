@@ -1,12 +1,13 @@
-{ lib, config, pkgs, system-details, ... }:
+{ lib, config, pkgs, ... }:
 let
-  cfg = config.gui.eww;
-  battery = cfg.battery;
+  gui = config.gui;
+  eww = gui.eww;
+  battery = eww.battery;
   ewwCommand = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
 in
 {
-  config = lib.mkIf (cfg.enable && battery.enable) {
+  config = lib.mkIf (gui.enable && (eww.enable && battery.enable)) {
     home = {
       file."/.config/eww/scripts/battery.sh" = {
         enable = true;

@@ -1,18 +1,13 @@
 { ... }:
 {
-  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; # Don't create default ~/Sync folder
-
   # Syncthing, a file syncing service
   services.syncthing = {
-    enable = true;
-    key = "/run/secrets/delaware-syncthing-key-pem";
-    cert = "/run/secrets/delaware-syncthing-cert-pem";
-    user = "syncthing";
-    group = "userdata";
+    enable     = true;
+    key        = "/run/secrets/delaware-syncthing-key-pem";
+    cert       = "/run/secrets/delaware-syncthing-cert-pem";
+    user       = "syncthing";
+    group      = "userdata";
     guiAddress = "127.0.0.1:8384";
-    overrideDevices = true;     # overrides any devices added or deleted through the WebUI
-    overrideFolders = true;     # overrides any folders added or deleted through the WebUI
-    openDefaultPorts = true;
     settings = {
       # setting.devices can be found in modules/common/syncthing.nix
       folders = {

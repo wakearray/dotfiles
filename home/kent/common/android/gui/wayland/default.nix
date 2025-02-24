@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.android.gui;
-  wayland = cfg.wayland;
+  agui = config.android.gui;
+  wayland = agui.wayland;
 in
 {
   imports = [
@@ -11,7 +11,7 @@ in
     enable = mkEnableOption "Enable hyprland on Android in Termux using Termux:x11 and cage";
   };
 
-  config = lib.mkIf (cfg.enable && wayland.enable) {
+  config = lib.mkIf (agui.enable && wayland.enable) {
     home.packages = with pkgs; [
       # A basic Wayland compositor example
       weston

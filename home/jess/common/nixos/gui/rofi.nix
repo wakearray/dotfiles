@@ -1,7 +1,11 @@
-{ lib, pkgs, system-details, ... }:
+{ lib, pkgs, config, ... }:
+let
+  wayland = config.gui.wayland;
+  isAndroid = config.home.systemDetails.isAndroid;
+in
 {
   # A rofi config for NixOS systems using Wayland
-  config = lib.mkIf (builtins.match "wayland" system-details.display-type != null) {
+  config = lib.mkIf (wayland.enable && (!isAndroid)) {
     gui.rofi = {
       enable = true;
       plugins = with pkgs; [

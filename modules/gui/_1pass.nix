@@ -1,4 +1,8 @@
 { pkgs, lib, config, ... }:
+let
+  gui = config.gui;
+  onePass = gui._1pass;
+in
 {
   options.gui._1pass = with lib; {
     enable = mkEnableOption "Enable 1Password";
@@ -11,7 +15,7 @@
     };
   };
 
-  config = lib.mkIf (config.gui.enable && config.gui._1pass.enable) {
+  config = lib.mkIf (gui.enable && onePass.enable) {
     environment.systemPackages = with pkgs; [
       # Password Management
       _1password-cli

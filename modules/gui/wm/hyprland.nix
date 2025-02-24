@@ -1,6 +1,6 @@
 { lib, config, pkgs, inputs, ... }:
 let
-  cfg = config.gui.wm.hyprland;
+  hyprland = config.gui.wm.hyprland;
   pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 {
@@ -8,7 +8,7 @@ in
     enable = mkEnableOption "Enable hyprland with UWSM.";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf hyprland.enable {
     nix.settings = {
       substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
@@ -31,7 +31,7 @@ in
           };
         };
       };
-      hyprlock.enable = true;
+      hyprlock.enable = false;
     };
 
     hardware.graphics = {

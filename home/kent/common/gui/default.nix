@@ -1,45 +1,54 @@
-{ lib, system-details, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 let
-  wayland = (builtins.match "wayland" system-details.display-type != null);
-  android = (builtins.match "android" system-details.host-type != null);
+  gui = config.gui;
+  wayland = config.gui.wayland;
+  system = config.home.systemDetails.architecture.text;
 in
 {
   # kent/common/gui
   # All settings and packages should be compatible with Android profiles
   imports = [
-    ./gurk.nix
-    #./todo.nix
     ../../../themes/gruvbox
   ];
 
-  # maybe want this: GTK_THEME=Arc-Dark file-roller
-  gtk = {
-    enable = true;
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
-    };
-  };
-
-  gui = {
-    rofi = lib.mkIf (wayland && (!android)) {
+  config = lib.mkIf gui.enable {
+    # maybe want this: GTK_THEME=Arc-Dark file-roller
+    gtk = {
       enable = true;
-      plugins = with pkgs; [
-        # Bluetooth configuration in rofi
-        # https://github.com/nickclyde/rofi-bluetooth
-        rofi-bluetooth
-
-        # Emoji picker for rofi - Built against rofi-wayland
-        # https://github.com/Mange/rofi-emoji
-        rofi-emoji-wayland
-      ];
-      modi = "drun,todo:todofi.sh,filebrowser,emoji";
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus-Dark";
+      };
     };
-    firefox.enable = true;
-  };
 
-  home.packages = with pkgs; [
-    pcmanfm
-    file-roller
-  ];
+    gui = {
+      rofi = lib.mkIf (wayland.enable) {
+        enable = true;
+        plugins = with pkgs; [
+          # Bluetooth configuration in rofi
+          # https://github.com/nickclyde/rofi-bluetooth
+          rofi-bluetooth
+
+          # Emoji picker for rofi - Built against rofi-wayland
+          # https://github.com/Mange/rofi-emoji
+          rofi-emoji-wayland
+        ];
+        modi = "drun,todo:todofi.sh,filebrowser,emoji";
+      };
+      todo = {
+        enable = true;
+        todofi.enable = true;
+      };
+      firefox.enable = true;
+    };
+
+    home.packages = with pkgs; [
+      # File manager
+      pcmanfm
+      # Archive manager
+      file-roller
+      # Bluetooth GUI written in Rust
+      overskride
+    ] ++ [ inputs.zen-browser.packages."${system}".default ];
+  };
 }

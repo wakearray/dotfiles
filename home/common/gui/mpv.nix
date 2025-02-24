@@ -1,6 +1,14 @@
 { lib, config, pkgs, ... }:
+let
+  gui = config.gui;
+  mpv = gui.mpv;
+in
 {
-  config = lib.mkIf config.gui.enable {
+  options.gui.mpv = with lib; {
+    enable = mkEnableOption "Enable an opinionated mpv config.";
+  };
+
+  config = lib.mkIf (gui.enable && mpv.enable) {
     programs.mpv = {
       enable = true;
       bindings = {

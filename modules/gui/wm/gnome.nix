@@ -1,10 +1,14 @@
 { lib, config, pkgs, ... }:
+let
+  gui = config.gui;
+  gnome = gui.wm.gnome;
+in
 {
   options.gui.wm.gnome = {
     enable = lib.mkEnableOption "Enable the Gnome desktop environment.";
   };
 
-  config = lib.mkIf (config.gui.enable && config.gui.wm.gnome.enable) {
+  config = lib.mkIf (gui.enable && gnome.enable) {
     # Enable the Gnome Desktop Environment using Wayland.
     services = {
       xserver = {

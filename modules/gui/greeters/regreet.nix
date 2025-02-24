@@ -1,13 +1,14 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.gui.greeter.regreet;
+  gui = config.gui;
+  regreet = gui.greeter.regreet;
 in
 {
   options.gui.greeter.regreet = with lib; {
     enable = mkEnableOption "Enable greetd with regreet to launch hyprland";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (gui.enable && regreet.enable) {
     services.greetd = {
       enable = true;
       settings = {
