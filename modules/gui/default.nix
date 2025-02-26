@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
   sd = config.modules.systemDetails.display;
   gui = config.gui;
@@ -35,5 +35,15 @@ in
     # Command-line utility and library for controlling media players that implement MPRIS
     # https://github.com/altdesktop/playerctl
     services.playerctld.enable = true;
+
+    environment = {
+      systemPackages = with pkgs; [
+        # Allows theming of QT6 applications like LibreOffice
+        qt6ct
+      ];
+      variables = {
+        QT_QPA_PLATFORMTHEME="qt6ct";
+      };
+    };
   };
 }

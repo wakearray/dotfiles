@@ -41,8 +41,6 @@
     # https://github.com/nix-community/nixos-generators
     nixos-generators
 
-    android-studio
-
     # IDEs
     libsForQt5.kate
 
