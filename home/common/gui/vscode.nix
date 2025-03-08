@@ -76,7 +76,6 @@ in
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib ]);
-      enableUpdateCheck = false;
       profiles = vscode.profiles;
     };
   };
