@@ -23,8 +23,12 @@
           devices = [ "Delaware" ];
         };
         "Kent_Backup_PC" = {
-          path = "/home/kent/Kent/Backups/PC";
+          path = "/home/kent/Backups/PC";
           devices = [ "Delaware" ];
+        };
+        "Kent_School" = {
+          path = "/home/kent/School";
+          devices = [ "Delaware" "Kent_y700" ];
         };
       };
     };
