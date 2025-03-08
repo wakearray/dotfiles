@@ -58,18 +58,6 @@
           path = "/data/userdata/Kent/Backups/PC";
 	        devices = [ "Kent_GreatBlue" ];
 	      };
-        "Kent_School" = {
-          path = "/data/userdata/Kent/School";
-	        devices = [
-            "Kent_S24_Ultra"
-            "Kent_P80"
-            "Kent_y700"
-            "Kent_Boox"
-            "Kent_Hisense_A9"
-            "Kent_Hibreak_Color"
-            "Kent_GreatBlue"
-          ];
-        };
 
 	      "Jess_Backup_Android" = {
           path = "/data/userdata/Jess/Backups/Android";
