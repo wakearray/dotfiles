@@ -45,6 +45,9 @@
       # GTK patchbay for pipewire
       # https://gitlab.freedesktop.org/pipewire/helvum
       helvum
+
+      # qt6ct for theming QT applications
+      qt6Packages.qt6ct
     ];
   };
 }
