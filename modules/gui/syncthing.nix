@@ -51,7 +51,7 @@ in
             devices = [ "Delaware" ];
           };
           "${titleUser}_Backup_PC" = {
-            path = "/home/${syncthing.user}/Backups/PC";
+            path = "/home/${syncthing.user}/Backups/PC/";
             devices = [ "Delaware" ];
           };
         };
