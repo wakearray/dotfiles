@@ -43,6 +43,8 @@ in
         # https://github.com/NixOS/nixpkgs/pull/384032
         # Signal Messenger for desktop
         #signal-desktop
+
+        glmark2
       ];
     };
 

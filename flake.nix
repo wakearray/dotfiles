@@ -42,6 +42,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Impermanence flake
+    impermanence.url = "github:nix-community/impermanence";
+
     # Declarative disk management using Nixlang/Flakes
     disko = {
       url = "github:nix-community/disko";
@@ -100,7 +103,7 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, lix-module, home-manager, system-manager, nix-system-graphics, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, lix-module, home-manager, system-manager, nix-system-graphics, impermanence, disko, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
@@ -148,6 +151,7 @@
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           lix-module.nixosModules.default
+          impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -158,6 +162,7 @@
                   ./home/kent
                   ./home/kent/hosts/greatblue
                   nixvim.homeManagerModules.nixvim
+                  impermanence.homeManagerModules.impermanence
                 ];
               };
               backupFileExtension = "backup";
@@ -513,8 +518,8 @@
     # nix run 'github:numtide/system-manager' -- switch --flake '.#android'
     systemConfigs.android = system-manager.lib.makeSystemConfig {
       modules = [
-        ./system-manager
-        # nix-system-graphics makes normal NixOS graphics packages
+        ./modules/system-manager
+        # nix-system-graphics makes normal NixOS graphics packages (mesa by default)
         # available to non NixOS systems
         nix-system-graphics.systemModules.default
         {

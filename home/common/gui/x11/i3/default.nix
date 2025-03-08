@@ -182,15 +182,6 @@ in
             size = 16.0;
           };
 
-          keycodebindings =
-          let
-            modifier = config.xsession.windowManager.i3.config.modifier;
-          in lib.mkOverride 1001 {
-            # '47' is the keycode for ';' according to xev
-            "${modifier}+47" = "focus right";
-            "${modifier}+Shift+47" = "move right";
-          };
-
           keybindings =
           let
           # rofiTodo     = "${config.home.homeDirectory}.local/bin/todofi.sh";
