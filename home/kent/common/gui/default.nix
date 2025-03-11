@@ -7,9 +7,6 @@ in
 {
   # kent/common/gui
   # All settings and packages should be compatible with Android profiles
-  imports = [
-    ../../../themes/gruvbox
-  ];
 
   config = lib.mkIf gui.enable {
     # maybe want this: GTK_THEME=Arc-Dark file-roller
@@ -22,6 +19,7 @@ in
     };
 
     gui = {
+      themes.gruvbox.enable = true;
       rofi = lib.mkIf (wayland.enable) {
         enable = true;
         plugins = with pkgs; [

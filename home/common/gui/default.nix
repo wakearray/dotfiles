@@ -13,6 +13,7 @@ in
     ./mpv.nix
     ./rofi.nix
     ./scripts
+    ./themes
     ./todo
     ./tui.nix
     ./vscode.nix

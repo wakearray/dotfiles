@@ -4,4 +4,8 @@
   imports = [
     ./firefox.nix
   ];
+
+  config = {
+    gui.themes.gruvbox.enable = true;
+  };
 }

@@ -7,7 +7,6 @@ in
   imports = [
     ./common
     ../common
-    ../themes/gruvbox
   ];
 
   home = {
