@@ -71,6 +71,7 @@ in
       default = "macchiato";
     };
   };
+
   config = lib.mkIf cfg.enable {
     catppuccin = {
       # Enable the Catppuccin Macchiato theme globally

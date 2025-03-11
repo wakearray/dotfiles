@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./catppuccin
+    # ./catppuccin
     ./gruvbox
   ];
 }
