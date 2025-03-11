@@ -6,6 +6,11 @@
     database.type = "postgres";
     # Enable support for Git Large File Storage
     lfs.enable = true;
+    secrets = {
+      mailer = {
+        PASSWD = "/run/secrets/mail-server-noreply";
+      };
+    };
     settings = {
       server = {
         DOMAIN = "git.${domain}";
@@ -31,7 +36,6 @@
          USER = "noreply@${domain}";
        };
     };
-    mailerPasswordFile = "/run/secrets/mail-server-noreply";
   };
 
   # Nginx reverse proxy

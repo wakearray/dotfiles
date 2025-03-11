@@ -22,6 +22,7 @@ END_CAT
   echo ""
 
   read -k 1 ans
+  echo ""
   case $ans in
     2)
       git -C "$FLAKE" add .
