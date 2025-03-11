@@ -303,7 +303,7 @@
           }
         ];
       };
-      # Cat's projector
+      # TV Computer
       Jerboa = let
         systemDetails = {
           hostType = "kiosk";

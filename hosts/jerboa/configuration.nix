@@ -20,16 +20,8 @@
     networkmanager.enable = true;
   };
 
-  services.xserver = {
-    enable = true;
-    displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "entertainment";
-      };
-      defaultSession = "dwm";
-    };
-    windowManager.dwm.enable = true;
+  hardware = {
+    bluetooth.enable = true;
   };
 
   system.stateVersion = "23.11";

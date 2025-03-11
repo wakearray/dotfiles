@@ -39,7 +39,7 @@ in
     };
 
     # A customizable lockscreen for hyprland
-    security.pam.services.hyprlock = {};
+    # security.pam.services.hyprlock = {};
 
     # A simple polkit authentication agent for Hyprland, written in QT/QML.
     # https://github.com/hyprwm/hyprpolkitagent

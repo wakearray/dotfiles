@@ -44,7 +44,6 @@
     # IDEs
     libsForQt5.kate
 
-
     # Kdenlive is video editing software
     libsForQt5.kdenlive
     # Vector animation tool that works with kdenlive
