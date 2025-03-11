@@ -11,7 +11,7 @@ in
   home = {
     username = "entertainment";
     homeDirectory = "/home/${user}";
-    stateVersion = "24.11";
+    stateVersion = "24.05";
 
     pointerCursor = {
       name = "Adwaita";

@@ -285,6 +285,11 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+              users.entertainment = {
+                imports = [
                   ./home/entertainment
                   ./home/entertainment/hosts/lagurus
                   nixvim.homeManagerModules.nixvim
@@ -325,6 +330,11 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  nixvim.homeManagerModules.nixvim
+                ];
+              };
+              users.entertainment = {
+                imports = [
                   ./home/entertainment
                   ./home/entertainment/hosts/jerboa
                   nixvim.homeManagerModules.nixvim
@@ -454,7 +464,15 @@
             users.jess = {
               imports = [
                 ./home/jess
+                ./home/jess/hosts/cichlid
                 catppuccin.homeManagerModules.catppuccin
+                nixvim.homeManagerModules.nixvim
+              ];
+            };
+            users.kent = {
+              imports = [
+                ./home/kent
+                ./home/kent/hosts/cichlid
                 nixvim.homeManagerModules.nixvim
               ];
             };

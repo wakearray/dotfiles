@@ -243,7 +243,7 @@ in
       lagurus = "zellij action rename-tab 'Lagurus' && ssh 192.168.0.65"; # Cat's Projector
       jerboa = "zellij action rename-tab 'Jerboa' && ssh 192.168.0.32"; # Living Room TV
       cichlid = "echo 'This computer isn't setup yet'"; # Jess' Desktop
-      sebrightbantam = "zellij action rename-tab 'Sebright Bantam' && ssh 192.168.0.80";  # QNAP TS-251
+      sebrightbantam = "zellij action rename-tab 'Sebright Bantam' && ssh 192.168.0.66";  # QNAP TS-251
       orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
 
       # Phones
