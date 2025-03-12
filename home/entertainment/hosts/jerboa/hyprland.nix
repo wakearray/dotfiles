@@ -8,7 +8,7 @@
         # https://wiki.hyprland.org/Configuring/Monitors/
         monitors = [
           # Literally any other monitor
-          ", preferred, auto, 1"
+          ", preferred, auto, 2.0"
         ];
         windowRules = [
           "group set, class:firefox, title:^(.*)!(Mozilla Firefox Private Browsing)$"
