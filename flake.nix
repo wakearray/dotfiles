@@ -249,6 +249,7 @@
                   nixvim.homeManagerModules.nixvim
                 ];
               };
+              backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs outputs;
                 systemDetails = systemDetails;
@@ -294,6 +295,7 @@
                   nixvim.homeManagerModules.nixvim
                 ];
               };
+              backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs outputs;
                 systemDetails = systemDetails;
@@ -339,6 +341,7 @@
                   nixvim.homeManagerModules.nixvim
                 ];
               };
+              backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs outputs;
                 systemDetails = systemDetails;
@@ -380,6 +383,7 @@
                   nixvim.homeManagerModules.nixvim
 	              ];
               };
+              backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs outputs;
                 systemDetails = systemDetails;
@@ -421,6 +425,7 @@
                   nixvim.homeManagerModules.nixvim
 	              ];
               };
+              backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs outputs;
                 systemDetails = systemDetails;
@@ -475,6 +480,7 @@
                 nixvim.homeManagerModules.nixvim
               ];
             };
+            backupFileExtension = "backup";
             extraSpecialArgs = {
               inherit inputs outputs;
               systemDetails = systemDetails;
@@ -517,6 +523,7 @@
                 nixvim.homeManagerModules.nixvim
               ];
             };
+            backupFileExtension = "backup";
             extraSpecialArgs = {
               inherit inputs outputs;
               systemDetails = systemDetails;
