@@ -18,4 +18,8 @@
       };
     };
   };
+
+  servers = {
+    home-assistant.enable = true;
+  };
 }

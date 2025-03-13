@@ -331,6 +331,7 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  ./home/kent/hosts/jerboa
                   nixvim.homeManagerModules.nixvim
                 ];
               };

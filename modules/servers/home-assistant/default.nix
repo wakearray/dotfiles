@@ -5,15 +5,14 @@ in
 {
   options.servers.home-assistant = with lib; {
     enable = mkEnableOption "Enable a libvirtd installation of Home Assistant.";
-
-
   };
+
   config = lib.mkIf home-assistant.enable {
     virtualisation = {
       libvirtd = {
         enable = true;
         # Used for UEFI boot of Home Assistant OS guest image
-        qemuOvmf = true;
+        qemu.ovmf = true;
       };
     };
 
