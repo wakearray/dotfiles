@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
   # /modules/hosts/jerboa
+  imports = [
+    ./tuigreet.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     # Music player
     clementine
@@ -10,13 +14,6 @@
     enable = true;
     gaming.enable = true;
     wm.hyprland.enable = true;
-    greeter.tuigreet = {
-      enable = true;
-      autoLogin = {
-        enable = true;
-        user = "entertainment";
-      };
-    };
   };
 
   servers = {

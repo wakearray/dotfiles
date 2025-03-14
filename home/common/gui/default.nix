@@ -46,6 +46,9 @@ in
         #signal-desktop
 
         glmark2
+
+        # Encrypted P2P Distributed Chat
+        jami
       ];
     };
 

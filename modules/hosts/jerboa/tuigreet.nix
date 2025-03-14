@@ -1,19 +1,16 @@
-{ lib, config, pkgs, ... }:
+{ pkgs, ... }:
 let
-  gui = config.gui;
-  tuigreet = gui.greeter.tuigreet;
-
   hyprlandStart = "${pkgs.uwsm}/bin/uwsm start -- hyprland-uwsm.desktop";
 in
 {
-  options.gui.greeter.tuigreet = with lib; {
-    enable = mkEnableOption "Enable greetd with tui-greet to launch hyprland";
-  };
-
-  config = lib.mkIf (gui.enable && tuigreet.enable) {
+  config = {
     services.greetd = {
       enable = true;
       settings = {
+        initial_session = {
+          command = "${hyprlandStart}";
+          user = "entertainment";
+        };
         default_session = {
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd '${hyprlandStart}";
           user = "greeter";
