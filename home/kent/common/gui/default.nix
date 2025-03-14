@@ -45,8 +45,18 @@ in
       pcmanfm
       # Archive manager
       file-roller
+
       # Bluetooth GUI written in Rust
+      # https://github.com/kaii-lb/overskride
       overskride
+
+      # A FOSS PDF Editor
+      # https://github.com/JakubMelka/PDF4QT
+      pdf4qt
+
+      # LibreOffice, a FOSS MS Office clone
+      # https://www.libreoffice.org/about-us/source-code/
+      libreoffice-qt6
     ] ++ [ inputs.zen-browser.packages."${system}".default ];
   };
 }
