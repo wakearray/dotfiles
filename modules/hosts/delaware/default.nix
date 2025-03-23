@@ -44,5 +44,6 @@
       enable = true;
       domain = "rss.${domain}";
     };
+    home-assistant.enable = true;
   };
 }

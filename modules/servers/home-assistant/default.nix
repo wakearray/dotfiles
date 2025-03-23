@@ -13,6 +13,7 @@ in
         enable = true;
         # Used for UEFI boot of Home Assistant OS guest image
         qemu.ovmf.enable = true;
+        allowedBridges = [ "br0" ];
       };
     };
 
@@ -23,5 +24,23 @@ in
       # For lsusb
       usbutils
     ];
+
+    networking = {
+#      defaultGateway = "192.168.0.1";
+      bridges = {
+        br0 = {
+          interfaces = [ "enp1s0f0" ];
+        };
+      };
+#      interfaces = {
+#        br0 = {
+#          useDHCP = false;
+#          adresses.ipv4 = {
+#            address = "192.168.0.90";
+#            prefixLength = 24;
+#          };
+#        };
+#      };
+    };
   };
 }
