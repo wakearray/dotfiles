@@ -27,9 +27,11 @@ in
 
     networking = {
 #      defaultGateway = "192.168.0.1";
+      useDHCP = false;
       bridges = {
         br0 = {
           interfaces = [ "enp1s0f0" ];
+          useDHCP = true;
         };
       };
 #      interfaces = {
