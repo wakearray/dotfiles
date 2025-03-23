@@ -49,6 +49,10 @@ in
 
         # Encrypted P2P Distributed Chat
         jami
+
+        # Assistive Technology Service Provider Interface protocol definitions and daemon for D-Bus
+        # Needed for jami on generic Linux systems
+        at-spi2-atk
       ];
     };
 

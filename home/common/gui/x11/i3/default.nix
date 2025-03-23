@@ -284,7 +284,7 @@ in
               notification = false;
             })
             (lib.mkIf eww.enable { # launch eww
-              command = "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"0\"";
+              command = "pkill eww && ${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"0\"";
               always = true;
               notification = false;
             })

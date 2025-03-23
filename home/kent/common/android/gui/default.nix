@@ -32,8 +32,15 @@ in
       # Waiting on pull request to be accepted
       # https://github.com/NixOS/nixpkgs/pull/384032
       signal-desktop-arch
+
+      # Possibly needed for Jami
+      pipewire
     ];
 
     xsession.numlock.enable = true;
+
+    programs.zsh.sessionVariables = {
+      LC_ALL = "en_US.utf8";
+    };
   };
 }
