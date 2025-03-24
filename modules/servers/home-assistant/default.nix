@@ -31,18 +31,17 @@ in
       bridges = {
         br0 = {
           interfaces = [ "enp1s0f0" ];
-          useDHCP = true;
         };
       };
-#      interfaces = {
-#        br0 = {
-#          useDHCP = false;
+      interfaces = {
+        br0 = {
+          useDHCP = true;
 #          adresses.ipv4 = {
 #            address = "192.168.0.90";
 #            prefixLength = 24;
 #          };
-#        };
-#      };
+        };
+      };
     };
   };
 }
