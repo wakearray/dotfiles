@@ -3,17 +3,39 @@ let
   home-assistant = config.servers.home-assistant;
 in
 {
+  # /modules/servers/home-assistant/
+  imports = [
+    ./script-install.nix
+  ];
+
   options.servers.home-assistant = with lib; {
     enable = mkEnableOption "Enable a libvirtd installation of Home Assistant.";
+
+    bridge = {
+      name = mkOption {
+        type = types.str;
+        default = "br0";
+        description = "Name of the bridge you want to use for the home-assistant virtual machine.";
+      };
+      interface = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "The name of the interface you want assigned to the bridge. Use `ip a` to see available interfaces, if only one on the network has an IP address, use that one. Name may look something like `enp1s0f0`";
+      };
+    };
   };
 
   config = lib.mkIf home-assistant.enable {
+    warnings = (
+      lib.optionals (home-assistant.interface == null) "Interface cannot be null. Set this to the physical interface you want the home-assistant virtual machine to use."
+    );
+
     virtualisation = {
       libvirtd = {
         enable = true;
         # Used for UEFI boot of Home Assistant OS guest image
         qemu.ovmf.enable = true;
-        allowedBridges = [ "br0" ];
+        allowedBridges = (lib.splitString " " home-assistant.bridge.name);
       };
     };
 
@@ -26,20 +48,15 @@ in
     ];
 
     networking = {
-#      defaultGateway = "192.168.0.1";
       useDHCP = false;
       bridges = {
-        br0 = {
-          interfaces = [ "enp1s0f0" ];
+        "${home-assistant.bridge.name}" = {
+          interfaces = (lib.splitString " " home-assistant.bridge.interface);
         };
       };
       interfaces = {
-        br0 = {
+        "${home-assistant.bridge.name}" = {
           useDHCP = true;
-#          adresses.ipv4 = {
-#            address = "192.168.0.90";
-#            prefixLength = 24;
-#          };
         };
       };
     };

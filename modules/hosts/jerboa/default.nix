@@ -17,6 +17,12 @@
   };
 
   servers = {
-    home-assistant.enable = true;
+    home-assistant = {
+      enable = true;
+      bridge = {
+        name = "br0";
+        interface = "enp1s0";
+      };
+    };
   };
 }
