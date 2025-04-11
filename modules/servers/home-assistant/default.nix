@@ -5,7 +5,7 @@ in
 {
   # /modules/servers/home-assistant/
   imports = [
-    ./script-install.nix
+    #./script-install.nix
   ];
 
   options.servers.home-assistant = with lib; {

@@ -229,6 +229,8 @@
     # Services.
     services = {
       locate.enable = true;
+      # Automount USB drives
+      gvfs.enable = true;
       # Use Avahi to make this computer discoverable and
       # to discover other computers.
       avahi = {

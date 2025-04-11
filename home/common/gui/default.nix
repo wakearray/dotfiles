@@ -11,6 +11,7 @@ in
     ./firefox.nix
     ./fonts.nix
     ./mpv.nix
+    ./pcmanfm.nix
     ./rofi.nix
     ./scripts
     ./themes

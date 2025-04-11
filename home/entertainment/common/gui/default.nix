@@ -6,6 +6,9 @@
   ];
 
   config = {
-    gui.themes.gruvbox.enable = true;
+    gui = {
+      themes.gruvbox.enable = true;
+      pcmanfm.enable = true;
+    };
   };
 }

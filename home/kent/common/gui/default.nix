@@ -38,14 +38,10 @@ in
         todofi.enable = true;
       };
       firefox.enable = true;
+      pcmanfm.enable = true;
     };
 
     home.packages = with pkgs; [
-      # File manager
-      pcmanfm
-      # Archive manager
-      file-roller
-
       # Bluetooth GUI written in Rust
       # https://github.com/kaii-lb/overskride
       overskride
