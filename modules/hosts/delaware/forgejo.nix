@@ -13,8 +13,8 @@ in
     };
 
     localPort = mkOption {
-      type = types.str;
-      default = "8065";
+      type = types.port;
+      default = 8065;
       description = "The port you want to use when locally accessing the server on the same network.";
     };
 
@@ -58,7 +58,7 @@ in
       };
 
       defaultActionsUrl = mkOption {
-        type = types.enum [ "" ];
+        type = types.enum [ "github" ];
       };
     };
   };
@@ -81,7 +81,7 @@ in
           # You need to specify this to remove the port from URLs in the web UI.
           ROOT_URL = "https://${forgejo.domain}/";
           PROTOCOL = "https";
-          HTTP_PORT = "${forgejo.localPort}";
+          HTTP_PORT = forgejo.localPort;
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = forgejo.disableRegistration;
@@ -112,7 +112,7 @@ in
         '';
         locations = {
           "/" = {
-            proxyPass = "http://localhost:${forgejo.localPort}";
+            proxyPass = "http://localhost:${builtins.toString forgejo.localPort}";
           };
         };
       };
