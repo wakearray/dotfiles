@@ -81,7 +81,7 @@ in
           # You need to specify this to remove the port from URLs in the web UI.
           ROOT_URL = "https://${forgejo.domain}/";
           PROTOCOL = "https";
-          HTTP_PORT = forgejo.localPort;
+          HTTP_PORT = "${forgejo.localPort}";
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = forgejo.disableRegistration;
