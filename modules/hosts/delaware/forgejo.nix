@@ -13,8 +13,8 @@ in
     };
 
     localPort = mkOption {
-      type = types.port;
-      default = 8065;
+      type = types.str;
+      default = "8065";
       description = "The port you want to use when locally accessing the server on the same network.";
     };
 
