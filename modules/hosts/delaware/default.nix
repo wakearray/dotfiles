@@ -31,6 +31,13 @@
       };
       tubearchivist.enable = true;
     };
+    forgejo = {
+      enable = true;
+      domain = "${domain}";
+      localPort = 8065;
+      mail.enable = false;
+      actions.enable = false;
+    };
     mail = {
       enable = true;
       domain = "${domain}";

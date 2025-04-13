@@ -47,7 +47,12 @@ in
       };
       windowRules = mkOption {
         type = types.listOf types.str;
-        default = [", preferred, auto, 1"];
+        default = [
+          "group set, class:firefox, title:^(.*)!(Mozilla Firefox Private Browsing)$"
+          "float, class:(firefox), title:(Picture-in-Picture)"
+          "pin, class:(firefox), title:(Picture-in-Picture), floating:1"
+          "size 20% 20%, class:(firefox), title:(Picture-in-Picture), floating:1, pinned:1"
+        ];
         description = "A list of window rules (v2 only) as described here: https://wiki.hyprland.org/Configuring/Window-Rules/#window-rules-v2";
       };
       animations = {
