@@ -34,7 +34,7 @@
     forgejo = {
       enable = true;
       domain = "${domain}";
-      localPort = "8065";
+      localPort = 8065;
       mail.enable = false;
       actions.enable = false;
     };
