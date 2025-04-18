@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./audiobookshelf.nix
     ./docker
     ./deluge
     ./home-assistant

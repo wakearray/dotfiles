@@ -239,6 +239,8 @@
         openFirewall = true;
         domainName = "wakenet";
       };
+      # Enable SMART error monitoring on NixOS machines
+      smartd.enable = true;
     };
   };
 }

@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
-  cfg = config.servers.mail;
-  domain = cfg.domain;
+  mail = config.servers.mail;
+  domain = mail.domain;
 in
 {
   options.servers.mail = with lib; {
@@ -52,7 +52,7 @@ in
       description = "Include the hashed password files from the SOPS /mailserver.yaml file.";
     };
   };
-  config = {
+  config = lib.mkIf mail.enable {
     mailserver = {
       enable = true;
       fqdn = "mail.${domain}";
@@ -68,14 +68,14 @@ in
 
       # A list of all login accounts. To create the password hashes, use
       # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
-      loginAccounts = cfg.users;
+      loginAccounts = mail.users;
 
       # Use Let's Encrypt certificates. Note that this needs to set up a stripped
       # down nginx and opens port 80.
       certificateScheme = "acme-nginx";
     };
 
-    sops.secrets = cfg.secrets;
+    sops.secrets = mail.secrets;
 
     # mailserver.openFirewall = true; Should be opening all these ports
     #

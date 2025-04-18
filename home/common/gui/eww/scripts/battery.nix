@@ -24,8 +24,8 @@ function change_icon () {
   ${ewwCommand} update battery_class="$CLASS"
 }
 
-EWW_OLD_BATT_CAPACITY=null
-EWW_OLD_BATT_STATUS=null
+EWW_OLD_BATT_CAPACITY=0
+EWW_OLD_BATT_STATUS="null"
 
 while true
 do

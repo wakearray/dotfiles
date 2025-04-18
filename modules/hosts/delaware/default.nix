@@ -22,6 +22,10 @@
   ];
 
   servers = {
+    audiobookshelf = {
+      enable = true;
+      domain = "${domain}";
+    };
     deluge.enable = true;
     docker = {
       enable = true;
