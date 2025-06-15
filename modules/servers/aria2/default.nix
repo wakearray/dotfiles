@@ -1,9 +1,9 @@
 { lib, config, pkgs, ... }:
 let
-  aria = config.servers.aria;
+  aria = config.servers.aria2;
 in
 {
-  options.servers.aria = with lib; {
+  options.servers.aria2 = with lib; {
     enable = mkEnableOption "Enable an Aria2 server with Ariang frontend.";
 
     rpcSopsFile = mkOption {
