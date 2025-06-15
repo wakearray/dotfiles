@@ -16,7 +16,7 @@ in
       description = "Domain name of the server. If using the default domain, AudioBookShelf will be accessible at `audiobookshelf.example.com`";
     };
 
-    localPort = mkoption {
+    localPort = mkOption {
       type = types.port;
       default = 8066;
       description = "The local port where AudioBookShelf can be accessed.";

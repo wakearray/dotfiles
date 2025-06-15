@@ -3,6 +3,7 @@
   ## These are the defaults I want on Delaware only:
   imports =
   [
+    ./aria2.nix
     ./zfs.nix
 
     ../../servers
@@ -22,6 +23,10 @@
   ];
 
   servers = {
+    aria2 = {
+      enable = true;
+      downloadsDirectory = "/data/downloads/";
+    };
     audiobookshelf = {
       enable = true;
       domain = "${domain}";

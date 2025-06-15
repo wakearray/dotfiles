@@ -1,0 +1,61 @@
+rpc-listen-port: ENC[AES256_GCM,data:i1ZZ77Mt/yHe3vJBB2ua/AnWVBDKaUWPiBEK945mdGnLLun81UuncvOjvagp6dRmLsFkbh854tOwWQ==,iv:QeOan5tTQH52HoPR3QqqPKFlcOUav5fcivCvvVyf+ow=,tag:piibRbvTl3bGGSFJEE93/A==,type:str]
+sops:
+    age:
+        - recipient: age1em9n3fvg9jphpsx055cv0t8u5wnxs64x2auddxsvjtuvg85kmerqp0wjg0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjSmZjd3RsK0gwUnBJWGFt
+            Wlg1QWVmZWptdFpDNTJDZG9CRHNTRUVkY0hFCi84M0U4MWtaOXJVM2YrVnBINW0r
+            dWNaa05TUGJiS2YvUDFBN3QyVUpjazAKLS0tIEp0M21NK0dCeDJ1bkRINk02dW1Q
+            TDFqU1c5VG1rbnpQU2pTNEd1Nk5aa2MKxgPtk+TAyKvvajOyT/WRT2qYjm1cm4Iu
+            PbZb04x1khxGuFReo8VBfwlo84DleXg4N+1M3ujAsRbL0PIkmD4frQ==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1pddnp2as3e76uqhk9uh3ff48jcua5st5px3cp35nmk2urem2xewq7vn6m4
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB5V2NCYmFGZzFiWXBaZW43
+            N09MQ0IxVnRlYVo0RWRoYzFhOUxSOWlrT3hRClkrTlZIUmJ6alVMNUxpdzgyd0lt
+            Zkd1eDUxZEVuQk9Pc3A0c2h1NWVjYzgKLS0tIGlEaStrdVNiQVM0OHlxUnQ0ZDMv
+            dzNmZVgrUkRQSkxseTE0Zm5UbU1ack0KvW0ObM2V+12YJ2MNe1Ey/vVjD25V+Bkr
+            s9TiLnOBR4BRCJyjru/KsRyWZpV8R3G59COdQX+6P6HRTu1vmgnkrg==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age158lzfdas82aj2dayppkcv4xgs4u7m0uk7zul90sfpj8wxdavyuqqgv6ar2
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuMFpPcmtOVWp3RzdOVkNy
+            QlBwTnJQV3ljMHNWR2kvYnZKcytwaVN4eVdvCm5oWW9RUUluVkppWGRObGFCZC85
+            V1NUK2ZTclJIV3JqSEhFNjF2V29JdUEKLS0tIHhGWkwxbkRzZVdoajFzYmZmdFRm
+            WkFtOUtIa09JbmQ3K3VFZDNpbzd5a0EKU65QZ45wmWPq3EO/mLElQbSunhdU6JbI
+            X3US/6ILpLcR6NwLzaJXHylkHqe2Tvf8OhoNr+qdPcHJfSH5KkRNLg==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age19md57qd8yqh7l5xvql8pynd6cvplnlx0jhmr9p3mz32z584869tswn04py
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNN0krdUh5UWZNMGQvd3N2
+            Z2laMW50Mys5RHpjMWtkZlFyMk0yc1JDdEFVClFTR1NtV1R3RE12Yk9Tbmx3SElG
+            NERRaXUrNExLQWpscjQ5Q3p2a2ZjYkEKLS0tIE1Fa2ZEWXRlTlFtQnNWVFhtRHZq
+            S0pLaUlHMCtSMlRqS1FuMkZBM2RRMHMKt/9JpKIqIUpQ85dALdLqN2F9J7brcrCk
+            yRFH6nCCWwGwOLFG6AiaolGhrIua51AJKY5L96D8OG24EJ/3uM8AYw==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1ldfj8u2lmq7cntyu6hxtep9dy7z6gfesctltztuz4fwh2a7ww4qsywvjyn
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhM3NVUm1Sb0JkWkthOC9B
+            RldFMFBLdVZsREJwTWs3bGs1eHBaUUx5YXhVCjFOejVmSXBJU211cWRMOHRGZjNa
+            RzlDRGd5YnVGQ2w5cXpoOTB2U1pIckkKLS0tIHF5Mi9rZFRsV2hhNUdhbXpGb1BD
+            T09Wc1FxTjk0d0J4bm94UDV4TmY1NFUKShYvRSO2IjdQCy+d+nBRWx/jk559GhSx
+            a3fa0W3iu/jxdBQoH9KwfcjYSuTNz4EKE5hY12WHLXRqgJl6JhEJ7g==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1ug0wd4d2tukuw2w7lzrpf2um8r2fxxr90xg7mphu07wwldnan3qsngdelh
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByMUlNWjJWR1VnK0dadWpt
+            a2UvR2hYZnVFbE9aZTFUUTE3cHdyUlJ0cGdBCmQzOG9ZWjZqY1JBNnU0eHYzcVBt
+            V3VldEhBTklXbnFtOXlQT3loeGlIalkKLS0tIEJ4K25nNWw0eDFFY1c1QmFHNmJS
+            UnpvdHZtSGUxM2c2V09TVmFzc1pSZEEKy5Pf7fJAQtvFBFKTh6D6slNlc+/2JM/C
+            AJWAnrZwQCGp2gL11Gbz+U5NEHvWRm1ZfU968J7h1hCcjrjhS/YZyg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-06-15T03:53:41Z"
+    mac: ENC[AES256_GCM,data:qbZjO4WZWz/rO9Eq820SCDROAry/gGx9g2jWPr9QaBM9JN7Xa3XXVhLophdMRrudmWi9ZuYv5igzEdrjY/ptuK2sLcq12kyZXdyEUjjlDGz2PpGcrwb17gbSx9+QoPg9/kQUV6DFZCKqwkFgdTXSmwKlBwpE5jQz0q21YyvczJI=,iv:mD+tO5C2WAEiBX33SCdaFcbqQgbwqiECUtZVlLLeefY=,tag:9fuWI2TbebmarVJLbnlQmg==,type:str]
+    unencrypted_suffix: _unencrypted
+    version: 3.10.2

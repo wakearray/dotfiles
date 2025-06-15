@@ -39,6 +39,7 @@ creation_rules:
         - *kent
         - *delaware
         - *greatblue
+        - *starling
         - *y700
         - *s24
   - path_regex: modules/hosts/delaware/.*.yaml$
