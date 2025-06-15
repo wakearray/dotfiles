@@ -41,7 +41,7 @@ in
         # attribute set of (boolean or signed integer or floating point number or (optionally newline-terminated) single-line string)
         dir = aria.downloadsDirectory;
         listen-port = aria.listenPorts;
-        rpc-listen-port = "6800";
+        rpc-listen-port = 6800;
       };
       rpcSecretFile = "/run/secrets/aria2-rpc-token";
       serviceUMask = "0002";
