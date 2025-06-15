@@ -37,7 +37,7 @@ in
         forceSSL = true;
         locations = {
           "/" = {
-            proxyPass = "http://localhost:${builtins.toString abs.port}";
+            proxyPass = "http://localhost:${builtins.toString abs.localPort}";
             proxyWebsockets = true;
           };
         };
