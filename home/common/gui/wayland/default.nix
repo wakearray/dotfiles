@@ -7,6 +7,7 @@ in
 {
   imports = [
     ./wm
+    ./locker
   ];
 
   options.gui.wayland = with lib; {

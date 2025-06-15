@@ -4,9 +4,10 @@
   imports = [
     ./android.nix
     ./gui
+    ./shell
     ./ssh.nix
     ./yazi.nix
-    ./zsh.nix
+    ./zellij.nix
     ../../modules/common/nvim/home.nix
   ];
 
@@ -111,7 +112,7 @@
     home = {
       enableNixpkgsReleaseCheck = false;
       sessionVariables = {
-        FLAKE = "${config.home.homeDirectory}/dotfiles";
+        NH_FLAKE = "${config.home.homeDirectory}/dotfiles";
       };
       packages = with pkgs; [
         # socat - Utility for bidirectional data transfer between two independent data channels
@@ -145,6 +146,7 @@
         # https://github.com/nix-community/manix
         manix
       ];
+      zellij.enable = true;
     };
 
     # Editor Config helps enforce your preferences on editors

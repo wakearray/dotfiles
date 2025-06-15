@@ -28,6 +28,12 @@ in
         default = "BAT0";
         description = "A string representing the identifier of the battery in your computer that you wish EWW to track. Check which battery you have by running the command `ls -X /sys/class/power_supply | grep 'BAT'` If the result is not `BAT0`, set this variable to what you see in your terminal.";
       };
+
+      monitorFrequency = mkOption {
+        type = types.int;
+        default = 5;
+        description = "The amount of time, in seconds, to wait inbetween each check of the battery status. The lower the number, the more recent the battery% will be, but the more it will impact your battery life.";
+      };
     };
   };
   config = lib.mkIf (gui.enable && eww.enable) {

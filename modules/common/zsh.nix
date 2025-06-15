@@ -13,6 +13,7 @@
     zsh-autoenv.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
+		autosuggestions.enable = true;
     histFile = "$HOME/.zsh_history";
     histSize = 10000;
     setOptions = [
@@ -27,7 +28,7 @@
       "CORRECT_ALL"
     ];
     shellAliases = {
-      # use lsd instead of ls.
+      # use exa instead of ls.
       l = "eza -la --tree --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore --level=1";
       c = "clear";
       # use zoxide instead of cd.

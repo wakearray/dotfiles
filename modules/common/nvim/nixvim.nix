@@ -4,7 +4,13 @@
     enable = true;
     # gruvbox.nvim - Lua port of the most famous vim colorscheme
     # https://github.com/ellisonleao/gruvbox.nvim/
-    colorschemes.gruvbox.enable = true;
+    colorschemes.base16 = {
+      enable = true;
+      colorscheme = "gruvbox-material-dark-medium";
+    };
+    dependencies = {
+      gcc.enable = true;
+    };
     globalOpts = {
       # Line numbers
       number = true;
@@ -20,8 +26,62 @@
   end
 '';
     # keymaps
-    # TODO:unmap J,K,L,M
-    # Assign J = bprevious, K = bnext, L =  Join N lines; default is 2, M = lookup Keyword under the cursor with 'keywordprg'
+    keymaps = [
+      {
+        action = "<esc>:bp";
+        key = "<M-J>";
+        mode = [ "n" "v" "i" ];
+        options = {
+          desc = "Switch to previous buffer";
+          silent = true;
+        };
+      }
+      {
+        action = "<esc>:bn";
+        key = "<M-K>";
+        mode = [ "n" "v" "i" ];
+        options = {
+          desc = "Switch to next buffer";
+          silent = true;
+        };
+      }
+      {
+        action = "<esc>:noh";
+        key = "<M-Space>";
+        mode = [ "n" "v" "i" ];
+        options = {
+          desc = "Clear highlighting";
+          silent = true;
+        };
+      }
+      {
+        action = "<esc>:Telescope";
+        key = "<M-t>";
+        mode = [ "n" "i" ];
+        options = {
+          desc = "Open Telescope";
+          silent = true;
+        };
+      }
+      {
+        action = "<esc>:Telescope live_grep";
+        key = "<M-g>";
+        mode = [ "n" "i" ];
+        options = {
+          desc = "Open Telescope live_grep";
+          silent = true;
+        };
+      }
+      {
+        action = "<esc>:Telescope buffers";
+        key = "<M-b>";
+        mode = [ "n" "i" ];
+        options = {
+          desc = "Open Telescope buffers";
+          silent = true;
+        };
+      }
+    ];
 
     # plugins
     plugins = {
@@ -180,12 +240,12 @@
           diagnostics = "nvim_lsp";
           numbers = {
             __raw = ''
-  function(opts)
-    return string.format('%s|%s', opts.id, opts.raise(opts.ordinal))
-  end
+              function(opts)
+                return string.format('%s|%s', opts.id, opts.raise(opts.ordinal))
+              end
             '';
-        # Lots and lots of settings:
-        # https://nix-community.github.io/nixvim/plugins/bufferline/settings/index.html
+          # Lots and lots of settings:
+          # https://nix-community.github.io/nixvim/plugins/bufferline/settings/index.html
           };
         };
       };
@@ -225,8 +285,57 @@
       # https://github.com/nvim-pack/nvim-spectre/
       spectre = {
         enable = true;
-        findPackage = pkgs.repgrep;
-        replacePackage = pkgs.gnused;
+        autoLoad = true;
+        settings = {
+          default = {
+            find = {
+              cmd = "rg";
+              options = [
+                "word"
+                "hidden"
+              ];
+            };
+            replace = {
+              cmd = "sed";
+            };
+          };
+          find_engine = {
+            rg = {
+              args = [
+                "--color=never"
+                "--no-heading"
+                "--with-filename"
+                "--line-number"
+                "--column"
+              ];
+              cmd = "rg";
+              options = {
+                hidden = {
+                  desc = "hidden file";
+                  icon = "[H]";
+                  value = "--hidden";
+                };
+                ignore-case = {
+                  desc = "ignore case";
+                  icon = "[I]";
+                  value = "--ignore-case";
+                };
+                line = {
+                  desc = "match in line";
+                  icon = "[L]";
+                  value = "-x";
+                };
+                word = {
+                  desc = "match in word";
+                  icon = "[W]";
+                  value = "-w";
+                };
+              };
+            };
+          };
+          is_insert_mode = false;
+          live_update = true;
+        };
       };
 
       # which-key.nvim - helps you remember your Neovim keymaps,

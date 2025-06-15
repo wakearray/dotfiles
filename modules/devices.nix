@@ -1,10 +1,16 @@
 let
   devices = {
-   # Kent
+    # Kent
     kent-greatblue = {
       ip = "192.168.0.11";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOGhJ+3+JajosnhJOFOg0Q202XigcatIgHIWqVdJr1O";
-      hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" ];
+      hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" "starling" ];
+      users = [ "kent" ];
+    };
+    starling = {
+      ip = "192.168.0.143";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJWchC4fFOM4ulE9YjQF2T0M/j8NSpqelnUoVgXK02cb";
+      hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" "kent-greatblue" ];
       users = [ "kent" ];
     };
     greatblue = {
@@ -60,39 +66,46 @@ let
       users = [ "kent" "jess" ];
     };
 
-
     # Servers
     delaware = {
       ip = "192.168.0.46";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIyh4x/us/WXIsqGjbfOCIKKX50mEyYg37ZMJ9VW7nnN";
-      hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" ];
+      hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" "starling" ];
       users = [ "kent" ];
     };
     lagurus = {
       ip = "192.168.0.65";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM6IG1FP+yFHuGcBK8DavEYlc1jvaog/aztJMAP38bQv";
-      hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" "boox_air_nova_c" "hisense_a9" "cichlid" "jess-shoebill" ];
+      hosts = [ "kent-greatblue" "starling" "samsung_s24" "lenovo_y700" "cubot_p80" "boox_air_nova_c" "hisense_a9" "cichlid" "jess-shoebill" ];
       users = [ "kent" "entertainment" ];
     };
     jerboa = {
       ip = "192.168.0.32";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILoQeclOZSjy9K8lPvdz/38WU/INxMGuecfFf47X5pGj";
-      hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" "boox_air_nova_c" "hisense_a9" "cichlid" "jess-shoebill" ];
+      hosts = [ "kent-greatblue" "starling" "samsung_s24" "lenovo_y700" "cubot_p80" "boox_air_nova_c" "hisense_a9" "cichlid" "jess-shoebill" ];
       users = [ "kent" "entertainment" ];
     };
     sebright_bantam = {
       ip = "192.168.0.80";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJnBdFqtIA/MRYb7Wtmp7xxn7l4M0Fc09JkUMw3665Ua";
-      hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" "boox_air_nova_c" "hisense_a9" "cichlid" "jess-shoebill" ];
+      hosts = [ "kent-greatblue" "starling" "samsung_s24" "lenovo_y700" "cubot_p80" "boox_air_nova_c" "hisense_a9" "cichlid" "jess-shoebill" ];
       users = [ "kent" ];
     };
 
-    # Just here so it gets added to the know_hosts file automatically
+    # Just here so it gets added to the known_hosts file automatically
+    # When connecting for the first time to a new server use the command:
+    # `ssh-keyscan <url>` to print the keys.
     github = {
       ip = "github.com";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
       hosts = [ "github" ];
       users = [ "github" ];
+    };
+    gitlab = {
+      ip = "gitlab.com";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf";
+      hosts = [ "gitlab" ];
+      users = [ "gitlab" ];
     };
   };
 in

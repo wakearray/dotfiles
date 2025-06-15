@@ -7,6 +7,7 @@ keys:
     # nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
     # Kent
     - &greatblue age158lzfdas82aj2dayppkcv4xgs4u7m0uk7zul90sfpj8wxdavyuqqgv6ar2
+    - &starling age19md57qd8yqh7l5xvql8pynd6cvplnlx0jhmr9p3mz32z584869tswn04py
     - &delaware age1pddnp2as3e76uqhk9uh3ff48jcua5st5px3cp35nmk2urem2xewq7vn6m4
     # Jess
     - &cichlid age1vhze94ngfzzsgtp45q6d8s4v9zt0234hxcnrk9x45ttz7r289vcq5yu7hw
@@ -46,6 +47,7 @@ creation_rules:
         - *kent
         - *delaware
         - *greatblue
+        - *starling
         - *y700
         - *s24
   - path_regex: modules/hosts/greatblue/.*.yaml$
@@ -70,3 +72,8 @@ creation_rules:
         - *y700
         - *cichlid
         - *shoebill
+  - path_regex: modules/hosts/starling/.*.yaml$
+    key_groups:
+      - age:
+        - *kent
+        - *starling

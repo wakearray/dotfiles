@@ -1,4 +1,4 @@
-{ outputs, pkgs, lib, systemDetails, ... }:
+{ inputs, outputs, pkgs, lib, systemDetails, ... }:
 {
   ## These are the defaults I want on every machine:
   imports =
@@ -160,26 +160,19 @@
         outputs.overlays.additions
         outputs.overlays.modifications
         outputs.overlays.stable-packages
-        outputs.overlays.nur-packages
 
         # You can also add overlays exported from other flakes:
         # neovim-nightly-overlay.overlays.default
       ];
       config = {
         allowUnfree = true;
-        packageOverrides = pkgs: {
-          nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-            inherit pkgs;
-          };
-        };
       };
     };
-
 
     nix = {
       settings = {
         # Enable flakes.
-        experimental-features = [ "nix-command" "flakes" ];
+        experimental-features = [ "nix-command" "flakes" "repl-flake" ];
         # Uses hard links to remove duplicates in the nix store
         auto-optimise-store = true;
       };
@@ -212,8 +205,6 @@
       nix-ld.enable = true;
       # Installs git as a system program
       git.enable = true;
-      # Console typo fixer
-      thefuck.enable = true;
       # Enable direnv
       direnv.enable = true;
       # Not Another Command Line Nix Helper

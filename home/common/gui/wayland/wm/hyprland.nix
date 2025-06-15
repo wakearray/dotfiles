@@ -37,6 +37,38 @@ in
           description = "Active border color for window that cannot be added to a group. Color is type gradient as described here: https://wiki.hyprland.org/Configuring/Variables/#:~:text=gradient,0deg";
         };
       };
+      overview = {
+        panelColor = mkOption {
+          type = types.str;
+          default = "0xff444444";
+          description = "Color of the border for inactive windows. Color is type gradient as described here: https://wiki.hyprland.org/Configuring/Variables/#:~:text=gradient,0deg";
+        };
+        panelBorderColor = mkOption {
+          type = types.str;
+          default = "0xff444444";
+          description = "Color of the border for inactive windows. Color is type gradient as described here: https://wiki.hyprland.org/Configuring/Variables/#:~:text=gradient,0deg";
+        };
+        workspaceActiveBackground = mkOption {
+          type = types.str;
+          default = "0xff444444";
+          description = "Color of the border for inactive windows. Color is type gradient as described here: https://wiki.hyprland.org/Configuring/Variables/#:~:text=gradient,0deg";
+        };
+        workspaceInactiveBackground = mkOption {
+          type = types.str;
+          default = "0xff444444";
+          description = "Color of the border for inactive windows. Color is type gradient as described here: https://wiki.hyprland.org/Configuring/Variables/#:~:text=gradient,0deg";
+        };
+        workspaceActiveBorder = mkOption {
+          type = types.str;
+          default = "0xff444444";
+          description = "Color of the border for inactive windows. Color is type gradient as described here: https://wiki.hyprland.org/Configuring/Variables/#:~:text=gradient,0deg";
+        };
+        workspaceInactiveBorder = mkOption {
+          type = types.str;
+          default = "0xff444444";
+          description = "Color of the border for inactive windows. Color is type gradient as described here: https://wiki.hyprland.org/Configuring/Variables/#:~:text=gradient,0deg";
+        };
+      };
     };
 
     settings = {
@@ -79,9 +111,9 @@ in
           "alacritty"
           "firefox"
           "signal-desktop"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg offset=\"0\""
           "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg offset=\"9\""
+          # "${pkgs.hyprland-monitor-attached}/bin/hyprland-monitor-attached "
         ];
         description = "A list of command line arguments you want run when hyprland starts.";
       };
@@ -99,7 +131,7 @@ in
         ];
         description = "A list of command line arguments you want run when hyprland exits.";
       };
-      bind = mkOption {
+      bindr = mkOption {
         type = types.listOf types.str;
         default = [
           # App launcher shortcut
@@ -122,15 +154,20 @@ in
           # Send active window to scratchpad
           "$mod SHIFT, S       , exec, scratchpad -g"
 
+          # Bring up the rofi menu for clipboard history
+          "$mod      , V       , exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+
           # Finds all windows that are in invalid workspaces and moves them
           # to the current workspace. Useful when unplugging monitors.
-          "$mod SHIFT, G       , split:grabroguewindows"
+          # "$mod SHIFT, G       , split:grabroguewindows"
           # Close the active app
           "$mod      , Q       , killactive"
           # Toggle floating on the currently active app
           "$mod      , T       , togglefloating"
           # Toggle grouping on the currently active app
           "$mod      , G       , togglegroup"
+          # Move window out of group
+          "$mod SHIFT, G       , moveoutofgroup"
 
           # Switch which window in active group is visible b = backwards
           # code:59 = ,
@@ -146,7 +183,7 @@ in
           # Toggle pinning the active floating app to the monitor rather than workspace
           "$mod      , P       , pin"
           # Lock and suspend the computer
-          "$mod      , L       , exec, systemctl suspend && hyprlock --immediate"
+          "$mod      , L       , exec, systemctl suspend && gtklock"
 
           # Exits hyperland
           "$mod SHIFT, Q       , exec, uwsm stop"
@@ -161,6 +198,11 @@ in
           "$mod SHIFT, right   , movewindow, r"
           "$mod SHIFT, up      , movewindow, u"
           "$mod SHIFT, down    , movewindow, d"
+
+          "$mod   ALT, left    , moveintogroup, l"
+          "$mod   ALT, right   , moveintogroup, r"
+          "$mod   ALT, up      , moveintogroup, u"
+          "$mod   ALT, down    , moveintogroup, d"
         ] ++ (
         # workspaces
         # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
@@ -168,10 +210,27 @@ in
           let ws = i + 1;
           in [
             "$mod, code:1${toString i}, split:workspace, ${toString ws}"
-            "$mod SHIFT, code:1${toString i}, split:movetoworkspace, ${toString ws}"
+            "$mod SHIFT, code:1${toString i}, split:movetoworkspacesilent, ${toString ws}"
           ])9)
         );
-        description = "Key bindings as described here: https://wiki.hyprland.org/Configuring/Binds/ use $mod to reference your assigned mod key.";
+        description = "Key bindings the trigger on release as described here: https://wiki.hyprland.org/Configuring/Binds/ use $mod to reference your assigned mod key.";
+      };
+      bindsr = mkOption {
+        type = types.listOf types.str;
+        default = [
+          # Move the active window in or out of a group with the arrow keys
+          # Action performed depends on whether there is a group in the direction
+          #"$mod SHIFT, G&left    , movewindoworgroup, l"
+          #"$mod SHIFT, G&right   , movewindoworgroup, r"
+          #"$mod SHIFT, G&up      , movewindoworgroup, u"
+          #"$mod SHIFT, G&down    , movewindoworgroup, d"
+
+        ];
+        description = "Multiple arbitrary key bindings that trigger on key release as described here: https://wiki.hyprland.org/Configuring/Binds/#keysym-combos
+
+Use $mod to reference your assigned mod key and separate each key or mod in a multikey/multi-mod bind, using `&` with no spaces.
+
+Note: Normally this would just be `binds` and not `bindsr`, but that already exists as an attribute set of other keybinding related options, due to the.. *interesting* choices the hyprland devs made.";
       };
       bindm = mkOption {
         type = types.listOf types.str;
@@ -222,7 +281,8 @@ in
   config = lib.mkIf (gui.enable && (wayland.enable && (hyprland.enable))) {
     wayland.windowManager.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       # Disabled due to using UWSM
       # https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#uwsm
       systemd.enable = false;
@@ -232,6 +292,95 @@ in
         monitor = s.monitors;
         windowrulev2 = s.windowRules;
         plugin = {
+          overview = {
+            # Colors
+
+            panelColor = hyprland.colors.overview.panelColor;
+            panelBorderColor = hyprland.colors.overview.panelBorderColor;
+            workspaceActiveBackground = hyprland.colors.overview.workspaceActiveBackground;
+            workspaceInactiveBackground = hyprland.colors.overview.workspaceInactiveBackground;
+            workspaceActiveBorder = hyprland.colors.overview.workspaceActiveBorder;
+            workspaceInactiveBorder = hyprland.colors.overview.workspaceInactiveBorder;
+            dragAlpha = 0.4; # overrides the alpha of window when dragged in overview (0 - 1, 0 = transparent, 1 = opaque)
+            disableBlur = true;
+
+            # Layout
+
+            #panelHeight = ;
+            #panelBorderWidth = ;
+            onBottom = false; # whether if panel should be on bottom instead of top
+            #workspaceMargin = ; # spacing of workspaces with eachother and the edge of the panel
+            #reservedArea = ; # padding on top of the panel, for Macbook camera notch
+            #workspaceBorderSize = ;
+            centerAligned = true; # whether if workspaces should be aligned at the center (KDE / macOS style) or at the left (Windows style)
+            hideBackgroundLayers = true; # do not draw background and bottom layers in overview
+            hideTopLayers = true; # do not draw top layers in overview
+            hideOverlayLayers = true; # do not draw overlay layers in overview
+            #hideRealLayers = ; # whether to hide layers in actual workspace
+            #drawActiveWorkspace = ; # draw the active workspace in overview as-is
+            overrideGaps = false; # whether if overview should override the layout gaps in the current workspace using the following values
+            gapsIn = 0;
+            gapsOut = 0;
+            affectStrut = true; # whether the panel should push window aside, disabling this option also disables overrideGaps
+
+            # Animation
+
+            # The panel uses the windows curve for a slide-in animation
+            #overrideAnimSpeed = ; # to override the animation speed
+
+            # Behaviors
+            autoDrag = true; # mouse click always drags window when overview is open
+            autoScroll = true; # mouse scroll on active workspace area always switch workspace
+            exitOnClick = true; # mouse click without dragging exits overview
+            switchOnDrop = false; # switch to the workspace when a window is droppped into it
+            exitOnSwitch = false; # overview exits when overview is switched by clicking on workspace view or by switchOnDrop
+            showNewWorkspace = false; # add a new empty workspace at the end of workspaces view
+            showEmptyWorkspace = true; # show empty workspaces that are inbetween non-empty workspaces
+            showSpecialWorkspace = false; # defaults to false
+            disableGestures = false;
+            reverseSwipe = false; # reverses the direction of swipe gesture, for macOS peeps?
+            exitKey = 1; # key used to exit overview mode (default: Escape). Leave empty to disable keyboard exit.
+          };
+          touch_gestures = {
+            # The default sensitivity is probably too low on tablet screens,
+            # I recommend turning it up to 4.0
+            sensitivity = 1.0;
+
+            # must be >= 3
+            workspace_swipe_fingers = 3;
+
+            # switching workspaces by swiping from an edge,
+            # this is separate from workspace_swipe_fingers
+            # and can be used at the same time
+            # possible values: l, r, u, or d
+            # to disable it set it to anything else
+            workspace_swipe_edge = "d";
+
+            # in milliseconds
+            long_press_delay = 400;
+
+            # resize windows by long-pressing on window borders and gaps.
+            # If general:resize_on_border is enabled,
+            # general:extend_border_grab_area is used for floating windows
+            resize_on_border_long_press = true;
+
+            # in pixels, the distance from the edge that is considered an edge
+            edge_margin = 10;
+
+            # emulates touchpad swipes when swiping in a direction
+            # that does not trigger workspace swipe.
+            # ONLY triggers when finger count is equal to workspace_swipe_fingers
+            #
+            # might be removed in the future in favor of event hooks
+            emulate_touchpad_swipe = false;
+
+            experimental = {
+              # send proper cancel events to windows instead of hacky touch_up events,
+              # NOT recommended as it crashed a few times,
+              # once it's stabilized I'll make it the default
+              send_cancel = 0;
+            };
+          };
           hyprsplit = {
             num_workspaces = 9;
             persistent_workspaces = true;
@@ -411,7 +560,13 @@ in
         exec-shutdown = s.execShutdown;
         # Key bindings
         # https://wiki.hyprland.org/Configuring/Binds/
-        bind = s.bind;
+        # Flags:
+        # s -> separate, will arbitrarily combine keys between each mod/key
+        # r -> release, will trigger on release of a key.
+        bindsr = s.bindsr;
+        # Flags:
+        # r -> release, will trigger on release of a key.
+        bindr = s.bindr;
         # Flags:
         # m -> mouse, see below.
         # https://wiki.hyprland.org/Configuring/Binds/#mouse-binds
@@ -424,33 +579,59 @@ in
         # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
         bindl = s.bindl;
       };
-      plugins = [
+      plugins = with pkgs; [
         # hyprgrass - hyprland plugin for touch screen gestures
         # https://github.com/horriblename/hyprgrass
         # inputs.hyprgrass.packages.${pkgs.system}.default
+        hyprlandPlugins.hyprgrass
 
         # hyprsplit - hyprland plugin for separate sets of workspaces on each monitor
         # https://github.com/shezdy/hyprsplit
-        inputs.hyprsplit.packages.${pkgs.system}.default
+        #inputs.hyprsplit.packages.${pkgs.system}.default
+        hyprlandPlugins.hyprsplit
 
         # hyprspace - Workspace overview plugin for Hyprland
         # https://github.com/KZDKM/Hyprspace
         # inputs.hyprspace.packages.${pkgs.system}.default
+        hyprlandPlugins.hyprspace
       ];
     };
-    home.packages = [
-      inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-      inputs.hyprland-contrib.packages.${pkgs.system}.hdrop
-      inputs.hyprland-contrib.packages.${pkgs.system}.scratchpad
-      inputs.hyprland-contrib.packages.${pkgs.system}.try_swap_workspace
-      pkgs.glm
-      # an xprop replacement for hyprland
-      pkgs.hyprprop
-    ];
+    home.packages = with pkgs; [
+      # Screen shot utility for hyprland
+      grimblast
+
+      # tdrop behavior for hyprland
+      hdrop
+
+      # Display arragement UI for hyprland
+      nwg-displays
+
+      # Math lib, not sure why I have this...
+      glm
+
+      # An xprop replacement for hyprland
+      hyprprop
+
+      # Changes the cursor
+      hyprcursor
+
+      # Automatically run a script when a monitor connects (or disconnects) in Hyprland
+      # To use, add this to the the hyprland.conf
+      # exec-once = ~/.cargo/bin/hyprland-monitor-attached PATH_TO_ATTACHED_SHCRIPT.sh [PATH_TO_DETACHED_SHCRIPT.sh]
+      hyprland-monitor-attached
+    ] ++ [
+        inputs.hyprland-contrib.packages.${pkgs.system}.try_swap_workspace
+        inputs.hyprland-contrib.packages.${pkgs.system}.scratchpad
+      ];
     gui.eww = {
-      enable = true;
-      bar.enable = true;
+      bar.enable = lib.mkDefault true;
     };
     scripts.monitorSwitch.enable = true;
+    home.pointerCursor = {
+      hyprcursor = {
+        enable = lib.mkDefault true;
+        size = lib.mkDefault 36;
+      };
+    };
   };
 }
