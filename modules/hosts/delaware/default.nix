@@ -8,10 +8,10 @@
     ../../servers
 
     ### Audio
-    ./audiobookshelf.nix
+    #./audiobookshelf.nix
 
     ### File
-    ./nextcloud.nix
+    #./nextcloud.nix
     ./syncthing.nix
 
     ### Git
