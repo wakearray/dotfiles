@@ -7,8 +7,9 @@ let
   hostname = lib.toLower config.modules.systemDetails.hostName;
 in
 {
+  # /modules/gui/syncthing.nix
   options.gui.syncthing = with lib; {
-    enable = mkEnableOption "";
+    enable = mkEnableOption "Enable a *very* opinionated Syncthing config.";
 
     user = mkOption {
       type = types.str;
@@ -25,12 +26,15 @@ in
 
   config = lib.mkIf (gui.enable && syncthing.enable) {
     # Syncthing, a file syncing service
+    #
+    # Use the command `nix-shell -p syncthing --run "syncthing generate --config myconfig/"`
+    # to generate a new ID and certs for a new machine.
     services.syncthing = {
       enable = true;
       key = "/run/secrets/${hostname}-syncthing-key-pem";
       cert = "/run/secrets/${hostname}-syncthing-cert-pem";
       user = syncthing.user;
-      settings = {
+      settings = lib.mkDefault {
         folders =
         let
           titleUser = titleCase syncthing.user;

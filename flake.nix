@@ -7,11 +7,14 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Nix User Packages
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Lix - A modern Rust based nix alternative
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -51,7 +54,7 @@
     };
 
     # Hyprland + Plugins
-    hyprland.url = "github:hyprwm/Hyprland/v0.45.2";
+    hyprland.url = "github:hyprwm/Hyprland/v0.49.0";
     ## Official plugins
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -65,11 +68,11 @@
     ## hyprland touch screen dispachers
     hyprgrass = {
       url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland"; # IMPORTANT
+      inputs.hyprland.follows = "hyprland";
     };
     ## Additional hyprland multimonitor support
     hyprsplit = {
-      url = "github:shezdy/hyprsplit/v0.45.2";
+      url = "github:shezdy/hyprsplit/v0.46.2";
       inputs.hyprland.follows = "hyprland";
     };
     ## Workspace overview feature for hyprland
@@ -102,7 +105,7 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, lix-module, home-manager, system-manager, nix-system-graphics, impermanence, disko, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, lix-module, nur, home-manager, system-manager, nix-system-graphics, impermanence, disko, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
@@ -119,6 +122,12 @@
     overlays = import ./overlays {inherit inputs outputs;};
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
+
+    # Speeds up `nix repl` by using the flake's nixpkgs version
+    nix.nixPath = let
+      path = toString ./.;
+    in
+      [ "repl=${path}/repl.nix" "nixpkgs=${inputs.nixpkgs}" ];
 
     # systemDetails can have a few variables to control what things are installed
     # hostName     = (string of) hostname or home-manager configuration
@@ -151,10 +160,10 @@
           sops-nix.nixosModules.sops
           lix-module.nixosModules.default
           impermanence.nixosModules.impermanence
+          nur.modules.nixos.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
               useUserPackages = true;
               users.kent = {
                 imports = [
@@ -162,8 +171,53 @@
                   ./home/kent/hosts/greatblue
                   nixvim.homeManagerModules.nixvim
                   impermanence.homeManagerModules.impermanence
+                  nur.modules.homeManager.default
                 ];
               };
+              backupFileExtension = "backup";
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                systemDetails = systemDetails;
+              };
+            };
+          }
+        ];
+      };
+      Starling = let
+        systemDetails = {
+          hostType = "laptop";
+          hostName = "Starling";
+          display = "wayland";
+          features = "printers";
+          architecture = "x86_64-linux";
+        };
+      in
+      lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+          systemDetails = systemDetails;
+        };
+        modules = [
+          ./hosts/starling/configuration.nix
+          nixvim.nixosModules.nixvim
+          sops-nix.nixosModules.sops
+          lix-module.nixosModules.default
+          impermanence.nixosModules.impermanence
+          nur.modules.nixos.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+	            users.kent = {
+	              imports = [
+	                ./home/kent
+		              ./home/kent/hosts/starling
+                  nixvim.homeManagerModules.nixvim
+                  impermanence.homeManagerModules.impermanence
+                  nur.modules.homeManager.default
+		            ];
+	            };
               backupFileExtension = "backup";
               extraSpecialArgs = {
                 inherit inputs outputs;
@@ -200,7 +254,6 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
               users.kent = {
@@ -240,7 +293,6 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
               useUserPackages = true;
               users.kent = {
                 imports = [
@@ -280,7 +332,6 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
               useUserPackages = true;
               users.kent = {
                 imports = [
@@ -326,7 +377,6 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
               useUserPackages = true;
               users.kent = {
                 imports = [
@@ -374,7 +424,6 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
               useUserPackages = true;
               users.jess = {
 	              imports = [
@@ -416,7 +465,6 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
               useUserPackages = true;
               users.jess = {
 	              imports = [
@@ -464,7 +512,6 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = true;
             useUserPackages = true;
             users.jess = {
               imports = [
@@ -516,7 +563,6 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = true;
             useUserPackages = true;
             users.kent = {
               imports = [

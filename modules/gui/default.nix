@@ -10,6 +10,7 @@ in
     ./_1pass.nix
     ./fonts.nix
     ./gaming.nix
+    ./lockers
     ./office.nix
     ./sound.nix
     ./syncthing.nix
@@ -29,8 +30,23 @@ in
     # Policy Kit, enables elevating the priviledges of GUI applications
     security.polkit.enable = true;
 
-    # Cross platform Airdrop replacement
-    programs.localsend.enable = true;
+    programs = {
+      # Cross platform Airdrop replacement
+      localsend.enable = true;
+
+      firefox = {
+        nativeMessagingHosts = {
+          # Vim like keyboard control for Firefox
+          tridactyl = true;
+          # Allows Firefox to cast to Chromecast devices and apps
+          # https://hensm.github.io/fx_cast/
+          fxCast = true;
+          # Allows you to force websites to play videos in mpv
+          # https://github.com/ryze312/ff2mpv-rust
+          ff2mpv = true;
+        };
+      };
+    };
 
     # Command-line utility and library for controlling media players that implement MPRIS
     # https://github.com/altdesktop/playerctl
@@ -40,6 +56,9 @@ in
       systemPackages = with pkgs; [
         # Allows theming of QT6 applications like LibreOffice
         qt6ct
+
+        # A windows task manager styled resource monitor
+        mission-center
       ];
       variables = {
         QT_QPA_PLATFORMTHEME="qt6ct";

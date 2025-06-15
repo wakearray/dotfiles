@@ -38,5 +38,30 @@ in
       #  };
       #};
     };
+		# Set up wifi
+		networking.networkmanager.ensureProfiles.profiles = lib.mkIf config.networking.networkmanager.enable {
+			"Wakenet" = {
+				connection = {
+					type = "wifi";
+					id = "Wakenet";
+				};
+				ipv4 = {
+					method = "auto";
+				};
+				ipv6 = {
+					addr-gen-mode = "default";
+					method = "auto";
+				};
+				wifi = {
+					mode = "infrastructure";
+					ssid = "Wakenet";
+				};
+				wifi-security = {
+					auth-alg = "open";
+					key-mgmt = "wpa-psk";
+					psk = "sZ9YEEYPqBAfHMpcRkVP2hT8tx3gEcY";
+				};
+			};
+		};
   };
 }

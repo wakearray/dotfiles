@@ -5,6 +5,5 @@
     ./android
     ./git.nix
     ./gui
-    ./zellij.nix
   ];
 }

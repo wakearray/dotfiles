@@ -20,6 +20,19 @@ let
   :windowtype "dock"
       ''
   );
+  enableBattery = (
+    if
+      (builtins.match "android" systemDetails.hostType != null || builtins.match "laptop" systemDetails.hostType != null)
+    then # If device is a laptop or android device, display a battery icon.
+      ''
+(label :class battery_class
+           :text battery_icon)
+    (label :text "''${battery_capacity}% | ")
+    time))
+      ''
+    else # Anything else shouldn't
+      ""
+  );
 in
 {
   config = lib.mkIf (gui.enable && (eww.enable && bar.enable)) {
@@ -62,10 +75,7 @@ Mute  : ''${mute_status}"
             :bool ui_memory_visible
             :value {EWW_RAM.used_mem_perc}
             :onchange "")
-    (label :class battery_class
-           :text battery_icon)
-    (label :text "''${battery_capacity}% | ")
-    time))
+    ${enableBattery}
 
 (defwidget bar [ offset ]
   (centerbox :orientation "h"

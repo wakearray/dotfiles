@@ -1,12 +1,13 @@
-{ lib, pkgs, config, systemDetails, ... }:
+{ outputs, lib, pkgs, config, systemDetails, ... }:
 {
   # /home/common
   imports = [
     ./android.nix
     ./gui
+    ./shell
     ./ssh.nix
     ./yazi.nix
-    ./zsh.nix
+    ./zellij.nix
     ../../modules/common/nvim/home.nix
   ];
 
@@ -107,11 +108,12 @@
       };
     };
   };
+
   config = {
     home = {
       enableNixpkgsReleaseCheck = false;
       sessionVariables = {
-        FLAKE = "${config.home.homeDirectory}/dotfiles";
+        NH_FLAKE = "${config.home.homeDirectory}/dotfiles";
       };
       packages = with pkgs; [
         # socat - Utility for bidirectional data transfer between two independent data channels
@@ -145,6 +147,18 @@
         # https://github.com/nix-community/manix
         manix
       ];
+      zellij.enable = true;
+    };
+
+    # nixpkgs allow unfree with stable overlay.
+    nixpkgs = {
+      overlays = [
+        outputs.overlays.stable-packages
+        outputs.overlays.modifications
+        outputs.overlays.additions
+        #outputs.overlays.nur-packages
+      ];
+      config = { allowUnfree = true; };
     };
 
     # Editor Config helps enforce your preferences on editors

@@ -1,7 +1,7 @@
-{ lib, config, pkgs, inputs, ... }:
+{ lib, config, pkgs, ... }:
 let
   hyprland = config.gui.wm.hyprland;
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  #pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   options.gui.wm.hyprland = with lib; {
@@ -9,17 +9,17 @@ in
   };
 
   config = lib.mkIf hyprland.enable {
-    nix.settings = {
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    };
+#    nix.settings = {
+#      substituters = ["https://hyprland.cachix.org"];
+#      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+#    };
 
     programs = {
       hyprland = {
         enable = true;
         withUWSM = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       };
       uwsm  = {
         enable = true;
@@ -31,11 +31,12 @@ in
           };
         };
       };
-      hyprlock.enable = false;
     };
 
+    gui.locker.gtklock.enable = true;
+
     hardware.graphics = {
-      package = pkgs-unstable.mesa.drivers;
+      package = pkgs.mesa;
     };
 
     # A customizable lockscreen for hyprland
@@ -46,6 +47,8 @@ in
     #security.polkit.package = pkgs.hyprpolkitagent;
 
     # Compatibility settings:
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    environment = {
+      sessionVariables.NIXOS_OZONE_WL = "1";
+    };
   };
 }

@@ -10,11 +10,13 @@ in
     plugins = mkOption {
       type = types.listOf types.package;
       default = [ ];
+      description = "A list of rofi plugins youwant installed alongside Rofi. They need to be added here as they get added into the overriden Rofi package appropriate for your GUI environment.";
     };
 
     modi = mkOption {
       type = types.commas;
       default = "drun,window,todo:todofi.sh,filebrowser";
+      description = "These are the options that will appear in the Rofi menu when you use the Rofi shortcut.";
     };
 
     theme = mkOption {
@@ -146,11 +148,11 @@ in
         if
           (builtins.match "wayland" systemDetails.display != null)
         then
-          pkgs.rofi-wayland.override {
+          pkgs.rofi-wayland-unwrapped.override {
             plugins = rofi.plugins;
           }
         else
-          pkgs.rofi.override {
+          pkgs.rofi-unwrapped.override {
             plugins = rofi.plugins;
           }
         );

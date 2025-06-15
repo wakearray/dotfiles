@@ -404,6 +404,10 @@ in
         # https://github.com/JohnDowson/i3-open-next-ws
         i3-open-next-ws
       ];
+      shellAliases = {
+        # This is only necessary on Android, but I also don't intend to enable i3 on anything else.
+        starti3 = "export DISPLAY=:0 PULSE_SERVER=tcp:127.0.0.1:4713 && dbus-launch --exit-with-session i3";
+      };
     };
 
     gui = {

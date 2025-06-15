@@ -14,30 +14,21 @@ in
         force = true;
         executable = true;
         text = /*bash*/ ''
-#!/usr/bin/env bash
+#!${pkgs.bash}/bin/bash
 
 handle() {
   echo "$1"
   case $1 in
     "monitoraddedv2>>"*)
         monitor="''${1#"monitoraddedv2>>"}"
-        monitor_num="''${1%",DP-"*}"
+        monitor_num="$(hyprctl monitors | grep "Monitor" | awk '{print $2}' | grep "^.*$" -c)"
         workspaces_offset=$((9 * monitor_num))
         ${hyprctl} notify 0 20000 "rgb(ff1ea3)" "Monitor $monitor connected"
-        if [ $monitor_num == 1 ]; then
-          sleep 1
-          bash monitorswitch 0 1
-        fi
         ${ewwCommand} open bar --id "mon_$monitor_num" --screen $monitor_num --arg width="100%" --arg offset="$workspaces_offset"
-      ;;
-    monitorremoved\>\>*)
-        # ${hyprctl} notify 0 20000 "rgb(ff1ea3)" "monitor ''${1#"monitorremoved>>"} disconnected"
-        # Grab any missed windows
-        ${hyprctl} dispatch split:grabroguewindows
       ;;
     workspace\>\>*)
         ws_num="''${1#"workspace>>"}"
-        ${ewwCommand} update active_workspace="''${ws_num}"
+        ${ewwCommand} update active_workspace="$ws_num"
       ;;
 #   focusedmon*)
 #     ;;

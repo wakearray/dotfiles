@@ -7,18 +7,19 @@ in
   imports = [
     ./alacritty.nix
     ./cliphist.nix
-    ./eww
     ./firefox.nix
     ./fonts.nix
+    ./llm.nix
     ./mpv.nix
     ./pcmanfm.nix
-    ./rofi.nix
+    ./rofi
     ./scripts
     ./themes
     ./todo
     ./tui.nix
     ./vscode.nix
     ./wayland
+    ./widgets
     ./wthrr.nix
     ./x11
     ./x86_64-gui.nix
@@ -54,10 +55,17 @@ in
         # Assistive Technology Service Provider Interface protocol definitions and daemon for D-Bus
         # Needed for jami on generic Linux systems
         at-spi2-atk
+
+        # An LLM tool
+        chatbox
       ];
     };
 
     programs = {
+      wthrr = {
+        enable = true;
+        gui.color = "plain";
+      };
       # yt-dlp - A feature-rich command-line audio/video downloader
       # https://github.com/yt-dlp/yt-dlp#configuration
       yt-dlp = {

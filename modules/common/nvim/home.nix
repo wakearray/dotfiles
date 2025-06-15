@@ -11,9 +11,6 @@
   };
 
   home = {
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
     packages = with pkgs; [
       # nixd - Nix language server written in C
       # https://github.com/nix-community/nixd

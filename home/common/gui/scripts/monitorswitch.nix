@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   wayland = config.gui.wayland;
   hyprland = config.home.wm.hyprland;
@@ -14,7 +14,7 @@ in
       force = true;
       executable = true;
       text = /*bash*/ ''
-#!/usr/bin/env bash
+#!${pkgs.bash}/bin/bash
 
 sleep_time=0.05
 
