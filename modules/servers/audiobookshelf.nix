@@ -26,7 +26,7 @@ in
   config = lib.mkIf abs.enable {
     services.audiobookshelf = {
       enable = true;
-      port = abs.port;
+      port = abs.localPort;
       package = pkgs.audiobookshelf;
     };
 
