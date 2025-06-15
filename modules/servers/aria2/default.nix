@@ -7,8 +7,8 @@ in
     enable = mkEnableOption "Enable an Aria2 server with Ariang frontend.";
 
     rpcSopsFile = mkOption {
-      type = types.str;
-      default = "./aria2.yaml";
+      type = types.path;
+      default = ./aria2.yaml;
       description = "The location of the SOPS yaml file that includes the RPC secret token.";
     };
 
