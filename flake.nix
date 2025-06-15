@@ -171,6 +171,7 @@
                   ./home/kent/hosts/greatblue
                   nixvim.homeManagerModules.nixvim
                   impermanence.homeManagerModules.impermanence
+                  nur.modules.homeManager.default
                 ];
               };
               backupFileExtension = "backup";

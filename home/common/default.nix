@@ -1,4 +1,4 @@
-{ lib, pkgs, config, systemDetails, ... }:
+{ outputs, lib, pkgs, config, systemDetails, ... }:
 {
   # /home/common
   imports = [
@@ -108,6 +108,7 @@
       };
     };
   };
+
   config = {
     home = {
       enableNixpkgsReleaseCheck = false;
@@ -147,6 +148,17 @@
         manix
       ];
       zellij.enable = true;
+    };
+
+    # nixpkgs allow unfree with stable overlay.
+    nixpkgs = {
+      overlays = [
+        outputs.overlays.stable-packages
+        outputs.overlays.modifications
+        outputs.overlays.additions
+        #outputs.overlays.nur-packages
+      ];
+      config = { allowUnfree = true; };
     };
 
     # Editor Config helps enforce your preferences on editors
