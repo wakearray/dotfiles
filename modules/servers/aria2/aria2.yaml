@@ -1,4 +1,4 @@
-rpc-listen-port: ENC[AES256_GCM,data:i1ZZ77Mt/yHe3vJBB2ua/AnWVBDKaUWPiBEK945mdGnLLun81UuncvOjvagp6dRmLsFkbh854tOwWQ==,iv:QeOan5tTQH52HoPR3QqqPKFlcOUav5fcivCvvVyf+ow=,tag:piibRbvTl3bGGSFJEE93/A==,type:str]
+aria2-rpc-token: ENC[AES256_GCM,data:CnMjXaExN7KFIeIv7n4Isq8bDZWlny4JplKYZeaTuU4bpkt/zMF67WUh9lb6t8D6Ig48yB69nuKKzA==,iv:jJ+jNmmrsBRemF7TRB9cX+JpRo/TkyvxQmU0LHdP9Co=,tag:gumHoYfN76KDT0q7QguQsg==,type:str]
 sops:
     age:
         - recipient: age1em9n3fvg9jphpsx055cv0t8u5wnxs64x2auddxsvjtuvg85kmerqp0wjg0
@@ -55,7 +55,7 @@ sops:
             UnpvdHZtSGUxM2c2V09TVmFzc1pSZEEKy5Pf7fJAQtvFBFKTh6D6slNlc+/2JM/C
             AJWAnrZwQCGp2gL11Gbz+U5NEHvWRm1ZfU968J7h1hCcjrjhS/YZyg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-06-15T03:53:41Z"
-    mac: ENC[AES256_GCM,data:qbZjO4WZWz/rO9Eq820SCDROAry/gGx9g2jWPr9QaBM9JN7Xa3XXVhLophdMRrudmWi9ZuYv5igzEdrjY/ptuK2sLcq12kyZXdyEUjjlDGz2PpGcrwb17gbSx9+QoPg9/kQUV6DFZCKqwkFgdTXSmwKlBwpE5jQz0q21YyvczJI=,iv:mD+tO5C2WAEiBX33SCdaFcbqQgbwqiECUtZVlLLeefY=,tag:9fuWI2TbebmarVJLbnlQmg==,type:str]
+    lastmodified: "2025-06-15T07:38:15Z"
+    mac: ENC[AES256_GCM,data:uUwI+BTtXzPGjMzFe/bCNx7l5CER01etMZ8tQZVWCK88IeKqzW8knmXHEWXr7KRKFwJDetP8nugnY/+Fswuks7tkhI4yxe2wyi3iMN7p4sRABUC8RjzsUxMH3hi3IuoTRdCEbNn1CgjBmtaukDYN2v8kBbkfpyKKJcoOQqLC/uw=,iv:rm9FjBBOfSZ1ZdirhPfh9vf5TiP8jPZtPrqr11SSa9M=,tag:xsma/X+H9m92ieowj3tg8Q==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.10.2
