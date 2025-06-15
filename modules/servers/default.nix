@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./aria2
     ./audiobookshelf.nix
     ./docker
     ./deluge

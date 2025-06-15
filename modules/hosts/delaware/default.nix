@@ -3,7 +3,6 @@
   ## These are the defaults I want on Delaware only:
   imports =
   [
-    ./aria2.nix
     ./zfs.nix
 
     ../../servers
