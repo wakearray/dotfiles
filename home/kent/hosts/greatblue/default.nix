@@ -3,7 +3,6 @@
   imports = [
     ./starship.nix
     ./hyprland.nix
-  # ./hyprlock.nix
   ];
 
   config = {
@@ -11,43 +10,61 @@
       # imv - a command line image viewer intended for use with tiling window managers
       # https://sr.ht/~exec64/imv/
       imv.enable = true;
+
+      llmClients.enable = true;
     };
 
     gui = {
       cliphist.enable = true;
+      eww.enable = true;
       themes.gruvbox.enable = true;
       alacritty.enable = true;
       vscode.enable = true;
+      rofi.rofiNetworkManager.enable = true;
     };
 
-    home.packages = with pkgs; [
-      # TTS
-      piper-tts
-      sox
+    home = {
+      packages = with pkgs; [
+        # TTS
+        piper-tts
+        sox
 
-      # Chrome
-      google-chrome
+        # Chrome
+        google-chrome
 
-      # Image editing
-      #gimp-with-plugins
-      darktable
-      rawtherapee
-      exiftool
-      inkscape
+        # Image editing
+        #gimp-with-plugins
+        darktable
+        rawtherapee
+        exiftool
+        inkscape
 
-      # 3D Modeling
-      blender
-      openscad-unstable
+        # 3D Modeling
+        blender
+        openscad-unstable
 
-      # Signal
-      gurk-rs
+        # Signal
+        gurk-rs
 
-      # GTK patchbay for pipewire
-      # https://gitlab.freedesktop.org/pipewire/helvum
-      helvum
+        # GTK patchbay for pipewire
+        # https://gitlab.freedesktop.org/pipewire/helvum
+        helvum
 
-      # qt6ct for theming QT applications
-      qt6Packages.qt6ct
-    ];
+        # qt6ct for theming QT applications
+        qt6Packages.qt6ct
+      ];
+
+      locker.gtklock = {
+        enable = true;
+        modules = with pkgs; [
+          # Display userinfo on the lockscreen
+          gtklock-userinfo-module
+          # Adds power control buttons to the lockscreen
+          gtklock-powerbar-module
+          # Adds media player controls to the lockscreen
+          gtklock-playerctl-module
+        ];
+      };
+    };
   };
 }
