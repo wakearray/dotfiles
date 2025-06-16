@@ -54,8 +54,6 @@
 
     # Audio and video format converter
     ffmpeg-full
-
-    gtklock
   ];
 
   services = {

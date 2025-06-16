@@ -29,7 +29,8 @@ in
 
     domain = lib.mkOption {
       type = lib.types.str;
-      default = "aria.localhost";
+      default = "aria.example.com";
+      description = "The domain you want to access AriaNg from.";
     };
   };
 
@@ -55,7 +56,15 @@ in
     services.nginx.virtualHosts."${aria.domain}" = {
       enableACME = true;
       forceSSL = true;
-      root = "${pkgs.ariang}/share/ariang";
+      locations = {
+        "/" = {
+          root = "${pkgs.ariang}/share/ariang";
+        };
+        "/jsonrpc" = {
+          proxypass = "http://localhost:${toString config.services.aria2.settings.rpc-listen-port}";
+          proxyWebsockets = true;
+        };
+      };
     };
 
     # RPC token

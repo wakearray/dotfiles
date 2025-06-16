@@ -43,9 +43,6 @@
         blender
         openscad-unstable
 
-        # Signal
-        gurk-rs
-
         # GTK patchbay for pipewire
         # https://gitlab.freedesktop.org/pipewire/helvum
         helvum
