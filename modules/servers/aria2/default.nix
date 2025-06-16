@@ -61,7 +61,7 @@ in
           root = "${pkgs.ariang}/share/ariang";
         };
         "/jsonrpc" = {
-          proxypass = "http://localhost:${toString config.services.aria2.settings.rpc-listen-port}";
+          proxyPass = "http://localhost:${toString config.services.aria2.settings.rpc-listen-port}";
           proxyWebsockets = true;
         };
       };
