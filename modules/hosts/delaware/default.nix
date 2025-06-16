@@ -26,7 +26,7 @@
     };
     audiobookshelf = {
       enable = true;
-      domain = "${domain}";
+      domain = "audiobookshelf.${domain}";
     };
     deluge.enable = true;
     docker = {
