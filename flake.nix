@@ -207,8 +207,6 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
 	            users.kent = {
 	              imports = [
 	                ./home/kent

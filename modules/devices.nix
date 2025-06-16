@@ -4,19 +4,25 @@ let
     kent-greatblue = {
       ip = "192.168.0.11";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOGhJ+3+JajosnhJOFOg0Q202XigcatIgHIWqVdJr1O";
-      hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" "starling" ];
+      hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" "kent-starling" ];
       users = [ "kent" ];
     };
-    starling = {
+    kent-starling = {
       ip = "192.168.0.143";
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJWchC4fFOM4ulE9YjQF2T0M/j8NSpqelnUoVgXK02cb";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEjMJxmbuWJRmhB9zSa7jyz2v5+3ie9hr8ik8udoPyZ7";
       hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" "kent-greatblue" ];
       users = [ "kent" ];
     };
     greatblue = {
       ip = "192.168.0.11";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB3i/PTZZawxIkgKeKl6SBpIbk5MIhPbbCV+Rt2XdVJm";
-      hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" ];
+      hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" "kent-starling" ];
+      users = [ "kent" ];
+    };
+    starling = {
+      ip = "192.168.0.143";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJWchC4fFOM4ulE9YjQF2T0M/j8NSpqelnUoVgXK02cb";
+      hosts = [ "samsung_s24" "lenovo_y700" "cubot_p80" "kent-greatblue" ];
       users = [ "kent" ];
     };
     samsung_s24 = {
@@ -70,7 +76,7 @@ let
     delaware = {
       ip = "192.168.0.46";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIyh4x/us/WXIsqGjbfOCIKKX50mEyYg37ZMJ9VW7nnN";
-      hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" "starling" ];
+      hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" "kent-starling" ];
       users = [ "kent" ];
     };
     lagurus = {
