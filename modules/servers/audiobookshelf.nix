@@ -1,7 +1,6 @@
 { lib, config, pkgs, ... }:
 let
   abs = config.servers.audiobookshelf;
-  domain = abs.domain;
 in
 {
   # AudioBookShelf
@@ -12,8 +11,8 @@ in
 
     domain = mkOption {
       type = types.str;
-      default = "example.com";
-      description = "Domain name of the server. If using the default domain, AudioBookShelf will be accessible at `audiobookshelf.example.com`";
+      default = "audiobookshelf.example.com";
+      description = "Domain name of the server.";
     };
 
     localPort = mkOption {
@@ -32,7 +31,7 @@ in
 
     # Nginx reverse proxy
     services.nginx.virtualHosts = {
-      "audiobookshelf.${domain}" = {
+      "${abs.domain}" = {
         enableACME = true;
         forceSSL = true;
         locations = {

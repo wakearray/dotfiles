@@ -7,9 +7,6 @@
 
     ../../servers
 
-    ### Audio
-    #./audiobookshelf.nix
-
     ### File
     #./nextcloud.nix
     ./syncthing.nix
@@ -24,6 +21,7 @@
   servers = {
     aria2 = {
       enable = true;
+      domain = "aria2.${domain}";
       downloadsDirectory = "/data/downloads/";
     };
     audiobookshelf = {
