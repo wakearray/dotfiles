@@ -18,6 +18,12 @@ in
       default = 8050;
       description = "Which port you'd like to access this webdav server at.";
     };
+
+    sopsFile = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      description = "The secrets file needs to be formatted as a single variable named `webdavEnvironmentVars`";
+    };
   };
 
   config = lib.mkIf webdav.enable {
@@ -51,8 +57,23 @@ in
         ];
       };
       # Use an environment file to allow passwords to be encrypted with SOPS
-      environmentFile = "";
+      environmentFile = config.sops.templates."webdavEnvironmentVars".path;
     };
 
+    sops.secrets.webdavEnvironmentVars = {
+      sopsFile = webdav.sopsFile;
+      mode = "0400";
+      owner = "webdav";
+      group = "webdav";
+    };
+
+    sops.templates."webdavEnvironmentFile" = {
+      content = ''
+        ${config.sops.placeholder.webdavEnvironmentVars}
+      '';
+      mode = "0400";
+      owner = "webdav";
+      group = "webdav";
+    };
   };
 }

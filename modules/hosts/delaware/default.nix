@@ -57,5 +57,10 @@
       enable = true;
       domain = "rss.${domain}";
     };
+    webdav = {
+      enable = true;
+      port = 8050;
+      sopsFile = ./webdavUsers.yaml;
+    };
   };
 }
