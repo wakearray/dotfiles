@@ -6,38 +6,53 @@ in
   ## WIP: Setup for Delaware with SOPS support and correct user directories
   options.servers.webdav = with lib; {
     enable = mkEnableOption "Enable an opinionated webdav install.";
+
+    address = mkOption {
+      type = types.str;
+      default = "0.0.0.0";
+      description = "The IPv4 address you want to listen to requests from.";
+    };
+
+    port = mkOption {
+      type = types.port;
+      default = 8050;
+      description = "Which port you'd like to access this webdav server at.";
+    };
   };
 
   config = lib.mkIf webdav.enable {
     services.webdav = {
       enable = true;
       settings = {
-        address = "0.0.0.0";
-        port = 8050;
-        scope = "/srv/public";
-        modify = true;
-        auth = true;
+        address = webdav.address;
+        port = webdav.port;
+        directory = "/data/userdata/public";
+        permissions = "R";
         users = [
           {
-            username = "{env}KENT_USERNAME";
-            password = "{env}KENT_PASSWORD";
+            username = "{env}USER1_USERNAME";
+            password = "{env}USER1_PASSWORD";
+            directory = "/data/userdata/Kent";
           }
           {
-            username = "{env}JESS_USERNAME";
-            password = "{env}JESS_PASSWORD";
+            username = "{env}USER2_USERNAME";
+            password = "{env}USER2_PASSWORD";
+            directory = "/data/userdata/Jess";
           }
           {
-            username = "{env}ENTERTAINMENT_USERNAME";
-            password = "{env}ENTERTAINMENT_PASSWORD";
+            username = "{env}USER3_USERNAME";
+            password = "{env}USER3_PASSWORD";
+            directory = "/data/userdata/Entertainment";
           }
           {
-            username = "{env}KENT_USERNAME";
-            password = "{env}KENT_PASSWORD";
+            username = "{env}USER4_USERNAME";
+            password = "{env}USER4_PASSWORD";
           }
         ];
       };
       # Use an environment file to allow passwords to be encrypted with SOPS
       environmentFile = "";
     };
+
   };
 }

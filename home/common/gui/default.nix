@@ -56,8 +56,8 @@ in
         # Needed for jami on generic Linux systems
         at-spi2-atk
 
-        # An LLM tool
-        chatbox
+        # A pretty aria2 client
+        varia
       ];
     };
 

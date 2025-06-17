@@ -13,10 +13,6 @@ in
     home.packages = with pkgs; [
       ### Clients
 
-      # All-in-one LLM CLI tool featuring Shell Assistant, Chat-REPL, RAG, AI Tools & Agents
-      # https://github.com/sigoden/aichat
-      aichat
-
       # AI client application and smart assistant
       # https://chatboxai.app/en
       # https://github.com/chatboxai/chatbox

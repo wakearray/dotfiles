@@ -43,6 +43,9 @@ END_CAT
     6)
       nvim --listen /tmp/nvim-editflake ${config.home.homeDirectory}/dotfiles
       ;;
+    7)
+      git -C "$NH_FLAKE" pull origin $(git -C "$NH_FLAKE" rev-parse --abbrev-ref HEAD)
+      ;;
     *)
       break
       ;;
@@ -62,6 +65,7 @@ while true; do
   4) Push current branch to remote
   5) Update flake and run a test build
   6) Continue editing flake
+  7) Pull current branch from remote
 
   Press any other key to leave this menu.
 END_CAT
@@ -94,6 +98,9 @@ END_CAT
       ;;
     6)
       nvim --listen /tmp/nvim-editflake ${config.home.homeDirectory}/dotfiles
+      ;;
+    7)
+      git -C "$NH_FLAKE" pull origin $(git -C "$NH_FLAKE" rev-parse --abbrev-ref HEAD)
       ;;
     *)
       break
