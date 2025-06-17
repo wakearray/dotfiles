@@ -57,7 +57,7 @@ in
         ];
       };
       # Use an environment file to allow passwords to be encrypted with SOPS
-      environmentFile = config.sops.templates."webdavEnvironmentVars".path;
+      environmentFile = config.sops.templates."webdavEnvironmentFile".path;
     };
 
     sops.secrets.webdavEnvironmentVars = {
