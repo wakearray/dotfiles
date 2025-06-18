@@ -39,16 +39,19 @@ in
             username = "{env}USER1_USERNAME";
             password = "{env}USER1_PASSWORD";
             directory = "/data/userdata/Kent";
+            permissions = "CRUD";
           }
           {
             username = "{env}USER2_USERNAME";
             password = "{env}USER2_PASSWORD";
             directory = "/data/userdata/Jess";
+            permissions = "CRUD";
           }
           {
             username = "{env}USER3_USERNAME";
             password = "{env}USER3_PASSWORD";
             directory = "/data/userdata/Entertainment";
+            permissions = "CRUD";
           }
           {
             username = "{env}USER4_USERNAME";
