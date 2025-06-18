@@ -75,5 +75,9 @@ in
       owner = "webdav";
       group = "webdav";
     };
+    networking.firewall = {
+      allowedUDPPorts = [ webdav.port ];
+      allowedTCPPorts = [ webdav.port ];
+    };
   };
 }
