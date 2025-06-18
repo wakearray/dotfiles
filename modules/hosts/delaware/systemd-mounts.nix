@@ -9,7 +9,7 @@
         what = "/data/audiobooks/";
         where = "/data/userdata/public/Audiobooks/";
         type = "fuse.bindfs";
-        options = "force-user=webdav,force-group=userdata,perms=0444:a+rD";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "local-fs.target" ];
         requires = [ "local-fs.target" ];
       }
@@ -18,7 +18,7 @@
         what = "/data/games/";
         where = "/data/userdata/public/Games/";
         type = "fuse.bindfs";
-        options = "force-user=webdav,force-group=userdata,perms=0444:a+rD";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "local-fs.target" ];
         requires = [ "local-fs.target" ];
       }
@@ -27,7 +27,7 @@
         what = "/data/games/";
         where = "/data/userdata/Kent/Games/";
         type = "fuse.bindfs";
-        options = "force-user=webdav,force-group=userdata,perms=0664:g+rwD";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "local-fs.target" ];
         requires = [ "local-fs.target" ];
       }
@@ -36,7 +36,7 @@
         what = "/data/games/";
         where = "/data/userdata/Jess/Games/";
         type = "fuse.bindfs";
-        options = "force-user=webdav,force-group=userdata,perms=0664:g+rwD";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "local-fs.target" ];
         requires = [ "local-fs.target" ];
       }
@@ -45,7 +45,7 @@
         what = "/data/audiobooks/";
         where = "/data/userdata/Kent/Audiobooks/";
         type = "fuse.bindfs";
-        options = "force-user=webdav,force-group=userdata,perms=0664:g+rwD";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "local-fs.target" ];
         requires = [ "local-fs.target" ];
       }
@@ -54,7 +54,7 @@
         what = "/data/audiobooks/";
         where = "/data/userdata/Jess/Audiobooks/";
         type = "fuse.bindfs";
-        options = "force-user=webdav,force-group=userdata,perms=0664:g+rwD";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "local-fs.target" ];
         requires = [ "local-fs.target" ];
       }
@@ -63,7 +63,7 @@
         what = "/data/downloads/";
         where = "/data/userdata/Kent/Downloads/";
         type = "fuse.bindfs";
-        options = "force-user=webdav,force-group=userdata,perms=0664:g+rwD";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "local-fs.target" ];
         requires = [ "local-fs.target" ];
       }
@@ -72,7 +72,7 @@
         what = "/data/torrents/";
         where = "/data/userdata/Kent/torrents/";
         type = "fuse.bindfs";
-        options = "force-user=webdav,force-group=userdata,perms=0664:g+rwD";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "local-fs.target" ];
         requires = [ "local-fs.target" ];
       }
