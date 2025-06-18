@@ -7,6 +7,8 @@
 
     ../../servers
 
+    ./systemd-mounts.nix
+
     ### File
     #./nextcloud.nix
     ./syncthing.nix

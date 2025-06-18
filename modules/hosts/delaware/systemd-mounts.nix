@@ -2,9 +2,9 @@
 {
   systemd.mounts = [
     {
-      description = "Read-only bind mount for public webdav access to Audiobooks";
+      description = "Read-only bind mount for public webdav access to Audiobooks.";
       what = "/data/audiobooks/";
-      where = "/data/userdata/public/audiobooks";
+      where = "/data/userdata/public/audiobooks/";
       options = "bind,noatime,username=webdav";
       mountConfig = {
         DirectoryMode = "444";
@@ -13,34 +13,68 @@
       requires = [ "local-fs.target" ];
     }
     {
-      description = "Family share bind mount for samba";
-      what = "/sambazfs/nextcloud/data/__groupfolders/3/";
-      where = "/mnt/samba/share_family";
-      options = "bind,username=nextcloud";
+      description = "Read-only bind mount for public webdav access to games.";
+      what = "/data/games/";
+      where = "/data/userdata/public/games/";
+      options = "bind,noatime,username=webdav";
+      mountConfig = {
+        DirectoryMode = "444";
+      };
       wantedBy = [ "local-fs.target" ];
       requires = [ "local-fs.target" ];
     }
     {
-      description = "Friends share bind mount for samba";
-      what = "/sambazfs/nextcloud/data/__groupfolders/4/";
-      where = "/mnt/samba/share_friends";
-      options = "bind,username=nextcloud";
+      description = "Read-write games bind mount for Kent.";
+      what = "/data/games/";
+      where = "/data/userdata/Kent/games/";
+      options = "bind,noatime,username=webdav";
+      mountConfig = {
+        DirectoryMode = "664";
+      };
       wantedBy = [ "local-fs.target" ];
       requires = [ "local-fs.target" ];
     }
     {
-      description = "Kent personal storage bind mount for samba";
-      what = "/sambazfs/nextcloud/data/Kent/files";
-      where = "/mnt/samba/personal_kent";
-      options = "bind,username=nextcloud";
+      description = "Read-write games bind mount for Jess.";
+      what = "/data/games/";
+      where = "/data/userdata/Jess/games/";
+      options = "bind,noatime,username=webdav";
+      mountConfig = {
+        DirectoryMode = "664";
+      };
       wantedBy = [ "local-fs.target" ];
       requires = [ "local-fs.target" ];
     }
     {
-      description = "Jess personal storage bind mount for samba";
-      what = "/sambazfs/nextcloud/data/Jess/files";
-      where = "/mnt/samba/personal_jess";
-      options = "bind,username=nextcloud";
+      description = "Read-write audiobooks bind mount for Kent.";
+      what = "/data/audiobooks/";
+      where = "/data/userdata/Kent/audiobooks/";
+      options = "bind,noatime,username=webdav";
+      mountConfig = {
+        DirectoryMode = "664";
+      };
+      wantedBy = [ "local-fs.target" ];
+      requires = [ "local-fs.target" ];
+    }
+    {
+      description = "Read-write audiobooks bind mount for Jess.";
+      what = "/data/audiobooks/";
+      where = "/data/userdata/Jess/audiobooks/";
+      options = "bind,noatime,username=webdav";
+      mountConfig = {
+        DirectoryMode = "664";
+      };
+      wantedBy = [ "local-fs.target" ];
+      requires = [ "local-fs.target" ];
+    }
+    {
+      description = "Read-write downloads bind mount for Kent.";
+      what = "/data/downloads/";
+      where = "/data/userdata/Kent/downloads/";
+      options = "bind,noatime,username=webdav";
+      mountConfig = {
+        DirectoryMode = "664";
+      };
       wantedBy = [ "local-fs.target" ];
       requires = [ "local-fs.target" ];
     }
