@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ ... }:
 {
   config = {
-    config.boot.supportedFilesystems."fuse.bindfs" = true;
+    boot.supportedFilesystems."fuse.bindfs" = true;
 
     systemd.mounts = [
       {
