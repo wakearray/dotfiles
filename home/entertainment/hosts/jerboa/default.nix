@@ -8,7 +8,10 @@
   config = {
     gui = {
       cliphist.enable = true;
-      themes.gruvbox.enable = true;
+      themes.gruvbox = {
+        enable = true;
+        cursorSize = 24;
+      };
       alacritty.enable = true;
 
       eww = {
