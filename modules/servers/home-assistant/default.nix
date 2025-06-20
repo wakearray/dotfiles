@@ -4,9 +4,9 @@ let
 in
 {
   # /modules/servers/home-assistant/
-  imports = [
-    ./script-install.nix
-  ];
+  #imports = [
+  #  ./script-install.nix
+  #];
 
   options.servers.home-assistant = with lib; {
     enable = mkEnableOption "Enable a libvirtd installation of Home Assistant.";
