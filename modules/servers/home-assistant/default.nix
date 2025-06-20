@@ -5,7 +5,7 @@ in
 {
   # /modules/servers/home-assistant/
   imports = [
-    #./script-install.nix
+    ./script-install.nix
   ];
 
   options.servers.home-assistant = with lib; {
@@ -27,7 +27,7 @@ in
 
   config = lib.mkIf home-assistant.enable {
     warnings = (
-      lib.optionals (home-assistant.interface == null) "Interface cannot be null. Set this to the physical interface you want the home-assistant virtual machine to use."
+      lib.optionals (home-assistant.bridge.interface == null) "Interface cannot be null. Set this to the physical interface you want the home-assistant virtual machine to use."
     );
 
     virtualisation = {
