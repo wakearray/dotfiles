@@ -82,4 +82,6 @@
 
   # Enables kernel module needed for ryzenadj to work
   hardware.cpu.amd.ryzen-smu.enable = true;
+
+  virtualisation.virtualbox.host.enable = true;
 }
