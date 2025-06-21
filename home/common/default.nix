@@ -196,7 +196,6 @@
       # https://github.com/eza-community/eza
       eza = {
         enable = true;
-        enableZshIntegration = true;
         package = pkgs.eza;
       };
 

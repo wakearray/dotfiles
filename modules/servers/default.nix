@@ -10,5 +10,6 @@
     ./tt-rss.nix
     ./nginx.nix
     ./jellyfin.nix
+    ./webdav.nix
   ];
 }

@@ -154,9 +154,8 @@ in
       }
 
       clean(){
-        sudo nix-collect-garbage -d
-        sudo nix-store --gc
         clear
+        sudo nix-collect-garbage -d 2>&1 | tail -n 2
         echo "Avaliable NixOS generations:"
         sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
       }

@@ -7,6 +7,8 @@
 
     ../../servers
 
+    ./systemd-mounts.nix
+
     ### File
     #./nextcloud.nix
     ./syncthing.nix
@@ -56,6 +58,11 @@
     tt-rss = {
       enable = true;
       domain = "rss.${domain}";
+    };
+    webdav = {
+      enable = true;
+      port = 8050;
+      sopsFile = ./webdavUsers.yaml;
     };
   };
 }

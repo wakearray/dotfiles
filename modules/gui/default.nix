@@ -59,6 +59,9 @@ in
 
         # A windows task manager styled resource monitor
         mission-center
+
+        # The XFCE terminal, installed as a backup.
+        xfce.xfce4-terminal
       ];
       variables = {
         QT_QPA_PLATFORMTHEME="qt6ct";

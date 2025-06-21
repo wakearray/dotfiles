@@ -1,58 +1,81 @@
 { ... }:
 {
-  # I need to reorganize the server file structure so that
-  # some of these folders are outside the NextCloud folder
-  # structure and are mounted inside NextCloud as
-  # "external storage"
+  config = {
+    boot.supportedFilesystems."fuse.bindfs" = true;
 
-  systemd.mounts = [
-    { # Create a `mount --bind` of the audiobooks folder so Audiobookshelf can still access it.
-      description = "Bind mount for Audiobookshelf";
-      what = "/sambazfs/nextcloud/data/__groupfolders/4/Audio Books/";
-      where = "/var/lib/audiobookshelf/audiobooks";
-      options = "bind,username=audiobookshelf";
-      wantedBy = [ "local-fs.target" ];
-      requires = [ "local-fs.target" ];
-    }
-    {# Create a `mount --bind` of the personal and group NextCloud folders so samba can still access them.
-      description = "Public share bind mount for samba";
-      what = "/sambazfs/nextcloud/data/__groupfolders/2/";
-      where = "/mnt/samba/share_public";
-      options = "bind,username=nextcloud";
-      wantedBy = [ "local-fs.target" ];
-      requires = [ "local-fs.target" ];
-    }
-    {
-      description = "Family share bind mount for samba";
-      what = "/sambazfs/nextcloud/data/__groupfolders/3/";
-      where = "/mnt/samba/share_family";
-      options = "bind,username=nextcloud";
-      wantedBy = [ "local-fs.target" ];
-      requires = [ "local-fs.target" ];
-    }
-    {
-      description = "Friends share bind mount for samba";
-      what = "/sambazfs/nextcloud/data/__groupfolders/4/";
-      where = "/mnt/samba/share_friends";
-      options = "bind,username=nextcloud";
-      wantedBy = [ "local-fs.target" ];
-      requires = [ "local-fs.target" ];
-    }
-    {
-      description = "Kent personal storage bind mount for samba";
-      what = "/sambazfs/nextcloud/data/Kent/files";
-      where = "/mnt/samba/personal_kent";
-      options = "bind,username=nextcloud";
-      wantedBy = [ "local-fs.target" ];
-      requires = [ "local-fs.target" ];
-    }
-    {
-      description = "Jess personal storage bind mount for samba";
-      what = "/sambazfs/nextcloud/data/Jess/files";
-      where = "/mnt/samba/personal_jess";
-      options = "bind,username=nextcloud";
-      wantedBy = [ "local-fs.target" ];
-      requires = [ "local-fs.target" ];
-    }
-  ];
+    systemd.mounts = [
+      {
+        description = "Read-only bind mount for public webdav access to Audiobooks.";
+        what = "/data/audiobooks/";
+        where = "/data/userdata/public/Audiobooks/";
+        type = "fuse.bindfs";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+      }
+      {
+        description = "Read-only bind mount for public webdav access to games.";
+        what = "/data/games/";
+        where = "/data/userdata/public/Games/";
+        type = "fuse.bindfs";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+      }
+      {
+        description = "Read-write games bind mount for Kent.";
+        what = "/data/games/";
+        where = "/data/userdata/Kent/Games/";
+        type = "fuse.bindfs";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+      }
+      {
+        description = "Read-write games bind mount for Jess.";
+        what = "/data/games/";
+        where = "/data/userdata/Jess/Games/";
+        type = "fuse.bindfs";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+      }
+      {
+        description = "Read-write audiobooks bind mount for Kent.";
+        what = "/data/audiobooks/";
+        where = "/data/userdata/Kent/Audiobooks/";
+        type = "fuse.bindfs";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+      }
+      {
+        description = "Read-write audiobooks bind mount for Jess.";
+        what = "/data/audiobooks/";
+        where = "/data/userdata/Jess/Audiobooks/";
+        type = "fuse.bindfs";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+      }
+      {
+        description = "Read-write downloads bind mount for Kent.";
+        what = "/data/downloads/";
+        where = "/data/userdata/Kent/Downloads/";
+        type = "fuse.bindfs";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+      }
+      {
+        description = "Read-write torrents bind mount for Kent.";
+        what = "/data/torrents/";
+        where = "/data/userdata/Kent/torrents/";
+        type = "fuse.bindfs";
+        options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+      }
+    ];
+  };
 }

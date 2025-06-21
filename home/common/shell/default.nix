@@ -16,7 +16,8 @@
 
         repl = "zellij action rename-tab \"Nix Repl\"; nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs";
 
-        l = "eza -la --tree --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore --level=1";
+        l = "eza -lag --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore";
+
         c = "clear";
 
         # use zoxide instead of cd.
@@ -43,7 +44,7 @@
           sebrightbantam   QNAP TS-251           192.168.0.66        \n \
           orloff           Odroid HC4            n/a                 \n \
           cichlid          Jess' Desktop         n/a                 \n \
-          p80              Cubot P80 phone       192.168.0.10 -p8022
+          p80              Cubot P80 phone       192.168.0.10 -p8022 "
         '';
         greatblue = "zellij action rename-tab 'Great Blue' && ssh 192.168.0.11"; # GPD Win 2 2023
         delaware = "zellij action rename-tab 'Delaware' && ssh 192.168.0.46"; # NextCloud Server
