@@ -46,6 +46,11 @@ in
             path = "/home/${syncthing.user}/notes/family/";
             devices = [ "Delaware" ];
           };
+          "Shared_Development" = {
+            # Which folder to add to Syncthing
+            path = "/home/${syncthing.user}/Shared Development/";
+            devices = [ "Delaware" ];
+          };
           "${titleUser}_Notes" = {
             path = "/home/${syncthing.user}/notes/personal/";
             devices = [ "Delaware" ];

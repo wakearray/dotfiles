@@ -6,6 +6,8 @@ let
   s = hyprland.settings;
 in
 {
+  imports = [ ./hypridle.nix ];
+
   options.home.wm.hyprland = with lib; {
     enable = mkEnableOption "Enable an opinionated hyperland home-manager configuration.";
 
@@ -123,6 +125,13 @@ in
           "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/hyprland.sh > /dev/null 2>&1 &"
         ];
         description = "A list of command line arguments you want run when hyprland starts.";
+      };
+      execr = mkOption {
+        type = types.listOf types.str;
+        default = [
+          "${pkgs.eww}/bin/eww close-all && pkill eww"
+        ] ++ s.execOnce;
+        description = "A list of command line arguments you want run when hyprland is reloaded.";
       };
       execShutdown = mkOption {
         type = types.listOf types.str;
@@ -557,6 +566,7 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
         };
         exec-once = s.execOnce;
         exec = s.exec;
+        execr = s.execr;
         exec-shutdown = s.execShutdown;
         # Key bindings
         # https://wiki.hyprland.org/Configuring/Binds/
@@ -627,6 +637,7 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
       bar.enable = lib.mkDefault true;
     };
     scripts.monitorSwitch.enable = true;
+    home.wm.hypridle.enable = true;
     home.pointerCursor = {
       hyprcursor = {
         enable = lib.mkDefault true;
