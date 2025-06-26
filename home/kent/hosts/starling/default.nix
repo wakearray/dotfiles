@@ -32,7 +32,7 @@
         google-chrome
 
         # Image editing
-        gimp-with-plugins
+        gimp3-with-plugins
         darktable
         rawtherapee
         exiftool
