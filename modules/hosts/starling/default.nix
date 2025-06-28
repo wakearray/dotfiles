@@ -62,6 +62,8 @@
     # Let the window manager choose how to handle lid open/close events
     logind = {
       lidSwitch = "ignore";
+      powerKey = "ignore";
+      powerKeyLongPress = "poweroff";
     };
   };
 

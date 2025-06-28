@@ -62,6 +62,9 @@ in
 
         # The XFCE terminal, installed as a backup.
         xfce.xfce4-terminal
+
+        # A simple calculator designed for elementary OS
+        pantheon.elementary-calculator
       ];
       variables = {
         QT_QPA_PLATFORMTHEME="qt6ct";
