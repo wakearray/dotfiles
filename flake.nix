@@ -12,12 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Lix - A modern Rust based nix alternative
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Nvim configs handled with Nixlang/Flakes
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -105,7 +99,7 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, lix-module, nur, home-manager, system-manager, nix-system-graphics, impermanence, disko, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, nur, home-manager, system-manager, nix-system-graphics, impermanence, disko, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
@@ -158,7 +152,6 @@
           nixos-hardware.nixosModules.gpd-win-max-2-2023
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
-          lix-module.nixosModules.default
           impermanence.nixosModules.impermanence
           nur.modules.nixos.default
           home-manager.nixosModules.home-manager
@@ -201,7 +194,6 @@
           ./hosts/starling/configuration.nix
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
-          lix-module.nixosModules.default
           impermanence.nixosModules.impermanence
           nur.modules.nixos.default
           home-manager.nixosModules.home-manager
@@ -249,7 +241,6 @@
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule
-          lix-module.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -288,7 +279,6 @@
           ./hosts/sebrightbantam/configuration.nix
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
-          lix-module.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -327,7 +317,6 @@
           ./hosts/lagurus/configuration.nix
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
-          lix-module.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -372,7 +361,6 @@
           ./hosts/jerboa/configuration.nix
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
-          lix-module.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -441,7 +429,6 @@
           }
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
-          lix-module.nixosModules.default
         ];
       };
       # Jess SteamDeck
@@ -482,7 +469,6 @@
           }
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
-          lix-module.nixosModules.default
         ];
       };
     };
@@ -536,7 +522,6 @@
         }
         nixvim.nixosModules.nixvim
         sops-nix.nixosModules.sops
-        lix-module.nixosModules.default
       ];
       format = "iso";
       # https://github.com/nix-community/nixos-generators#using-in-a-flake
@@ -578,7 +563,6 @@
         }
         nixvim.nixosModules.nixvim
         sops-nix.nixosModules.sops
-        lix-module.nixosModules.default
       ];
       format = "iso";
       # https://github.com/nix-community/nixos-generators#using-in-a-flake

@@ -170,16 +170,17 @@
     };
 
     nix = {
+      package = pkgs.lixPackageSets.latest.lix;
       settings = {
         # Enable flakes.
-        experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+        experimental-features = [ "nix-command" "flakes" ];
         # Uses hard links to remove duplicates in the nix store
         auto-optimise-store = true;
       };
     };
 
     # Deletes temp files on boot.
-    boot.tmp.useTmpfs = true;
+    boot.tmp.useTmpfs = lib.mkDefault true;
 
     # Set your time zone.
     time.timeZone = "America/New_York";

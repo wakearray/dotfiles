@@ -56,6 +56,9 @@
     ffmpeg-full
   ];
 
+  # Starling can't complete full builds if this is enabled
+  boot.tmp.useTmpfs = false;
+
   services = {
     # Needed to make NixOS work with displaylink docks
     xserver.videoDrivers = [ "displaylink" "modesetting" ];

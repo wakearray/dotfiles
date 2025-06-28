@@ -52,7 +52,7 @@ in
     };
 
     nix = {
-      package = pkgs.lix;
+      package = pkgs.lixPackageSets.latest.lix;
       # Weekly garbage collection
       gc = {
         automatic = true;
