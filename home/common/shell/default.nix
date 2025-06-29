@@ -14,7 +14,7 @@
         #  source /etc/set-environment && nix repl $(echo $NIX_PATH | perl -pe 's|.*(/nix/store/.*-source/repl.nix).*|\1|')
         #'';
 
-        repl = "zellij action rename-tab \"Nix Repl\"; nix repl --extra-experimental-features 'flakes repl-flake' nixpkgs";
+        repl = "zellij action rename-tab \"Nix Repl\"; nix repl --extra-experimental-features 'flakes' nixpkgs";
 
         l = "eza -lag --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore";
 
