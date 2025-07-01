@@ -7,7 +7,7 @@
     cert       = "/run/secrets/delaware-syncthing-cert-pem";
     user       = "syncthing";
     group      = "userdata";
-    guiAddress = "127.0.0.1:8384";
+    guiAddress = "0.0.0.0:8384";
     settings = {
       # setting.devices can be found in modules/common/syncthing.nix
       folders = {
@@ -16,6 +16,7 @@
           devices = [
             "Jess_S20_Ultra"
 	          "Jess_Cichlid"
+            "Jess_Boox"
 
             "Kent_S24_Ultra"
             "Kent_P80"
@@ -24,6 +25,7 @@
             "Kent_Hisense_A9"
             "Kent_Hibreak_Color"
             "Kent_GreatBlue"
+            "Kent_Starling"
           ];
         };
         "Kent_Notes" = {
@@ -36,6 +38,7 @@
             "Kent_Hisense_A9"
             "Kent_Hibreak_Color"
             "Kent_GreatBlue"
+            "Kent_Starling"
           ];
         };
         "Kent_S24_Ultra" = {
@@ -52,11 +55,15 @@
             "Kent_Hisense_A9"
             "Kent_Hibreak_Color"
             "Kent_GreatBlue"
+            "Kent_Starling"
           ];
 	      };
         "Kent_Backup_PC" = {
           path = "/data/userdata/Kent/Backups/PC";
-	        devices = [ "Kent_GreatBlue" ];
+	        devices = [
+            "Kent_GreatBlue"
+            "Kent_Starling"
+          ];
 	      };
 
 	      "Jess_Backup_Android" = {
@@ -64,17 +71,24 @@
 	        devices = [
             "Jess_S20_Ultra"
 	          "Jess_Cichlid"
+            "Jess_Shoebill"
+            "Jess_Boox"
           ];
 	      };
         "Jess_Backup_PC" = {
           path = "/data/userdata/Jess/Backups/PC";
-	        devices = [ "Jess_Cichlid" ];
+	        devices = [
+            "Jess_Cichlid"
+            "Jess_Shoebill"
+          ];
 	      };
         "Jess_Notes" = {
           path = "/data/userdata/Jess/Notes";
           devices = [
 	          "Jess_S20_Ultra"
 	          "Jess_Cichlid"
+            "Jess_Shoebill"
+            "Jess_Boox"
 	        ];
         };
         "Jess_S20_Ultra" = {

@@ -13,6 +13,12 @@ in
       type = types.listOf types.str;
       default = [ "nobody" ];
     };
+
+    pamLogin = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable or disable automatically logging into gnome-keyring on user login.";
+    };
   };
 
   config = lib.mkIf (gui.enable && onePass.enable) {
@@ -26,7 +32,11 @@ in
       libgnome-keyring
     ];
 
+    # Runs gnome-keyring as root
     services.gnome.gnome-keyring.enable = true;
+
+    # Logs into gnome-keyring on login
+    security.pam.services.login.enableGnomeKeyring = true;
 
     # This has some issues when using it with VSCode and in other circumstances.
     environment.sessionVariables = lib.mkIf config.gui._1pass.sshAuthSock  {
