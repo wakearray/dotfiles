@@ -28,7 +28,7 @@
     # keymaps
     keymaps = [
       {
-        action = "<esc>:b\\r";
+        action = "<esc>:b\";
         key = "<M-J>";
         mode = [ "n" "v" "i" ];
         options = {
@@ -37,7 +37,7 @@
         };
       }
       {
-        action = "<esc>:bn\\r";
+        action = "<esc>:bn\";
         key = "<M-K>";
         mode = [ "n" "v" "i" ];
         options = {
@@ -46,7 +46,7 @@
         };
       }
       {
-        action = "<esc>:noh\\r";
+        action = "<esc>:noh\";
         key = "<M-Space>";
         mode = [ "n" "v" "i" ];
         options = {
@@ -55,7 +55,7 @@
         };
       }
       {
-        action = "<esc>:Telescope\\r";
+        action = "<esc>:Telescope\";
         key = "<M-t>";
         mode = [ "n" "i" ];
         options = {
@@ -64,7 +64,7 @@
         };
       }
       {
-        action = "<esc>:Telescope live_grep\\r";
+        action = "<esc>:Telescope live_grep\";
         key = "<M-g>";
         mode = [ "n" "i" ];
         options = {
@@ -73,7 +73,7 @@
         };
       }
       {
-        action = "<esc>:Telescope buffers\\r";
+        action = "<esc>:Telescope buffers\";
         key = "<M-b>";
         mode = [ "n" "i" ];
         options = {
