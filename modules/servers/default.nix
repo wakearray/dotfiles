@@ -5,6 +5,7 @@
     ./audiobookshelf.nix
     ./docker
     ./deluge
+    ./firewall
     ./home-assistant
     ./satisfactory.nix
     ./tt-rss.nix

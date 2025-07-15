@@ -3,42 +3,23 @@
   options.servers.tt-rss = {
     enable = lib.mkEnableOption "tt-rss";
 
-    port = lib.mkOption {
-      type = lib.types.port;
-      default = 8064;
-      description = "The localhost port to use.";
-    };
-
     domain = lib.mkOption {
       type = lib.types.str;
-      default = "rss.localhost";
+      default = "rss.example.com";
       description = "The nginx domain you'll be accessing the site from.";
-    };
-
-    selfUrlPath = lib.mkOption {
-      type = lib.types.str;
-      default = "http://localhost";
-      description = "The URL where the server can be found.";
     };
   };
   config = lib.mkIf config.servers.tt-rss.enable {
     services = {
       tt-rss = {
         enable = true;
-        selfUrlPath = "${config.servers.tt-rss.selfUrlPath}:${builtins.toString config.servers.tt-rss.port}";
+        virtualHost = "${config.servers.tt-rss.domain}";
       };
 
       # Nginx reverse proxy
-      nginx.virtualHosts = {
-        "${config.servers.tt-rss.domain}" = {
-          enableACME = true;
-          forceSSL = true;
-          locations = {
-            "/" = {
-              proxyPass = "${config.servers.tt-rss.selfUrlPath}:${builtins.toString config.servers.tt-rss.port}";
-            };
-          };
-        };
+      nginx.virtualHosts."${config.servers.tt-rss.domain}" = {
+        enableACME = true;
+        forceSSL = true;
       };
     };
     servers.nginx.enable = true;

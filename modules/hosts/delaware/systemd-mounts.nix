@@ -10,8 +10,8 @@
         where = "/data/userdata/public/Audiobooks/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
-        wantedBy = [ "local-fs.target" ];
-        requires = [ "local-fs.target" ];
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
       }
       {
         description = "Read-only bind mount for public webdav access to games.";
@@ -19,8 +19,8 @@
         where = "/data/userdata/public/Games/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
-        wantedBy = [ "local-fs.target" ];
-        requires = [ "local-fs.target" ];
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
       }
       {
         description = "Read-write games bind mount for Kent.";
@@ -28,8 +28,8 @@
         where = "/data/userdata/Kent/Games/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
-        wantedBy = [ "local-fs.target" ];
-        requires = [ "local-fs.target" ];
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
       }
       {
         description = "Read-write games bind mount for Jess.";
@@ -37,8 +37,8 @@
         where = "/data/userdata/Jess/Games/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
-        wantedBy = [ "local-fs.target" ];
-        requires = [ "local-fs.target" ];
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
       }
       {
         description = "Read-write audiobooks bind mount for Kent.";
@@ -46,8 +46,8 @@
         where = "/data/userdata/Kent/Audiobooks/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
-        wantedBy = [ "local-fs.target" ];
-        requires = [ "local-fs.target" ];
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
       }
       {
         description = "Read-write audiobooks bind mount for Jess.";
@@ -55,8 +55,8 @@
         where = "/data/userdata/Jess/Audiobooks/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
-        wantedBy = [ "local-fs.target" ];
-        requires = [ "local-fs.target" ];
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
       }
       {
         description = "Read-write downloads bind mount for Kent.";
@@ -64,8 +64,8 @@
         where = "/data/userdata/Kent/Downloads/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
-        wantedBy = [ "local-fs.target" ];
-        requires = [ "local-fs.target" ];
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
       }
       {
         description = "Read-write torrents bind mount for Kent.";
@@ -73,8 +73,8 @@
         where = "/data/userdata/Kent/torrents/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
-        wantedBy = [ "local-fs.target" ];
-        requires = [ "local-fs.target" ];
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
       }
     ];
   };

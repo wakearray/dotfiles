@@ -49,7 +49,7 @@
               POSTGRESQL_HOSTS = "bricks-postgresql";
               REDIS_HOSTS = "bricks-redis";
             };
-            ports = [ "8001:8001" "8002:8002" ];
+            ports = [ "127.0.0.1:8001:8001" "127.0.0.1:8002:8002" ];
             dependsOn = [ "bricks-redis" "bricks-postgresql" ];
             hostname = "bricksllm";
             autoStart = true;
@@ -65,7 +65,7 @@
               # Manually set the allowable models. These are also manually set in bricksllm
               CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4o=gpt-4o";
             };
-            ports = [ "3210:3210" ];
+            ports = [ "127.0.0.1:3210:3210" ];
             dependsOn = [ "bricksllm" ];
             hostname = "Lobe-Chat";
             autoStart = true;

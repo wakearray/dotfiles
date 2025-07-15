@@ -1,5 +1,9 @@
 { lib, config, pkgs, ... }:
 {
+  # when creating new containers, ensure the `ports` argument always starts with
+  # "127.0.0.1:" otherwise Docker will attempt to open external ports in iptables
+  # regardless of other firewall rules.
+
   imports = [
     ./lobechat.nix
     ./tubearchivist.nix
@@ -26,6 +30,12 @@
       docker = {
         enable = true;
         enableOnBoot = true;
+        daemon.settings = {
+          pruning = {
+            enabled = true;
+            interval = "24h";
+          };
+        };
       };
       oci-containers.backend = "docker";
     };

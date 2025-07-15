@@ -29,7 +29,7 @@
       };
     };
   };
-  config = 
+  config =
     let
       cfg =  config.servers.docker.wger.volumes;
       # Docker Volumes
@@ -51,7 +51,7 @@
 	    "${static}:/home/wger/static"
 	    "${media}:/home/wger/media"
 	  ];
-	  ports = [ "8000" ];
+	  ports = [ "127.0.0.1:8000" ];
 	  extraOptions = [
 	    "--health-cmd=wget --no-verbose --tries=1 --spider http://localhost:8000"
 	    "--health-interval=10s"
@@ -69,7 +69,7 @@
 	    "${static}:/wger/static:ro"
 	    "${media}:/wger/media:ro"
 	  ];
-	  ports = [ "8063:80" ];
+	  ports = [ "127.0.0.1:8063:8063" ];
 	  extraOptions = [
 	    "--health-cmd=service nginx status"
 	    "--health-interval=10s"
@@ -89,7 +89,7 @@
 	  volumes = [
 	    "${postgres-data}:/var/lib/postgresql/data/"
 	  ];
-	  ports = [ "5432" ];
+	  ports = [ "127.0.0.1:5432" ];
 	  extraOptions = [
 	    "--health-cmd=pg_isready -U wger"
 	    "--health-interval=10s"
@@ -101,7 +101,7 @@
 	};
 	wger-cache = {
 	  image = "redis";
-	  ports = [ "6379" ];
+	  ports = [ "127.0.0.1:6379" ];
 	  volumes = [
 	    "${redis-data}:/data"
 	  ];
