@@ -47,7 +47,7 @@
       actions.enable = false;
     };
     mail = {
-      enable = true;
+      enable = false;
       domain = "${domain}";
     };
     nginx = {

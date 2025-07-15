@@ -57,7 +57,7 @@
         # Attribute set of values from `core.conf` file
         # https://git.deluge-torrent.org/deluge/tree/deluge/core/preferencesmanager.py#n41
         add_paused = false;
-        allow_remote = false;
+        allow_remote = true;
         auto_manage_prefer_seeds = false;
         auto_managed = true;
         cache_expiry = 60;
