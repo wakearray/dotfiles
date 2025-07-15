@@ -28,7 +28,7 @@
     # keymaps
     keymaps = [
       {
-        action = "<esc>:b\";
+        action = "<esc>:bp\";
         key = "<M-J>";
         mode = [ "n" "v" "i" ];
         options = {

@@ -28,7 +28,7 @@ let
 (label :class battery_class
            :text battery_icon)
     (label :text "''${battery_capacity}% | ")
-    time))
+    time)
       ''
     else # Anything else shouldn't
       ""
@@ -75,7 +75,7 @@ Mute  : ''${mute_status}"
             :bool ui_memory_visible
             :value {EWW_RAM.used_mem_perc}
             :onchange "")
-    ${enableBattery}
+    ${enableBattery} )
 
 (defwidget bar [ offset ]
   (centerbox :orientation "h"
