@@ -30,11 +30,13 @@
       docker = {
         enable = true;
         #enableOnBoot = false;
-        daemon.settings = {
-          pruning = {
-            enabled = true;
-            interval = "24h";
-          };
+
+        # Pruning causes errors in starting docker.
+        #        daemon.settings = {
+        #          pruning = {
+        #            enabled = true;
+        #            interval = "24h";
+        #          };
         };
       };
       podman = {
