@@ -39,7 +39,7 @@
       };
 
       archivist-redis = {
-        image = "redis/redis-stack-server";
+        image = "redis";
         autoStart = true;
         #      expose = [ "6379" ];
         volumes = [
@@ -114,7 +114,7 @@
       in ''
         ${dockercli} pull bbilly1/tubearchivist:latest
         ${dockercli} pull bbilly1/tubearchivist-es:latest
-        ${dockercli} pull redis/redis-stack-server:latest
+        ${dockercli} pull redis:latest
         systemctl restart docker-archivist-es.service
         systemctl restart docker-archivist-redis.service
         systemctl restart docker-tubearchivist.service

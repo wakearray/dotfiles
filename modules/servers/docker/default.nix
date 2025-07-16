@@ -26,10 +26,10 @@
     ];
 
     virtualisation = {
-      # Enable virtualization.
+      # Enable docker deamon
       docker = {
-        enable = true;
-        enableOnBoot = true;
+        enable = false;
+        enableOnBoot = false;
         daemon.settings = {
           pruning = {
             enabled = true;
@@ -37,7 +37,15 @@
           };
         };
       };
-      oci-containers.backend = "docker";
+      podman = {
+        enable = true;
+        dockerCompat = true;
+        autoPrune = {
+          enabled = true;
+          dates = "weekly";
+        };
+      };
+      oci-containers.backend = "podman";
     };
     servers.nginx.enable = true;
   };
