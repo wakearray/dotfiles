@@ -18,10 +18,10 @@
         ];
         environment = {
           ES_URL = "http://archivist-es:9200";  # needs protocol e.g. http and port
-          REDIS_HOST = "archivist-redis";       # don't add protocol
+          REDIS_CON = "redis://archivist-redis:6379";
           HOST_UID = "1000";
           HOST_GID = "1000";
-          TA_HOST = "192.168.0.46";      # set your host name
+          TA_HOST = "http://192.168.0.46";      # set your host name
           TZ = "America/New_York";
         };
         environmentFiles = [
