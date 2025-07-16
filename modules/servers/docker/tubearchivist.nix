@@ -11,7 +11,7 @@
       tubearchivist = {
         image = "bbilly1/tubearchivist";
         autoStart = true;
-        ports = [ "127.0.0.1:8062:8000" ];
+        ports = [ "8062:8000" ];
         volumes = [
           "/data/tubearchivist/media:/youtube"
           "/data/tubearchivist/cache:/cache"

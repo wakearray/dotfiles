@@ -28,8 +28,8 @@
     virtualisation = {
       # Enable docker deamon
       docker = {
-        enable = false;
-        enableOnBoot = false;
+        enable = true;
+        #enableOnBoot = false;
         daemon.settings = {
           pruning = {
             enabled = true;
@@ -38,14 +38,14 @@
         };
       };
       podman = {
-        enable = true;
-        dockerCompat = true;
+        enable = false;
+        dockerCompat = false;
         autoPrune = {
           enabled = true;
           dates = "weekly";
         };
       };
-      oci-containers.backend = "podman";
+      oci-containers.backend = "docker";
     };
     servers.nginx.enable = true;
   };
