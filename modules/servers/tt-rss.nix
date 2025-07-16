@@ -13,6 +13,7 @@
     services = {
       tt-rss = {
         enable = true;
+        selfUrlPath = "https://${config.servers.tt-rss.domain}";
         virtualHost = "${config.servers.tt-rss.domain}";
       };
 

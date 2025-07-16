@@ -130,7 +130,7 @@ in
         type = types.listOf types.str;
         default = [
           "${pkgs.eww}/bin/eww close-all && pkill eww"
-        ] ++ s.execOnce;
+        ];
         description = "A list of command line arguments you want run when hyprland is reloaded.";
       };
       execShutdown = mkOption {

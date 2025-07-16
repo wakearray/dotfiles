@@ -12,10 +12,11 @@
             ", preferred, auto, 4.0"
           ];
           windowRules = [
-            "group set, class:firefox, title:^(.*)!(Mozilla Firefox Private Browsing)$"
+            "group set, class:(firefox), title:^(.*)!(Mozilla Firefox Private Browsing)$"
             "float, class:(firefox), title:(Picture-in-Picture)"
             "pin, class:(firefox), title:(Picture-in-Picture), floating:1"
             "size 20% 20%, class:(firefox), title:(Picture-in-Picture), floating:1, pinned:1"
+            "workspace 2, class:(Alacritty)"
           ];
           animations = {
             enable = true;
@@ -24,7 +25,6 @@
           execOnce = [
             "alacritty"
             "firefox"
-            "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
             "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"0\""
           ];
           exec = [
