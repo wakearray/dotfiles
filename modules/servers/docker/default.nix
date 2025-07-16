@@ -41,7 +41,7 @@
         enable = false;
         dockerCompat = false;
         autoPrune = {
-          enabled = true;
+          enable = true;
           dates = "weekly";
         };
       };
