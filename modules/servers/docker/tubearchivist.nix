@@ -41,7 +41,7 @@
       archivist-redis = {
         image = "redis";
         autoStart = true;
-        #      expose = [ "6379" ];
+        ports = [ "127.0.0.1:6379:6379" ];
         volumes = [
           "/data/tubearchivist/redis:/data"
         ];
@@ -66,9 +66,10 @@
           "--network=archivist-network"
         ];
         volumes = [
+          # If encountering permissions error, run `sudo chown 1000:0 -R /data/tubearchivist/es`
           "/data/tubearchivist/es:/usr/share/elasticsearch/data"            # check for permission error when using bind mount, see readme
         ];
-  #      expose = [ "9200" ];
+        ports = [ "127.0.0.1:9200:9200" ];
       };
     };
 
@@ -96,6 +97,9 @@
       serviceConfig.Type = "oneshot";
       script = let dockercli = "${config.virtualisation.docker.package}/bin/docker";
       in ''
+        # Ensures elastic search doesn't have permission errors
+        chown 1000:0 -R /data/tubearchivist/es
+
         # Put a true at the end to prevent getting non-zero return code, which will
         # crash the whole service.
         check=$(${dockercli} network ls | grep "archivist-network" || true)

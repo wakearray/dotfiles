@@ -70,35 +70,35 @@ in
       database.type = "postgres";
       # Enable support for Git Large File Storage
       lfs.enable = true;
-      secrets = {
-        mailer = {
-          PASSWD = "/run/secrets/mail-server-noreply";
-        };
-      };
+      #secrets = {
+      #  mailer = {
+      #    PASSWD = "/run/secrets/mail-server-noreply";
+      #  };
+      #};
       settings = {
         server = {
-          DOMAIN = "git.${forgejo.domain}";
+          DOMAIN = "localhost";
           # You need to specify this to remove the port from URLs in the web UI.
-          ROOT_URL = "https://${forgejo.domain}/";
-          PROTOCOL = "https";
+          ROOT_URL = "https://git.${forgejo.domain}/";
+          PROTOCOL = "http";
           HTTP_PORT = forgejo.localPort;
         };
         # You can temporarily allow registration to create an admin user.
         service.DISABLE_REGISTRATION = forgejo.disableRegistration;
         # Add support for actions, based on act: https://github.com/nektos/act
         actions = {
-          ENABLED = true;
-          DEFAULT_ACTIONS_URL = "github";
+          ENABLED = forgejo.actions.enable;
+          DEFAULT_ACTIONS_URL = forgejo.actions.defaultActionsUrl;
         };
         # Sending emails is completely optional
         # You can send a test email from the web UI at:
         # Profile Picture > Site Administration > Configuration >  Mailer Configuration
-         mailer = {
-           ENABLED = forgejo.enable;
-           SMTP_ADDR = forgejo.mail.smtpAddr;
-           FROM = "noreply@${forgejo.domain}";
-           USER = "noreply@${forgejo.domain}";
-         };
+        # mailer = {
+        #   ENABLED = forgejo.enable;
+        #   SMTP_ADDR = forgejo.mail.smtpAddr;
+        #   FROM = "noreply@${forgejo.domain}";
+        #   USER = "noreply@${forgejo.domain}";
+        # };
       };
     };
 

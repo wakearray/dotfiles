@@ -43,8 +43,9 @@
       enable = true;
       domain = "${domain}";
       localPort = 8065;
+      disableRegistration = true;
       mail.enable = false;
-      actions.enable = false;
+      actions.enable = true;
     };
     mail = {
       enable = false;
