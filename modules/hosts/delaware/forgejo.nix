@@ -54,11 +54,13 @@ in
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable the email notification function.";
+        description = "Enable Forgejo Actions. Remember Forgejo Actions relies on Forgejo Runner which must be installed seperately.";
       };
 
       defaultActionsUrl = mkOption {
-        type = types.enum [ "github" ];
+        type = types.str;
+        default = "https://data.forgejo.org";
+        description = "In a workflow, when uses: does not specify an absolute URL, the value of DEFAULT_ACTIONS_URL is prepended to it.";
       };
     };
   };
