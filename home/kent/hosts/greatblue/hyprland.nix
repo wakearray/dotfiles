@@ -4,76 +4,84 @@ let
 in
 {
   config = {
-    home.wm.hyprland = {
-      enable = true;
-      modKey = "SUPER";
-      settings = {
-        # https://wiki.hyprland.org/Configuring/Monitors/
-        monitors = [
-          # Built in display: eDP-1
-          "desc:Japan Display Inc. GPD1001H 0x00000001, 2560x1600@60.01Hz, 0x0, 1.666667"
-          # External USB-C display with VESA
-          "desc:Stargate Technology F156P1 0x00001111, 1920x1080@60.00Hz, auto-up, 1"
-          # External USB-C display without VESA, labeled "QQH"
-          "desc:DZX Z1-9 0000000000000, preferred, auto-up, 1"
-          # Mirror main display on QQH
-          # "DP-1, preferred, auto, 1, mirror,desc:Japan Display Inc. GPD1001H 0x00000001"
-          # Primary monitor on the 4 display dock
-          "desc:AOC 2279WH AHXJ49A007682, 1920x1080@60, auto-up, 1"
-          # Literally any other monitor
-          ", preferred, auto, 1"
-        ];
-        windowRules = [
-          "group set, class:firefox, title:^(.*)!(Mozilla Firefox Private Browsing)$"
-          "float, class:(firefox), title:(Picture-in-Picture)"
-          "pin, class:(firefox), title:(Picture-in-Picture), floating:1"
-          "size 20% 20%, class:(firefox), title:(Picture-in-Picture), floating:1, pinned:1"
-        ];
-        animations = {
-          enable = true;
-          firstLaunchAnimation = true;
+    home = {
+      shellAliases = {
+        disable = "${pkgs.hyprland}/bin/hyprctl keyword monitor \"desc:BNQ BenQ GW2480 E1L0141401Q, disable\" && ${pkgs.hyprland}/bin/hyprctl keyword monitor \"desc:AOC 2279WH AHXJ49A007682, disable\"";
+        enable = "${pkgs.hyprland}/bin/hyprctl keyword monitor \"desc:BNQ BenQ GW2480 E1L0141401Q, 1920x1080@60, auto-up, 1\" && ${pkgs.hyprland}/bin/hyprctl keyword monitor \"desc:AOC 2279WH AHXJ49A007682, 1920x1080@60, auto-up, 1\"";
+      };
+      wm.hyprland = {
+        enable = true;
+        modKey = "SUPER";
+        settings = {
+          # https://wiki.hyprland.org/Configuring/Monitors/
+          monitors = [
+            # Built in display: eDP-1
+            "desc:Japan Display Inc. GPD1001H 0x00000001, 2560x1600@60.01Hz, 0x0, 1.666667"
+            # External USB-C display with VESA
+            "desc:Stargate Technology F156P1 0x00001111, 1920x1080@60.00Hz, auto-up, 1"
+            # External USB-C display without VESA, labeled "QQH"
+            "desc:DZX Z1-9 0000000000000, preferred, auto-up, 1"
+            # Mirror main display on QQH
+            # "DP-1, preferred, auto, 1, mirror,desc:Japan Display Inc. GPD1001H 0x00000001"
+            # Primary monitor on the 4 display dock
+            "desc:AOC 2279WH AHXJ49A007682, 1920x1080@60, auto-up, 1"
+            # Secondary monitor on the 4 display dock
+            "desc:BNQ BenQ GW2480 E1L0141401Q, 1920x1080@60, auto-up, 1"
+            # Literally any other monitor
+            ", preferred, auto, 1"
+          ];
+          windowRules = [
+            "group set always, class:(firefox), title:^(.*)!(Mozilla Firefox Private Browsing)$"
+            "float, class:(firefox), title:(Picture-in-Picture)"
+            "pin, class:(firefox), title:(Picture-in-Picture), floating:1"
+            "size 20% 20%, class:(firefox), title:(Picture-in-Picture), floating:1, pinned:1"
+            "fullscreen, title:(Steam Big Picture Mode)"
+            "idleinhibit always, class:^(steam_app_.*)$"
+            "idleinhibit always, fullscreen:1"
+          ];
+          animations = {
+            enable = true;
+            firstLaunchAnimation = true;
+          };
+          execOnce = [
+            "alacritty"
+            "firefox"
+            "signal-desktop"
+            "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
+            "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"0\""
+            "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"9\""
+            "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_2 --screen 2 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"18\""
+            "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_3 --screen 3 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"27\""
+            "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh  > /dev/null 2>&1 &"
+            "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/hyprland.sh > /dev/null 2>&1 &"
+          ];
+          exec = [ ];
+          execShutdown = [ "${pkgs.eww}/bin/eww close-all && pkill eww" ];
+          bindl = [
+            # Bind mute key to toggle mute
+            ", XF86AudioMute, exec, pamixer -t"
+            # Also have it update an eww variable
+            ", XF86AudioMute, exec, eww update -c ${config.xdg.configHome}/eww/bar mute_status='\$(pamixer --get-mute)'"
+
+            # Bind play/pause key to play-pause functionality
+            ", XF86AudioPlay, exec, playerctl play-pause"
+
+            # Bind previous key to previous functionality
+            ", XF86AudioPrev, exec, playerctl previous"
+            # Bind previous key to previous functionality
+            ", XF86AudioNext, exec, playerctl next"
+
+            # Disable built in-monitor when closing the lid
+            #", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, disable\""
+            # Re-enable built-in monitor when opening the lid
+            #", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, 2560x1600, 0x0, 1.67\""
+
+            # Turn off built-in monitor when closing the lid
+            ", switch:on:Lid Switch, exec, export ${hostname}_LID=\"closed\" && sleep 1 && hyprctl dispatch dpms off eDP-1"
+            # Turn on  built-in monitor when opening the lid
+            ", switch:off:Lid Switch, exec, export ${hostname}_LID=\"open\" && sleep 1 && hyprctl dispatch dpms on eDP-1"
+          ];
         };
-        execOnce = [
-          "alacritty"
-          "firefox"
-          "signal-desktop"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar daemon"
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_0 --screen 0 --arg width=\"120%\" --arg height=\"2%\" --arg offset=\"0\""
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_1 --screen 1 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"9\""
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_2 --screen 2 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"18\""
-          "${pkgs.eww}/bin/eww -c ${config.xdg.configHome}/eww/bar open bar --id mon_3 --screen 3 --arg width=\"100%\" --arg height=\"2%\" --arg offset=\"27\""
-        ];
-        exec = [
-          "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/battery.sh  > /dev/null 2>&1 &"
-          "${pkgs.bash}/bin/bash ${config.xdg.configHome}/eww/scripts/hyprland.sh > /dev/null 2>&1 &"
-        ];
-        execShutdown = [
-          "${pkgs.eww}/bin/eww close-all && pkill eww"
-        ];
-        bindl = [
-          # Bind mute key to toggle mute
-          ", XF86AudioMute, exec, pamixer -t"
-          # Also have it update an eww variable
-          ", XF86AudioMute, exec, eww update -c ${config.xdg.configHome}/eww/bar mute_status='\$(pamixer --get-mute)'"
-
-          # Bind play/pause key to play-pause functionality
-          ", XF86AudioPlay, exec, playerctl play-pause"
-
-          # Bind previous key to previous functionality
-          ", XF86AudioPrev, exec, playerctl previous"
-          # Bind previous key to previous functionality
-          ", XF86AudioNext, exec, playerctl next"
-
-          # Disable built in-monitor when closing the lid
-          #", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, disable\""
-          # Re-enable built-in monitor when opening the lid
-          #", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, 2560x1600, 0x0, 1.67\""
-
-          # Turn off built-in monitor when closing the lid
-          ", switch:on:Lid Switch, exec, export ${hostname}_LID=\"closed\" && sleep 1 && hyprctl dispatch dpms off eDP-1"
-          # Turn on  built-in monitor when opening the lid
-          ", switch:off:Lid Switch, exec, export ${hostname}_LID=\"open\" && sleep 1 && hyprctl dispatch dpms on eDP-1"
-        ];
       };
     };
   };

@@ -1,0 +1,629 @@
+ok
+ok
+ok
+ok
+ok
+ok
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+ok
+ok
+ok
+ok
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+ok
+ok
+ok
+ok
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+ok
+ok
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 128
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 102
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 117
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 147
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 152
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 138
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 154
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 106
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok
+[gamescope] [[0;34mInfo[0m]  [0;37mconsole:[0m gamescope version 3.16.14 (gcc 14.3.0)
+No CAP_SYS_NICE, falling back to regular-priority compute and threads.
+Performance will be affected.
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/inspect.lua' (id: 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/modegen.lua' (id: 1)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/common/util.lua' (id: 2)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays'
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/asus.rogally.lcd.lua' (id: 3)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/deckhd.steamdeck.deckhd-lcd.lua' (id: 4)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/gpd.win4.lcd.lua' (id: 5)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongo.lcd.lua' (id: 6)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/lenovo.legiongos.lcd.lua' (id: 7)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.lcd.lua' (id: 8)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Running script file '/nix/store/kf9nz90ykgjibdxmgqnxvdld4h51xbim-gamescope-3.16.14/share/gamescope/scripts/00-gamescope/displays/valve.steamdeck.oled.lua' (id: 9)
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/etc/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/etc/gamescope/scripts' does not exist
+[gamescope] [[0;34mInfo[0m]  [0;37mscriptmgr:[0m Loading scripts from: '/home/kent/.config/gamescope/scripts'
+[gamescope] [[0;33mWarn[0m]  [0;37mscriptmgr:[0m Directory '/home/kent/.config/gamescope/scripts' does not exist
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+ATTENTION: default value of option vk_khr_present_wait overridden by environment.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m selecting physical device 'AMD Radeon 780M (RADV PHOENIX)': queue family 1 (general queue family 0)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m physical device supports DRM format modifiers
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:67] Creating headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m supported DRM formats for sampling usage:
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR24 (0x34325241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR24 (0x34325258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB24 (0x34324241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB24 (0x34324258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   RG16 (0x36314752)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   NV12 (0x3231564E)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB4H (0x48344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB4H (0x48344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB48 (0x38344241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB48 (0x38344258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AB30 (0x30334241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XB30 (0x30334258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   AR30 (0x30335241)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m   XR30 (0x30335258)
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Using explicit sync when available
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Running compositor on wayland display 'gamescope-0'
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [backend/headless/backend.c:17] Starting headless backend
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m Successfully initialized libei for input emulation!
+[gamescope] [[0;34mInfo[0m]  [0;37mwlserver:[0m [xwayland/server.c:107] Starting Xwayland on :1
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Could not resolve keysym XF86RefreshRateToggle
+> Warning:          Could not resolve keysym XF86Accessibility
+> Warning:          Could not resolve keysym XF86DoNotDisturb
+Errors from xkbcomp are not fatal to the X server
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: connecting
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream state changed: paused
+[gamescope] [[0;34mInfo[0m]  [0;37mpipewire:[0m stream available on node ID: 154
+[gamescope] [[0;34mInfo[0m]  [0;37mvblank:[0m Using timerfd.
+[gamescope] [[0;34mInfo[0m]  [0;37mvulkan:[0m Creating Gamescope nested swapchain with format 64 and colorspace 0
+bwrap: Unexpected capabilities but not setuid, old file caps config?
+[gamescope] [[0;34mInfo[0m]  [0;37mlaunch:[0m Primary child shut down!
+terminate called without an active exception
+(EE) failed to read Wayland events: Broken pipe
+ok
+ok

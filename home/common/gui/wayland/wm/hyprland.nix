@@ -290,8 +290,6 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
   config = lib.mkIf (gui.enable && (wayland.enable && (hyprland.enable))) {
     wayland.windowManager.hyprland = {
       enable = true;
-      #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       # Disabled due to using UWSM
       # https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#uwsm
       systemd.enable = false;
@@ -303,7 +301,6 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
         plugin = {
           overview = {
             # Colors
-
             panelColor = hyprland.colors.overview.panelColor;
             panelBorderColor = hyprland.colors.overview.panelBorderColor;
             workspaceActiveBackground = hyprland.colors.overview.workspaceActiveBackground;

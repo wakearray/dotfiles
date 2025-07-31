@@ -16,11 +16,11 @@ in
         text = /*sh*/ ''
 #!/usr/bin/env bash
 
-if [[ ! -z "$BATTERY_SCRIPT_PID" ]]; then
-  kill $BATTERY_SCRIPT_PID
-  export BATTERY_SCRIPT_PID=$$
+if [[ -n "$BATTERY_SCRIPT_PID" ]]; then
+  kill "$BATTERY_SCRIPT_PID"
+  export BATTERY_SCRIPT_PID="$$"
 else
-  export BATTERY_SCRIPT_PID=$$
+  export BATTERY_SCRIPT_PID="$$"
 fi
 
 
@@ -28,8 +28,7 @@ function change_icon () {
   ICON="$1"
   CLASS="$2"
   echo "Icon: $ICON | Class: $CLASS"
-  ${ewwCommand} update battery_icon="$ICON"
-  ${ewwCommand} update battery_class="$CLASS"
+  ${ewwCommand} update battery_icon="$ICON" battery_class="$CLASS"
 }
 
 EWW_OLD_BATT_CAPACITY=0
@@ -40,13 +39,12 @@ do
   BATT_CAPACITY=$(cat /sys/class/power_supply/${battery.identifier}/capacity)
   BATT_STATUS=$(cat /sys/class/power_supply/${battery.identifier}/status)
 
-  if [ "$BATT_CAPACITY" != "$EWW_OLD_BATT_CAPACITY" ] || [ "$BATT_STATUS" != "$EWW_OLD_BATT_STATUS" ]; then
-    ${ewwCommand} update battery_status="$BATT_STATUS"
-    ${ewwCommand} update battery_capacity="$BATT_CAPACITY"
-    EWW_OLD_BATT_CAPACITY=$BATT_CAPACITY
-    EWW_OLD_BATT_STATUS=$BATT_STATUS
+  if [[ "$BATT_CAPACITY" != "$EWW_OLD_BATT_CAPACITY" || "$BATT_STATUS" != "$EWW_OLD_BATT_STATUS" ]]; then
+    ${ewwCommand} update battery_icon="$ICON" battery_class="$CLASS"
+    EWW_OLD_BATT_CAPACITY="$BATT_CAPACITY"
+    EWW_OLD_BATT_STATUS="$BATT_STATUS"
     if [ "$BATT_CAPACITY" == "100" ]; then
-      change_icon "󰂎󱐋" "battery-charging"
+      change_icon "󰁹󱐋" "battery-charging"
     else
       if [ "$BATT_STATUS" == "Charging" ]; then
         case  1:''${BATT_CAPACITY:--} in

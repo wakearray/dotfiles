@@ -30,6 +30,17 @@
   hardware = {
     bluetooth.enable = true;
     keyboard.qmk.enable = true;
+    cpu.amd.updateMicrocode = true;
+    amdgpu.initrd.enable = true;
+
+    # Enable the open sourve Vulkan driver for AMD GPUs
+    # Steam will launch with amdvlk by default when present
+    # If needed, you can launch steam with the older RADV drivers with the command:
+    # `AMD_VULKAN_ICD="RADV" steam`
+    amdgpu.amdvlk = {
+      enable = true;
+      support32Bit.enable = true;
+    };
   };
 
   system.stateVersion = "23.11";

@@ -141,6 +141,10 @@
 
       # https://www.gnu.org/software/wget/
       wget
+
+      # ImageMagick - Command line software for manipulating images
+      # https://imagemagick.org/
+      imagemagick
     ];
 
     # TODO: Consider using this:
@@ -183,7 +187,7 @@
     boot.tmp.useTmpfs = lib.mkDefault true;
 
     # Set your time zone.
-    time.timeZone = "America/New_York";
+    time.timeZone = lib.mkDefault "America/New_York";
 
     # Select internationalisation properties.
     i18n = {
