@@ -23,7 +23,7 @@ in
     home.packages = with pkgs; [
       # DarkTable - Virtual lighttable and darkroom for photographers
       # https://github.com/darktable-org/darktable
-      darktable
+      stable.darktable
 
       # dconf - Gnome system config, wanted by darktable
       dconf

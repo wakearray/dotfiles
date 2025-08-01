@@ -34,7 +34,7 @@
 
         # Image editing
         gimp3-with-plugins
-        darktable
+        stable.darktable
         rawtherapee
         exiftool
         inkscape
