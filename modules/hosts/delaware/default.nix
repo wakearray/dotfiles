@@ -13,9 +13,6 @@
     #./nextcloud.nix
     ./syncthing.nix
 
-    ### Git
-    ./forgejo.nix
-
     ### Mail
     ./mailserver.nix
   ];

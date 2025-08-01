@@ -192,6 +192,7 @@
         };
         modules = [
           ./hosts/starling/configuration.nix
+          nixos-hardware.nixosModules.common-cpu-intel
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           impermanence.nixosModules.impermanence

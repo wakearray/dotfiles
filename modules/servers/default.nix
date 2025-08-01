@@ -6,6 +6,7 @@
     ./docker
     ./deluge
     ./firewall
+    ./forgejo.nix
     ./home-assistant
     ./satisfactory.nix
     ./tt-rss.nix

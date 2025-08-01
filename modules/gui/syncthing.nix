@@ -44,24 +44,30 @@ in
           "Family_Notes" = {
             # Which folder to add to Syncthing
             path = "/home/${syncthing.user}/notes/family/";
+            # Which devices to use for syncing
             devices = [ "Delaware" ];
+            # Unless ignorePerms is set to true, Android can seemingly sometimes cause issues
+            ignorePerms = true;
           };
           "Shared_Development" = {
-            # Which folder to add to Syncthing
             path = "/home/${syncthing.user}/Shared Development/";
             devices = [ "Delaware" ];
+            ignorePerms = true;
           };
           "${titleUser}_Notes" = {
             path = "/home/${syncthing.user}/notes/personal/";
             devices = [ "Delaware" ];
+            ignorePerms = true;
           };
           "${titleUser}_Backup_Android" = {
             path = "/home/${syncthing.user}/Backups/Android/";
             devices = [ "Delaware" ];
+            ignorePerms = true;
           };
           "${titleUser}_Backup_PC" = {
             path = "/home/${syncthing.user}/Backups/PC/";
             devices = [ "Delaware" ];
+            ignorePerms = true;
           };
         };
       };
