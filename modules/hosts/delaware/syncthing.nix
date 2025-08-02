@@ -30,6 +30,25 @@
           ];
           ignorePerms = true;
         };
+        "Shared_Development" = {         # Name of folder in Syncthing, also the folder ID
+          path = "/data/userdata/Family/Development";    # Which folder to add to Syncthing
+          devices = [
+            #"Jess_S20_Ultra"
+	          "Jess_Cichlid"
+            "Jess_Boox"
+
+            "Kent_S24_Ultra"
+            #"Kent_P80"
+            "Kent_y700"
+            #"Kent_Boox"
+            #"Kent_Hisense_A9"
+            #"Kent_Hibreak_Color"
+            "Kent_GreatBlue"
+            "Kent_Starling"
+          ];
+          ignorePerms = true;
+        };
+
         "Kent_Notes" = {
           path = "/data/userdata/Kent/Notes";
           devices = [
