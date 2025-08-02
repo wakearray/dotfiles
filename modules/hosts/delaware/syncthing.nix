@@ -47,6 +47,7 @@
           path = "/data/userdata/Kent/Pictures/S24_Ultra";
           devices = [ "Kent_S24_Ultra" ];
           ignorePerms = true;
+          type = "receiveonly";
         };
 	      "Kent_Backup_Android" = {
           path = "/data/userdata/Kent/Backups/Android";
@@ -103,6 +104,7 @@
           path = "/data/userdata/Jess/Pictures/S20_Ultra";
           devices = [ "Jess_S20_Ultra" ];
           ignorePerms = true;
+          type = "receiveonly";
         };
       };
     };

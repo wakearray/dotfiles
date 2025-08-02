@@ -1,9 +1,6 @@
 { lib, config, ... }:
 let
-  gui = config.gui;
-  syncthing = gui.syncthing;
-
-  titleCase = str: (lib.toUpper (builtins.substring 0 1 str)) + (lib.toLower (builtins.substring 1 32 str));
+  syncthing = config.gui.syncthing;
   hostname = lib.toLower config.modules.systemDetails.hostName;
 in
 {
@@ -12,8 +9,8 @@ in
     enable = mkEnableOption "Enable a *very* opinionated Syncthing config.";
 
     user = mkOption {
-      type = types.str;
-      default = "kent";
+      type = types.nullOr types.str;
+      default = null;
       description = "The name of the user to sync.";
     };
 
@@ -24,7 +21,7 @@ in
     };
   };
 
-  config = lib.mkIf (gui.enable && syncthing.enable) {
+  config = lib.mkIf syncthing.enable {
     # Syncthing, a file syncing service
     #
     # Use the command `nix-shell -p syncthing --run "syncthing generate --config myconfig/"`
@@ -34,14 +31,15 @@ in
       key = "/run/secrets/${hostname}-syncthing-key-pem";
       cert = "/run/secrets/${hostname}-syncthing-cert-pem";
       user = syncthing.user;
-      settings = lib.mkDefault {
+      settings = {
         folders =
         let
-          titleUser = titleCase syncthing.user;
+          titleUser = lib.toSentenceCase syncthing.user;
         in
         {
           # Name of folder in Syncthing, also the folder ID
           "Family_Notes" = {
+            enable = true;
             # Which folder to add to Syncthing
             path = "/home/${syncthing.user}/notes/family/";
             # Which devices to use for syncing
