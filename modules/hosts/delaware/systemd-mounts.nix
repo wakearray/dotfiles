@@ -70,7 +70,7 @@
       {
         description = "Read-write torrents bind mount for Kent.";
         what = "/data/torrents/";
-        where = "/data/userdata/Kent/torrents/";
+        where = "/data/userdata/Kent/Torrents/";
         type = "fuse.bindfs";
         options = "force-user=webdav,force-group=userdata,perms=0774:g+rwx:a+rD";
         wantedBy = [ "zfs-import.target" ];

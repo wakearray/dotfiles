@@ -10,6 +10,7 @@ in
     ./_1pass.nix
     ./fonts.nix
     ./gaming.nix
+    ./kiosk.nix
     ./lockers
     ./office.nix
     ./sound.nix

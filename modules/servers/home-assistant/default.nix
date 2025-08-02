@@ -27,7 +27,7 @@ in
 
   config = lib.mkIf home-assistant.enable {
     warnings = (
-      lib.optionals (home-assistant.bridge.interface == null) "Interface cannot be null. Set this to the physical interface you want the home-assistant virtual machine to use."
+      lib.optionals (home-assistant.bridge.interface == null) "Interface cannot be null. Set this to the physical interface you want the home-assistant virtual machine to use. Use `ip a` to see a list of interfaces on your machine."
     );
 
     virtualisation = {
