@@ -21,5 +21,9 @@
     # bluetui - TUI for managing bluetooth on Linux
     # https://github.com/pythops/bluetui
     bluetui
+
+    # gum - A tool for glamorous shell scripts
+    # https://github.com/charmbracelet/gum
+    gum
   ];
 }
