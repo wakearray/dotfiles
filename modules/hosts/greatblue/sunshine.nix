@@ -15,69 +15,69 @@
           {
           name = "Steam";
             detached = [
-              "setsid steam -bigpicture"
+              "sudo -u kent setsid steam steam://open/bigpicture"
             ];
           }
           {
             name = "Baldur's Gate 3";
             detached = [
-              "setsid steam -applaunch 1086940"
+              "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/1086940.png";
           }
           {
             name = "L.A. Noire";
             detached = [
-                  "setsid steam -applaunch 110800"
+                  "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/110800.png";
           }
           {
             name = "Mars First Logistics";
             detached = [
-                  "setsid steam -applaunch 1532200"
+                  "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/1532200.png";
           }
           {
             name = "Palworld";
             detached = [
-                  "setsid steam -applaunch 1623730"
+                  "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/1623730.png";
           }
           {
             name = "The Elder Scrolls IV: Oblivion Remastered";
             detached = [
-                  "setsid steam -applaunch 2623190"
+                  "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/2623190.png";
           }
           {
             name = "Caves of Qud";
             detached = [
-                  "setsid steam -applaunch 333640"
+                  "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/333640.png";
           }
           {
             name = "Disco Elysium";
             detached = [
-                  "setsid steam -applaunch 632470"
+                  "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/632470.png";
           }
           {
             name = "dotAGE";
             detached = [
-                  "setsid steam -applaunch 638510"
+                  "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/638510.png";
           }
           {
             name = "Do Not Feed the Monkeys";
             detached = [
-                  "setsid steam -applaunch 658850"
+                  "sudo -u kent setsid steam steam://rungameid/658850"
             ];
             image-path = "/home/kent/.config/sunshine/covers/658850.png";
           }

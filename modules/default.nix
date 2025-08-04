@@ -222,6 +222,13 @@
       };
     };
 
+    # RAM compression
+    zramSwap = {
+      enable = true;
+      # Change this on a per machine basis
+      memoryPercent = lib.mkDefault 50;
+    };
+
     # Services.
     services = {
       locate.enable = true;
