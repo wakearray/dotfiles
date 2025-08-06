@@ -76,11 +76,11 @@ END_CAT
   case $ans in
     1)
       git -C "$NH_FLAKE" add .
-      nh os test ${config.home.homeDirectory}/dotfiles -- --show-trace
+      nh os test "$NH_FLAKE" -- --show-trace
       ;;
     2)
       git -C "$NH_FLAKE" add .
-      nh os switch ${config.home.homeDirectory}/dotfiles
+      nh os switch "$NH_FLAKE"
       ;;
     3)
       git -C "$NH_FLAKE" add .
@@ -173,6 +173,17 @@ in
         git reset -- init.sh
         nix flake update
         git add flake.lock Cargo.lock
+        git commit -m "Initial commit"
+      }
+
+      goflake() {
+        nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#go" ''$1
+        direnv allow ''$1
+        cd ''$1
+        git init
+        git add .
+        nix flake update
+        git add .
         git commit -m "Initial commit"
       }
 

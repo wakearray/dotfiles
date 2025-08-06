@@ -18,6 +18,7 @@
     gui = {
       cliphist.enable = true;
       eww.enable = true;
+      kitty.enable = true;
       themes.gruvbox.enable = true;
       vscode.enable = true;
       rofi.rofiNetworkManager.enable = true;

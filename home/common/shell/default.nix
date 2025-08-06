@@ -25,10 +25,10 @@
         cdi = "zi";
 
         # Launch neovim with a named server
-        nvim = "nvim --listen /tmp/nvim-socket-$$";
+        nvim = "nvim --listen /tmp/nvim-socket-$(uuidgen)";
 
         # Opens nvim to the `~/notes` directory
-        notes = "zellij action rename-tab Notes; nvim --listen /tmp/nvim-notes-socket-$$ ~/notes";
+        notes = "zellij action rename-tab Notes; nvim --listen /tmp/nvim-notes-socket-$(uuidgen) ~/notes";
 
         rename = "zellij action rename-tab ";
 
@@ -59,8 +59,8 @@
         #mountp80 = "zellij action rename-tab 'P80' && sshfs u0_a183@192.168.0.10:/data/data/com.termux/files /mnt/phones/p80 -p8022";
       };
       sessionVariables = {
-        EDITOR = "nvim --listen /tmp/nvim-socket-$$";
-        MANPAGER = "nvim --listen /tmp/nvim-socket-$$ +Man!";
+        EDITOR = "nvim --listen /tmp/nvim-socket-$(uuidgen)";
+        MANPAGER = "nvim --listen /tmp/nvim-socket-$(uuidgen) +Man!";
       };
     };
   };

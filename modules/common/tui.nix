@@ -18,6 +18,10 @@
     # https://github.com/extrawurst/gitui
     gitui
 
+    # GitHub tool for managing PRs and issues
+    # https://github.com/dlvhdr/gh-dash
+    gh-dash
+
     # bluetui - TUI for managing bluetooth on Linux
     # https://github.com/pythops/bluetui
     bluetui

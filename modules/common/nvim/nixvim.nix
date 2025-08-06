@@ -29,7 +29,7 @@
     keymaps = [
       {
         action = "<esc>:bp\";
-        key = "<M-J>";
+        key = "<M-S-Left>";
         mode = [ "n" "v" "i" ];
         options = {
           desc = "Switch to previous buffer";
@@ -38,7 +38,7 @@
       }
       {
         action = "<esc>:bn\";
-        key = "<M-K>";
+        key = "<M-S-Right>";
         mode = [ "n" "v" "i" ];
         options = {
           desc = "Switch to next buffer";

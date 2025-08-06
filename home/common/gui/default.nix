@@ -9,6 +9,7 @@ in
     ./cliphist.nix
     ./firefox.nix
     ./fonts.nix
+    ./kitty.nix
     ./llm.nix
     ./mpv.nix
     ./pcmanfm.nix
