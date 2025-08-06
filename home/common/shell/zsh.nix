@@ -166,20 +166,40 @@ in
         nix flake new --template github:wakearray/nix-templates/feature/automation-improvements#rust-bevy ''$1
         direnv allow ''$1
         cd ''$1
-        rm init.sh
+        cat << EOF > .gitignore
+target/**
+result-*/**
+result*
+result-bin
+.direnv/**
+.vscode/**
+.cargo
+EOF
         git init
         sed -i "s/bevy_template/''$1/g" Cargo.toml
-        git add * .envrc .gitignore
-        git reset -- init.sh
+        git add .
         nix flake update
-        git add flake.lock Cargo.lock
+        git add .
         git commit -m "Initial commit"
+      }
+
+      rustflake(){
+        nix
       }
 
       goflake() {
         nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#go" ''$1
         direnv allow ''$1
         cd ''$1
+        cat << EOF > .gitignore
+target/**
+result-*/**
+result*
+result-bin
+.direnv/**
+.vscode/**
+vendor/**
+EOF
         git init
         git add .
         nix flake update
