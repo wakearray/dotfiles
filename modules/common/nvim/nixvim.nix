@@ -110,7 +110,8 @@
 
       # rustaceanvim - Supercharge your Rust experience in Neovim! A heavily modified fork of rust-tools.nvim
       # https://github.com/mrcjkb/rustaceanvim
-      rustaceanvim.enable = true;
+      # Error with lua when building after last update.
+      # rustaceanvim.enable = true;
 
       # nvim-notify - A fancy, configurable, notification manager for NeoVim
       # https://github.com/rcarriga/nvim-notify
