@@ -65,7 +65,7 @@ in
           enable = true;
           force = true;
           text = /*bash*/ ''
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 VERSION="1.0.0"
 
