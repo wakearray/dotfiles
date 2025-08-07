@@ -162,7 +162,7 @@
                 imports = [
                   ./home/kent
                   ./home/kent/hosts/greatblue
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                   impermanence.homeManagerModules.impermanence
                   nur.modules.homeManager.default
                 ];
@@ -205,7 +205,7 @@
 	              imports = [
 	                ./home/kent
 		              ./home/kent/hosts/starling
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                   impermanence.homeManagerModules.impermanence
                   nur.modules.homeManager.default
 		            ];
@@ -251,7 +251,7 @@
                 imports = [
                   ./home/kent
                   ./home/kent/hosts/delaware
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                 ];
               };
               extraSpecialArgs = {
@@ -288,7 +288,7 @@
                 imports = [
                   ./home/kent
                   ./home/kent/hosts/sebrightbantam
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                 ];
               };
               backupFileExtension = "backup";
@@ -325,14 +325,14 @@
               users.kent = {
                 imports = [
                   ./home/kent
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                 ];
               };
               users.entertainment = {
                 imports = [
                   ./home/entertainment
                   ./home/entertainment/hosts/lagurus
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                 ];
               };
               backupFileExtension = "backup";
@@ -370,14 +370,14 @@
                 imports = [
                   ./home/kent
                   ./home/kent/hosts/jerboa
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                 ];
               };
               users.entertainment = {
                 imports = [
                   ./home/entertainment
                   ./home/entertainment/hosts/jerboa
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                 ];
               };
               backupFileExtension = "backup";
@@ -418,7 +418,7 @@
 	                ./home/jess
                   ./home/jess/cichlid
 		              catppuccin.homeManagerModules.catppuccin
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
 	              ];
               };
               backupFileExtension = "backup";
@@ -458,7 +458,7 @@
 	                ./home/jess
                   ./home/jess/shoebill
 		              catppuccin.homeManagerModules.catppuccin
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
 	              ];
               };
               backupFileExtension = "backup";
@@ -504,14 +504,14 @@
                 ./home/jess
                 ./home/jess/hosts/cichlid
                 catppuccin.homeManagerModules.catppuccin
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
               ];
             };
             users.kent = {
               imports = [
                 ./home/kent
                 ./home/kent/hosts/cichlid
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
               ];
             };
             backupFileExtension = "backup";
@@ -552,7 +552,7 @@
             users.kent = {
               imports = [
                 ./home/kent
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
               ];
             };
             backupFileExtension = "backup";
@@ -603,7 +603,7 @@
       in lib.homeManagerConfiguration {
         modules = [
           ./home/kent
-          nixvim.homeManagerModules.nixvim
+          nixvim.homeModules.nixvim
           sops-nix.homeManagerModules.sops
         ];
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
@@ -624,7 +624,7 @@
         modules = [
           ./home/kent
           ./home/kent/hosts/y700
-          nixvim.homeManagerModules.nixvim
+          nixvim.homeModules.nixvim
           sops-nix.homeManagerModules.sops
         ];
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
@@ -646,7 +646,7 @@
         modules = [
           ./home/jess
           ./home/jess/hosts/toucan
-          nixvim.homeManagerModules.nixvim
+          nixvim.homeModules.nixvim
           sops-nix.homeManagerModules.sops
         ];
         pkgs = nixpkgs.legacyPackages.aarch64-linux;
