@@ -79,18 +79,6 @@ git_status_format() {
   center "$FLAKE_GIT_STATUS"
 }
 
-git_commit_format() {
-
-  # Sample text:
-  # [main 945df99] Added new flakeworkflow script using gum
-  # 4 files changed, 216 insertions(+), 123 deletions(-)
-  # create mode 100644 home/common/shell/flakeworkflow.nix
-  FLAKE_COMMIT_TEXT="$(cat "$FLAKE_COMMIT_LOG")"
-  COMMIT_BORDER_COLOR="2"
-  FLAKE_COMMIT_TEXT="$(gum style "$(echo "$FLAKE_COMMIT_TEXT" | gum format -t template)" --border-foreground="$COMMIT_BORDER_COLOR" --padding="1 2")"
-  center "$FLAKE_COMMIT_TEXT"
-}
-
 rebuild() {
   git -C "$NH_FLAKE" add .
   if [ $IS_NIXOS -eq 1 ]; then
@@ -116,11 +104,12 @@ commit() {
   clear
   git -C "$NH_FLAKE" add .
   git_status_format
-  git -C "$NH_FLAKE" commit -m "$(gum input)" -m "$(gum write)"
+  git -C "$NH_FLAKE" commit -m "$(gum input)" -m "$(gum write)" > "$FLAKE_COMMIT_LOG" 2>&1
+  commit_message
   if gum confirm "Do you want to push commit to origin/$FLAKE_GIT_BRANCH?"; then
-    git -C "$NH_FLAKE" push origin "$FLAKE_GIT_BRANCH" > "$FLAKE_COMMIT_LOG" 2>&1
-    commit_message
+    push
   fi
+  clear
 }
 
 push() {
