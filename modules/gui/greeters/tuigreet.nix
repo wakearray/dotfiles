@@ -15,14 +15,12 @@ in
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd \"${hyprlandStart}\"";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd \"${hyprlandStart}\"";
           user = "greeter";
         };
       };
     };
 
-    environment.systemPackages = with pkgs; [
-      greetd.tuigreet
-    ];
+    environment.systemPackages = [ pkgs.tuigreet ];
   };
 }
