@@ -552,6 +552,10 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
         cursor = {
           no_hardware_cursors = true;
         };
+        ecosystem = {
+          no_update_news = true;
+          no_donation_nag = true;
+        };
         gestures = {
           workspace_swipe = true;
         };
