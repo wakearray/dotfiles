@@ -174,6 +174,7 @@
       settings = {
         # Enable flakes.
         experimental-features = [ "nix-command" "flakes" ];
+        download-buffer-size = 524288000; # 500 MiB
         # Uses hard links to remove duplicates in the nix store
         auto-optimise-store = true;
       };
