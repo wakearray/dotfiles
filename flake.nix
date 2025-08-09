@@ -262,6 +262,49 @@
           }
         ];
       };
+      # Hetzner VPS
+      Hamburger =
+      let
+        systemDetails = {
+          hostType = "server";
+          hostName = "Hamburger";
+          display = "cli";
+          features = "";
+          architecture = "x86_64-linux";
+        };
+      in
+      lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+          domain = "voicelesscrimson.com";
+          systemDetails = systemDetails;
+        };
+        modules = [
+          ./hosts/hamburger/configuration.nix
+          nixvim.nixosModules.nixvim
+          sops-nix.nixosModules.sops
+          simple-nixos-mailserver.nixosModule
+          disko.nixosModules.disko
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  ./home/kent/hosts/hamburger
+                  nixvim.homeModules.nixvim
+                ];
+              };
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                systemDetails = systemDetails;
+              };
+            };
+          }
+        ];
+      };
       # Old QNAP NAS
       SebrightBantam = let
         systemDetails = {

@@ -20,6 +20,13 @@ in
       "*" = {
         identityFile = "~/.ssh/id_ed25519";
         identitiesOnly = true;
+        remoteForwards = [
+          { # Lemonade
+            bind.port = 2489;
+            host.address = "localhost";
+            host.port = 2489;
+          }
+        ];
       };
     };
   };

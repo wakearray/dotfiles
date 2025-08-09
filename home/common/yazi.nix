@@ -14,6 +14,15 @@ in
         initLua = ''
           require("starship"):setup()
         '';
+        settings = {
+          mgr = {
+            show_hidden = true;
+            sort_by = "alphabetical";
+            sort_sensitive = false;
+            sort_dir_first = true;
+            linemode = "size";
+          };
+        };
       };
     };
 

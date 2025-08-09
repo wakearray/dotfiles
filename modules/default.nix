@@ -147,10 +147,6 @@
       imagemagick
     ];
 
-    # TODO: Consider using this:
-    # boot.initrd.network.ssh.authorizedKeyFiles is a new option in the initrd ssh daemon module,
-    # for adding authorized keys via list of files.
-
     # Add the userdata usergroup
     users.groups.userdata = {};
 

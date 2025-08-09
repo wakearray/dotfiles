@@ -3,7 +3,6 @@
   imports = [
     ./starship.nix
     ./hyprland.nix
-    ./moonlight.nix
   ];
 
   config = {

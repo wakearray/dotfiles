@@ -3,7 +3,6 @@ let
   webdav = config.servers.webdav;
 in
 {
-  ## WIP: Setup for Delaware with SOPS support and correct user directories
   options.servers.webdav = with lib; {
     enable = mkEnableOption "Enable an opinionated webdav install.";
 
