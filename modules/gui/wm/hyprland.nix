@@ -49,6 +49,9 @@ in
     # Compatibility settings:
     environment = {
       sessionVariables.NIXOS_OZONE_WL = "1";
+
+      # Provides image preview in Yazi when running on Wayland
+      systemPackages = [ pkgs.ueberzugpp ];
     };
   };
 }
