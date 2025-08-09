@@ -1,11 +1,10 @@
-{ inputs, outputs, pkgs, lib, systemDetails, ... }:
+{ outputs, pkgs, lib, systemDetails, ... }:
 {
   ## These are the defaults I want on every machine:
   imports =
   [
     ./common
     ./gui
-    ./servers
   ];
 
   options.modules.systemDetails = with lib; {
@@ -174,7 +173,10 @@
       settings = {
         # Enable flakes.
         experimental-features = [ "nix-command" "flakes" ];
-        download-buffer-size = 524288000; # 500 MiB
+
+        # download-buffer-size is unavailable in lix
+        # download-buffer-size = 524288000; # 500 MiB
+
         # Uses hard links to remove duplicates in the nix store
         auto-optimise-store = true;
       };

@@ -10,13 +10,14 @@ in
     ./_1pass.nix
     ./fonts.nix
     ./gaming.nix
+    ./greeters
     ./kiosk.nix
     ./lockers
     ./office.nix
     ./sound.nix
     ./syncthing.nix
+    ./tui.nix
     ./wm
-    ./greeters
   ];
 
   options.gui = with lib; {

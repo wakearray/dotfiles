@@ -239,6 +239,7 @@
         };
         modules = [
           ./hosts/delaware/configuration.nix
+          ./modules/servers
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule
@@ -281,6 +282,7 @@
         };
         modules = [
           ./hosts/hamburger/configuration.nix
+          ./modules/servers
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule
@@ -321,6 +323,7 @@
         };
         modules = [
           ./hosts/sebrightbantam/configuration.nix
+          ./modules/servers
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
@@ -577,7 +580,7 @@
         hostType = "server";
         hostName = "CustomInstaller";
         display = "cli";
-        features = "printers installer";
+        features = "installer";
         architecture = "x86_64-linux";
       };
       in nixos-generators.nixosGenerate {
