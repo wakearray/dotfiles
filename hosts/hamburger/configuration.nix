@@ -20,6 +20,7 @@
       enable = true;
       efiSupport = true;
       efiInstallAsRemovable = true;
+      device = "/dev/disk/by-partlabel/NIXBOOT";
     };
 
     # Enable networking.
