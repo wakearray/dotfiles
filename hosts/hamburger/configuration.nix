@@ -4,7 +4,7 @@
   imports =
   [
     ./hardware-configuration.nix
-    ./disko-config.nix
+    # ./disko-config.nix
     ../../modules
     ../../modules/hosts/hamburger
     ../../users/kent
