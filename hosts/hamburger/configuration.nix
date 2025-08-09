@@ -10,23 +10,30 @@
     ../../users/kent
   ];
 
-  # Bootloader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
-
-  # Enable networking.
-  networking = {
-    networkmanager.enable = true;
-    hostName = "Hamburger"; # Define your hostname
-    firewall = {
+  config = {
+    # Bootloader.
+    # boot.loader = {
+    #   systemd-boot.enable = true;
+    #   efi.canTouchEfiVariables = true;
+    # };
+    boot.loader.grub = {
       enable = true;
-      allowPing = true;
+      efiSupport = true;
+      efiInstallAsRemovable = true;
     };
+
+    # Enable networking.
+    networking = {
+      networkmanager.enable = true;
+      hostName = "Hamburger"; # Define your hostname
+      firewall = {
+        enable = true;
+        allowPing = true;
+      };
+    };
+
+    services.openssh.enable = true;
+
+    system.stateVersion = "25.11";
   };
-
-  services.openssh.enable = true;
-
-  system.stateVersion = "25.11";
 }
