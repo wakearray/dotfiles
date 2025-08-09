@@ -126,6 +126,7 @@ push() {
 pull() {
   if git -C "$NH_FLAKE" pull origin "$FLAKE_GIT_BRANCH" > "$FLAKE_PULL_LOG" 2>&1; then
     FLAKE_ERROR_BIT=0
+    pull_message
     if gum confirm "Build system?"; then
       rebuild
     fi
@@ -181,7 +182,8 @@ error_message() {
   if [ $FLAKE_ERROR_BIT -eq 1 ]; then
     FLAKE_ERROR_TEXT="$(cat "$FLAKE_ERROR_LOG")"
 
-    # TODO: Add sed arguments to filter text and format it in gum format template style.
+    # TODO: Add sed arguments to filter text and
+    # format it in `gum format` template style.
 
     FLAKE_ERROR_TEXT_STYLED="$(gum style \
       "$(echo "$FLAKE_ERROR_TEXT" | \
@@ -202,7 +204,8 @@ commit_message() {
     # $FLAKE_COMMIT_LOG has something in it
     FLAKE_COMMIT_TEXT="$(cat "$FLAKE_COMMIT_LOG")"
 
-    # TODO: Add sed arguments to filter text and format it in gum format template style.
+    # TODO: Add sed arguments to filter text and
+    # format it in `gum format` template style.
 
     FLAKE_COMMIT_TEXT_STYLED="$(gum style \
       "$(echo "$FLAKE_COMMIT_TEXT" | \
@@ -228,7 +231,8 @@ push_message() {
     # create mode 100644 home/common/shell/flakeworkflow.nix
     FLAKE_PUSH_TEXT="$(cat "$FLAKE_PUSH_LOG")"
 
-    # TODO: Add sed arguments to filter text and format it in gum format template style.
+    # TODO: Add sed arguments to filter text and
+    # format it in `gum format` template style.
 
     FLAKE_PUSH_TEXT_STYLED="$(gum style \
       "$(echo "$FLAKE_PUSH_TEXT" | \
@@ -247,7 +251,8 @@ pull_message() {
     # $FLAKE_PULL_LOG has something in it
     FLAKE_PULL_TEXT="$(cat "$FLAKE_PULL_LOG")"
 
-    # TODO: Add sed arguments to filter text and format it in gum format template style.
+    # TODO: Add sed arguments to filter text and
+    # format it in `gum format` template style.
 
     FLAKE_PULL_TEXT_STYLED="$(gum style \
       "$(echo "$FLAKE_PULL_TEXT" | \

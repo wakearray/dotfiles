@@ -45,6 +45,10 @@ in
       # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
       heroic
 
+      # Unofficial GOG downloader that uses the same API calls as the official client
+      # https://github.com/Sude-/lgogdownloader
+      lgogdownloader-gui
+
       # A sensible wine/proton wrapper for games
       # https://github.com/bottlesdevs/Bottles
       bottles
