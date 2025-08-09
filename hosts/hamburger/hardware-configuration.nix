@@ -14,12 +14,12 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = lib.mkForce "/dev/disk/by-partlabel/disk-main-root";
+    { device = lib.mkForce "/dev/disk/by-partlabel/NIXROOT";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = lib.mkForce "/dev/disk/by-partlabel/disk-main-ESP";
+    { device = lib.mkForce "/dev/disk/by-partlabel/NIXBOOT";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
