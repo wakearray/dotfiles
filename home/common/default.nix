@@ -229,6 +229,10 @@
         # delta - A syntax-highlighting pager for git, diff, grep, and blame output
         # https://github.com/dandavison/delta
         delta.enable = true;
+        ignores = [
+          "*~"
+          "*.swp"
+        ];
       };
 
       # skim - `sk` - Fuzzy Finder in rust!

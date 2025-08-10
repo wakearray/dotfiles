@@ -9,6 +9,7 @@ in
   # All settings and packages should be compatible with Android profiles
   imports = [
     ./firefox.nix
+    ./ssh.nix
   ];
 
   config = lib.mkIf gui.enable {

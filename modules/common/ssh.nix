@@ -13,6 +13,8 @@
   };
 
   programs.ssh = {
+    # Currently being set by 1password config
+    # startAgent = true;
     pubkeyAcceptedKeyTypes = [ "ssh-ed25519" ];
     hostKeyAlgorithms = [ "ssh-ed25519" ];
   };
