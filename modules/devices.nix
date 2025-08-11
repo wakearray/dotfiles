@@ -79,6 +79,12 @@ let
       hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" "kent-starling" ];
       users = [ "kent" ];
     };
+    hamburger = {
+      ip = "5.161.77.151";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFATH54Utcx9Ia4PwjF2D0p4OiLIGxw55K1QqU4eV328";
+      hosts = [ "kent-greatblue" "samsung_s24" "lenovo_y700" "cubot_p80" "kent-starling" ];
+      users = [ "kent" ];
+    };
     lagurus = {
       ip = "192.168.0.65";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM6IG1FP+yFHuGcBK8DavEYlc1jvaog/aztJMAP38bQv";
