@@ -9,6 +9,10 @@
     # https://github.com/hykilpikonna/HyFetch
     hyfetch
 
+    # GitHub cli tool
+    # https://cli.github.com/
+    gh
+
     # GitUI provides you with the comfort of a git GUI
     # right in your terminal
     # https://github.com/extrawurst/gitui
