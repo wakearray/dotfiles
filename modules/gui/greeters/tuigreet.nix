@@ -26,7 +26,8 @@ in
     services.greetd = {
       enable = true;
       # Run greetd on tty2 to avoid systemd logging spam
-      vt = 2;
+      # A recent change in the management of NixPkgs has removed this option
+      # vt = 2;
       settings = {
         default_session = {
           command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd \"${hyprlandStart}\"";
@@ -40,7 +41,9 @@ in
     # Ensure all systemd logging happens on tty1.
     # This allows running tuigreet on a different
     # vt to avoid console spam.
-    boot.kernelParams = [ "console=tty1" ];
+    # Edit: All greeters in Nixpkgs are now being
+    # forced to use tty1.
+    boot.kernelParams = [ "console=tty2" ];
 
     # Wait till multi-user target is triggered
     # to avoid the majority of the systemd logging spam
