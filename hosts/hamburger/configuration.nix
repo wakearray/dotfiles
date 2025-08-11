@@ -20,7 +20,7 @@
       efiSupport = true;
       efiInstallAsRemovable = true;
       devices = [
-        "/dev/disk/by-partlabel/NIXBOOT"
+        "/dev/sda"
       ];
     };
 

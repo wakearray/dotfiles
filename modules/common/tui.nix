@@ -17,5 +17,9 @@
     # gum - A tool for glamorous shell scripts
     # https://github.com/charmbracelet/gum
     gum
+
+    # Interactively browse dependency graphs of Nix derivations.
+    # https://hackage.haskell.org/package/nix-tree
+    nix-tree
   ];
 }
