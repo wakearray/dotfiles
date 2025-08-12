@@ -22,7 +22,7 @@ in
         treesitter = {
           enable = true;
           autoLoad = true;
-          folding = true;
+          #folding = true;
           # Settings:
           # https://nix-community.github.io/nixvim/plugins/treesitter/settings/index.html
           settings = {
@@ -94,9 +94,9 @@ in
           enable = true;
           # Settings found here:
           # https://nix-community.github.io/nixvim/plugins/trouble/settings/index.html
-          settings = {
-            auto_open = true;
-          };
+          #settings = {
+          #  auto_open = true;
+          #};
         };
 
         # nvim-colorizer.lua - The fastest Neovim colorizer. (Highlights color codes)

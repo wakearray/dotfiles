@@ -15,7 +15,7 @@
       shiftwidth = 2;
     };
     # keymaps
-    keymaps = lib.mkDefault [
+    keymaps = [
       {
         action = "<esc>:bp\";
         key = "<M-S-Left>";
