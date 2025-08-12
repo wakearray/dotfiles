@@ -15,7 +15,7 @@
 
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/50163e16-be00-471f-a496-6a91711b78c";
+    { device = "/dev/disk/by-uuid/50163e16-be00-471f-a496-6a91711b78c6";
     # { device = lib.mkForce "/dev/disk/by-partlabel/NIXROOT";
       fsType = "ext4";
     };
