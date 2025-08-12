@@ -1,6 +1,4 @@
-{ config, systemDetails, ... }:
-let
-in
+{ ... }:
 {
   # zsh
   # More options found here:
