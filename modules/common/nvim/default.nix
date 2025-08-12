@@ -1,37 +1,32 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+let
+  hasWayland = config.modules.systemDetails.display.wayland;
+  isDeveloper = config.modules.systemDetails.features.developer;
+in
 {
   imports = [
-    ./nixvim.nix
+    ./nixvim-devel.nix
+    ./nixvim-minimal.nix
   ];
 
   # Defualt for using on Wayland compositors
-  programs.nixvim.clipboard = {
-    register = "unnamedplus";
-    providers.wl-copy = {
-      enable = true;
-      # wl-clipboard-rs doesn't work in Gnome
-      # https://github.com/YaLTeR/wl-clipboard-rs/issues/8#issuecomment-542057210
-      package = pkgs.wl-clipboard;
-    };
+  programs.nixvim.clipboard.providers.wl-copy.enable = hasWayland;
+
+  environment.variables = {
+    EDITOR = "nvim --listen /tmp/nvim-socket-$(uuidgen)";
   };
+  environment.systemPackages = lib.mkIf isDeveloper [
+    # nixd - Nix language server written in C
+    # https://github.com/nix-community/nixd
+    pkgs.nixd
 
-  environment = {
-    variables = {
-      EDITOR = "nvim";
-    };
-    systemPackages = with pkgs; [
-      # nixd - Nix language server written in C
-      # https://github.com/nix-community/nixd
-      nixd
+    # CodeLLDB - A debugging server for Rust
+    # https://github.com/vadimcn/codelldb
+    pkgs.vscode-extensions.vadimcn.vscode-lldb
 
-      # CodeLLDB - A debugging server for Rust
-      # https://github.com/vadimcn/codelldb
-      vscode-extensions.vadimcn.vscode-lldb
+    pkgs.lldb_18
 
-      lldb_18
-
-      gnused
-      repgrep
-    ];
-  };
+    pkgs.gnused
+    pkgs.repgrep
+  ];
 }

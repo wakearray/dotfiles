@@ -14,7 +14,8 @@
     # hostName     = (string of) hostname or home-manager configuration
     # hostType     = (one of) "laptop" "desktop" "server" "android" "kiosk"
     # display      = (one of) "wayland" "x11" "cli"
-    # features     = (none, one, or more of) "printers" "installer" "einkBW" "einkColor"
+    # features     = (none, one, or more of) "printers" "installer"
+    #                "gaming" "minimal" "developer" "gaming" "eink" "einkColor"
     # architecture = (one of) "x86_64-linux" "aarch64-linux"
 
     # Hostname
@@ -66,18 +67,33 @@
       };
     };
 
-    # Features [ "printers" "installer" "eink" "einkColor" ]
+    # Features [ "printers" "installer" "minimal" "developer" "gaming" "eink" "einkColor" ]
     # (`installer` and `printer` options aren't included in home-manager)
     features = {
       printers = mkOption {
         type = types.bool;
-        default = (builtins.match "printers" systemDetails.features != null);
+        default = (builtins.match ".*printers.*" systemDetails.features != null);
         description = "True if host should have printer access.";
       };
       installer = mkOption {
         type = types.bool;
-        default = (builtins.match "installer" systemDetails.features != null);
-        description = "True if derivation needs .";
+        default = (builtins.match ".*installer.*" systemDetails.features != null);
+        description = "True if derivation needs `nixos-instal` tools.";
+      };
+      minimal = mkOption {
+        type = types.bool;
+        default = (builtins.match ".*minimal.*" systemDetails.features != null);
+        description = "True if derivation needs a minimal build. Mostly for low spec VPS like Hetzner and Oracle.";
+      };
+      developer = mkOption {
+        type = types.bool;
+        default = (builtins.match ".*developer.*" systemDetails.features != null);
+        description = "True if derivation needs developer tools. A SteamDeck probably doesn't, for instance.";
+      };
+      gaming = mkOption {
+        type = types.bool;
+        default = (builtins.match ".*gaming.*" systemDetails.features != null);
+        description = "True if derivation needs gaming apps/settings.";
       };
     };
 

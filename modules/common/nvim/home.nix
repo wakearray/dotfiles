@@ -1,29 +1,37 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
+let
+  isAndroid = config.home.systemDetails.isAndroid;
+  isDeveloper = config.home.systemDetails.features.developer;
+  hasWayland = config.home.systemDetails.display.wayland;
+in
 {
   imports = [
-    ./nixvim.nix
+    ./nixvim-minimal.nix
+    ./nixvim-devel.nix
     ./markdown-oxide.nix
   ];
 
-  programs.nixvim.clipboard = {
-    register = "unnamedplus";
-    providers.xclip.enable = true;
-  };
+  config = {
+    developer.nixvim.enable = isDeveloper;
 
-  home = {
-    packages = with pkgs; [
-      # nixd - Nix language server written in C
-      # https://github.com/nix-community/nixd
-      nixd
+    programs.nixvim.clipboard.providers.xclip.enable = isAndroid;
+    programs.nixvim.clipboard.providers.wl-copy.enable = hasWayland;
 
-      # CodeLLDB - A debugging server for Rust
-      # https://github.com/vadimcn/codelldb
-      vscode-extensions.vadimcn.vscode-lldb
+    home = lib.mkIf isAndroid {
+      packages = with pkgs; [
+        # nixd - Nix language server written in C
+        # https://github.com/nix-community/nixd
+        nixd
 
-      lldb_18
+        # CodeLLDB - A debugging server for Rust
+        # https://github.com/vadimcn/codelldb
+        vscode-extensions.vadimcn.vscode-lldb
 
-      gnused
-      repgrep
-    ];
+        lldb_18
+
+        gnused
+        repgrep
+      ];
+    };
   };
 }

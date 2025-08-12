@@ -1,14 +1,14 @@
 { lib, config, pkgs, ... }:
 let
-  gui = config.gui;
-  gaming = gui.gaming;
+  gaming = config.gui.gaming;
+  isGamingHost = config.systemDetails.features.gaming;
 in
 {
   options.gui.gaming = {
-    enable = lib.mkEnableOption "Enable Steam, GOG, etc.";
+    enable = lib.mkEnableOption "Enable Steam, GOG, etc." // { default = isGamingHost; };
   };
 
-  config = lib.mkIf (gui.enable && gaming.enable) {
+  config = lib.mkIf gaming.enable {
     programs = {
       # Enable Steam
       steam = {

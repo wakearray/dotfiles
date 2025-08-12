@@ -127,7 +127,8 @@
     # hostName     = (string of) hostname or home-manager configuration
     # hostType     = (one of) "laptop" "desktop" "server" "android" "kiosk"
     # display      = (one of) "wayland" "x11" "none"
-    # features     = (none, one, or more of) "printers" "installer" "einkBW" "einkColor"
+    # features     = (none, one, or more of) "printers" "installer"
+    #                "gaming" "minimal" "developer" "gaming" "eink" "einkColor"
     # architecture = (one of) "x86_64-linux" "aarch64-linux"
 
     # NixOS configuration entrypoint
@@ -138,7 +139,7 @@
           hostType = "laptop";
           hostName = "GreatBlue";
           display = "wayland";
-          features = "printers";
+          features = "printers developer gaming";
           architecture = "x86_64-linux";
         };
       in
@@ -181,7 +182,7 @@
           hostType = "laptop";
           hostName = "Starling";
           display = "wayland";
-          features = "printers";
+          features = "printers developer";
           architecture = "x86_64-linux";
         };
       in
@@ -270,7 +271,7 @@
           hostType = "server";
           hostName = "Hamburger";
           display = "cli";
-          features = "";
+          features = "minimal";
           architecture = "x86_64-linux";
         };
       in
@@ -313,7 +314,7 @@
           hostType = "server";
           hostName = "SebrightBantam";
           display = "cli";
-          features = "";
+          features = "minimal";
           architecture = "x86_64-linux";
         };
       in lib.nixosSystem {
@@ -352,7 +353,7 @@
           hostType = "kiosk";
           hostName = "Lagurus";
           display = "wayland";
-          features = "";
+          features = "minimal";
           architecture = "x86_64-linux";
         };
       in lib.nixosSystem {
@@ -396,7 +397,7 @@
           hostType = "kiosk";
           hostName = "Jerboa";
           display = "wayland";
-          features = "";
+          features = "minimal";
           architecture = "x86_64-linux";
         };
       in lib.nixosSystem {
@@ -441,7 +442,7 @@
           hostType = "desktop";
           hostName = "Cichlid";
           display = "wayland";
-          features = "printers";
+          features = "printers developer gaming";
           architecture = "x86_64-linux";
         };
       in lib.nixosSystem {
@@ -484,7 +485,7 @@
           hostType = "laptop";
           hostName = "Shoebill";
           display = "wayland";
-          features = "printers";
+          features = "printers gaming";
           architecture = "x86_64-linux";
         };
       in lib.nixosSystem {
@@ -526,7 +527,7 @@
         hostType = "desktop";
         hostName = "Cichlid";
         display = "wayland";
-        features = "printers installer";
+        features = "printers installer developer gaming";
         architecture = "x86_64-linux";
       };
       in nixos-generators.nixosGenerate {
@@ -580,7 +581,7 @@
         hostType = "server";
         hostName = "CustomInstaller";
         display = "cli";
-        features = "installer";
+        features = "installer minimal";
         architecture = "x86_64-linux";
       };
       in nixos-generators.nixosGenerate {
@@ -643,7 +644,7 @@
           hostType = "android";
           hostName = "kent@android";
           display = "x11";
-          features = "";
+          features = "developer";
           architecture = "aarch64-linux";
         };
       in lib.homeManagerConfiguration {
@@ -663,7 +664,7 @@
           hostType = "android";
           hostName = "kent@y700";
           display = "x11";
-          features = "";
+          features = "developer";
           architecture = "aarch64-linux";
         };
       in lib.homeManagerConfiguration {
@@ -685,7 +686,7 @@
           hostType = "android";
           hostName = "jess@toucan";
           display = "x11";
-          features = "eink";
+          features = "eink developer";
           architecture = "aarch64-linux";
         };
       in lib.homeManagerConfiguration {

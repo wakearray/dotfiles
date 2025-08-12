@@ -18,7 +18,8 @@
     # hostName     = (string of) hostname or home-manager configuration
     # hostType     = (one of) "laptop" "desktop" "server" "android" "kiosk"
     # display      = (one of) "wayland" "x11" "cli"
-    # features     = (none, one, or more of) "printers" "installer" "einkBW" "einkColor"
+    # features     = (none, one, or more of) "printers" "installer"
+    #                "gaming" "minimal" "developer" "gaming" "eink" "einkColor"
     # architecture = (one of) "x86_64-linux" "aarch64-linux"
 
     # Hostname
@@ -74,20 +75,40 @@
       };
     };
 
-    # Features [ "printers" "installer" "eink" "einkColor" ]
+    # Features [ "printers" "installer" "minimal" "developer"
+    #            "gaming" "eink" "einkColor" ]
     # (`installer` and `printer` options aren't included in home-manager)
-    eink = {
-      enable = mkOption {
+
+    features = {
+      minimal = mkOption {
         type = types.bool;
-        default = (builtins.match "eink" systemDetails.features != null);
-        description = "True if host is eink.";
+        default = (builtins.match ".*minimal.*" systemDetails.features != null);
+        description = "True if derivation needs a minimal build. Mostly for low spec VPS like Hetzner and Oracle.";
       };
-      Color = mkOption {
+      developer = mkOption {
         type = types.bool;
-        default = (builtins.match "einkColor" systemDetails.features != null);
-        description = "True if host is a color enabled eink device.";
+        default = (builtins.match ".*developer.*" systemDetails.features != null);
+        description = "True if derivation needs developer tools. A SteamDeck probably doesn't, for instance.";
+      };
+      gaming = mkOption {
+        type = types.bool;
+        default = (builtins.match ".*gaming.*" systemDetails.features != null);
+        description = "True if derivation needs gaming apps/settings.";
+      };
+      eink = {
+        enable = mkOption {
+          type = types.bool;
+          default = ((builtins.match ".*eink.*" systemDetails.features != null)||(builtins.match ".*einkColor.*" systemDetails.features != null));
+          description = "True if host is eink.";
+        };
+        Color = mkOption {
+          type = types.bool;
+          default = (builtins.match ".*einkColor.*" systemDetails.features != null);
+          description = "True if host is a color enabled eink device.";
+        };
       };
     };
+
 
     # Architecture
     architecture = {
