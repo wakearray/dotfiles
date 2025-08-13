@@ -9,6 +9,21 @@
       mail = {
         enable = true;
         domain = domain;
+        users = {
+          "admin@${domain}" = {
+            hashedPasswordFile = "/run/secrets/mail-server-admin";
+            aliases = [ "postmaster@${domain}" "security@${domain}" "abuse@${domain}" ];
+          };
+          "noreply@${domain}" = {
+            hashedPasswordFile = "/run/secrets/mail-server-noreply";
+          };
+          "kent@${domain}" = {
+            hashedPasswordFile = "/run/secrets/mail-server-kent";
+          };
+          "jess@${domain}" = {
+            hashedPasswordFile = "/run/secrets/mail-server-jess";
+          };
+        };
         secrets = let
           opts = {
             sopsFile = ./mailserver.yaml;
