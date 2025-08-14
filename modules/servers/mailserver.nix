@@ -7,6 +7,9 @@ in
   options.servers.mail = with lib; {
     enable = mkEnableOption "Enable an opinionated mail server config using the Simple NixOS Mailserver: https://nixos-mailserver.readthedocs.io/en/latest/";
 
+    smtp.enable = mkEnableOption "Whether to enable sending of mail.";
+    imap.enable = mkEnableOption "Whether to enable recieving of mail using IMAP.";
+
     domain = mkOption {
       type = types.str;
       default = "example.com";
@@ -59,6 +62,12 @@ in
       domains = [ "${domain}" ];
       openFirewall = true;
 
+      enableImap = mail.imap.enable;
+      enableImapSsl = mail.imap.enable;
+
+      enableSubmission = mail.smtp.enable;
+      enableSubmissionSsl = mail.smtp.enable;
+
       fullTextSearch = {
         enable = true;
         # index new email as they arrive
@@ -74,7 +83,7 @@ in
       # down nginx and opens port 80.
       certificateScheme = "acme-nginx";
 
-      stateVersion = 1;
+      stateVersion = 3;
     };
 
     sops.secrets = mail.secrets;

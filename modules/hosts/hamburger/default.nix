@@ -9,6 +9,7 @@
       mail = {
         enable = true;
         domain = domain;
+        imap.enable = true;
         users = {
           "admin@${domain}" = {
             hashedPasswordFile = "/run/secrets/mail-server-admin";
