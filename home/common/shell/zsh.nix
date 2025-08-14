@@ -59,9 +59,9 @@ EOF
         git commit -m "Initial commit"
       }
 
-      rustflake(){
-        nix
-      }
+      # rustflake(){
+      #   nix
+      # }
 
       goflake() {
         nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#go" ''$1

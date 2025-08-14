@@ -50,7 +50,7 @@ close() {
   rm "$FLAKE_PUSH_LOG"
   rm "$FLAKE_PULL_LOG"
   clear
-  zellij action rename-tab "Tab #1"
+  zellij action undo-rename-tab
 }
 
 center() {
