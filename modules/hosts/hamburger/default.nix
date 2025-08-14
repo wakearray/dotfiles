@@ -10,6 +10,7 @@
         enable = true;
         domain = domain;
         imap.enable = true;
+        smtp.enable = true;
         users = {
           "admin@${domain}" = {
             hashedPasswordFile = "/run/secrets/mail-server-admin";
