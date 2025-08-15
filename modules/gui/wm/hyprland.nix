@@ -18,8 +18,7 @@ in
       hyprland = {
         enable = true;
         withUWSM = true;
-        #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        portalPackage = pkgs.xdg-desktop-portal-hyprland;
       };
       uwsm  = {
         enable = true;
@@ -30,6 +29,31 @@ in
             binPath = "/run/current-system/sw/bin/Hyprland";
           };
         };
+      };
+    };
+
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-wlr
+        # You might also want to include other portals you need,
+        # but ensure hyprland is prioritized for screensharing and similar features
+      ];
+      config = {
+        hyprland = {
+          # This explicitly tells applications using the portal
+          # to use the "hyprland" backend for ScreenCast functionality.
+          "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
+          "org.freedesktop.impl.portal.RemoteDesktop" = "wlr";
+          # You may need to add configurations for other portal interfaces
+          # depending on the application and the specific functionality you're targeting.
+          # For example, for file chooser:
+          # "org.freedesktop.impl.portal.FileChooser" = "hyprland";
+        };
+        # You might need to configure other portals based on your needs
+        # For example, to prioritize hyprland for certain functionalities if you have multiple portals enabled
+        common = { "org.freedesktop.impl.portal.RemoteDesktop" = "wlr"; };
       };
     };
 

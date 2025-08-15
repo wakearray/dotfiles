@@ -5,6 +5,7 @@
   [
     ./tui.nix
     ./u2f.nix
+    ./test.nix
   ];
 
   gui = {

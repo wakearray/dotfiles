@@ -11,7 +11,7 @@ in
 
       port = mkOption {
         type = types.port;
-        default = 443;
+        default = 444;
         description = "The port that remote SSH connections should come in on.";
       };
     };
@@ -47,7 +47,7 @@ in
         access_log /var/log/nginx/stream_access.log basic;
 
         server {
-            listen ${cfg.sshRedirection.port}; # Or your desired port for SSH
+            listen ${ builtins.toString cfg.sshRedirection.port }; # Or your desired port for SSH
             proxy_pass 127.0.0.1:22; # Or the IP and port of your SSH server
             # Other stream-specific configurations like proxy_timeout, etc.
         }
