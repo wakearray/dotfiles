@@ -43,6 +43,7 @@
       nginx = {
         enable = true;
         domain = "${domain}";
+        sshRedirection.enable = true;
       };
       satisfactory.enable = true;
       tt-rss = {
