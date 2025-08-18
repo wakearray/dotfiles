@@ -3,7 +3,7 @@
   config = {
     servers = {
       nginx = {
-        enable = true;
+        enable = false;
         domain = domain;
       };
     };

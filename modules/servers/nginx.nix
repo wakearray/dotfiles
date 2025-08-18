@@ -6,16 +6,6 @@ in
   options.servers.nginx = with lib; {
     enable = mkEnableOption "Enable nginx";
 
-    sshRedirection = {
-      enable = mkEnableOption "Enable connecting to ssh over port 443. Needed when using something like ";
-
-      port = mkOption {
-        type = types.port;
-        default = 444;
-        description = "The port that remote SSH connections should come in on.";
-      };
-    };
-
     domain = mkOption {
       type = types.str;
       default = "example.com";
@@ -24,34 +14,68 @@ in
 
   config = lib.mkIf cfg.enable {
     # Nginx reverse proxy
-    services.nginx = {
-      enable = true;
-      recommendedGzipSettings = true;
-      recommendedOptimisation = true;
-      recommendedTlsSettings = true;
-      recommendedProxySettings = true;
+    services = {
+      nginx = {
+        enable = true;
+        recommendedGzipSettings = true;
+        recommendedOptimisation = true;
+        recommendedTlsSettings = true;
+        recommendedProxySettings = true;
 
-      virtualHosts = {
-        # Additional virtualHosts can be found with their respective services config files.
-        "${cfg.domain}" = {
-          enableACME = true;
-          forceSSL = true;
-          root = "/var/www/${cfg.domain}";
+        defaultListen = [
+          { addr = "127.0.0.1"; port = 8443; ssl = true; }
+        ];
+
+        virtualHosts = {
+          # Additional virtualHosts can be found with their respective services config files.
+          "${cfg.domain}" = {
+            enableACME = true;
+            forceSSL = true;
+            root = "/var/www/${cfg.domain}";
+          };
         };
       };
-      streamConfig = lib.mkIf cfg.sshRedirection.enable ''
-        # Optional: Log stream connections
-        log_format basic '$remote_addr [$time_local] '
-                         '$protocol $status $bytes_sent $bytes_received '
-                         '$session_time';
-        access_log /var/log/nginx/stream_access.log basic;
-
-        server {
-            listen ${ builtins.toString cfg.sshRedirection.port }; # Or your desired port for SSH
-            proxy_pass 127.0.0.1:22; # Or the IP and port of your SSH server
-            # Other stream-specific configurations like proxy_timeout, etc.
-        }
-      '';
+      sslh = {
+        enable = true;
+        method = "select";
+        port = 443;
+        settings = {
+          transparent = true;
+          protocols = [
+            {
+              host = "localhost";
+              name = "ssh";
+              port = "22";
+              service = "ssh";
+            }
+            {
+              host = "localhost";
+              name = "openvpn";
+              port = "1194";
+            }
+            {
+              host = "localhost";
+              name = "xmpp";
+              port = "5222";
+            }
+            {
+              host = "localhost";
+              name = "http";
+              port = "80";
+            }
+            {
+              host = "localhost";
+              name = "tls";
+              port = "8443";
+            }
+            {
+              host = "localhost";
+              name = "anyprot";
+              port = "8443";
+            }
+          ];
+        };
+      };
     };
 
     users.users.nginx.extraGroups = [ "acme" ];

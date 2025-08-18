@@ -21,5 +21,13 @@
     # Interactively browse dependency graphs of Nix derivations.
     # https://hackage.haskell.org/package/nix-tree
     nix-tree
+
+    # GNU software calculator
+    # https://www.gnu.org/software/bc/
+    bc
+
+    # Command line JSON processor
+    # https://github.com/jqlang/jq
+    jq
   ];
 }
