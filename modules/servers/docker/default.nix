@@ -1,4 +1,7 @@
 { lib, config, pkgs, ... }:
+let
+  cfg = config.servers.docker;
+in
 {
   # when creating new containers, ensure the `ports` argument always starts with
   # "127.0.0.1:" otherwise Docker will attempt to open external ports in iptables
@@ -14,7 +17,7 @@
     enable = lib.mkEnableOption "Docker";
   };
 
-  config = lib.mkIf config.servers.docker.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       bridge-utils
       docker-client
@@ -27,20 +30,8 @@
 
     virtualisation = {
       # Enable docker deamon
-      docker = {
-        enable = true;
-        #enableOnBoot = false;
-      };
-      podman = {
-        enable = false;
-        dockerCompat = false;
-        autoPrune = {
-          enable = true;
-          dates = "weekly";
-        };
-      };
+      docker.enable = true;
       oci-containers.backend = "docker";
     };
-    servers.nginx.enable = true;
   };
 }

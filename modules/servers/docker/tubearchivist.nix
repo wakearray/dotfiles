@@ -138,5 +138,11 @@
         Unit = "updateArchivistDockerImages.service";
       };
     };
+
+    # Ensure nginx and docker are enabled
+    servers = {
+      docker.enable = true;
+      nginx.enable = true;
+    };
   };
 }

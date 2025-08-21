@@ -4,8 +4,18 @@
     servers = {
       nginx = {
         enable = false;
-        domain = domain;
+        rootURL = {
+          enable = true;
+          domain = domain;
+        };
       };
+      tt-rss = {
+        enable = true;
+        domain = "rss.${domain}";
+      };
+      # TODO: setup ntfy
+
+      # TODO:
     };
   };
 }

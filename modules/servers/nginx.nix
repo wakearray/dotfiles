@@ -6,9 +6,13 @@ in
   options.servers.nginx = with lib; {
     enable = mkEnableOption "Enable nginx";
 
-    domain = mkOption {
-      type = types.str;
-      default = "example.com";
+    rootURL = {
+      enable = mkEnableOption "Enable the root URL. If disabled, this server will enable nginx, but it won't have any virtualHosts by default.";
+
+      domain = mkOption {
+        type = types.str;
+        default = "example.com";
+      };
     };
   };
 

@@ -5,73 +5,69 @@
 
     domain = lib.mkOption {
       type = lib.types.str;
-      default = "lobe.localhost";
+      default = "lobe.example.com";
     };
   };
   config = lib.mkIf config.servers.docker.lobechat.enable {
-    virtualisation = {
-      oci-containers = {
-        containers = {
-          # Redis server needed for bricksllm
-          bricks-redis = {
-            image = "redis:6.2-alpine";
-            cmd = [ "redis-server" "--save" "20" "1" "--loglevel" "warning" "--requirepass" "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81" ];
-            volumes = [
-              "bricks-redis:/data"
-            ];
-            hostname = "bricks-redis";
-            autoStart = true;
-            extraOptions = [ "--network=lobechat-network" ];
-          };
-          # Postgresql server needed for bricksllm
-          bricks-postgresql = {
-            image = "postgres:14.1-alpine";
-            environment = {
-              POSTGRES_USER = "postgres";
-              POSTGRES_PASSWORD = "postgres";
-            };
-            volumes = [
-              "bricks-postgresql:/var/lib/postgresql/data"
-            ];
-            hostname = "bricks-postgresql";
-            autoStart = true;
-            extraOptions = [ "--network=lobechat-network" ];
-          };
-          # bricksllm - Enterprise-grade API gateway that helps you monitor and impose cost or rate limits per API key.
-          # https://github.com/bricks-cloud/BricksLLM
-          bricksllm = {
-            image = "luyuanxin1995/bricksllm";
-            cmd = [ "-m=dev" ];
-            environment = {
-              POSTGRESQL_USERNAME = "postgres";
-              POSTGRESQL_PASSWORD = "postgres";
-              REDIS_PASSWORD = "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81";
-              POSTGRESQL_HOSTS = "bricks-postgresql";
-              REDIS_HOSTS = "bricks-redis";
-            };
-            ports = [ "127.0.0.1:8001:8001" "127.0.0.1:8002:8002" ];
-            dependsOn = [ "bricks-redis" "bricks-postgresql" ];
-            hostname = "bricksllm";
-            autoStart = true;
-            extraOptions = [ "--network=lobechat-network" ];
-          };
-          # Lobe Chat - A web based frontend for LLM chatbots.
-          # https://github.com/lobehub/lobe-chat
-          lobe-chat = {
-            image = "lobehub/lobe-chat";
-            environment = {
-              # Bricksllm local proxy
-              OPENAI_PROXY_URL = "http://bricksllm:8002/api/providers/openai/v1";
-              # Manually set the allowable models. These are also manually set in bricksllm
-              CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4o=gpt-4o";
-            };
-            ports = [ "127.0.0.1:3210:3210" ];
-            dependsOn = [ "bricksllm" ];
-            hostname = "Lobe-Chat";
-            autoStart = true;
-            extraOptions = [ "--network=lobechat-network" ];
-          };
+    virtualisation.oci-containers.containers = {
+      # Redis server needed for bricksllm
+      bricks-redis = {
+        image = "redis:6.2-alpine";
+        cmd = [ "redis-server" "--save" "20" "1" "--loglevel" "warning" "--requirepass" "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81" ];
+        volumes = [
+          "bricks-redis:/data"
+        ];
+        hostname = "bricks-redis";
+        autoStart = true;
+        extraOptions = [ "--network=lobechat-network" ];
+      };
+      # Postgresql server needed for bricksllm
+      bricks-postgresql = {
+        image = "postgres:14.1-alpine";
+        environment = {
+          POSTGRES_USER = "postgres";
+          POSTGRES_PASSWORD = "postgres";
         };
+        volumes = [
+          "bricks-postgresql:/var/lib/postgresql/data"
+        ];
+        hostname = "bricks-postgresql";
+        autoStart = true;
+        extraOptions = [ "--network=lobechat-network" ];
+      };
+      # bricksllm - Enterprise-grade API gateway that helps you monitor and impose cost or rate limits per API key.
+      # https://github.com/bricks-cloud/BricksLLM
+      bricksllm = {
+        image = "luyuanxin1995/bricksllm";
+        cmd = [ "-m=dev" ];
+        environment = {
+          POSTGRESQL_USERNAME = "postgres";
+          POSTGRESQL_PASSWORD = "postgres";
+          REDIS_PASSWORD = "eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81";
+          POSTGRESQL_HOSTS = "bricks-postgresql";
+          REDIS_HOSTS = "bricks-redis";
+        };
+        ports = [ "127.0.0.1:8001:8001" "127.0.0.1:8002:8002" ];
+        dependsOn = [ "bricks-redis" "bricks-postgresql" ];
+        hostname = "bricksllm";
+        autoStart = true;
+        extraOptions = [ "--network=lobechat-network" ];
+      };
+      # Lobe Chat - A web based frontend for LLM chatbots.
+      # https://github.com/lobehub/lobe-chat
+      lobe-chat = {
+        image = "lobehub/lobe-chat";
+        environment = {
+          # Bricksllm local proxy
+          OPENAI_PROXY_URL = "http://bricksllm:8002/api/providers/openai/v1";
+          # Manually set the allowable models. These are also manually set in bricksllm
+          CUSTOM_MODELS = "-all,+gpt-3.5-turbo-1106,+gpt-4o=gpt-4o";
+        };
+        ports = [ "127.0.0.1:3210:3210" ];
+        dependsOn = [ "bricksllm" ];
+        hostname = "Lobe-Chat";
+        autoStart = true;
+        extraOptions = [ "--network=lobechat-network" ];
       };
     };
 
@@ -132,6 +128,12 @@
           };
         };
       };
+    };
+
+    # Ensure nginx and docker are enabled
+    servers = {
+      docker.enable = true;
+      nginx.enable = true;
     };
   };
 }

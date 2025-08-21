@@ -26,10 +26,6 @@
       deluge.enable = true;
       docker = {
         enable = true;
-        lobechat = {
-          enable = true;
-          domain = "lobe.${domain}";
-        };
         tubearchivist.enable = true;
       };
       forgejo = {
@@ -42,13 +38,9 @@
       };
       nginx = {
         enable = true;
-        domain = "${domain}";
+        rootURL.enable = false;
       };
       satisfactory.enable = true;
-      tt-rss = {
-        enable = true;
-        domain = "rss.${domain}";
-      };
       webdav = {
         enable = true;
         port = 8050;
