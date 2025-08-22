@@ -4,6 +4,7 @@ let
 in
 {
   # /modules/servers/home-assistant/
+
   #imports = [
   #  ./script-install.nix
   #];
@@ -60,5 +61,7 @@ in
         };
       };
     };
+
+    networking.firewall.allowedTCPPorts = [ 8123 ];
   };
 }
