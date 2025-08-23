@@ -118,7 +118,7 @@ EOF
       }
 
       eval $(ssh-agent -s)
-      find ~/.ssh -type f -name 'id_ed25519_*' ! -name '*.pub' -exec ssh-add {} \;
+      find ~/.ssh -type f -name 'id_ed25519*' ! -name '*.pub' -exec ssh-add {} \;
       clear
     '';
     shellAliases = {
