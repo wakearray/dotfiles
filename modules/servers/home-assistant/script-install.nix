@@ -26,19 +26,21 @@ in
   set -e
 
   virt-install \
-      --connect qemu:///system \
-      --name haos \
-      --os-variant=generic \
-      --boot uefi \
-      --import \
-      --disk $HOAS_OVA_QCOW2 \
-      --cpu host \
-      --vcpus 2 \
-      --memory 4098 \
-      --network network=${bridgeName} \
-      --graphics none
+    --name haos \
+    --description "Home Assistant OS" \
+    --os-variant=generic \
+    --memory=4096 \
+    --cpu host-model \
+    --vcpus=2 \
+    # --disk "$HOAS_OVA_QCOW2",bus=scsi \
+    --disk "/var/lib/haos/haos_ova-16.1.qcow2",bus=scsi \
+    --controller type=scsi,model=virtio-scsi \
+    --import \
+    --graphics none \
+    --boot uefi \
+    # --network bridge="${bridgeName}"
+    --network bridge="br0"
 
-  rm $HOAS_OVA_QCOW2
     '';
     executable = true;
     destination = "/bin/install-home-assistant";

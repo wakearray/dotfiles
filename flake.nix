@@ -407,6 +407,8 @@
         };
         modules = [
           ./hosts/jerboa/configuration.nix
+          ./modules/servers
+          simple-nixos-mailserver.nixosModule
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
