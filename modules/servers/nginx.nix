@@ -35,7 +35,7 @@ in
           "${cfg.rootURL.domain}" = {
             enableACME = true;
             forceSSL = true;
-            root = "/var/www/${cfg.domain}";
+            root = "/var/www/${cfg.rootURL.domain}";
           };
         };
       };

@@ -15,7 +15,11 @@
       };
       # TODO: setup ntfy
 
-      # TODO:
+      # TODO: setup Vault Warden
+      vaultwarden = {
+        enable = true;
+        domain = "vault.${domain}";
+      };
     };
   };
 }
