@@ -30,7 +30,7 @@ in
           { addr = "127.0.0.1"; port = 8443; ssl = true; }
         ];
 
-        virtualHosts = {
+        virtualHosts = lib.mkIf cfg.rootURL.enable {
           # Additional virtualHosts can be found with their respective services config files.
           "${cfg.rootURL.domain}" = {
             enableACME = true;

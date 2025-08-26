@@ -5,8 +5,6 @@
   [
     ./zfs.nix
 
-    ../../servers
-
     ./systemd-mounts.nix
 
     ./syncthing.nix
