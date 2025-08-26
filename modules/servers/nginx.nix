@@ -32,7 +32,7 @@ in
 
         virtualHosts = {
           # Additional virtualHosts can be found with their respective services config files.
-          "${cfg.domain}" = {
+          "${cfg.rootURL.domain}" = {
             enableACME = true;
             forceSSL = true;
             root = "/var/www/${cfg.domain}";

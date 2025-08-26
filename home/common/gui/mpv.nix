@@ -5,7 +5,7 @@ let
 in
 {
   options.gui.mpv = with lib; {
-    enable = mkEnableOption "Enable an opinionated mpv config.";
+    enable = mkEnableOption "Enable an opinionated mpv config." // { default = gui.enable; };
   };
 
   config = lib.mkIf (gui.enable && mpv.enable) {
