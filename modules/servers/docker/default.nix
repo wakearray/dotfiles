@@ -9,8 +9,10 @@ in
 
   imports = [
     ./lobechat.nix
+    ./omada-controller.nix
     ./tubearchivist.nix
     ./wger.nix
+    ./wyze-bridge.nix
   ];
 
   options.servers.docker = {

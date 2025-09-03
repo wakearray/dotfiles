@@ -43,19 +43,8 @@ in
         # Utilities for managing home files
         xdg-utils
 
-        # Waiting on pull request to be accepted
-        # https://github.com/NixOS/nixpkgs/pull/384032
-        # Signal Messenger for desktop
-        #signal-desktop
-
+        # Graphics tests to assist with troubleshooting driver issues
         glmark2
-
-        # Encrypted P2P Distributed Chat
-        jami
-
-        # Assistive Technology Service Provider Interface protocol definitions and daemon for D-Bus
-        # Needed for jami on generic Linux systems
-        at-spi2-atk
 
         # A pretty aria2 client
         varia
@@ -63,10 +52,7 @@ in
     };
 
     programs = {
-      wthrr = {
-        enable = true;
-        gui.color = "plain";
-      };
+      wthrr.enable = true;
       # yt-dlp - A feature-rich command-line audio/video downloader
       # https://github.com/yt-dlp/yt-dlp#configuration
       yt-dlp = {
