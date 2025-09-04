@@ -195,6 +195,18 @@
 
         # Uses hard links to remove duplicates in the nix store
         auto-optimise-store = true;
+
+        substituters = [
+          "http://192.168.0.46:8501"  # Use https:// if behind reverse proxy
+          "https://cache.nixos.org"
+          # ... other substituters
+        ];
+
+        trusted-public-keys = [
+          "Delaware:Ec+pe9fhw0x2ADj3DNBZ06d0xVgmn5shUNbEP0d2k+Q="
+          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+          # ... other keys
+        ];
       };
     };
 
