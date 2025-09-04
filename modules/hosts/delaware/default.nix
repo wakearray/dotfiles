@@ -34,6 +34,10 @@
         mail.enable = false;
         actions.enable = true;
       };
+      ncps = {
+        enable = true;
+        storageLocation = "/mnt/ssd980/ncps";
+      };
       nginx = {
         enable = true;
         rootURL.enable = false;

@@ -5,6 +5,12 @@ in
 {
   options.servers.ncps = with lib; {
     enable = mkEnableOption "Enable an opinionated [`ncps`](https://github.com/kalbasit/ncps) config. `ncps` is a nix binary cache proxy service with local caching and signing.";
+
+    storageLocation = mkOption {
+      type = types.str;
+      default = "/var/lib/ncps";
+      description = "The location where the `data`, `tmp`, and `db` directories will be located.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -12,9 +18,9 @@ in
       enable = true;
       cache = {
         hostName = "Delaware";
-        dataPath = "/mnt/ssd980/ncps/data";
-        tempPath = "/mnt/ssd980/ncps/tmp"; # Introduced in NixOS 25.09
-        databaseURL = "sqlite:/mnt/ssd980/ncps/db/db.sqlite";
+        dataPath = "${cfg.storageLocation}/data";
+        tempPath = "${cfg.storageLocation}/tmp"; # Introduced in NixOS 25.09
+        databaseURL = "sqlite:${cfg.storageLocation}/db/db.sqlite";
         maxSize = "50G";
         lru.schedule = "0 4 1 * *"; # Clean up on the first of every month at 4 AM
         allowPutVerb = true;

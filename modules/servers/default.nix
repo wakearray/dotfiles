@@ -22,6 +22,7 @@ in
     ./home-assistant
     ./jellyfin.nix
     ./mailserver.nix
+    ./ncps.nix
     ./nginx.nix
     ./satisfactory.nix
     ./tt-rss.nix
