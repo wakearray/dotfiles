@@ -18,8 +18,7 @@ in
       enable = true;
       cache = {
         hostName = "Delaware";
-        dataPath = "${cfg.storageLocation}/data";
-        tempPath = "${cfg.storageLocation}/tmp"; # Introduced in NixOS 25.09
+        dataPath = "${cfg.storageLocation}";
         databaseURL = "sqlite:${cfg.storageLocation}/db/db.sqlite";
         maxSize = "50G";
         lru.schedule = "0 4 1 * *"; # Clean up on the first of every month at 4 AM
