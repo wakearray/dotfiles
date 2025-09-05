@@ -1,10 +1,10 @@
 { lib, config, ... }:
 let
-  idle = config.home.wm.hypridle;
+  cfg = config.home.wm.hypridle;
 in
 {
   options.home.wm.hypridle = with lib; {
-    enable = mkEnableOption "Enable an opinionated hypridle config.";
+    enable = mkEnableOption "Enable an opinionated hypridle config." // { default = config.home.wm.hyprland.enable; };
 
     settings = mkOption {
       type = types.attrs;
@@ -27,10 +27,10 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     services.hypridle = {
       enable = true;
-      settings = idle.settings;
+      settings = cfg.settings;
     };
   };
 }
