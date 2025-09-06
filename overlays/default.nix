@@ -11,6 +11,8 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+
+    # Temporary workaround for github.com/NixOS/nixpkgs/issues/437058
     pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
       (python-final: python-prev: {
       # Workaround for bug #437058

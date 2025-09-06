@@ -1,12 +1,12 @@
 { config, lib, ... }:
 let
-  cfg = config.servers.wyzeBridge;
+  cfg = config.servers.docker.wyzeBridge;
 in
 {
-  options.servers.wyzeBridge = with lib; {
+  options.servers.docker.wyzeBridge = with lib; {
     enable = mkEnableOption "Enable [Docker Wyze Bridge (redux)](https://github.com/IDisposable/docker-wyze-bridge)";
 
-    networkHost = mkEnableOption "If true, will use host's network, if false will use a docker bridge and open appropriate ports.";
+    useHostNetwork = mkEnableOption "If true, will use host's network, if false will use a docker bridge and open appropriate ports.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -15,7 +15,7 @@ in
         image = "idisposablegithub365/wyze-bridge:latest";
         autoStart = true;
         pull = "newer";
-        ports = lib.optionals (! cfg.networkHost) [
+        ports = lib.optionals (! cfg.useHostNetwork) [
           "1935:1935/tcp" # RTMP rtmp://localhost:1935/mystream?user=myuser&pass=mypass
           "1936:1936/tcp" # RTMP rtmps://localhost:1936/mystream?user=myuser&pass=mypass
           "2935:2935/tcp" # RTMPS rtmps://localhost:2935/mystream?user=myuser&pass=mypass
@@ -35,7 +35,7 @@ in
         environment = {
           TZ = "America/New_York";
         };
-        extraOptions = lib.optionals cfg.networkHost [
+        extraOptions = lib.optionals cfg.useHostNetwork [
           "--network=host"
         ];
       };

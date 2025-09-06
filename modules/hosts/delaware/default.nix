@@ -25,6 +25,7 @@
       docker = {
         enable = true;
         tubearchivist.enable = true;
+        wyzeBridge.enable = true;
       };
       forgejo = {
         enable = true;
