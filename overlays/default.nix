@@ -1,8 +1,5 @@
 # This file defines overlays
 {inputs, ...}:
-let
-  nixpkgs = inputs.nixpkgs;
-in
 {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs {pkgs = final;};
@@ -14,6 +11,20 @@ in
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+    pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+      (python-final: python-prev: {
+      # Workaround for bug #437058
+        i3ipc = python-prev.i3ipc.overridePythonAttrs (oldAttrs: {
+          doCheck = false;
+          checkPhase = ''
+            echo "Skipping pytest in Nix build"
+          '';
+          installCheckPhase = ''
+            echo "Skipping install checks in Nix build"
+          '';
+        });
+      })
+    ];
   };
 
   # When applied, the 24.11 nixpkgs set (declared in the flake inputs) will
