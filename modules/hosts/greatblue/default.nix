@@ -40,11 +40,8 @@
     # https://github.com/nix-community/nixos-generators
     nixos-generators
 
-    # IDEs
-    libsForQt5.kate
-
     # Kdenlive is video editing software
-    libsForQt5.kdenlive
+    kdePackages.kdenlive
     # Vector animation tool that works with kdenlive
     # glaxnimate
 
@@ -74,9 +71,7 @@
     # Needed to make NixOS work with displaylink docks
     xserver.videoDrivers = [ "displaylink" "modesetting" ];
     # Let the window manager choose how to handle lid open/close events
-    logind = {
-      lidSwitch = "ignore";
-    };
+    logind.settings.Login.HandleLidSwitch = "ignore";
   };
 
   # Enables kernel module needed for ryzenadj to work

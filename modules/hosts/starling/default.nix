@@ -34,7 +34,7 @@
     nixos-generators
 
     # Kdenlive is video editing software
-    libsForQt5.kdenlive
+    kdePackages.kdenlive
     # Vector animation tool that works with kdenlive
     # glaxnimate
 
@@ -63,10 +63,10 @@
     # Needed to make NixOS work with displaylink docks
     xserver.videoDrivers = [ "displaylink" "modesetting" ];
     # Let the window manager choose how to handle lid open/close events
-    logind = {
-      lidSwitch = "ignore";
-      powerKey = "ignore";
-      powerKeyLongPress = "poweroff";
+    logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandlePowerKey = "ignore";
+      HandlePowerKeyLongPress = "poweroff";
     };
   };
 

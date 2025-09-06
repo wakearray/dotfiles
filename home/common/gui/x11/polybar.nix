@@ -1,9 +1,6 @@
 { lib, config, pkgs, ... }:
 let
-  gui = config.gui;
-  x11 = gui.x11;
-  polybar = gui.polybar;
-  i3 = gui.wm.i3;
+  cfg = config.gui.polybar;
 in
 {
   options.gui.polybar = with lib; {
@@ -77,7 +74,7 @@ in
       };
     };
   };
-  config = lib.mkIf (gui.enable && (x11.enable && (i3.enable && polybar.enable))) {
+  config = lib.mkIf cfg.enable {
     services.polybar = {
       enable = true;
       config = {
@@ -101,8 +98,8 @@ in
           offset-y = 0;
 
           # Bar colors
-          background = "${polybar.colors.background}";
-          foreground = "${polybar.colors.foreground}";
+          background = "${cfg.colors.background}";
+          foreground = "${cfg.colors.foreground}";
 
           # Modules
           modules-right = "tray memory date";
@@ -131,13 +128,13 @@ in
           time-alt = "%l:%M %P";
 
           format = "╭ <label> ╮";
-          format-foreground = "${polybar.colors.time-foreground}";
-          format-background = "${polybar.colors.time-background}";
+          format-foreground = "${cfg.colors.time-foreground}";
+          format-background = "${cfg.colors.time-background}";
 
           label = "%date%󱑎 %time%";
           label-font = "1";
-          label-foreground = "${polybar.colors.time-foreground}";
-          label-background = "${polybar.colors.time-background}";
+          label-foreground = "${cfg.colors.time-foreground}";
+          label-background = "${cfg.colors.time-background}";
         };
 
         "module/i3" = {
@@ -167,8 +164,8 @@ in
           # Default: %mode%
           label-mode = "%mode%";
           label-mode-padding = 0;
-          label-mode-foreground = "${polybar.colors.urgent-foreground}";
-          label-mode-background = "${polybar.colors.urgent-background}";
+          label-mode-foreground = "${cfg.colors.urgent-foreground}";
+          label-mode-background = "${cfg.colors.urgent-background}";
 
           # Available tokens:
           #   %name%
@@ -177,8 +174,8 @@ in
           #   %output%
           # Default: %icon% %name%
           label-focused = "╭ %name% ╮";
-          label-focused-foreground = "${polybar.colors.focused-foreground}";
-          label-focused-background = "${polybar.colors.background}";
+          label-focused-foreground = "${cfg.colors.focused-foreground}";
+          label-focused-background = "${cfg.colors.background}";
           label-focused-padding = 0;
 
           # Available tokens:
@@ -188,8 +185,8 @@ in
           #   %output%
           # Default: %icon% %name%
           label-unfocused = "╭ %name% ╮";
-          label-unfocused-foreground = "${polybar.colors.foreground}";
-          label-unfocused-background = "${polybar.colors.background}";
+          label-unfocused-foreground = "${cfg.colors.foreground}";
+          label-unfocused-background = "${cfg.colors.background}";
           label-unfocused-padding = 0;
 
           # Available tokens:
@@ -199,7 +196,7 @@ in
           #   %output%
           # Default: %icon% %name%
           label-visible = "╭ %name% ╮";
-          label-visible-underline = "${polybar.colors.background}";
+          label-visible-underline = "${cfg.colors.background}";
           label-visible-padding = 0;
 
           # Available tokens:
@@ -209,14 +206,14 @@ in
           #   %output%
           # Default: %icon% %name%
           label-urgent = "╭ %name% ╮";
-          label-urgent-foreground = "${polybar.colors.urgent-foreground}";
-          label-urgent-background = "${polybar.colors.urgent-background}";
+          label-urgent-foreground = "${cfg.colors.urgent-foreground}";
+          label-urgent-background = "${cfg.colors.urgent-background}";
           label-urgent-padding = 0;
 
           # Separator in between workspaces
           label-separator = "";
           label-separator-padding = 0;
-          label-separator-foreground = "${polybar.colors.background}";
+          label-separator-foreground = "${cfg.colors.background}";
         };
         settings = {
           screenchange-reload = true;
@@ -236,32 +233,32 @@ in
         enable = true;
         executable = true;
         force = true;
-        text = ''
-  #!/usr/bin/env sh
+        text = /*sh*/ ''
+          #!/usr/bin/env sh
 
-  # Terminate already running bar instances
-  polybar-msg cmd quit
-  wait 2
-  sudo pkill polybar
+          # Terminate already running bar instances
+          polybar-msg cmd quit
+          wait 2
+          sudo pkill polybar
 
-  # Wait until the processes have been shut down
-  while pgrep -x polybar >/dev/null; do sleep 1; done
+          # Wait until the processes have been shut down
+          while pgrep -x polybar >/dev/null; do sleep 1; done
 
-  # Launch polybar
-  polybar top &
+          # Launch polybar
+          polybar top &
         '';
       };
       ".config/polybar/quit_polybar.sh" = {
         enable = true;
         executable = true;
         force = true;
-        text = ''
-  #!/usr/bin/env sh
+        text = /*sh*/ ''
+          #!/usr/bin/env sh
 
-  # Terminate running bar instances
-  polybar-msg cmd quit
-  wait 2
-  sudo pkill polybar
+          # Terminate running bar instances
+          polybar-msg cmd quit
+          wait 2
+          sudo pkill polybar
         '';
       };
     };

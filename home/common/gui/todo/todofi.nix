@@ -1,9 +1,6 @@
 { lib, config, pkgs, ... }:
 let
-  gui = config.gui;
-  rofi = gui.rofi;
-  todo = gui.todo;
-  todofi = todo.todofi;
+  cfg = config.gui.todo.todofi;
 in
 {
   options.gui.todo.todofi = with lib; {
@@ -57,7 +54,8 @@ in
       };
     };
   };
-  config = lib.mkIf (gui.enable && (todo.enable && (rofi.enable && todofi.enable))) {
+
+  config = lib.mkIf cfg.enable {
     home = {
       file = {
         ".local/bin/todofi.sh" = {
@@ -69,9 +67,9 @@ in
 
 VERSION="1.0.0"
 
-TODOTXT_CFG_FILE="''${HOME}/.config/todo/config"
+TODOTXT_CFG_FILE="${config.xdg.configHome}/todo/config"
 
-CONFIG_FILE="''${HOME}/.config/todofish.conf"
+CONFIG_FILE="${config.xdg.configHome}/todofish.conf"
 FILTER_FILE="`dirname ''${CONFIG_FILE}`/todofish_filter.sh"
 
 FILTER=""
@@ -83,18 +81,18 @@ LINES_MODE="auto"
 LINES_MIN=1
 LINES_MAX=15
 
-COLOR_TITLE="${todofi.colors.colorTitle}"
-COLOR_SHORTCUT="${todofi.colors.colorShortcut}"
-COLOR_INFO="${todofi.colors.colorInfo}"
-COLOR_EXAMPLE="${todofi.colors.colorExample}"
-COLOR_ITEM="${todofi.colors.colorItem}"
+COLOR_TITLE="${cfg.colors.colorTitle}"
+COLOR_SHORTCUT="${cfg.colors.colorShortcut}"
+COLOR_INFO="${cfg.colors.colorInfo}"
+COLOR_EXAMPLE="${cfg.colors.colorExample}"
+COLOR_ITEM="${cfg.colors.colorItem}"
 
 # Don't forget to quote regex char
 MARKUP_PRIORITY='<b>\1<\/b> \2'
-MARKUP_PROJECT='<span fgcolor="${todofi.colors.markupProject}"><b>\1<\/b><\/span>'
-MARKUP_CONTEXT='<span fgcolor="${todofi.colors.markupContext}"><b>\1<\/b><\/span>'
-MARKUP_TAG='<span fgcolor="${todofi.colors.markupTag}"><b>\1<\/b><\/span>'
-MARKUP_DUE='<span fgcolor="${todofi.colors.markupDue}"><b>\1<\/b><\/span>'
+MARKUP_PROJECT='<span fgcolor="${cfg.colors.markupProject}"><b>\1<\/b><\/span>'
+MARKUP_CONTEXT='<span fgcolor="${cfg.colors.markupContext}"><b>\1<\/b><\/span>'
+MARKUP_TAG='<span fgcolor="${cfg.colors.markupTag}"><b>\1<\/b><\/span>'
+MARKUP_DUE='<span fgcolor="${cfg.colors.markupDue}"><b>\1<\/b><\/span>'
 
 SHORTCUT_NEW="Alt+a"
 SHORTCUT_DONE="Alt+d"

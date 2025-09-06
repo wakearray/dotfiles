@@ -1,8 +1,6 @@
 { lib, config, pkgs, ... }:
 let
-  isx11 = config.home.systemDetails.display.x11;
-  gui = config.gui;
-  x11 = gui.x11;
+  cfg = config.gui.x11;
 in
 {
   # home/common/android/gui
@@ -12,14 +10,11 @@ in
   ];
 
   options.gui.x11 = with lib; {
-    enable = mkOption {
-      type = types.bool;
-      default = isx11;
-      description = "Default is `true` if `systemDetails.display = \"x11\"`";
-    };
+    enable = mkEnableOption "Default is `true` if `systemDetails.display = \"x11\"`" // {
+      default = config.home.systemDetails.display.x11; };
   };
 
-  config = lib.mkIf x11.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # clipboard management
       xclip

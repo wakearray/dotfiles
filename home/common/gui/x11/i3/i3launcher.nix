@@ -1,20 +1,13 @@
 { lib, config, pkgs, ... }:
 let
-  gui = config.gui;
-  i3 = gui.wm.i3;
-  launcher = i3.launcher;
-  isAndroid = config.home.systemDetails.isAndroid;
+  cfg = config.gui.wm.i3.launcher;
 in
 {
   options.gui.wm.i3.launcher = with lib; {
-    enable = mkOption {
-      type = types.bool;
-      default = (gui.enable && (i3.enable && isAndroid));
-      description = "A helper script to launch i3 on Android. This is only needed on Android.";
-    };
+    enable = mkEnableOption "A helper script to launch i3 on Android. This is only needed on Android." // { default = config.home.systemDetails.isAndroid; };
   };
 
-  config = lib.mkIf launcher.enable {
+  config = lib.mkIf cfg.enable {
     home.file.".local/bin/i3launcher" = {
       enable = true;
       force = true;

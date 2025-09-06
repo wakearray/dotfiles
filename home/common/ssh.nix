@@ -16,6 +16,7 @@ in
   # Enable ssh and set its config
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "*" = {
         identityFile = "~/.ssh/id_ed25519";
@@ -27,6 +28,18 @@ in
             host.port = 2489;
           }
         ];
+
+        # defaults
+        forwardAgent = false;
+        addKeysToAgent = "no";
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
       };
     };
   };

@@ -2,7 +2,7 @@
 let
   isAndroid = config.home.systemDetails.isAndroid;
   gui = config.gui;
-  agui = config.android.gui;
+  cfg = config.android.gui;
 in
 {
   # home/jess/common/android/gui
@@ -19,7 +19,7 @@ in
     };
   };
 
-  config = lib.mkIf agui.enable {
+  config = lib.mkIf cfg.enable {
     gui = {
       wm.i3.enable = true;
       polybar.enable = true;

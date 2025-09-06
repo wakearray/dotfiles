@@ -1,8 +1,7 @@
 { lib, pkgs, config, ... }:
 let
+  cfg = config.gui.wm.i3;
   gui = config.gui;
-  x11 = gui.x11;
-  i3 = gui.wm.i3;
   polybar = gui.polybar;
   eww = gui.eww;
 
@@ -39,7 +38,9 @@ in
   ];
 
   options.gui.wm.i3 = with lib; {
-    enable = mkEnableOption "Enable a very opinionated i3 config intended for use inside Termux.";
+    enable = mkEnableOption "Enable a very opinionated i3 config intended for use inside Termux." // {
+      default = config.home.systemDetails.display.x11;
+    };
 
     modifier = mkOption {
       type = types.enum [ "Shift" "Control" "Mod1" "Mod2" "Mod3" "Mod4" "Mod5" ];
@@ -151,14 +152,14 @@ in
     };
   };
 
-  config = lib.mkIf (gui.enable && (x11.enable && i3.enable)) {
+  config = lib.mkIf cfg.enable {
     xsession = {
       enable = true;
       windowManager.i3 = {
         enable = true;
         package = pkgs.i3-rounded;
         config = {
-          modifier = i3.modifier;
+          modifier = cfg.modifier;
 
           assigns = lib.mkOverride 1001 {
             "$pws_1" = [ { class = "Alacritty";   } ];
@@ -355,12 +356,12 @@ in
           };
 
           colors = {
-            background      = i3.colors.background;
-            focused         = i3.colors.focused;
-            focusedInactive = i3.colors.focusedInactive;
-            placeholder     = i3.colors.placeholder;
-            unfocused       = i3.colors.unfocused;
-            urgent          = i3.colors.urgent;
+            background      = cfg.colors.background;
+            focused         = cfg.colors.focused;
+            focusedInactive = cfg.colors.focusedInactive;
+            placeholder     = cfg.colors.placeholder;
+            unfocused       = cfg.colors.unfocused;
+            urgent          = cfg.colors.urgent;
           };
 
           floating = {
@@ -371,23 +372,23 @@ in
               { title = "Picture-in-Picture"; class = "firefox"; }
             ];
             # Modifier key or keys that can be used to drag floating windows.
-            modifier = i3.modifier;
+            modifier = cfg.modifier;
             # Whether to show floating window titlebars.
             titlebar = false;
           };
         };
       extraConfig = lib.mkOverride 1001 ''
-  set $pws_1 "1: 4a70"
-  set $pws_2 "2: d772"
-  set $pws_3 "3: 91b3"
-  set $pws_4 "4: 4a1d"
-  set $pws_5 "5: bfa0"
-  set $pws_6 "6: 4fcd"
-  set $pws_7 "7: 742e"
-  set $pws_8 "8: f458"
-  set $pws_9 "9: 3107"
+        set $pws_1 "1: 4a70"
+        set $pws_2 "2: d772"
+        set $pws_3 "3: 91b3"
+        set $pws_4 "4: 4a1d"
+        set $pws_5 "5: bfa0"
+        set $pws_6 "6: 4fcd"
+        set $pws_7 "7: 742e"
+        set $pws_8 "8: f458"
+        set $pws_9 "9: 3107"
 
-  border_radius 5
+        border_radius 5
       '';
       };
     };
