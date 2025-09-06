@@ -14,7 +14,6 @@ in
       omadacontroller = {
         image = "idisposablegithub365/wyze-bridge:latest";
         autoStart = true;
-        pull = "newer";
         ports = lib.optionals (! cfg.useHostnetwork) [
           "1935:1935/tcp" # RTMP rtmp://localhost:1935/mystream?user=myuser&pass=mypass
           "1936:1936/tcp" # RTMP rtmps://localhost:1936/mystream?user=myuser&pass=mypass
