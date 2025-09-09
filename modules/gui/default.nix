@@ -8,6 +8,7 @@ in
   # Defaults for any GUI specific applications that I want on every GUI capable computer
   imports = [
     ./_1pass.nix
+    ./bluetooth.nix
     ./fonts.nix
     ./gaming.nix
     ./greeters

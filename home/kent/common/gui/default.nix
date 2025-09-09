@@ -44,10 +44,6 @@ in
     };
 
     home.packages = with pkgs; [
-      # Bluetooth GUI written in Rust
-      # https://github.com/kaii-lb/overskride
-      overskride
-
       # A FOSS PDF Editor
       # https://github.com/JakubMelka/PDF4QT
       pdf4qt
@@ -55,6 +51,10 @@ in
       # LibreOffice, a FOSS MS Office clone
       # https://www.libreoffice.org/about-us/source-code/
       libreoffice-qt6
+
+      # Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deeze
+      # https://github.com/nathom/streamrip
+      streamrip
     ] ++ [ inputs.zen-browser.packages."${system}".default ];
   };
 }

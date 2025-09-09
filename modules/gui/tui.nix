@@ -3,10 +3,6 @@
   # modules/gui/tui
   # Packages that should be available on personal workstations, but not on servers.
   environment.systemPackages = with pkgs; [
-    # bluetui - TUI for managing bluetooth on Linux
-    # https://github.com/pythops/bluetui
-    bluetui
-
     # GitHub cli tool
     # https://cli.github.com/
     gh
