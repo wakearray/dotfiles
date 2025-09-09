@@ -13,6 +13,12 @@
         enable = true;
         domain = "rss.${domain}";
       };
+      mattermost = {
+        enable = true;
+        domain = "chat.${domain}";
+        siteName = "VoicelessCrimson";
+      };
+
       # TODO: setup ntfy
 
       # TODO: setup Vault Warden
