@@ -8,8 +8,8 @@
     user       = "webdav";
     group      = "userdata";
     guiAddress = "0.0.0.0:8384";
-    # Uncomment this when directories start accumulating files that won't sync
-    # extraFlags = [ "--reset-deltas" ];
+    # Fix for when directories start accumulating files that won't sync
+    extraFlags = [ "--reset-deltas" ];
     settings = {
       # setting.devices can be found in modules/common/syncthing.nix
       folders = {

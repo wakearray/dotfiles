@@ -35,18 +35,18 @@
 
         # SSH Hosts
         lhosts = ''
-          echo " \
-          The available hosts for ssh are:                           \n \
-                                                                     \n \
-          greatblue        GPD Win 2 2023        192.168.0.11        \n \
-          starling         7" Tablet             192.168.0.146       \n \
-          delaware         Dell Optiplex Server  192.168.0.46        \n \
-          lagurus          Cat Projector         192.168.0.65        \n \
-          jerboa           Livingroom TV         192.168.0.32        \n \
-          sebrightbantam   QNAP TS-251           192.168.0.66        \n \
-          orloff           Odroid HC4            n/a                 \n \
-          cichlid          Jess' Desktop         n/a                 \n \
-          p80              Cubot P80 phone       192.168.0.10 -p8022 \n \
+          echo "
+          The available hosts for ssh are:                           \n
+                                                                     \n
+          greatblue        GPD Win 2 2023        192.168.0.11        \n
+          starling         7" Tablet             192.168.0.146       \n
+          delaware         Dell Optiplex Server  192.168.0.46        \n
+          lagurus          Cat Projector         192.168.0.65        \n
+          jerboa           Livingroom TV         192.168.0.32        \n
+          sebrightbantam   QNAP TS-251           192.168.0.66        \n
+          orloff           Odroid HC4            n/a                 \n
+          cichlid          Jess' Desktop         n/a                 \n
+          p80              Cubot P80 phone       192.168.0.10 -p8022 \n
           hamburger        Hetzner VPS           5.161.77.151"
         '';
         greatblue = "zellij action rename-tab 'Great Blue' && ssh 192.168.0.11; zellij action undo-rename-tab"; # GPD Win 2 2023
