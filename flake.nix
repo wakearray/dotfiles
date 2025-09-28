@@ -228,7 +228,7 @@
           hostType = "server";
           hostName = "Delaware";
           display = "cli";
-          features = "printers";
+          features = "";
           architecture = "x86_64-linux";
         };
       in

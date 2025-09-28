@@ -15,6 +15,36 @@ in
         gcc.enable = true;
       };
 
+     #  autoCdm = [
+     #    {
+     #      event = [
+     #        "BufNewFile"
+     #      ];
+     #      pattern = [
+     #        "*.nix"
+     #      ];
+     #      command = "0r ${config.nixvim.extraFiles."templates/nix.tpl".target}";
+     #    }
+     #  ];
+
+     #  extraFiles = {
+     #    "templates/nix.tpl".text = /*nix*/ ''
+     #      { lib, config, ... }:
+     #      let
+     #        cfg = config.temp;
+     #      in
+     #      {
+     #        options.temp = with lib; {
+     #          enable = mkEnableOption "Enable an opinionated config";
+     #        };
+
+     #        config = lib.mkif cfg.enable {
+
+     #        };
+     #      }
+     #    '';
+     #  };
+
       # plugins
       plugins = {
         # nvim-treesitter - Nvim Treesitter configurations and abstraction layer
@@ -37,6 +67,15 @@ in
         # wtf - Delicious diagnostic debugging in Neovim
         # https://github.com/piersolenski/wtf.nvim
         wtf.enable = true;
+
+        # luasnip -
+        #
+        # luasnip = {
+        #   enable = true;
+        #   filetypeExtend = [
+        #     "nix"
+        #   ];
+        # };
 
         # rustaceanvim - Supercharge your Rust experience in Neovim! A heavily modified fork of rust-tools.nvim
         # https://github.com/mrcjkb/rustaceanvim
@@ -204,22 +243,6 @@ in
           };
         };
 
-        # Adds yazi floating window access into nvim.
-        # https://github.com/mikavilpas/yazi.nvim/
-        yazi = {
-          enable = true;
-          # Settings:
-          # https://nix-community.github.io/nixvim/plugins/yazi/settings/index.html
-          settings = {
-            enable_mouse_support = true;
-            floating_window_scaling_factor = 0.9;
-            log_level = "off";
-            open_for_directories = false;
-            yazi_floating_window_border = "single";
-            yazi_floating_window_winblend = 0;
-          };
-        };
-
         # neovim’s built-in LSP
         # https://nix-community.github.io/nixvim/plugins/lsp/index.html
         lsp = {
@@ -246,6 +269,7 @@ in
           };
         };
       };
+
       extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
         name = "todo.txt-vim";
         src = pkgs.fetchFromGitHub {

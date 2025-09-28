@@ -43,6 +43,7 @@
         enable = true;
         rootURL.enable = false;
       };
+      print.enable = true;
       satisfactory.enable = true;
       webdav = {
         enable = true;

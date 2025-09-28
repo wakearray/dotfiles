@@ -28,7 +28,6 @@ in
   config = lib.mkIf cfg.enable {
     services.vaultwarden = {
       enable = true;
-      dbBackend = "postgresql";
       config = {
         DATA_FOLDER = cfg.dataFolder;
         PUSH_ENABLED = false;
@@ -39,9 +38,9 @@ in
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = cfg.localPort;
         ROCKET_LOG = "critical";
-
       };
     };
+
     # Nginx reverse proxy
     services.nginx.virtualHosts = {
       "${cfg.domain}" = {

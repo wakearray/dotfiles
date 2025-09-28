@@ -25,6 +25,7 @@ in
     ./mattermost.nix
     ./ncps.nix
     ./nginx.nix
+    ./printers.nix
     ./satisfactory.nix
     ./tt-rss.nix
     ./webdav.nix

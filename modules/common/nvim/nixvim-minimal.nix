@@ -17,7 +17,7 @@
     # keymaps
     keymaps = [
       {
-        action = "<esc>:bp\";
+        action = "<CMD>bprevious<CR>";
         key = "<M-S-Left>";
         mode = [ "n" "v" "i" ];
         options = {
@@ -26,7 +26,7 @@
         };
       }
       {
-        action = "<esc>:bn\";
+        action = "<CMD>bnext<CR>";
         key = "<M-S-Right>";
         mode = [ "n" "v" "i" ];
         options = {
@@ -35,7 +35,7 @@
         };
       }
       {
-        action = "<esc>:noh\";
+        action = "<CMD>noh<CR>";
         key = "<M-Space>";
         mode = [ "n" "v" "i" ];
         options = {
@@ -44,7 +44,7 @@
         };
       }
       {
-        action = "<esc>:Telescope\";
+        action = "<CMD>Telescope<CR>";
         key = "<M-t>";
         mode = [ "n" "i" ];
         options = {
@@ -53,7 +53,7 @@
         };
       }
       {
-        action = "<esc>:Telescope live_grep\";
+        action = "<CMD>Telescope live_grep<CR>";
         key = "<M-g>";
         mode = [ "n" "i" ];
         options = {
@@ -62,11 +62,20 @@
         };
       }
       {
-        action = "<esc>:Telescope buffers\";
+        action = "<CMD>Telescope buffers<CR>";
         key = "<M-b>";
         mode = [ "n" "i" ];
         options = {
           desc = "Open Telescope buffers";
+          silent = true;
+        };
+      }
+      {
+        action = "<CMD>NvimTreeToggle<CR>";
+        key = "<M-t>";
+        mode = [ "n" "i" ];
+        options = {
+          desc = "Toggle Neovim Tree";
           silent = true;
         };
       }
