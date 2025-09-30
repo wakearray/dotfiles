@@ -25,6 +25,7 @@ in
     ./mattermost.nix
     ./ncps.nix
     ./nginx.nix
+    ./paperless
     ./printers.nix
     ./satisfactory.nix
     ./tt-rss.nix

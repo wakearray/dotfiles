@@ -43,6 +43,10 @@
         enable = true;
         rootURL.enable = false;
       };
+      paperless = {
+        enable = true;
+        port = 28981;
+      };
       print.enable = true;
       satisfactory.enable = true;
       webdav = {
