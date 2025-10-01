@@ -7,7 +7,7 @@ let
   iconColors = eww.icons.colors;
 in
 {
-  config = lib.mkIf (gui.enable && (eww.enable && bar.enable)) {
+  config = lib.mkIf (eww.enable && bar.enable)  {
     home.file."/.config/eww/bar/eww.scss" = {
       enable = true;
       force = true;
@@ -32,8 +32,8 @@ in
   // Styles on classes (see eww.yuck for more information)
 
   .barwidget {
-    background-color : #32302F;
-    color            : #DDC7A1;
+    background-color : ${colors.bar-bg};
+    color            : ${colors.text};
     border-radius    : 6px;
     padding-top      : 0px;
     padding-bottom   : 0px;
@@ -45,16 +45,45 @@ in
     margin-right     : 12px;
   }
 
+  // GTK Tooltip Styling
+  tooltip label {
+    color            : ${colors.tooltip-fg};
+    padding          : 0.3em 0.6em;
+  }
+
+  tooltip.background {
+    border-radius    : 6px;
+    background-color : ${colors.tooltip-bg};
+  }
+
+  // GTK System Tray Styling
+  // https://github.com/elkowar/eww/issues/1067
   .systray {
     margin-right     : 20px;
   }
 
+  .systray menu {
+    border-radius    : 6px;
+    padding          : 0.3em 0.6em;
+
+    background-color : ${colors.tooltip-bg};
+
+    separator {
+      background-color : ${colors.tooltip-bg};
+      padding-top    : 1px;
+
+      &:last-child {
+        padding      : unset;
+      }
+    }
+  }
+
+  // Eww Tooltip Styling
   .tooltiptext {
     color            : ${colors.tooltip-fg};
     background-color : ${colors.tooltip-bg};
     border-radius    : 6px;
-    margin           : 1em;
-    padding          : 1em;
+    padding          : 0.3em 0.6em;
   }
 
   .icon {

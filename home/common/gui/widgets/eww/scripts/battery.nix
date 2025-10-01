@@ -31,8 +31,8 @@ function change_icon () {
   ${ewwCommand} update battery_icon="$ICON" battery_class="$CLASS"
 }
 
-EWW_OLD_BATT_CAPACITY=0
-EWW_OLD_BATT_STATUS="null"
+EWW_OLD_BATT_CAPACITY="0"
+EWW_OLD_BATT_STATUS=""
 
 while true
 do
@@ -93,7 +93,7 @@ do
           ;;
           ($((BATT_CAPACITY<101))*)
             #echo "$BATT_CAPACITY >=99<=101"
-            change_icon "󰁹󱐋" "battery-charging"
+            change_icon "󰁹󱐋" "battery-full"
           ;;
         esac
       else
@@ -154,7 +154,7 @@ do
           ;;
           ($((BATT_CAPACITY<101))*)
             #echo "$BATT_CAPACITY >=99<=101"
-            change_icon "󰁹" "battery-discharging"
+            change_icon "󰁹" "battery-full"
           ;;
         esac
       fi

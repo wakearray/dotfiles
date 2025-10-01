@@ -168,9 +168,9 @@ Status  : ''${battery_status}")
 (defvar mute_status false)
 
 (defvar battery_status "")
-(defvar battery_capacity 0)
-(defvar battery_icon "󰂎!")
-(defvar battery_class "battery-discharging")
+(defvar battery_capacity 100)
+(defvar battery_icon "󰁹󱐋")
+(defvar battery_class "battery-full")
 
 (defvar active_workspace "1")
 
