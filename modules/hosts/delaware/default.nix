@@ -45,6 +45,7 @@
       };
       paperless = {
         enable = true;
+        domain = "paperless.${domain}";
         port = 28981;
       };
       print.enable = true;

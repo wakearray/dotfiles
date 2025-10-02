@@ -23,6 +23,12 @@ in
       default = "${cfg.dataDir}/consume";
       description = "Directory from which new documents are imported.";
     };
+
+    domain = mkOption {
+      type = types.str;
+      default = "paperless.example.com";
+      description = "Domain you intend to access your paperless instance from.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -31,6 +37,7 @@ in
         enable = true;
         dataDir = cfg.dataDir;
         consumptionDir = cfg.consumptionDir;
+        domain = cfg.domain;
       };
       vsftpd = {
         enable = true;

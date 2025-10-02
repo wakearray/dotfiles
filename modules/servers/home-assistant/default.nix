@@ -1,19 +1,17 @@
-{ lib, config, pkg, ... }:
+{ lib, config, ... }:
+let
+  cfg = config.servers.home-assistant;
+in
 {
+  # WIP
   options.servers.home-assistant = with lib; {
-    enable = mkEnableOption "";
+    enable = mkEnableOption "An opinionated Home-Assistant config.";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     services.home-assistant = {
       enable = true;
-      settings = {
-        homeassistant.enabled = config.services.home-assistant.enable;
-        permit_join = true;
-        serial = {
-          port = "/dev/ttyACM1";
-        };
-      };
+      openFirewall = true;
     };
   };
 }
