@@ -48,6 +48,9 @@ in
 
         # A pretty aria2 client
         varia
+
+        # The only Linux program I could find with a logical way to edit PDFs
+        masterpdfeditor4
       ];
     };
 
