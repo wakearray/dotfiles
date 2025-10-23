@@ -19,6 +19,7 @@
       sopsFile = ./syncthing.yaml;
     };
     gaming.enable = true;
+    print.enable = true;
     wm.gnome.enable = true;
   };
 }

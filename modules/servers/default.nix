@@ -23,13 +23,14 @@ in
     ./jellyfin.nix
     ./mailserver.nix
     ./mattermost.nix
+    ./miniflux.nix
     ./ncps.nix
     ./nginx.nix
     ./paperless
     ./printers.nix
     ./satisfactory.nix
-    ./tt-rss.nix
     ./webdav.nix
+    ./vaultwarden.nix
   ];
 
   config = lib.mkIf config.modules.systemDetails.isServer {

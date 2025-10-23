@@ -82,4 +82,6 @@ creation_rules:
       - age:
         - *kent
         - *kent_new
+        - *starling
+        - *greatblue
         - *hamburger

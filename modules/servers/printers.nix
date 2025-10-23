@@ -16,35 +16,41 @@ in
     ];
 
     # Enable CUPS to print documents.
-    services.printing = {
-      enable = true;
-      drivers = [ pkgs.brlaser pkgs.cups-dymo ];
-      webInterface = true;
-      listenAddresses = [ "*:631" ];
-      allowFrom = [ "all" ];
-      browsing = true;
-      defaultShared = true;
-      browsed.enable = true;
+    services = {
+      ipp-usb.enable = true;
+
+      printing = {
+        enable = true;
+        drivers = [ pkgs.brlaser pkgs.cups-dymo ];
+        webInterface = true;
+        listenAddresses = [ "*:631" ];
+        allowFrom = [ "all" ];
+        browsing = true;
+        defaultShared = true;
+        browsed.enable = true;
+      };
     };
 
-    hardware.printers = {
-      ensurePrinters = [
-        {
-          name = "Brother_HL-L2300D";
-          location = "Chicken Coop";
-          deviceUri = "usb://Brother/HL-L2300D%20series?serial=U63878K7N171253";
-          ppdOptions = {
-             PageSize = "A4";
-          };
-          model = "drv:///brlaser.drv/brl2300d.ppd";
-        }
-        {
-          name = "DYMO_LabelWriter_4XL";
-          location = "Chicken Coop";
-          deviceUri = "usb://DYMO/LabelWriter%204XL?serial=16102622140932";
-          model = "${pkgs.cups-dymo}/share/cups/model/lw4xl.ppd";
-        }
-      ];
-    };
+  # hardware.printers = {
+  #   ensurePrinters = [
+  #     {
+  #       name = "Brother_HL-L2300D";
+  #       location = "Chicken Coop";
+  #       deviceUri = "usb://Brother/HL-L2300D%20series?serial=U63878K7N171253";
+  #       ppdOptions = {
+  #          PageSize = "A4";
+  #       };
+  #       model = "drv:///${pkgs.brlaser}/share/cups/drv/brlaser.drv/brl2300d.ppd";
+  #       #model = "drv:///brlaser.drv/brl2300d.ppd";
+  #     }
+  #     {
+  #       name = "DYMO_LabelWriter_4XL";
+  #       location = "Chicken Coop";
+  #       deviceUri = "usb://DYMO/LabelWriter%204XL?serial=16102622140932";
+  #       model = "${pkgs.cups-dymo}/share/cups/model/lw4xl.ppd";
+  #       #model = "${pkgs.cups-dymo}/share/cups/model/lw4xl.ppd";
+  #     }
+  #   ];
+  # };
   };
 }

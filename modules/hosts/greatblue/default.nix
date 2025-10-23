@@ -19,6 +19,7 @@
     };
     gaming.enable = true;
     office.enable = true;
+    print.enable = true;
     wm.hyprland.enable = true;
     greeter.tuigreet.enable = true;
   };

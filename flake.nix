@@ -6,6 +6,10 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # Quickly local nix packages with specific files
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
     # Nix User Packages
     nur = {
       url = "github:nix-community/NUR";
@@ -99,7 +103,7 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, nur, home-manager, system-manager, nix-system-graphics, impermanence, disko, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, nix-index-database, nur, home-manager, system-manager, nix-system-graphics, impermanence, disko, nixvim, sops-nix, simple-nixos-mailserver, nixos-generators, catppuccin, ... }@inputs:
   let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
@@ -155,6 +159,7 @@
           sops-nix.nixosModules.sops
           impermanence.nixosModules.impermanence
           nur.modules.nixos.default
+          nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -198,6 +203,7 @@
           sops-nix.nixosModules.sops
           impermanence.nixosModules.impermanence
           nur.modules.nixos.default
+          nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -244,6 +250,7 @@
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule
+          nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -288,6 +295,7 @@
           sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule
           disko.nixosModules.disko
+          nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -327,6 +335,7 @@
           ./modules/servers
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
+          nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -365,6 +374,7 @@
           ./hosts/lagurus/configuration.nix
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
+          nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -408,9 +418,9 @@
         modules = [
           ./hosts/jerboa/configuration.nix
           ./modules/servers
-          simple-nixos-mailserver.nixosModule
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
+          nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -457,6 +467,7 @@
           nixos-hardware.nixosModules.common-cpu-intel
           nixos-hardware.nixosModules.common-pc-ssd
           nixos-hardware.nixosModules.common-hidpi
+          nix-index-database.nixosModules.nix-index
 	        catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           {
@@ -497,6 +508,7 @@
         };
         modules = [
           ./hosts/shoebill/configuration.nix
+          nix-index-database.nixosModules.nix-index
 	        catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           {
@@ -543,6 +555,7 @@
         nixos-hardware.nixosModules.common-cpu-intel
         nixos-hardware.nixosModules.common-pc-ssd
         nixos-hardware.nixosModules.common-hidpi
+        nix-index-database.nixosModules.nix-index
         catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
         {
@@ -594,6 +607,7 @@
       };
       modules = [
         ./hosts/custominstaller/configuration.nix
+        nix-index-database.nixosModules.nix-index
         home-manager.nixosModules.home-manager
         {
           home-manager = {

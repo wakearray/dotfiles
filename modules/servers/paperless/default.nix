@@ -45,6 +45,17 @@ in
         writeEnable = true;
         anonymousUserHome = cfg.consumptionDir;
       };
+
+      # Nginx server
+      nginx.virtualHosts."${cfg.domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations = {
+          "/" = {
+            proxyPass = "http://localhost:${toString cfg.port}";
+          };
+        };
+      };
     };
   };
 }

@@ -70,11 +70,6 @@
     # Features [ "printers" "installer" "minimal" "developer" "gaming" "eink" "einkColor" ]
     # (`installer` and `printer` options aren't included in home-manager)
     features = {
-      printers = mkOption {
-        type = types.bool;
-        default = (builtins.match ".*printers.*" systemDetails.features != null);
-        description = "True if host should have printer access.";
-      };
       installer = mkOption {
         type = types.bool;
         default = (builtins.match ".*installer.*" systemDetails.features != null);
@@ -260,17 +255,21 @@
     services = {
       locate.enable = true;
       # Automount USB drives
-      gvfs.enable = true;
+      gvfs.enable = lib.mkDefault true;
       # Use Avahi to make this computer discoverable and
       # to discover other computers.
       avahi = {
-        enable = true;
+        enable = lib.mkDefault true;
         nssmdns4 = true;
         openFirewall = true;
         domainName = "wakenet";
+        publish = {
+          enable = true;
+          userServices = true;
+        };
       };
       # Enable SMART error monitoring on NixOS machines
-      smartd.enable = true;
+      smartd.enable = lib.mkDefault true;
     };
   };
 }

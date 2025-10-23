@@ -4,7 +4,7 @@ let
 in
 {
   options.gui.print = with lib; {
-    enable = mkEnableOption "Enable CUPS print server for connecting to printers on the local network." // { default = config.modules.systemDetails.features.printers;};
+    enable = mkEnableOption "Enable CUPS print server for connecting to printers on the local network.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -42,7 +42,7 @@ in
           ppdOptions = {
              PageSize = "A4";
           };
-          model = "drv:///brlaser.drv/brl2300d.ppd";
+          model = "drv:///${pkgs.brlaser}/share/cups/drv/brlaser.drv/brl2300d.ppd";
         }
         {
           name = "DYMO_LabelWriter_4XL";

@@ -23,16 +23,20 @@ in
       default = "/var/lib/vaultwarden/";
       description = "String of path to where you want the vault to be located.";
     };
+
+    sopsFile = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      description = "The secrets file needs to be a complete environment file named `vaultwardenEnvironmentVars` including (but not limited to) `PUSH_INSTALLATION_ID`, `PUSH_INSTALLATION_KEY`, and `ADMIN_TOKEN`.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     services.vaultwarden = {
       enable = true;
+      environmentFile = config.sops.templates."vaultwardenEnvironmentFile".path;
       config = {
         DATA_FOLDER = cfg.dataFolder;
-        PUSH_ENABLED = false;
-        # PUSH_INSTALLATION_ID=CHANGEME
-        # PUSH_INSTALLATION_KEY=CHANGEME
         DOMAIN = "https://${cfg.domain}";
         SIGNUPS_ALLOWED = false;
         ROCKET_ADDRESS = "127.0.0.1";
@@ -53,6 +57,17 @@ in
           };
         };
       };
+    };
+
+    # sops secrets
+    sops.secrets.vaultwardenEnvironmentVars = {
+      sopsFile = cfg.sopsFile;
+    };
+
+    sops.templates."vaultwardenEnvironmentFile" = {
+      content  = ''
+        ${config.sops.placeholder.vaultwardenEnvironmentVars}
+      '';
     };
   };
 }

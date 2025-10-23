@@ -27,7 +27,7 @@ in
         recommendedProxySettings = true;
 
         defaultListen = [
-          { addr = "127.0.0.1"; port = 8443; ssl = true; }
+          { addr = "127.0.0.1"; port = 443; ssl = true; }
         ];
 
         virtualHosts = lib.mkIf cfg.rootURL.enable {
@@ -39,54 +39,15 @@ in
           };
         };
       };
-      sslh = {
-        enable = true;
-        method = "select";
-        port = 443;
-        settings = {
-          transparent = true;
-          protocols = [
-            {
-              host = "localhost";
-              name = "ssh";
-              port = "22";
-              service = "ssh";
-            }
-            {
-              host = "localhost";
-              name = "openvpn";
-              port = "1194";
-            }
-            {
-              host = "localhost";
-              name = "xmpp";
-              port = "5222";
-            }
-            {
-              host = "localhost";
-              name = "http";
-              port = "80";
-            }
-            {
-              host = "localhost";
-              name = "tls";
-              port = "8443";
-            }
-            {
-              host = "localhost";
-              name = "anyprot";
-              port = "8443";
-            }
-          ];
-        };
-      };
     };
 
     users.users.nginx.extraGroups = [ "acme" ];
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "kent.hambrock@gmail.com";
+      defaults = {
+        email = "kent.hambrock@gmail.com";
+      };
     };
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];

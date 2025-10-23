@@ -18,6 +18,7 @@
       sopsFile = ./syncthing.yaml;
     };
     wm.hyprland.enable = true;
+    print.enable = true;
     greeter.tuigreet.enable = true;
   };
 
