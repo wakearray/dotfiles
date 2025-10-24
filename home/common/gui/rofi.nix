@@ -144,18 +144,9 @@ in
     programs = {
       rofi = {
         enable = true;
-        package = (
-        if
-          (builtins.match "wayland" systemDetails.display != null)
-        then
-          pkgs.rofi-wayland-unwrapped.override {
-            plugins = rofi.plugins;
-          }
-        else
-          pkgs.rofi-unwrapped.override {
-            plugins = rofi.plugins;
-          }
-        );
+        package = pkgs.rofi-unwrapped.override {
+          plugins = rofi.plugins;
+        };
         extraConfig = {
           location = 0;
           yoffset = 0;

@@ -14,10 +14,11 @@ in
         # https://github.com/nickclyde/rofi-bluetooth
         rofi-bluetooth
 
-        # Emoji picker for rofi - Built against rofi-wayland
+        # Emoji picker for rofi
         # https://github.com/Mange/rofi-emoji
-        rofi-emoji-wayland
+        rofi-emoji
       ];
+
       modi = "drun,todo:todofi.sh,filebrowser,emoji";
     };
   };

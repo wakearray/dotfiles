@@ -60,10 +60,6 @@ in
       # Simple Wine and Proton-based compatibility tools manager
       # https://github.com/Vysp3r/ProtonPlus
       protonplus
-
-      # Run any Windows program with Proton. `proton-call -r foo.exe`
-      # https://github.com/gtors/proton-caller
-      proton-caller
     ];
   };
 }

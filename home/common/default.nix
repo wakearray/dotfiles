@@ -247,13 +247,26 @@
       # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
       git = {
         enable = true;
-        # delta - A syntax-highlighting pager for git, diff, grep, and blame output
-        # https://github.com/dandavison/delta
-        delta.enable = true;
+        settings = {
+          color.ui = "auto";
+          # initialize new repos using `main` for the first branch rather than `master`
+          init.defaultBranch = "main";
+        };
+        signing = lib.mkDefault {
+          format = "ssh";
+          signByDefault = true;
+        };
         ignores = [
           "*~"
           "*.swp"
         ];
+      };
+
+      # delta - A syntax-highlighting pager for git, diff, grep, and blame output
+      # https://github.com/dandavison/delta
+      delta = {
+        enable = true;
+        enableGitIntegration = true;
       };
 
       # skim - `sk` - Fuzzy Finder in rust!

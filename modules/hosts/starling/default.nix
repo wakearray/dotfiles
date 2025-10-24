@@ -23,9 +23,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # Drivers to support docks with HDMI ports
-    displaylink
-
     # Generate Nix packages from URLs
     # https://github.com/nix-community/nix-init
     nix-init
@@ -46,9 +43,6 @@
     # For playing audio from one device on another
     soundwireserver
 
-    # OpenSCAD
-    openscad-unstable
-
     # utils
     usbutils
     android-tools
@@ -61,8 +55,6 @@
   boot.tmp.useTmpfs = false;
 
   services = {
-    # Needed to make NixOS work with displaylink docks
-    xserver.videoDrivers = [ "displaylink" "modesetting" ];
     # Let the window manager choose how to handle lid open/close events
     logind.settings.Login = {
       HandleLidSwitch = "ignore";

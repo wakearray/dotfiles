@@ -44,10 +44,6 @@ in
     services.gnome.gnome-browser-connector.enable = true;
 
     environment.systemPackages = with pkgs; [
-      # Rofi - Window switcher, run dialog and dmenu replacement for Wayland
-      # https://github.com/lbonn/rofi
-      rofi-wayland
-
       # Gnome specific stuffs
       gnome-tweaks
 

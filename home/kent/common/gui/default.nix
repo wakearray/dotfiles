@@ -1,7 +1,6 @@
 { inputs, lib, config, pkgs, ... }:
 let
   gui = config.gui;
-  wayland = config.gui.wayland;
   system = config.home.systemDetails.architecture.text;
 in
 {
@@ -26,12 +25,12 @@ in
 
     gui = {
       themes.gruvbox.enable = true;
-      rofi = lib.mkIf (wayland.enable) {
+      rofi = {
         enable = true;
         plugins = with pkgs; [
-          # Emoji picker for rofi - Built against rofi-wayland
+          # Emoji picker for rofi
           # https://github.com/Mange/rofi-emoji
-          rofi-emoji-wayland
+          rofi-emoji
         ];
         modi = "drun,todo:todofi.sh";
       };

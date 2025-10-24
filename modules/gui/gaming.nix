@@ -40,7 +40,6 @@ in
       bottles      # A sensible Wine wrapper for games
       protontricks # Use winetricks in proton
       protonplus   # Simple Wine and Proton-based compatibility tools manager
-      proton-caller
     ];
 
     # Enable xbox one acccessories

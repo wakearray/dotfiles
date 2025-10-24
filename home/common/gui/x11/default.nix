@@ -29,9 +29,6 @@ in
       xorg.xprop
       xorg.xev
 
-      # pcmanfm - gui file manager
-      pcmanfm
-
       # Mesa - OpenGL drivers
       mesa
     ];

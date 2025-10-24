@@ -12,7 +12,7 @@ in
       pcmanfm
 
       # Add lxmenu-data to be offered a list of "Installed applications" when opening a file.
-      lxde.lxmenu-data
+      lxmenu-data
 
       # Add shared-mime-info to recognise different file types.
       shared-mime-info
