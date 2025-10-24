@@ -7,13 +7,13 @@ let
     if
       (builtins.match "wayland" systemDetails.display != null)
     then # Wayland config
-      ''
+      /*yuck*/ ''
 :stacking "bg"
   :exclusive true
   :focusable false
       ''
     else # X11 config
-      ''
+      /*yuck*/ ''
 :stacking "bg"
   :wm-ignore false
   :reserve (struts :distance "2%" :side "top")
@@ -24,12 +24,8 @@ let
     if
       (builtins.match "android" systemDetails.hostType != null || builtins.match "laptop" systemDetails.hostType != null)
     then # If device is a laptop or android device, display a battery icon.
-      ''
-(label :class battery_class
-           :text battery_icon)
-    (label :text "''${battery_capacity}% | ")
-    time)
-      ''
+/*yuck*/ "
+(battery_widget)"
     else # Anything else shouldn't
       ""
   );
@@ -74,8 +70,8 @@ Mute  : ''${mute_status}"
             :bool-name "ui_memory_visible"
             :bool ui_memory_visible
             :value {EWW_RAM.used_mem_perc}
-            :onchange "")
-    ${enableBattery} )
+            :onchange "")${enableBattery}
+    (label :text time)))
 
 (defwidget bar [ offset ]
   (centerbox :orientation "h"
@@ -150,7 +146,10 @@ Mute  : ''${mute_status}"
            :text "Capacity: ''${battery_capacity}%
 Status  : ''${battery_status}")
     (box :orientation "h"
-      (label :text "''${battery_icon} ''${EWW_BATTERY["${eww.battery.identifier}"].capacity}% | "))))
+         :space-evenly false
+      (label :class battery_class
+             :text battery_icon)
+      (label :text "''${EWW_BATTERY["${eww.battery.identifier}"].capacity}% | "))))
 
 (defwidget workspace_toggle [ workspace offset ]
   (button :onclick "~/.config/eww/scripts/set_workspace.sh ''${workspace}"
