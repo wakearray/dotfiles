@@ -8,10 +8,11 @@ in
   # regardless of other firewall rules.
 
   imports = [
-    ./lobechat.nix
-    ./omada-controller.nix
+    #./lobechat.nix
+    #./omada-controller.nix
     ./tubearchivist.nix
-    ./wger.nix
+    ./vaultwarden.nix
+    #./wger.nix
     ./wyze-bridge.nix
   ];
 

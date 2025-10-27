@@ -1,9 +1,9 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
-  cfg = config.servers.vaultwarden;
+  cfg = config.servers.docker.vaultwarden;
 in
 {
-  options.servers.vaultwarden = with lib; {
+  options.servers.docker.vaultwarden = with lib; {
     enable = mkEnableOption "Enable an opinionated vaultwarden config.";
 
     domain = mkOption {
@@ -32,17 +32,21 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.vaultwarden = {
-      enable = true;
-      environmentFile = config.sops.templates."vaultwardenEnvironmentFile.env".path;
-      config = {
-        DATA_FOLDER = cfg.dataFolder;
-        DOMAIN = "https://${cfg.domain}";
-        SIGNUPS_ALLOWED = false;
-        ROCKET_ADDRESS = "127.0.0.1";
-        ROCKET_PORT = cfg.localPort;
-        ROCKET_LOG = "critical";
-      };
+    virtualisation.oci-containers.containers.vaultwarden = {
+      image = "vaultwarden/server:latest";
+      autoStart = true;
+      environmentFiles = [
+        config.sops.templates."vaultwardenEnvironmentFile.env".path
+      ];
+      #environment = {
+      #  ADMIN_TOKEN="\${VAULTWARDEN_ADMIN_TOKEN}";
+      #};
+      volumes = [
+        "${cfg.dataFolder}:/data/"
+      ];
+      ports = let port = builtins.toString cfg.localPort; in [
+        "127.0.0.1:${port}:${port}"
+      ];
     };
 
     # Nginx reverse proxy
@@ -60,20 +64,24 @@ in
     };
 
     # sops secrets
-    sops.secrets.vaultwardenEnvironmentVars = {
-      sopsFile = cfg.sopsFile;
-      mode     = "0400";
-      owner    = "vaultwarden";
-      group    = "vaultwarden";
+    sops.secrets = {
+      vw_push_id = { sopsFile = cfg.sopsFile; };
+      vw_push_key = { sopsFile = cfg.sopsFile; };
+      vw_admin_token = { sopsFile = cfg.sopsFile; };
     };
 
     sops.templates."vaultwardenEnvironmentFile.env" = {
       content  = ''
-        ${config.sops.placeholder.vaultwardenEnvironmentVars}
+        PUSH_ENABLED=true
+        PUSH_INSTALLATION_ID=${config.sops.placeholder.vw_push_id}
+        PUSH_INSTALLATION_KEY=${config.sops.placeholder.vw_push_key}
+        ADMIN_TOKEN=${config.sops.placeholder.vw_admin_token}
+
+        DOMAIN=https://${cfg.domain}
+        SIGNUPS_ALLOWED=false
+        ROCKET_PORT=${builtins.toString cfg.localPort}
+        ROCKET_LOG=critical
       '';
-      mode     = "0400";
-      owner    = "vaultwarden";
-      group    = "vaultwarden";
     };
   };
 }

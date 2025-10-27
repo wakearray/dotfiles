@@ -37,10 +37,13 @@
      #    domain = "ntfy.${domain}";
      #  };
 
-      vaultwarden = {
+      docker = {
         enable = true;
-        domain = "vault.${domain}";
-        sopsFile = ./vaultwarden.yaml;
+        vaultwarden = {
+          enable = true;
+          domain = "vault.${domain}";
+          sopsFile = ./vaultwarden.yaml;
+        };
       };
     };
   };

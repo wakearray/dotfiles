@@ -30,7 +30,6 @@ in
     ./printers.nix
     ./satisfactory.nix
     ./webdav.nix
-    ./vaultwarden.nix
   ];
 
   config = lib.mkIf config.modules.systemDetails.isServer {
