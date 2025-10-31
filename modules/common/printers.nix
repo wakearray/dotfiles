@@ -32,7 +32,7 @@ in
     ###  - After that, it’ll ask you for your login details. Login with your normal OS login and everything should work now.
     ###
 
-    hardware.printers = {
+    hardware.printers = lib.mkIf false {
       ensureDefaultPrinter = "Brother_HL-L2300D";
       ensurePrinters = [
         {

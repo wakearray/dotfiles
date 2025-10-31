@@ -58,7 +58,7 @@ in
     environment = {
       systemPackages = with pkgs; [
         # Allows theming of QT6 applications like LibreOffice
-        qt6ct
+        qt6Packages.qt6ct
 
         # A windows task manager styled resource monitor
         mission-center
