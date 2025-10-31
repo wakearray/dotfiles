@@ -31,7 +31,6 @@
         domain = "${domain}";
         localPort = 8065;
         disableRegistration = true;
-        mail.enable = false;
         actions.enable = true;
       };
       ncps = {

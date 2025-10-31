@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  forgejo = config.servers.forgejo;
+  cfg = config.servers.forgejo;
 in
 {
   options.servers.forgejo = with lib; {
@@ -39,7 +39,7 @@ in
     };
   };
 
-  config = lib.mkIf forgejo.enable {
+  config = lib.mkIf cfg.enable {
     # Forgejo
     services.forgejo = {
       enable = true;
@@ -54,16 +54,16 @@ in
       settings = {
         server = {
           DOMAIN = "localhost";
-          ROOT_URL = "https://git.${forgejo.domain}/";
+          ROOT_URL = "https://git.${cfg.domain}/";
           PROTOCOL = "http";
-          HTTP_PORT = forgejo.localPort;
+          HTTP_PORT = cfg.localPort;
         };
         # You can temporarily allow registration to create an admin user.
-        service.DISABLE_REGISTRATION = forgejo.disableRegistration;
+        service.DISABLE_REGISTRATION = cfg.disableRegistration;
         # Add support for actions, based on act: https://github.com/nektos/act
         actions = {
-          ENABLED = forgejo.actions.enable;
-          DEFAULT_ACTIONS_URL = forgejo.actions.defaultActionsUrl;
+          ENABLED = cfg.actions.enable;
+          DEFAULT_ACTIONS_URL = cfg.actions.defaultActionsUrl;
         };
         # Sending emails is completely optional
         # You can send a test email from the web UI at:
@@ -73,9 +73,9 @@ in
           PROTOCOL = "smtp+starttls";
           SMTP_ADDR = "mail.smtp2go.com";
           SMTP_PORT = 8025;
-          FROM = "forgejo@${forgejo.domain}";
-          ENVELOPE_FROM = "forgejo@${forgejo.domain}";
-          USER = "forgejo@${forgejo.domain}";
+          FROM = "forgejo@${cfg.domain}";
+          ENVELOPE_FROM = "forgejo@${cfg.domain}";
+          USER = "forgejo@${cfg.domain}";
           PASSWD_URI = "file:/run/secrets/forgejo_mailer_password";
         };
       };
@@ -83,7 +83,7 @@ in
 
     sops.secrets = let
       opts = {
-        sopsFile = ./forgejo.yaml;
+        sopsFile = ./secrets.yaml;
         mode     = "0400";
         owner    = "forgejo";
         group    = "forgejo";
@@ -95,7 +95,7 @@ in
 
     # Nginx reverse proxy
     services.nginx.virtualHosts = {
-      "git.${forgejo.domain}" = {
+      "git.${cfg.domain}" = {
         enableACME = true;
         forceSSL = true;
         extraConfig = ''
@@ -103,10 +103,11 @@ in
         '';
         locations = {
           "/" = {
-            proxyPass = "http://localhost:${builtins.toString forgejo.localPort}";
+            proxyPass = "http://localhost:${builtins.toString cfg.localPort}";
           };
         };
       };
     };
   };
 }
+

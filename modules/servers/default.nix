@@ -18,7 +18,7 @@ in
     ./deluge
     ./docker
     ./firewall
-    ./forgejo.nix
+    ./forgejo
     ./home-assistant
     ./jellyfin.nix
     ./mailserver.nix

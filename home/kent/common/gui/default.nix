@@ -1,6 +1,5 @@
 { inputs, lib, config, pkgs, ... }:
 let
-  gui = config.gui;
   system = config.home.systemDetails.architecture.text;
 in
 {
@@ -11,7 +10,7 @@ in
     ./ssh.nix
   ];
 
-  config = lib.mkIf gui.enable {
+  config = lib.mkIf config.gui.enable {
     gtk = {
       enable = true;
       iconTheme = {
