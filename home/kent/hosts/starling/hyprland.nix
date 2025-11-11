@@ -34,10 +34,6 @@
           "pin, class:(firefox), title:(Picture-in-Picture), floating:1"
           "size 20% 20%, class:(firefox), title:(Picture-in-Picture), floating:1, pinned:1"
         ];
-        animations = {
-          enable = true;
-          firstLaunchAnimation = true;
-        };
         execOnce = [
           "alacritty"
           "firefox"

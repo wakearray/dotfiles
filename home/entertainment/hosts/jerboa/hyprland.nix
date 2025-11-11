@@ -18,10 +18,6 @@
             "size 20% 20%, class:(firefox), title:(Picture-in-Picture), floating:1, pinned:1"
             "workspace 2, class:(Alacritty)"
           ];
-          animations = {
-            enable = true;
-            firstLaunchAnimation = true;
-          };
           execOnce = [
             "alacritty"
             "firefox"

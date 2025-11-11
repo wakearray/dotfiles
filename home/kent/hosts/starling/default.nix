@@ -29,12 +29,6 @@
         piper-tts
         sox
 
-        # Chrome
-        google-chrome
-
-        # Hopefully Lighter than Signal Desktop
-        signal-cli
-
         # Image editing
         gimp3-with-plugins
         stable.darktable

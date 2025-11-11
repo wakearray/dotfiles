@@ -90,8 +90,8 @@ in
         description = "A list of window rules (v2 only) as described here: https://wiki.hyprland.org/Configuring/Window-Rules/#window-rules-v2";
       };
       animations = {
-        enable = mkEnableOption "Enable animations.";
-        firstLaunchAnimation = mkEnableOption "Enable animation for opening apps.";
+        enable = mkEnableOption "Enable animations." // {default = true;};
+        workspaceWraparound = mkEnableOption "Enable workspace wraparound, causing directional workspace animations to animate as if the first and last workspaces were adjacent." // {default = true;};
       };
       input = mkOption {
         type = types.attrs;
@@ -545,7 +545,7 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
           # More details about animations:
           # https://wiki.hyprland.org/Configuring/Animations/
           enabled = s.animations.enable;
-          first_launch_animation = s.animations.firstLaunchAnimation;
+          workspace_wraparound = s.animations.workspaceWraparound;
         };
         # https://wiki.hyprland.org/Configuring/Variables/#input
         input = s.input;
@@ -556,9 +556,9 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
           no_update_news = true;
           no_donation_nag = true;
         };
-        gestures = {
-          workspace_swipe = true;
-        };
+        # gestures = {
+        #   workspace_swipe = true;
+        # };
         misc = {
           font_family = "Mono";
         };

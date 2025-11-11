@@ -155,6 +155,9 @@
       # ImageMagick - Command line software for manipulating images
       # https://imagemagick.org/
       imagemagick
+
+      # Fast duplicate file finder written in rust
+      ddh
     ];
 
     # Add the userdata usergroup

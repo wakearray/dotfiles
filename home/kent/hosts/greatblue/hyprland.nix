@@ -39,10 +39,6 @@ in
             "idleinhibit always, class:^(steam_app_.*)$"
             "idleinhibit always, fullscreen:1"
           ];
-          animations = {
-            enable = true;
-            firstLaunchAnimation = true;
-          };
           execOnce = [
             "alacritty"
             "firefox"

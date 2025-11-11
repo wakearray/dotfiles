@@ -60,7 +60,7 @@ in
           # https://github.com/mattermost-community/mattermost-plugin-memes/tree/master
           (fetchurl {
             url = "https://github.com/mattermost-community/mattermost-plugin-memes/releases/download/v1.5.0/memes-1.5.0.tar.gz";
-            hash = "";
+            hash = "sha256-c+OW/Sfc1cipBulaoik412ig3khR9EhNQ5UJe0NNq2U=";
           })
 
           # RemindMe Bot
@@ -68,7 +68,7 @@ in
           # https://github.com/scottleedavis/mattermost-plugin-remind/blob/master/README.md
           (fetchurl {
             url = "https://github.com/scottleedavis/mattermost-plugin-remind/releases/download/v1.0.0/com.github.scottleedavis.mattermost-plugin-remind-1.0.0.tar.gz";
-            hash = "";
+            hash = "sha256-uFH4w6xROC4uG+5fHY342A2Rr9bvkJyKxBGfyE7L63I=";
           })
 
           # Todo
@@ -76,7 +76,7 @@ in
           # https://github.com/mattermost-community/mattermost-plugin-todo
           (fetchurl {
             url = "https://github.com/mattermost-community/mattermost-plugin-todo/releases/download/v0.7.1/com.mattermost.plugin-todo-0.7.1.tar.gz";
-            hash = "";
+            hash = "sha256-P+Z66vqE7FRmc2kTZw9FyU5YdLLbVlcJf11QCbfeJ84=";
           })
 
           # Auto Markdown Links
@@ -84,7 +84,7 @@ in
           # https://github.com/mattermost-community/mattermost-plugin-autolink
           (fetchurl {
             url = "https://github.com/mattermost-community/mattermost-plugin-autolink/releases/download/v1.4.1/mattermost-autolink-1.4.1.tar.gz";
-            hash = "";
+            hash = "sha256-uKnGAGO9CQquBLWcehhUeNOIMZduKmYL2hhDEpmUTlE=";
           })
 
           # ClamAV - Auto scan uploads for viruses
@@ -92,7 +92,7 @@ in
           # https://github.com/mattermost-community/mattermost-plugin-antivirus#installation
           (fetchurl {
             url = "https://github.com/mattermost-community/mattermost-plugin-antivirus/releases/download/v1.0.0/antivirus-1.0.0.tar.gz";
-            hash = "";
+            hash = "sha256-Hc4kVhDcFZ3KbvlSBbYy6yhaNwvp2fduCL0gC1XG2mo=";
           })
 
           # Replace - sed style comment editing
@@ -100,7 +100,7 @@ in
           # https://github.com/carmo-evan/mattermost-plugin-replace
           (fetchurl {
             url = "https://github.com/carmo-evan/mattermost-plugin-replace/releases/download/v0.2.1/com.mattermost.replace-0.2.0.tar.gz";
-            hash = "";
+            hash = "sha256-Ue7X8uc9sqxEbzTsmbrXxV/TXFZtdcCoTuE1iYmIwog=";
           })
 
           # Draw - Let usrs draw simple art inside Mattermost
@@ -108,7 +108,7 @@ in
           # https://github.com/jespino/mattermost-plugin-draw
           (fetchurl {
             url = "https://github.com/jespino/mattermost-plugin-draw/releases/download/v0.0.4/com.mattermost.draw-plugin-0.0.4.tar.gz";
-            hash = "";
+            hash = "sha256-Vl0x01ZKhWVz9Fw11UD55xgUEfTPP+Jp0J9vhtf8zb4=";
           })
 
           # Walltime - shows message time in user's time zone
@@ -116,7 +116,7 @@ in
           # https://github.com/mattermost-community/mattermost-plugin-walltime
           (fetchurl {
             url = "https://github.com/mattermost-community/mattermost-plugin-walltime/releases/download/0.1.1/com.mattermost.walltime-plugin-0.1.1.tar.gz";
-            hash = "";
+            hash = "sha256-4etbmpjakDeM9M17LXoXvHu2IQO4Run3mmqOyog2l0Y=";
           })
 
           # Agents - LLM integration for Mattermost
@@ -132,7 +132,7 @@ in
           # https://github.com/mattermost-community/mattermost-plugin-custom-attributes
           (fetchurl {
             url = "https://github.com/mattermost-community/mattermost-plugin-custom-attributes/releases/download/v1.3.1/com.mattermost.custom-attributes-1.3.1.tar.gz";
-            hash = "";
+            hash = "sha256-+vlbd++EEMJV0L9FixUShBua8YMF/K9QLq8fC5szq10=";
           })
 
           # Matterpoll - Polls for Mattermost
@@ -140,7 +140,7 @@ in
           # https://github.com/matterpoll/matterpoll
           (fetchurl {
             url = "https://github.com/matterpoll/matterpoll/releases/download/v1.8.0/com.github.matterpoll.matterpoll-1.8.0.tar.gz";
-            hash = "";
+            hash = "sha256-ORfa+f5HJLbG+kRnL+UnbL66iPH+S9jhOHdB1vvRx2A=";
           })
 
           # Freemium - Remove Mattermost ads and references to bbeing a free/community server
@@ -148,71 +148,39 @@ in
           # https://github.com/dy0gu/mattermost-plugin-freemium
           (fetchurl {
             url = "https://github.com/dy0gu/mattermost-plugin-freemium/releases/download/v1.8.0/freemium.tar.gz";
-            hash = "";
+            hash = "sha256-teHhqQqG6PYkSoz3nZBFi39tyEJ3MoyQWPWHOpOPJ/I=";
           })
 
-          #
-          #
-          # https://github.com/streamer45/mattermost-plugin-voice
-          (fetchurl {
-            url = "";
-            hash = "";
-          })
-
-          #
-          #
+          # Meeting Agenda plugin
+          # 0.2.3
           # https://github.com/mattermost-community/mattermost-plugin-agenda
           (fetchurl {
-            url = "";
-            hash = "";
+            url = "https://github.com/mattermost-community/mattermost-plugin-agenda/releases/download/v0.2.3/com.mattermost.agenda-0.2.3.tar.gz";
+            hash = "sha256-7LyK2z7Y1chBHXoL5MXLtc0yj28plQyOPkdO3fwtSEU=";
           })
 
-          #
-          #
+          # Message Wrangler - Lets you move messages between threads and channels
+          # 0.9.0
           # https://github.com/gabrieljackson/mattermost-plugin-wrangler
           (fetchurl {
-            url = "";
-            hash = "";
+            url = "https://github.com/gabrieljackson/mattermost-plugin-wrangler/releases/download/v0.9.0/com.mattermost.wrangler-0.9.0.tar.gz";
+            hash = "sha256-S1DzEy9z69TqLeEa8X4MDkxW5IIyGvTTxLDBZu8Yeko=";
           })
 
-          #
-          #
+          # End2EndEncryption using PGP keys
+          # 0.9.1
           # https://github.com/quarkslab/mattermost-plugin-e2ee
           (fetchurl {
-            url = "";
-            hash = "";
+            url = "https://github.com/quarkslab/mattermost-plugin-e2ee/releases/download/v0.9.1/com.quarkslab.e2ee-0.9.1.tar.gz";
+            hash = "sha256-oczKNgV55gwS/pijreq+5KpkKmtzx+UuJKUjFk8461Q=";
           })
 
-          #
-          #
+          # Channel Notes
+          # 0.1.1
           # https://github.com/crspeller/mattermost-plugin-channel-notes
           (fetchurl {
-            url = "";
-            hash = "";
-          })
-
-          #
-          #
-          # https://github.com/jfrerich/mattermost-plugin-bookmarks
-          (fetchurl {
-            url = "";
-            hash = "";
-          })
-
-          #
-          #
-          # https://github.com/mattermost/mattermost-plugin-community
-          (fetchurl {
-            url = "";
-            hash = "";
-          })
-
-          #
-          #
-          # https://github.com/streamer45/mattermost-plugin-screen
-          (fetchurl {
-            url = "";
-            hash = "";
+            url = "https://github.com/crspeller/mattermost-plugin-channel-notes/releases/download/v0.1.1/channel-notes-0.1.1.tar.gz";
+            hash = "sha256-GwjMAUlcxJDoGqZNEvUqRsI7xo8LDRAXCFzAPw/ohhs=";
           })
 
           # Bot Webhook
@@ -220,7 +188,7 @@ in
           # https://github.com/timkley/mattermost-plugin-bot-webhook
           (fetchurl {
             url = "https://github.com/timkley/mattermost-plugin-bot-webhook/releases/download/v0.3.0/bot-webhook-plugin-0.3.0.tar.gz";
-            hash = "";
+            hash = "sha256-8J7RFmwMYyEcPfqQlzHR+KQ8yXhoAHvBWAfFiWh9wUU=";
           })
 
           # Github
@@ -228,7 +196,7 @@ in
           # https://github.com/mattermost/mattermost-plugin-github
           (fetchurl {
             url = "https://github.com/mattermost/mattermost-plugin-github/releases/download/v2.5.0/mattermost-plugin-github-v2.5.0-linux-amd64.tar.gz";
-            hash = "";
+            hash = "sha256-NsQ0DrZOXx1G2H5IoE8D6XtRnFwBjIYX2q/q36V3uLQ=";
           })
 
           # Jitsi - Self hosted video conferencing plugin
@@ -236,32 +204,122 @@ in
           # https://github.com/mattermost-community/mattermost-plugin-jitsi
           (fetchurl {
             url = "https://github.com/mattermost-community/mattermost-plugin-jitsi/releases/download/v2.1.0/jitsi-2.1.0.tar.gz";
-            hash = "";
+            hash = "sha256-c7l9LzQRRAtEiG03uZgn9V8NowFBx3s+xiuPwuC9HeQ=";
           })
 
+          # Voice Message plugin
+          # TODO: Needs more work to fix compilation errors
+          # https://github.com/streamer45/mattermost-plugin-voice
+          #(mattermost.buildPlugin {
+          # pname = "mattermost-plugin-voice";
+          # version = "";
+          # src = fetchFromGitHub {
+          #   owner = "streamer45";
+          #   repo = "mattermost-plugin-voice";
+          #   rev = "421c4ece43fcad86701d6ffaca86c150c7b1a2b4";
+          #   hash = "sha256-B44BQqREVod7dxxQtmhILVyu8Kr+/VqJEogclguruLQ=";
+          # };
+          # vendorHash = "sha256-zPhwWhLs19BxoB3EOPpKWaAFHE5zjU0m/3R1lAmYzX0=";
+          # npmDepsHash = "sha256-cDgx0BpFttFUTfmOUrMwpc8QIOS753CLm/GfbzjepJE=";
+          # extraGoModuleAttrs = {
+          #   npmFlags = [ "--legacy-peer-deps" ];
+          # };
+          #)
+
           # Forgejo plugin
-          # TODO: It needs to be compiled
+          # TODO: Needs more work to fix compilation errors
           # https://github.com/hhru/mattermost-plugin-forgejo
-#          (fetchurl {
-#            url = "";
-#            hash = "";
-#          })
+          #(mattermost.buildPlugin {
+          # pname = "mattermost-plugin-forgejo";
+          # version = "";
+          # src = fetchFromGitHub {
+          #   owner = "hhru";
+          #   repo = "mattermost-plugin-forgejo";
+          #   rev = "1a77c36638cadbfa6cbc911f8fccbdd6bf1861ee";
+          #   hash = "sha256-rdcgm+HmfMXYllV3kOwfOxuEdnYdAa+k6kP8Rx7FipM=";
+          # };
+          # vendorHash = "sha256-eQNke8ISodQJriKhzGi+TawMBidMZ89ltR9NwwkHOxo=";
+          # npmDepsHash = "sha256-6WXZe74/YO9ppwBV4CFB6yIfkCkrS00AtzVBjMvbyoQ=";
+          # extraGoModuleAttrs = {
+          #   npmFlags = [ "--legacy-peer-deps" ];
+          # };
+          #})
 
           # Mermaid - Support for Mermaidjs in Mattermost
           # TODO: Needs compilation
           # https://github.com/SpikeTings/Mermaid
-#          (fetchurl {
-#            url = "";
-#            hash = "";
-#          })
+          #(mattermost.buildPlugin {
+          # pname = "Mermaid";
+          # version = "";
+          # src = fetchFromGitHub {
+          #   owner = "SpikeTings";
+          #   repo = "Mermaid";
+          #   rev = "6e3d7e0b6e0f82ef8d214e195e32a4be2441773d";
+          #   hash = "";
+          # };
+          # vendorHash = "";
+          # npmDepsHash = "";
+          # extraGoModuleAttrs = {
+          #   npmFlags = [ "--legacy-peer-deps" ];
+          # };
+          #})
 
-          #
-          #
-          #
-          (fetchurl {
-            url = "";
-            hash = "";
-          })
+          # Message Bookmarks
+          # TODO: Needs compilation
+          # https://github.com/jfrerich/mattermost-plugin-bookmarks
+          #(mattermost.buildPlugin {
+          # pname = "mattermost-plugin-bookmarks";
+          # version = "";
+          # src = fetchFromGitHub {
+          #   owner = "jfrerich";
+          #   repo = "mattermost-plugin-bookmarks";
+          #   rev = "";
+          #   hash = "";
+          # };
+          # vendorHash = "";
+          # npmDepsHash = "";
+          # extraGoModuleAttrs = {
+          #   npmFlags = [ "--legacy-peer-deps" ];
+          # };
+          #})
+
+          # GitHub Community plugin
+          # TODO: Needs compilation
+          # https://github.com/mattermost/mattermost-plugin-community
+          #(mattermost.buildPlugin {
+          # pname = "mattermost-plugin-community";
+          # version = "";
+          # src = fetchFromGitHub {
+          #   owner = "mattermost";
+          #   repo = "mattermost-plugin-community";
+          #   rev = "";
+          #   hash = "";
+          # };
+          # vendorHash = "";
+          # npmDepsHash = "";
+          # extraGoModuleAttrs = {
+          #   npmFlags = [ "--legacy-peer-deps" ];
+          # };
+          #})
+
+          # Screen Recorder plugin
+          # TODO: Needs compilation
+          # https://github.com/streamer45/mattermost-plugin-screen
+          #(mattermost.buildPlugin {
+          # pname = "mattermost-plugin-screen";
+          # version = "";
+          # src = fetchFromGitHub {
+          #   owner = "streamer45";
+          #   repo = "mattermost-plugin-screen";
+          #   rev = "";
+          #   hash = "";
+          # };
+          # vendorHash = "";
+          # npmDepsHash = "";
+          # extraGoModuleAttrs = {
+          #   npmFlags = [ "--legacy-peer-deps" ];
+          # };
+          #})
         ];
       };
 

@@ -39,6 +39,8 @@ in
         consumptionDir = cfg.consumptionDir;
         domain = cfg.domain;
       };
+
+      # FTP server
       vsftpd = {
         enable = true;
         anonymousUser = true;

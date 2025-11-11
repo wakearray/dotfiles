@@ -1,4 +1,4 @@
-{ domain, ... }:
+{ domain, pkgs, ... }:
 {
   ## These are the defaults I want on Delaware only:
   imports =
@@ -54,5 +54,13 @@
         sopsFile = ./webdavUsers.yaml;
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      # HDD controls
+      hdparm
+
+      # For mounting HDDs using NTFS
+      ntfs3g
+    ];
   };
 }

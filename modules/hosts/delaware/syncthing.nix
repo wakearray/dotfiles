@@ -7,9 +7,10 @@
     cert       = "/run/secrets/delaware-syncthing-cert-pem";
     user       = "webdav";
     group      = "userdata";
-    guiAddress = "0.0.0.0:8384";
+    guiAddress = "http://0.0.0.0:8384";
     # Fix for when directories start accumulating files that won't sync
-    extraFlags = [ "--reset-deltas" ];
+    # This appears to be removed in version 2, unsure what the replacement is yet.
+    # extraFlags = [ "--reset-deltas" ];
     settings = {
       # setting.devices can be found in modules/common/syncthing.nix
       folders = {

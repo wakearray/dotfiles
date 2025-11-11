@@ -7,6 +7,7 @@ in
   # All settings and packages should be compatible with Android profiles
   imports = [
     ./firefox.nix
+    ./mime.nix
     ./ssh.nix
   ];
 

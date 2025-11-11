@@ -31,6 +31,8 @@
         # Opens nvim to the `~/notes` directory
         notes = "zellij action rename-tab Notes; nvim --listen /tmp/nvim-notes-socket-$(uuidgen) ~/notes; zellij action undo-rename-tab";
 
+        systemctl = "sudo EDITOR=nvim systemctl-tui";
+
         rename = "zellij action rename-tab";
 
         # SSH Hosts
@@ -62,6 +64,7 @@
         p80 = "zellij action rename-tab 'P80' && ssh u0_a183@192.168.0.10 -p8022; zellij action undo-rename-tab";
         #mountp80 = "zellij action rename-tab 'P80' && sshfs u0_a183@192.168.0.10:/data/data/com.termux/files /mnt/phones/p80 -p8022; zellij action undo-rename-tab";
 
+        # Cloud Servers
         hamburger = "zellij action rename-tab 'Hetzner' && ssh 5.161.77.151; zellij action undo-rename-tab";
       };
       sessionVariables = {
