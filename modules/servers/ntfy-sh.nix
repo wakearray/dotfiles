@@ -98,14 +98,14 @@ This setting is required for any of the following features:
 
     sops.templates."ntfyEnvironmentFile" = {
       content = ''
-        SMTP_SENDER_FROM="ntfy@$voicelesscrimson.com"
-        SMTP_SERVER_LISTEN=":25"
-        SMTP_SERVER_DOMAIN="ntfy.sh"
-        SMTP_SERVER_ADDR_PREFIX="ntfy-"
-        SMTP_SENDER_ADDR="email-smtp.us-east-2.amazonaws.com:587"
-        SMTP_SENDER_USER="akideadbeefaffe12345"
-        SMTP_SENDER_PASS="abd13kf+sfak2dzifjafldkthisisnotarealkeyomg."
-        NTFY_AUTH_USERS='phil:$2a$10$YLiO8U21sX1uhZamTLJXHuxgVC0Z/GKISibrKCLohPgtG7yIxSk4C:admin,ben:$2a$10$NKbrNb7HPMjtQXWJ0f1pouw03LDLT/WzlO9VAv44x84bRCkh19h6m:user'
+        SMTP_SENDER_FROM="${config.sops.placeholder.smtp-sender-from}"
+        SMTP_SERVER_LISTEN="${config.sops.placeholder.smtp_server_listen}";
+        SMTP_SERVER_DOMAIN="${config.sops.placeholder.smtp_server_domain}";
+        SMTP_SERVER_ADDR_PREFIX="${config.sops.placeholder.smtp_server_addr_prefix}";
+        SMTP_SENDER_ADDR="${config.sops.placeholder.smtp_sender_addr}";
+        SMTP_SENDER_USER="${config.sops.placeholder.smtp_sender_user}";
+        SMTP_SENDER_PASS="${config.sops.placeholder.smtp_sender_pass}";
+        NTFY_AUTH_USERS='${config.sops.placeholder.ntfy_auth_users}';
         ${config.sops.placeholder.ntfyEnvironmentVars}
       '';
       mode = "0400";
