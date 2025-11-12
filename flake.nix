@@ -226,6 +226,52 @@
           }
         ];
       };
+      MoonFish = let
+        systemDetails = {
+          hostType = "server";
+          hostName = "MoonFish";
+          display = "wayland";
+          features = "developer gaming";
+          architecture = "x86_64-linux";
+        };
+      in
+      lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+          systemDetails = systemDetails;
+        };
+        modules = [
+          ./hosts/moonfish/configuration.nix
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-cpu-amd-pstate
+          nixos-hardware.nixosModules.common-cpu-amd-zenpower
+          nixvim.nixosModules.nixvim
+          sops-nix.nixosModules.sops
+          impermanence.nixosModules.impermanence
+          nur.modules.nixos.default
+          nix-index-database.nixosModules.nix-index
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              users.kent = {
+                imports = [
+                  ./home/kent
+                  ./home/kent/hosts/moonfish
+                  nixvim.homeModules.nixvim
+                  impermanence.homeManagerModules.impermanence
+                  nur.modules.homeManager.default
+                ];
+              };
+              backupFileExtension = "backup";
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                systemDetails = systemDetails;
+              };
+            };
+          }
+        ];
+      };
       # Dell Optiplex 7050 tower
       ## i7-7700 / 32GB DDR4-2300
       Delaware =
