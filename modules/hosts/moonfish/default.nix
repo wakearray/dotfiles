@@ -46,7 +46,7 @@
   hardware.cpu.amd.ryzen-smu.enable = true;
 
   virtualisation = {
-    host.enable = true;
+    virtualbox.host.enable = true;
     # Enable docker deamon
     docker.enable = true;
     oci-containers.backend = "docker";
