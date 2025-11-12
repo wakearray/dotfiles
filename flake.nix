@@ -226,10 +226,10 @@
           }
         ];
       };
-      MoonFish = let
+      Moonfish = let
         systemDetails = {
           hostType = "server";
-          hostName = "MoonFish";
+          hostName = "Moonfish";
           display = "wayland";
           features = "developer gaming";
           architecture = "x86_64-linux";
