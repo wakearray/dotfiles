@@ -158,6 +158,9 @@
 
       # Fast duplicate file finder written in rust
       ddh
+
+      # Adds support for mounting webdav directories
+      davfs2
     ];
 
     # Add the userdata usergroup
