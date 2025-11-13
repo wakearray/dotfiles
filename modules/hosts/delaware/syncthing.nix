@@ -65,12 +65,14 @@
           ];
           ignorePerms = true;
         };
+
         "Kent_S24_Ultra" = {
-          path = "/data/userdata/Kent/Pictures/S24_Ultra";
+          path = "/data/userdata/Kent/Pictures/Cameras/S24_Ultra";
           devices = [ "Kent_S24_Ultra" ];
           ignorePerms = true;
           type = "receiveonly";
         };
+
 	      "Kent_Backup_Android" = {
           path = "/data/userdata/Kent/Backups/Android";
 	        devices = [
