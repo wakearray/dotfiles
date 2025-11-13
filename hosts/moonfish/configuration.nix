@@ -31,6 +31,10 @@
     nvidia = {
       open = false;  # The GTX 1080 is not supported by the open source userspace drivers
       prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true; # Provides `nvidia-offload` command.
+        };
         nvidiaBusId = "PCI:1:0:0"; # EVGA Nvidia GTX 1080 OC
         amdgpuBusId = "PCI:4:0:0"; # AMD Radeon 610M
       };

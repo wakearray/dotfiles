@@ -248,6 +248,7 @@
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           impermanence.nixosModules.impermanence
+          disko.nixosModules.disko
           nur.modules.nixos.default
           nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager

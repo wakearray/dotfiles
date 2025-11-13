@@ -41,7 +41,7 @@
           The available hosts for ssh are:                           \n
                                                                      \n
           greatblue        GPD Win 2 2023        192.168.0.11        \n
-          starling         7" Tablet             192.168.0.146       \n
+          starling         7" Tablet             192.168.0.143       \n
           delaware         Dell Optiplex Server  192.168.0.46        \n
           lagurus          Cat Projector         192.168.0.65        \n
           jerboa           Livingroom TV         192.168.0.32        \n
@@ -52,7 +52,7 @@
           hamburger        Hetzner VPS           5.161.77.151"
         '';
         greatblue = "zellij action rename-tab 'Great Blue' && ssh 192.168.0.11; zellij action undo-rename-tab"; # GPD Win 2 2023
-        starling = "zellij action rename-tab 'Starling' && ssh 192.168.0.146; zellij action undo-rename-tab"; # GPD Win 2 2023
+        starling = "zellij action rename-tab 'Starling' && ssh 192.168.0.143; zellij action undo-rename-tab"; # GPD Win 2 2023
         delaware = "zellij action rename-tab 'Delaware' && ssh 192.168.0.46; zellij action undo-rename-tab"; # NextCloud Server
         lagurus = "zellij action rename-tab 'Lagurus' && ssh 192.168.0.65; zellij action undo-rename-tab"; # Cat's Projector
         jerboa = "zellij action rename-tab 'Jerboa' && ssh 192.168.0.32; zellij action undo-rename-tab"; # Living Room TV
