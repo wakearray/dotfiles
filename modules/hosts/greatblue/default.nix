@@ -19,7 +19,7 @@
     };
     gaming.enable = true;
     office.enable = true;
-    print.enable = true;
+    #print.enable = true;
     wm.hyprland.enable = true;
     greeter.tuigreet.enable = true;
   };
@@ -31,7 +31,7 @@
     ryzenadj
 
     # Drivers to support docks with HDMI ports
-    displaylink
+    #displaylink
 
     # Generate Nix packages from URLs
     # https://github.com/nix-community/nix-init
@@ -70,7 +70,7 @@
 
   services = {
     # Needed to make NixOS work with displaylink docks
-    xserver.videoDrivers = [ "displaylink" "modesetting" ];
+    #xserver.videoDrivers = [ "displaylink" "modesetting" ];
     # Let the window manager choose how to handle lid open/close events
     logind.settings.Login.HandleLidSwitch = "ignore";
   };

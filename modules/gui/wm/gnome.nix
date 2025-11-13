@@ -14,7 +14,6 @@ in
       xserver = {
         enable = true;
         dpi = 300;
-        videoDrivers = [ "displaylink" "modesetting" ];
         desktopManager.gnome.enable = true;
         displayManager.gdm  = {
           enable = true;
