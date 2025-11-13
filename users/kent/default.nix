@@ -12,6 +12,10 @@ let
   userKeys = getKeysForUser "kent";
 in
 {
+  imports = [
+    ./sshfs.nix
+  ];
+
   users.users.kent = {
     isNormalUser = true;
     description = "Kent";

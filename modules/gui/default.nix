@@ -51,9 +51,15 @@ in
       };
     };
 
-    # Command-line utility and library for controlling media players that implement MPRIS
-    # https://github.com/altdesktop/playerctl
-    services.playerctld.enable = true;
+    services = {
+      # Command-line utility and library for controlling media players that implement MPRIS
+      # https://github.com/altdesktop/playerctl
+      playerctld.enable = true;
+
+      # DBus service that allows applications to query and manipulate storage devices
+      # Additional settings: https://search.nixos.org/options?channel=unstable&show=services.udisks2.settings
+      udisks2.enable = true;
+    };
 
     environment = {
       systemPackages = with pkgs; [

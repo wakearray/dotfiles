@@ -63,5 +63,9 @@ in
         # TODO: Fill in the settings later
       };
     };
+    services = {
+      # Removable disk automounter for udisks
+      udiskie.enable = true;
+    };
   };
 }
