@@ -1,7 +1,15 @@
-{ ... }:
+{ modulesPath,
+  lib,
+  pkgs,
+  ...
+} @ args:
 {
+  # nix run github:nix-community/nixos-anywhere -- --flake .#Moonfish -i ~/.ssh/id_ed25519_signing_key --target-host kent@192.168.0.167
   imports =
   [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
+    ./disk-config.nix
     ./hardware-configuration.nix
     ../../modules
     ../../modules/hosts/moonfish

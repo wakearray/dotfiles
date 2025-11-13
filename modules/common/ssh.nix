@@ -1,13 +1,13 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    # require public key authentication for better security
+    # require public key authentication for better security, allow settings to be override for making custom installer images
     settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
+      PasswordAuthentication = lib.mkDefault false;
+      KbdInteractiveAuthentication = lib.mkDefault false;
+      PermitRootLogin = lib.mkDefault "no";
     };
     openFirewall = true;
   };
