@@ -41,7 +41,7 @@
 
         # 3D Modeling
         blender
-        openscad-unstable
+        stable.openscad-unstable
 
         # GTK patchbay for pipewire
         # https://gitlab.freedesktop.org/pipewire/helvum

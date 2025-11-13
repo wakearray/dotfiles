@@ -58,7 +58,7 @@
     soundwireserver
 
     # OpenSCAD
-    openscad-unstable
+    stable.openscad-unstable
 
     # utils
     usbutils
