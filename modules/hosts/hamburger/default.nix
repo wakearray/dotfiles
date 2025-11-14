@@ -32,10 +32,12 @@
       };
 
       # TODO: setup ntfy
-     #  ntfy = {
-     #    enable = true;
-     #    domain = "ntfy.${domain}";
-     #  };
+      ntfy = {
+        enable = true;
+        domain = "ntfy.${domain}";
+        localPort = 2586;
+        sopsFile = ./ntfy.yaml;
+      };
 
       docker = {
         enable = true;

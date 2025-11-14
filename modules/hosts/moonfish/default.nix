@@ -15,6 +15,15 @@
     greeter.tuigreet.enable = true;
   };
 
+  servers.docker = {
+    enable = true;
+    gow = {
+      wolf = {
+        enable = true;
+      };
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     # RyzenAdj for controlling many RyzenCPU/APU/GPU power settings
     # https://github.com/FlyGoat/RyzenAdj
@@ -29,18 +38,7 @@
 
     # Audio and video format converter
     ffmpeg_7-full
-
-    # Docker things
-    bridge-utils
-    docker-client
-    docker-compose
-
-    # Oxker - A simple tui to view & control docker containers
-    # https://github.com/mrjackwills/oxker
-    oxker
   ];
-
-  services = { };
 
   # Enables kernel module needed for ryzenadj to work
   hardware.cpu.amd.ryzen-smu.enable = true;

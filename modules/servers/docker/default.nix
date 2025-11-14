@@ -10,6 +10,7 @@ in
   imports = [
     #./lobechat.nix
     #./omada-controller.nix
+    ./gow-wolf.nix
     ./tubearchivist.nix
     ./vaultwarden.nix
     #./wger.nix

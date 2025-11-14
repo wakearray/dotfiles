@@ -56,7 +56,7 @@ This setting is required for any of the following features:
           listen-http = "127.0.0.1:${builtins.toString cfg.localPort}";
           # firebase-key-file = "/etc/ntfy/firebase.json";
           cache-file = "${cfg.cacheRootDirectory}/cache.db";
-          auth-file = cfg.authFile;
+          auth-file = "${cfg.authFile}";
           behind-proxy = true;
           attachment-cache-dir = "${cfg.cacheRootDirectory}/attachments";
           keepalive-interval = "45s";
@@ -83,7 +83,6 @@ This setting is required for any of the following features:
         group = "ntfy-sh";
       };
     in {
-      ntfyEnvironmentVars = opts;
       smtp-sender-from = opts;
       smtp-server-listen = opts;
       smtp-server-domain = opts;
@@ -94,6 +93,7 @@ This setting is required for any of the following features:
       # format: 'username:password:admin,username2:password2:user'
       # https://docs.ntfy.sh/config/#users-via-the-config
       ntfy-auth-users = opts;
+      ntfyEnvironmentVars = opts;
     };
 
     sops.templates."ntfyEnvironmentFile" = {

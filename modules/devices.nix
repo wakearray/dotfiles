@@ -79,6 +79,12 @@ let
       hosts = [ "kent-greatblue" "samsungs24" "lenovoy700" "cubotp80" "kent-starling" ];
       users = [ "kent" ];
     };
+    moonfish = {
+      ip = "192.168.0.166";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7jTRj4EwVd6jenHGMHJICVPA5aC/ZAVuguicQxknn1";
+      hosts = [ "kent-greatblue" "samsungs24" "lenovoy700" "cubotp80" "kent-starling" ];
+      users = [ "kent" "jess" ];
+    };
     hamburger = {
       ip = "5.161.77.151";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFATH54Utcx9Ia4PwjF2D0p4OiLIGxw55K1QqU4eV328";

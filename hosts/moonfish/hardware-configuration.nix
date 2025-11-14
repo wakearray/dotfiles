@@ -19,7 +19,7 @@
     };
 
   fileSystems."/boot" =
-    { device = lib.mkDefault "/dev/disk/by-label/ESP";
+    { device = lib.mkDefault "/dev/disk/by-label/disk-main-ESP";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
