@@ -593,17 +593,14 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
       plugins = with pkgs; [
         # hyprgrass - hyprland plugin for touch screen gestures
         # https://github.com/horriblename/hyprgrass
-        # inputs.hyprgrass.packages.${pkgs.system}.default
         hyprlandPlugins.hyprgrass
 
         # hyprsplit - hyprland plugin for separate sets of workspaces on each monitor
         # https://github.com/shezdy/hyprsplit
-        #inputs.hyprsplit.packages.${pkgs.system}.default
         hyprlandPlugins.hyprsplit
 
         # hyprspace - Workspace overview plugin for Hyprland
         # https://github.com/KZDKM/Hyprspace
-        # inputs.hyprspace.packages.${pkgs.system}.default
         hyprlandPlugins.hyprspace
       ];
     };
@@ -631,8 +628,8 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
       # exec-once = ~/.cargo/bin/hyprland-monitor-attached PATH_TO_ATTACHED_SHCRIPT.sh [PATH_TO_DETACHED_SHCRIPT.sh]
       hyprland-monitor-attached
     ] ++ [
-        inputs.hyprland-contrib.packages.${pkgs.system}.try_swap_workspace
-        inputs.hyprland-contrib.packages.${pkgs.system}.scratchpad
+        inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.try_swap_workspace
+        inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.scratchpad
       ];
     gui.eww = {
       bar.enable = lib.mkDefault true;
