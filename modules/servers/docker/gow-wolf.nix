@@ -65,10 +65,10 @@ in
     };
 
     # Enabled for nvidia-container-toolkit method
-    hardware.nvidia-container-toolkit = {
-      enable = true;
-      package = pkgs.nvidiaCtkPackages.nvidia-container-toolkit-docker;
-    };
+    # hardware.nvidia-container-toolkit = {
+    #   enable = true;
+    #   package = pkgs.nvidiaCtkPackages.nvidia-container-toolkit-docker;
+    # };
 
     environment.systemPackages = with pkgs; [
       libnvidia-container
