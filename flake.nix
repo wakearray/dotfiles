@@ -242,10 +242,12 @@
         };
         modules = [
           ./hosts/moonfish/configuration.nix
+          ./modules/servers
           nixos-hardware.nixosModules.common-cpu-amd
           nixos-hardware.nixosModules.common-cpu-amd-pstate
           nixos-hardware.nixosModules.common-cpu-amd-zenpower
           nixvim.nixosModules.nixvim
+          simple-nixos-mailserver.nixosModule
           sops-nix.nixosModules.sops
           impermanence.nixosModules.impermanence
           disko.nixosModules.disko

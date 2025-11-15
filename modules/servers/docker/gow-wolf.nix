@@ -12,26 +12,35 @@ in
       wolf = {
         image = "ghcr.io/games-on-whales/wolf:stable";
         environment = {
-          NVIDIA_DRIVER_VOLUME_NAME = "nvidia-driver-vol";
+          # Used for manual method
+          # NVIDIA_DRIVER_VOLUME_NAME = "nvidia-driver-vol";
+
+          # Used for nvidia-container-toolkit method
+          NVIDIA_DRIVER_CAPABILITIES = "all";
+          NVIDIA_VISIBLE_DEVICES = "all";
         };
         volumes = [
           "/etc/wolf/:/etc/wolf:rw"
           "/var/run/docker.sock:/var/run/docker.sock:rw"
           "/dev/:/dev/:rw"
           "/run/udev:/run/udev:rw"
-          "nvidia-driver-vol:/usr/nvidia:rw"
+
+          # Used for manual method
+          # "nvidia-driver-vol:/usr/nvidia:rw"
         ];
         devices = [
           "/dev/dri"
           "/dev/uinput"
           "/dev/uhid"
-          "/dev/nvidia-uvm"
-          "/dev/nvidia-uvm-tools"
-          "/dev/nvidia-caps/nvidia-cap1"
-          "/dev/nvidia-caps/nvidia-cap2"
-          "/dev/nvidiactl"
-          "/dev/nvidia0"
-          "/dev/nvidia-modeset"
+
+          # Used for manual method
+          # "/dev/nvidia-uvm"
+          # "/dev/nvidia-uvm-tools"
+          # "/dev/nvidia-caps/nvidia-cap1"
+          # "/dev/nvidia-caps/nvidia-cap2"
+          # "/dev/nvidiactl"
+          # "/dev/nvidia0"
+          # "/dev/nvidia-modeset"
         ];
         ports = [
           # HTTPS
@@ -49,14 +58,21 @@ in
         ];
         extraOptions = [
           "--device-cgroup-rule=c 13:* rmw"
-          "--network=host"
+          # Used for nvidia-container-toolkit method
+          "--gpus=all"
         ];
-        restartPolicy = "unless-stopped";
       };
     };
 
-    environment.systemPackages = [
-      pkgs.libnvidia-container
+    # Enabled for nvidia-container-toolkit method
+    hardware.nvidia-container-toolkit = {
+      enable = true;
+      package = pkgs.nvidiaCtkPackages.nvidia-container-toolkit-docker;
+    };
+
+    environment.systemPackages = with pkgs; [
+      libnvidia-container
+      nvidiaCtkPackages.nvidia-container-toolkit-docker
     ];
 
     networking.firewall = {

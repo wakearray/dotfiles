@@ -161,6 +161,9 @@
 
       # Adds support for mounting webdav directories
       davfs2
+
+      # Provides `lspci`, `pcilmr`, and `setpci`
+      pciutils
     ];
 
     # Add the userdata usergroup

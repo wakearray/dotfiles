@@ -9,6 +9,8 @@
     ./u2f.nix
   ];
 
+  sshfsMountsKent.enable = true;
+
   gui = {
     enable = true;
     _1pass.enable = true;

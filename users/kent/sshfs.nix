@@ -1,9 +1,14 @@
-{ lib, ... }:
+{ config, lib, ... }:
 let
   user = "kent";
+  cfg = config.sshfsMountsKent;
 in
 {
-  config = {
+  options.sshfsMountsKent = with lib; {
+    enable = mkEnableOption "Enable sshfs mount points for user kent.";
+  };
+
+  config = lib.mkIf cfg.enable {
     fileSystems = {
       "/mnt/shares/${user}" = {
         device = "${user}@192.168.0.46:/data/userdata/${lib.toSentenceCase user}";
