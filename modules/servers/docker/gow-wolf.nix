@@ -13,11 +13,11 @@ in
         image = "ghcr.io/games-on-whales/wolf:stable";
         environment = {
           # Used for manual method
-          # NVIDIA_DRIVER_VOLUME_NAME = "nvidia-driver-vol";
+          NVIDIA_DRIVER_VOLUME_NAME = "nvidia-driver-vol";
 
           # Used for nvidia-container-toolkit method
-          NVIDIA_DRIVER_CAPABILITIES = "all";
-          NVIDIA_VISIBLE_DEVICES = "all";
+          # NVIDIA_DRIVER_CAPABILITIES = "all";
+          # NVIDIA_VISIBLE_DEVICES = "all";
         };
         volumes = [
           "/etc/wolf/:/etc/wolf:rw"
@@ -26,7 +26,7 @@ in
           "/run/udev:/run/udev:rw"
 
           # Used for manual method
-          # "nvidia-driver-vol:/usr/nvidia:rw"
+          "nvidia-driver-vol:/usr/nvidia:rw"
         ];
         devices = [
           "/dev/dri"
@@ -34,13 +34,13 @@ in
           "/dev/uhid"
 
           # Used for manual method
-          # "/dev/nvidia-uvm"
-          # "/dev/nvidia-uvm-tools"
-          # "/dev/nvidia-caps/nvidia-cap1"
-          # "/dev/nvidia-caps/nvidia-cap2"
-          # "/dev/nvidiactl"
-          # "/dev/nvidia0"
-          # "/dev/nvidia-modeset"
+          "/dev/nvidia-uvm"
+          "/dev/nvidia-uvm-tools"
+          "/dev/nvidia-caps/nvidia-cap1"
+          "/dev/nvidia-caps/nvidia-cap2"
+          "/dev/nvidiactl"
+          "/dev/nvidia0"
+          "/dev/nvidia-modeset"
         ];
         ports = [
           # HTTPS
@@ -59,7 +59,7 @@ in
         extraOptions = [
           "--device-cgroup-rule=c 13:* rmw"
           # Used for nvidia-container-toolkit method
-          "--gpus=all"
+          # "--gpus=all"
         ];
       };
     };
@@ -72,7 +72,6 @@ in
 
     environment.systemPackages = with pkgs; [
       libnvidia-container
-      nvidiaCtkPackages.nvidia-container-toolkit-docker
     ];
 
     networking.firewall = {
