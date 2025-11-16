@@ -51,7 +51,9 @@ in
           # RTSP
           "48010:48010"
           # Control
+          "47998:47998"
           "47999:47999"
+          "48000:48000"
           # Video
           "48100:48100"
           # Audio
@@ -87,7 +89,9 @@ in
       ];
       allowedUDPPorts = [
         # Control
+        47998
         47999
+        48000
         # Video
         48100
         # Audio
