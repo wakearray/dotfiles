@@ -14,6 +14,7 @@ in
         environment = {
           # Used for manual method
           NVIDIA_DRIVER_VOLUME_NAME = "nvidia-driver-vol";
+          WOLF_RENDER_NODE = "/dev/dri/renderD129";
 
           # Used for nvidia-container-toolkit method
           # NVIDIA_DRIVER_CAPABILITIES = "all";
@@ -58,6 +59,7 @@ in
         ];
         extraOptions = [
           "--device-cgroup-rule=c 13:* rmw"
+          "--network=host"
           # Used for nvidia-container-toolkit method
           # "--gpus=all"
         ];

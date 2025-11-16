@@ -54,6 +54,6 @@ in
       # Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deeze
       # https://github.com/nathom/streamrip
       streamrip
-    ] ++ [ inputs.zen-browser.packages."${system}".default ];
+    ] ++ [ inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default ];
   };
 }
