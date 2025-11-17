@@ -42,7 +42,7 @@ in
   config = lib.mkIf cfg.enable {
     assertions =[
       {
-        assertion = (cfg.nvidiaManual && cfg.nvidiaAutomatic);
+        assertion = !(cfg.nvidiaManual && cfg.nvidiaAutomatic);
         message = "Automatic and manual Nvidia driver setup methods can't be used together. Choose one and disable the other.";
       }
     ];
