@@ -36,19 +36,6 @@ in
     programs = {
       # Cross platform Airdrop replacement
       localsend.enable = true;
-
-      firefox = {
-        nativeMessagingHosts = {
-          # Vim like keyboard control for Firefox
-          tridactyl = true;
-          # Allows Firefox to cast to Chromecast devices and apps
-          # https://hensm.github.io/fx_cast/
-          fxCast = true;
-          # Allows you to force websites to play videos in mpv
-          # https://github.com/ryze312/ff2mpv-rust
-          ff2mpv = true;
-        };
-      };
     };
 
     services = {

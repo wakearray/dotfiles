@@ -230,8 +230,8 @@
         systemDetails = {
           hostType = "server";
           hostName = "Moonfish";
-          display = "wayland";
-          features = "developer gaming";
+          display = "cli";
+          features = "";
           architecture = "x86_64-linux";
         };
       in
@@ -251,7 +251,6 @@
           sops-nix.nixosModules.sops
           impermanence.nixosModules.impermanence
           disko.nixosModules.disko
-          nur.modules.nixos.default
           nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
@@ -263,7 +262,6 @@
                   ./home/kent/hosts/moonfish
                   nixvim.homeModules.nixvim
                   impermanence.homeManagerModules.impermanence
-                  nur.modules.homeManager.default
                 ];
               };
               backupFileExtension = "backup";

@@ -8,12 +8,23 @@ in
     enable = mkEnableOption "Enable an opinionated Firefox config with Tridactyl enabled.";
   };
 
-  config = lib.mkIf (gui.enable && firefox.enable) {
+  config = lib.mkIf firefox.enable {
     programs.firefox = {
       enable = true;
+      package = pkgs.firefox-unwrapped;
       nativeMessagingHosts = with pkgs; [
         # Tridactyl native connector
         tridactyl-native
+
+        # Allows creation of PWAs in Firefox
+        firefoxpwa
+
+        # Allows playing of videos in MPV rather than the browser itself
+        ff2mpv
+
+        # Allows Firefox to cast to Chromecast devices and apps
+        # https://hensm.github.io/fx_cast/
+        fx-cast-bridge
       ];
 #      profiles = {
 #        default = {
@@ -130,6 +141,17 @@ in
 #          ];
 #        };
 #      };
+    };
+
+    xdg.configFile."ff2mpv-rust.json" = {
+      enable = true;
+      force = true;
+      text = /*json*/ ''
+        {
+          "player_command": "mpv",
+          "player_args": ["--no-terminal", "--"]
+        }
+      '';
     };
   };
 }
