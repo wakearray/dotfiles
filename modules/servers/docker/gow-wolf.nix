@@ -30,8 +30,8 @@ in
     '';
 
     renderNode = mkOption {
-      type = types.str;
-      default = "/dev/dri/renderD128";
+      type = types.nullOr types.str;
+      default = builtins.null;
       description = ''
       The default render node used for virtual desktops.
       Use the command `ls -l /sys/class/drm/renderD*/device/driver` to determine which render node is assigned to each GPU on multi GPU systems.
@@ -51,6 +51,7 @@ in
       wolf = {
         image = "ghcr.io/games-on-whales/wolf:stable";
         environment = {
+        } // lib.optionalAttrs (!(builtins.isNull cfg.renderNode)) {
           WOLF_RENDER_NODE = cfg.renderNode;
         } // lib.optionalAttrs cfg.nvidiaManual {
           NVIDIA_DRIVER_VOLUME_NAME = "nvidia-driver-vol";
