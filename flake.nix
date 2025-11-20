@@ -118,8 +118,6 @@
   {
     inherit lib;
     overlays = import ./overlays {inherit inputs outputs;};
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
 
     # Speeds up `nix repl` by using the flake's nixpkgs version
     nix.nixPath = let

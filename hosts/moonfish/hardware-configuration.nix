@@ -13,6 +13,13 @@
     kernelModules = [
       "kvm-amd"
     ];
+    blacklistedKernelModules = [
+      "nvidia"
+      "nvidiafb"
+      "nvidia-drm"
+      "nvidia-uvm"
+      "nvidia-modeset"
+    ];
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" "sr_mod" ];
       kernelModules = [ ];

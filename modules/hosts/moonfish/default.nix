@@ -3,18 +3,6 @@
   ## These are the defaults I want on Moonfish only:
   imports = [ ];
 
-  gui = {
-    enable = true;
-    # syncthing = {
-    #   enable = true;
-    #   user = "kent";
-    #   sopsFile = ./syncthing.yaml;
-    # };
-    gaming.enable = true;
-    wm.hyprland.enable = true;
-    greeter.tuigreet.enable = true;
-  };
-
   servers.docker = {
     enable = true;
     gow = {
@@ -24,11 +12,9 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    # RyzenAdj for controlling many RyzenCPU/APU/GPU power settings
-    # https://github.com/FlyGoat/RyzenAdj
-    ryzenadj
+  services.lact.enable = true;
 
+  environment.systemPackages = with pkgs; [
     # For playing audio from one device on another
     soundwireserver
 
@@ -40,8 +26,6 @@
     ffmpeg_7-full
   ];
 
-  # Enables kernel module needed for ryzenadj to work
-  hardware.cpu.amd.ryzen-smu.enable = true;
 
   virtualisation = {
     virtualbox.host.enable = true;
