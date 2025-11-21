@@ -247,7 +247,6 @@
           nixvim.nixosModules.nixvim
           simple-nixos-mailserver.nixosModule
           sops-nix.nixosModules.sops
-          impermanence.nixosModules.impermanence
           disko.nixosModules.disko
           nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
@@ -259,7 +258,6 @@
                   ./home/kent
                   ./home/kent/hosts/moonfish
                   nixvim.homeModules.nixvim
-                  impermanence.homeManagerModules.impermanence
                 ];
               };
               backupFileExtension = "backup";
@@ -559,13 +557,22 @@
           {
             home-manager = {
               useUserPackages = true;
-              users.jess = {
-	              imports = [
-	                ./home/jess
-                  ./home/jess/shoebill
-		              catppuccin.homeManagerModules.catppuccin
-                  nixvim.homeModules.nixvim
-	              ];
+              users = {
+                jess = {
+                  imports = [
+                    ./home/jess
+                    ./home/jess/hosts/shoebill
+                    catppuccin.homeModules.catppuccin
+                    nixvim.homeModules.nixvim
+                  ];
+                };
+                kent = {
+                  imports = [
+                    ./home/kent
+                    ./home/kent/hosts/shoebill
+                    nixvim.homeModules.nixvim
+                  ];
+                };
               };
               backupFileExtension = "backup";
               extraSpecialArgs = {
@@ -576,6 +583,7 @@
           }
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
+          disko.nixosModules.disko
         ];
       };
     };

@@ -121,12 +121,15 @@ in
             c = colors.${cfg.flavor};
           in
           {
-            fg-1 = c.pink;
-            fg-2 = c.mauve;
-            bg-1 = c.base;
-            bg-2 = c.crust;
-            accent-1 = c.pink;
-            accent-2 = c.mauve;
+            text = c.text;
+            bar-fg = c.mauve;
+            bar-bg = c.base;
+            tooltip-fg = c.text;
+            tooltip-bg = c.base;
+            metric-fg = c.rosewater;
+            metric-bg = c.crust;
+            workspace-active = c.mauve;
+            workspace-inactive = c.surface-1;
           };
         };
       };

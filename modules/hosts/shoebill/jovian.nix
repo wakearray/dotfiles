@@ -3,11 +3,11 @@
   imports = [
     (
       # Put the most recent revision here:
-      let revision = "8d7b2149e618696d5100c2683af1ffa893f02a75"; in
+      let revision = "4b1c28efe3b31e00c427e651b398d8251dd29812"; in
       builtins.fetchTarball {
         url = "https://github.com/Jovian-Experiments/Jovian-NixOS/archive/${revision}.tar.gz";
         # Update the hash as needed:
-        sha256 = "sha256:0000000000000000000000000000000000000000000000000000";
+        sha256 = "sha256:1mfq2iyd34qy5ibmzmy63hq76q7yqamkw5n6xakga5wwkpv0w2sc";
       } + "/modules"
     )];
 
@@ -22,8 +22,7 @@
       # This is the default SteamDeck behavior
       autoStart = true;
 
-      # Command to launch the Window Manager or DE
-      desktopSession = "if uwsm check may-start; then exec uwsm start hyprland.desktop fi";
+      desktopSession = "steam";
 
       # Environment variables to launch Steam with
       environment = {};
@@ -43,8 +42,6 @@
 
       # Enable x11 to rotate the display
       enableXorgRotation = false;
-
-      #
     };
     decky-loader = {
       enable = true;

@@ -4,7 +4,7 @@
   ...
 } @ args:
 {
-  # nix run github:nix-community/nixos-anywhere -- --flake .#Moonfish -i ~/.ssh/id_ed25519_signing_key --target-host nixos@192.168.0.167
+  # nix run github:nix-community/nixos-anywhere -- --flake .#Moonfish -target-host nixos@192.168.0.166
   imports =
   [
     (modulesPath + "/installer/scan/not-detected.nix")

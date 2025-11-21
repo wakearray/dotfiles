@@ -155,7 +155,8 @@ in
     };
 
 
-    environment.systemPackages = [ ] ++ lib.optionals (cfg.nvidiaManual || cfg.nvidiaAutomatic) [
+    environment.systemPackages = [
+    ] ++ lib.optionals (cfg.nvidiaManual || cfg.nvidiaAutomatic) [
       pkgs.libnvidia-container
     ] ++ lib.optionals cfg.nvidiaAutomatic [
       pkgs.nvidia-container-toolkit

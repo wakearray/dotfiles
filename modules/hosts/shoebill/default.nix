@@ -16,7 +16,5 @@
       user = "jess";
       sopsFile = ./syncthing.yaml;
     };
-    print.enable = true;
-    wm.gnome.enable = true;
   };
 }

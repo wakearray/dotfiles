@@ -6,7 +6,7 @@ in
   imports = [
     ./common
     ../common
-    ../themes/catppuccin.nix
+    ../common/gui/themes/catppuccin
   ];
 
   home = {
