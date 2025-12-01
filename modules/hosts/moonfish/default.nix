@@ -8,6 +8,9 @@
     gow = {
       wolf = {
         enable = true;
+        renderNode = "/dev/dri/renderD128";
+        gstDebug = 3;
+        rustLog = "INFO";
       };
     };
   };
@@ -24,6 +27,9 @@
 
     # Audio and video format converter
     ffmpeg_7-full
+
+    # Tool for AMD GPUs
+    rocmPackages.rocm-smi
   ];
 
 

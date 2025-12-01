@@ -37,6 +37,22 @@ in
       Use the command `ls -l /sys/class/drm/renderD*/device/driver` to determine which render node is assigned to each GPU on multi GPU systems.
       '';
     };
+
+    gstDebug = mkOption {
+      type = types.nullOr types.int8;
+      default = builtins.null;
+      example = 3;
+      description = "Set the level of verbosity of the `GST_DEBUG` environment variable.";
+    };
+
+    rustLog = mkOption {
+      type = types.nullOr types.str;
+      default = builtins.null;
+      example = "INFO";
+      description = "Set the level of verbosity of the `RUST_LOG` environment variable.";
+    };
+
+    zeroCopy = mkEnableOption "Enable the zerocopy function. May be necessary to turn it off depending on card and available driver support." // { default = true; };
   };
 
   config = lib.mkIf cfg.enable {
@@ -49,8 +65,14 @@ in
 
     virtualisation.oci-containers.containers = {
       wolf = {
-        image = "ghcr.io/games-on-whales/wolf:stable";
+        image = "gow/wolf";
         environment = {
+        } // lib.optionalAttrs (!cfg.zeroCopy) {
+          WOLF_USE_ZERO_COPY = "FALSE";
+        } // lib.optionalAttrs (!(builtins.isNull cfg.rustLog)) {
+          RUST_LOG = cfg.rustLog;
+        } // lib.optionalAttrs (!(builtins.isNull cfg.gstDebug)) {
+          GST_DEBUG = "${builtins.toString cfg.gstDebug}";
         } // lib.optionalAttrs (!(builtins.isNull cfg.renderNode)) {
           WOLF_RENDER_NODE = cfg.renderNode;
         } // lib.optionalAttrs cfg.nvidiaManual {
@@ -58,6 +80,9 @@ in
         } // lib.optionalAttrs cfg.nvidiaAutomatic {
           NVIDIA_DRIVER_CAPABILITIES = "all";
           NVIDIA_VISIBLE_DEVICES = "all";
+        };
+        capabilities = {
+          SYS_PTRACE = true;
         };
         volumes = [
           "/etc/wolf/:/etc/wolf:rw"
@@ -81,6 +106,7 @@ in
           "/dev/nvidia-modeset"
         ];
         ports = [
+        ] ++ lib.optionals (!cfg.networkHostMode) [
           # HTTPS
           "47984:47984"
           # HTTP
@@ -164,6 +190,7 @@ in
 
     networking.firewall = {
       allowedTCPPorts = [
+      ] ++ lib.optionals (!cfg.networkHostMode) [
         # HTTPS
         47984
         # HTTP
@@ -172,6 +199,7 @@ in
         48010
       ];
       allowedUDPPorts = [
+      ] ++ lib.optionals (!cfg.networkHostMode) [
         # Control
         47999
         # Video
