@@ -39,7 +39,7 @@ in
     };
 
     gstDebug = mkOption {
-      type = types.nullOr types.int8;
+      type = types.nullOr types.ints.s8;
       default = builtins.null;
       example = 3;
       description = "Set the level of verbosity of the `GST_DEBUG` environment variable.";
