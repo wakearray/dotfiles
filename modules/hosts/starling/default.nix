@@ -51,6 +51,8 @@
 
     # Audio and video format converter
     ffmpeg-full
+
+    ntfs3g
   ];
 
   # Starling can't complete full builds if this is enabled
