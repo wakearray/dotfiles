@@ -46,7 +46,7 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking = {
     useDHCP = lib.mkDefault true;
-    interfaces.enp3s0.wakeOnLan = {
+    interfaces.enp5s0.wakeOnLan = {
       enable = true;
       policy = [ "magic" ];
     };

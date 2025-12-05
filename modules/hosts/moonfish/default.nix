@@ -1,10 +1,12 @@
 { pkgs, ... }:
 {
   ## These are the defaults I want on Moonfish only:
-  imports = [ ];
+  imports = [
+    ./sunshineSteam.nix
+  ];
 
   servers.docker = {
-    enable = true;
+    enable = false;
     gow = {
       wolf = {
         enable = true;
@@ -14,6 +16,8 @@
       };
     };
   };
+
+  sunshineSteam.enable = true;
 
   services.lact.enable = true;
 
@@ -32,12 +36,8 @@
     rocmPackages.rocm-smi
   ];
 
-
   virtualisation = {
     virtualbox.host.enable = true;
-    # Enable docker deamon
-    docker.enable = true;
-    oci-containers.backend = "docker";
   };
 }
 

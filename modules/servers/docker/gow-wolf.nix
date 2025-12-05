@@ -63,70 +63,76 @@ in
       }
     ];
 
-    virtualisation.oci-containers.containers = {
-      wolf = {
-        image = "gow/wolf";
-        environment = {
-        } // lib.optionalAttrs (!cfg.zeroCopy) {
-          WOLF_USE_ZERO_COPY = "FALSE";
-        } // lib.optionalAttrs (!(builtins.isNull cfg.rustLog)) {
-          RUST_LOG = cfg.rustLog;
-        } // lib.optionalAttrs (!(builtins.isNull cfg.gstDebug)) {
-          GST_DEBUG = "${builtins.toString cfg.gstDebug}";
-        } // lib.optionalAttrs (!(builtins.isNull cfg.renderNode)) {
-          WOLF_RENDER_NODE = cfg.renderNode;
-        } // lib.optionalAttrs cfg.nvidiaManual {
-          NVIDIA_DRIVER_VOLUME_NAME = "nvidia-driver-vol";
-        } // lib.optionalAttrs cfg.nvidiaAutomatic {
-          NVIDIA_DRIVER_CAPABILITIES = "all";
-          NVIDIA_VISIBLE_DEVICES = "all";
+    virtualisation = {
+      docker.enable = true;
+      oci-containers = {
+        backend = "docker";
+        containers = {
+          wolf = {
+            image = "gow/wolf";
+            environment = {
+            } // lib.optionalAttrs (!cfg.zeroCopy) {
+              WOLF_USE_ZERO_COPY = "FALSE";
+            } // lib.optionalAttrs (!(builtins.isNull cfg.rustLog)) {
+              RUST_LOG = cfg.rustLog;
+            } // lib.optionalAttrs (!(builtins.isNull cfg.gstDebug)) {
+              GST_DEBUG = "${builtins.toString cfg.gstDebug}";
+            } // lib.optionalAttrs (!(builtins.isNull cfg.renderNode)) {
+              WOLF_RENDER_NODE = cfg.renderNode;
+            } // lib.optionalAttrs cfg.nvidiaManual {
+              NVIDIA_DRIVER_VOLUME_NAME = "nvidia-driver-vol";
+            } // lib.optionalAttrs cfg.nvidiaAutomatic {
+              NVIDIA_DRIVER_CAPABILITIES = "all";
+              NVIDIA_VISIBLE_DEVICES = "all";
+            };
+            capabilities = {
+              SYS_PTRACE = true;
+            };
+            volumes = [
+              "/etc/wolf/:/etc/wolf:rw"
+              "/var/run/docker.sock:/var/run/docker.sock:rw"
+              "/dev/:/dev/:rw"
+              "/run/udev:/run/udev:rw"
+            ] ++ lib.optionals cfg.nvidiaManual [
+              "nvidia-driver-vol:/usr/nvidia:rw"
+            ];
+            devices = [
+              "/dev/dri"
+              "/dev/uinput"
+              "/dev/uhid"
+            ] ++ lib.optionals cfg.nvidiaManual [
+              "/dev/nvidia-uvm"
+              "/dev/nvidia-uvm-tools"
+              "/dev/nvidia-caps/nvidia-cap1"
+              "/dev/nvidia-caps/nvidia-cap2"
+              "/dev/nvidiactl"
+              "/dev/nvidia0"
+              "/dev/nvidia-modeset"
+            ];
+            ports = [
+            ] ++ lib.optionals (!cfg.networkHostMode) [
+              # HTTPS
+              "47984:47984"
+              # HTTP
+              "47989:47989"
+              # RTSP
+              "48010:48010"
+              # Control
+              "47999:47999"
+              # Video
+              "48100:48100"
+              # Audio
+              "48200:48200"
+            ];
+            extraOptions = [
+              "--device-cgroup-rule=c 13:* rmw"
+            ] ++ lib.optionals cfg.nvidiaAutomatic [
+              "--gpus=all"
+            ] ++ lib.optionals cfg.networkHostMode [
+              "--network=host"
+            ];
+          };
         };
-        capabilities = {
-          SYS_PTRACE = true;
-        };
-        volumes = [
-          "/etc/wolf/:/etc/wolf:rw"
-          "/var/run/docker.sock:/var/run/docker.sock:rw"
-          "/dev/:/dev/:rw"
-          "/run/udev:/run/udev:rw"
-        ] ++ lib.optionals cfg.nvidiaManual [
-          "nvidia-driver-vol:/usr/nvidia:rw"
-        ];
-        devices = [
-          "/dev/dri"
-          "/dev/uinput"
-          "/dev/uhid"
-        ] ++ lib.optionals cfg.nvidiaManual [
-          "/dev/nvidia-uvm"
-          "/dev/nvidia-uvm-tools"
-          "/dev/nvidia-caps/nvidia-cap1"
-          "/dev/nvidia-caps/nvidia-cap2"
-          "/dev/nvidiactl"
-          "/dev/nvidia0"
-          "/dev/nvidia-modeset"
-        ];
-        ports = [
-        ] ++ lib.optionals (!cfg.networkHostMode) [
-          # HTTPS
-          "47984:47984"
-          # HTTP
-          "47989:47989"
-          # RTSP
-          "48010:48010"
-          # Control
-          "47999:47999"
-          # Video
-          "48100:48100"
-          # Audio
-          "48200:48200"
-        ];
-        extraOptions = [
-          "--device-cgroup-rule=c 13:* rmw"
-        ] ++ lib.optionals cfg.nvidiaAutomatic [
-          "--gpus=all"
-        ] ++ lib.optionals cfg.networkHostMode [
-          "--network=host"
-        ];
       };
     };
 
@@ -187,6 +193,8 @@ in
     ] ++ lib.optionals cfg.nvidiaAutomatic [
       pkgs.nvidia-container-toolkit
     ];
+
+
 
     networking.firewall = {
       allowedTCPPorts = [

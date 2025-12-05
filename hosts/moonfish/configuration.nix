@@ -41,6 +41,10 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+
+      ## amdvlk - Discontinued 1st party driver with better performance in some games
+      #extraPackages = [ pkgs.amdvlk ];
+      #extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
     };
   };
 
