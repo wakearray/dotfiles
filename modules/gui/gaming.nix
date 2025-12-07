@@ -40,6 +40,9 @@ in
       bottles      # A sensible Wine wrapper for games
       protontricks # Use winetricks in proton
       protonplus   # Simple Wine and Proton-based compatibility tools manager
+
+      # For remoting into Sunshine hosts
+      moonlight-qt
     ];
 
     # Enable xbox one acccessories

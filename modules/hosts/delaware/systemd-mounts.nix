@@ -2,8 +2,16 @@
 {
   config = {
     boot.supportedFilesystems."fuse.bindfs" = true;
-
     systemd.mounts = [
+      {
+        description = "Read-write bind mount for public webdav access to Audiobooks.";
+        what = "/data/audiobooks/";
+        where = "/data/appdata/audiobookshelf/Audiobooks/";
+        type = "fuse.bindfs";
+        options = "force-user=audiobookshelf,force-group=audiobookshelf,perms=0774:g+rwx:a+rD";
+        wantedBy = [ "zfs-import.target" ];
+        requires = [ "zfs-import.target" ];
+      }
       {
         description = "Read-only bind mount for public webdav access to Audiobooks.";
         what = "/data/audiobooks/";
