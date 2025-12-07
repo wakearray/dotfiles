@@ -64,6 +64,9 @@ in
       # Cli interface for Steam
       steamcmd
 
+      # Rust TUI client for steamcmd
+      steam-tui
+
       # Game launcher with access to Steam, GOG, Epic, and Humble Bundle
       # https://github.com/lutris/lutris
       lutris
@@ -92,7 +95,22 @@ in
 
       # Used to allow gamescope to use HDR
       gamescope-wsi
+
+      # Pulseaudio command line mixer
+      pamixer
     ];
+
+    # Enable sound with pipewire.
+    security.rtkit.enable = true;
+    services = {
+      pipewire = {
+        enable = true;
+        alsa = {
+          enable = true;
+          support32Bit = true;
+        };
+      };
+    };
 
     users.users.entertainment = {
       isNormalUser = true;
@@ -107,7 +125,7 @@ in
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.gamescope}/bin/gamescope -W 1920 -H 1080 -f -e --xwayland-count 2 --hdr-enabled --hdr-itm-enabled -- steam -pipewire-dmabuf -gamepadui -steamdeck -steamos3 > /dev/null 2>&1";
+          command = "${pkgs.gamescope}/bin/gamescope -W 1920 -H 1080 --prefer-output card1-HDMI-A-1 --default-touch-mode 4 -f -e --xwayland-count 2 -- steam -pipewire-dmabuf -gamepadui -steamdeck > /dev/null 2>&1";
           user = "entertainment";
         };
       };
@@ -118,6 +136,17 @@ in
       # Needed for Wayland use, disable for x11
       capSysAdmin = true;
       openFirewall = true;
+    };
+
+    # Override the `sunshine.autoStart` service's systemd target to `default.target`
+    # This is needed as GameScope doesn't trigger systemd's `graphical-session.target`
+    systemd.user.services.sunshine = {
+      description = "Self-hosted game stream host for Moonlight";
+
+      wantedBy = lib.mkForce [ "default.target" ];
+      partOf = lib.mkForce [ "default.target" ];
+      wants = lib.mkForce [ "default.target" ];
+      after = lib.mkForce [ "default.target" ];
     };
   };
 }

@@ -9,7 +9,7 @@
     enable = false;
     gow = {
       wolf = {
-        enable = true;
+        enable = false;
         renderNode = "/dev/dri/renderD128";
         gstDebug = 3;
         rustLog = "INFO";
