@@ -17,11 +17,5 @@ in
     gui = {
       pcmanfm.enable = true;
     };
-
-    home.packages = with pkgs; [
-      # aseprite - Animated sprite editor & pixel art tool
-      # https://www.aseprite.org/
-      aseprite
-    ];
   };
 }
