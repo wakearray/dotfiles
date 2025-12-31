@@ -43,10 +43,27 @@ in
 
       # For remoting into Sunshine hosts
       moonlight-qt
+
+      # Joystick/gamepad diagnostic tools
+      linuxConsoleTools
+      jstest-gtk
     ];
 
     # Enable xbox one acccessories
-    hardware.xone.enable = true;
+    hardware = {
+      xone.enable = true;
+      uinput.enable = true;
+    };
+
+    # udev rules for recognizing more 3rd party game controllers
+    services = {
+      udev = {
+        packages = with pkgs; [
+          game-devices-udev-rules
+          steam-devices-udev-rules
+        ];
+      };
+    };
 
     # A game streaming server used with the moonlight app on Android.
     # On the moonlight client manually add the server as `<server IP>:47989`

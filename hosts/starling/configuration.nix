@@ -26,7 +26,11 @@
     firewall.enable = true;
   };
 
-  hardware.bluetooth.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+    # Enable keyboard udev rules
+    keyboard.qmk.enable = true;
+  };
 
   system.stateVersion = "25.05";
 }

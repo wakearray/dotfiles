@@ -42,6 +42,9 @@ in
         cd = "z";
         cdi = "zi";
 
+        # Run zsh as root with inherited environment variables
+        sudozsh = "sudo -E /var/run/current-system/sw/bin/zsh";
+
         # Launch neovim with a named server
         nvim = "nvim --listen /tmp/nvim-socket-$(eval uuidgen)";
 

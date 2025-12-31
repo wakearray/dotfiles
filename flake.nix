@@ -108,12 +108,12 @@
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
 
-    systems = [
-      "aarch64-linux"
-      "x86_64-linux"
-    ];
+    #systems = [
+    #  "aarch64-linux"
+    #  "x86_64-linux"
+    #];
 
-    forAllSystems = nixpkgs.lib.genAttrs systems;
+    #forAllSystems = nixpkgs.lib.genAttrs systems;
   in
   {
     inherit lib;
@@ -460,7 +460,6 @@
         };
         modules = [
           ./hosts/jerboa/configuration.nix
-          ./modules/servers
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           nix-index-database.nixosModules.nix-index

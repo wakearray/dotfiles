@@ -1,16 +1,18 @@
 { lib, config, pkgs, ... }:
 let
-  gui = config.gui;
-  gaming = gui.gaming;
+  cfg = config.gui.gaming;
 in
 {
-  imports = [ ./sunshine.nix ];
+  imports = [
+    ./sunshine.nix
+    ./gamepad.nix
+  ];
 
   options.gui.gaming = {
-    enable = lib.mkEnableOption "Enable Steam, GOG, etc.";
+    enable = lib.mkEnableOption "Enable Steam, GOG, etc." // { default = config.modules.systemDetails.features.gaming; };
   };
 
-  config = lib.mkIf (gui.enable && gaming.enable) {
+  config = lib.mkIf cfg.enable {
     programs = {
       # Enable Steam
       steam = {
@@ -60,6 +62,13 @@ in
       # Simple Wine and Proton-based compatibility tools manager
       # https://github.com/Vysp3r/ProtonPlus
       protonplus
+
+      # udev rules to improve controller recognition
+      steam-devices-udev-rules
+
+      # Joystick/gamepad diagnostic tools
+      linuxConsoleTools
+      jstest-gtk
     ];
   };
 }

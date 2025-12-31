@@ -15,14 +15,4 @@
     gaming.enable = true;
     wm.hyprland.enable = true;
   };
-
-  servers = {
-    home-assistant = {
-      enable = true;
-      bridge = {
-        name = "br0";
-        interface = "enp1s0";
-      };
-    };
-  };
 }

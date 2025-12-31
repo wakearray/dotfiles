@@ -3,6 +3,10 @@ let
   cfg = config.sunshineSteam;
 in
 {
+  imports = [
+    ../../gui/sound.nix
+  ];
+
   options.sunshineSteam = with lib; {
     enable = mkEnableOption "Enable Steam and Sunshine, using autologin with gamescope and greetd.";
 
@@ -101,16 +105,7 @@ in
     ];
 
     # Enable sound with pipewire.
-    security.rtkit.enable = true;
-    services = {
-      pipewire = {
-        enable = true;
-        alsa = {
-          enable = true;
-          support32Bit = true;
-        };
-      };
-    };
+    gui.sound.enable = true;
 
     users.users.entertainment = {
       isNormalUser = true;

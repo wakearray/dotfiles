@@ -7,6 +7,7 @@
     ../../modules/gui/themes/catppuccin.nix
     ../../modules/hosts/cichlid
     ../../users/jess
+    ../../users/kent
   ];
 
   # Bootloader.
