@@ -61,6 +61,9 @@ in
 
         # A simple calculator designed for elementary OS
         pantheon.elementary-calculator
+
+        # App for updating the keymap of ZMK keyboards
+        zmk-studio
       ];
 
       variables = {
