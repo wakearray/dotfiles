@@ -85,6 +85,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Tui for inspecting a flake
+    nix-inspect.url = "github:bluskript/nix-inspect";
+
     # Declarative mailserver configured in Nixlang
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";

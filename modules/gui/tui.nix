@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   # modules/gui/tui
   # Packages that should be available on personal workstations, but not on servers.
@@ -14,5 +14,5 @@
     # Lazycli - A tool to static turn CLI commands into TUIs
     # https://github.com/jesseduffield/lazycli
     lazycli
-  ];
+  ] ++ [ inputs.nix-inspect.packages.x86_64-linux.nix-inspect-release ];
 }
