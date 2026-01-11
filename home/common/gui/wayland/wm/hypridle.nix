@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
   cfg = config.home.wm.hypridle;
 in
@@ -30,6 +30,7 @@ in
   config = lib.mkIf cfg.enable {
     services.hypridle = {
       enable = true;
+      package = pkgs.stable.hypridle;
       settings = cfg.settings;
     };
   };

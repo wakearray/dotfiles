@@ -33,6 +33,5 @@ in
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFuW5WWczdzTId3AZ6gPKTKa4y+5jYPownSvYx+nyC/d" # Hisense A9
     ];
   };
-  nix.settings.trusted-users = [ "kent" ];
   gui._1pass.polkitPolicyOwners = [ "kent" ];
 }

@@ -590,7 +590,7 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
         # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
         bindl = s.bindl;
       };
-      plugins = with pkgs; [
+      plugins = with pkgs.stable; [
         # hyprgrass - hyprland plugin for touch screen gestures
         # https://github.com/horriblename/hyprgrass
         hyprlandPlugins.hyprgrass
@@ -604,7 +604,7 @@ Note: Normally this would just be `binds` and not `bindsr`, but that already exi
         hyprlandPlugins.hyprspace
       ];
     };
-    home.packages = with pkgs; [
+    home.packages = with pkgs.stable; [
       # Screen shot utility for hyprland
       grimblast
 

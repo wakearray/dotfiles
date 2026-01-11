@@ -8,7 +8,7 @@
     # Use Firefox's Readability API to extract useful
     # text from webpages and display them in the terminal
     # https://gitlab.com/gardenappl/readability-cli
-    readability-cli
+    stable.readability-cli
 
     # FastSSH is a TUI that allows you to quickly connect to your services by navigating through your SSH config.
     # https://github.com/julien-r44/fast-ssh

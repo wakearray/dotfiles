@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Quickly local nix packages with specific files
@@ -51,38 +51,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hyprland + Plugins
-    hyprland.url = "github:hyprwm/Hyprland/v0.49.0";
-    ## Official plugins
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-    ## Officially hosted unofficial plugins
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    ## hyprland touch screen dispachers
-    hyprgrass = {
-      url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland";
-    };
-    ## Additional hyprland multimonitor support
-    hyprsplit = {
-      url = "github:shezdy/hyprsplit/v0.46.2";
-      inputs.hyprland.follows = "hyprland";
-    };
-    ## Workspace overview feature for hyprland
-    hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     # Secrets management
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ## Officially hosted unofficial plugins
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     # Tui for inspecting a flake
@@ -170,7 +148,6 @@
                   ./home/kent
                   ./home/kent/hosts/greatblue
                   nixvim.homeModules.nixvim
-                  impermanence.homeManagerModules.impermanence
                   nur.modules.homeManager.default
                 ];
               };
@@ -214,7 +191,6 @@
 	                ./home/kent
 		              ./home/kent/hosts/starling
                   nixvim.homeModules.nixvim
-                  impermanence.homeManagerModules.impermanence
                   nur.modules.homeManager.default
 		            ];
 	            };

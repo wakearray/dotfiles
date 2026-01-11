@@ -17,8 +17,9 @@ in
     programs = {
       hyprland = {
         enable = true;
+        package = pkgs.stable.hyprland;
         withUWSM = true;
-        portalPackage = pkgs.xdg-desktop-portal-hyprland;
+        portalPackage = pkgs.stable.xdg-desktop-portal-hyprland;
       };
       uwsm  = {
         enable = true;
@@ -34,7 +35,7 @@ in
 
     xdg.portal = {
       enable = true;
-      extraPortals = with pkgs; [
+      extraPortals = with pkgs.stable; [
         xdg-desktop-portal-hyprland
         xdg-desktop-portal-wlr
         # You might also want to include other portals you need,

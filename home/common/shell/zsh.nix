@@ -1,10 +1,11 @@
-{ ... }:
+{ config, ... }:
 {
   # zsh
   # More options found here:
   # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zellij.enable
   programs.zsh = {
     enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
     enableCompletion = true;
     enableVteIntegration = true;
     syntaxHighlighting = { enable = true; };
@@ -20,7 +21,8 @@
       append = true;
       ignoreAllDups = true;
       ignoreSpace = true;
-      path =  "$HOME/.zsh_history";
+      # path = "$HOME/.zsh_history";
+      path = "${config.programs.zsh.dotDir}/.zsh_history";
       save = 20000;
       size = 20000;
     };
@@ -110,8 +112,8 @@ EOF
       function mkcd {
         if [ ! -n "$1" ]; then
           echo "Enter a directory name"
-        elif [ -d $1 ]; then
-          echo "'$1' already exists, entering.."; cd $1
+        elif [ -d "$1" ]; then
+          echo "$1 already exists, entering.."; cd $1
         else
           mkdir $1 && cd $1
         fi
@@ -119,6 +121,7 @@ EOF
 
       eval $(ssh-agent -s)
       find ~/.ssh -type f -name 'id_ed25519*' ! -name '*.pub' -exec ssh-add {} \;
+      rm /tmp/nvim-*
       clear
     '';
     shellAliases = {

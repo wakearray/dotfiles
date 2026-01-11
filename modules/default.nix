@@ -189,6 +189,7 @@
     };
 
     nix = {
+      # package = pkgs.lixPackageSets.latest.lix;
       package = pkgs.lixPackageSets.latest.lix;
       settings = {
         # Enable flakes.
@@ -196,6 +197,12 @@
 
         # download-buffer-size is unavailable in lix
         # download-buffer-size = 524288000; # 500 MiB
+
+        # Remote builders will source their own binary substitutes if available
+        builders-use-substitutes = true;
+
+        # If the local network binary cache fails even once, it's offline and shouldn't need to be retried
+        download-attempts = 2;
 
         # Uses hard links to remove duplicates in the nix store
         auto-optimise-store = true;
@@ -211,6 +218,12 @@
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           # ... other keys
         ];
+
+        # All users in the wheel group are considered trusted nix users
+        trusted-users = [ "@wheel" ];
+
+        # Turn off the annoying dirty git tree warning that occurs when building from a git repo that hasn't had the latest changes commited yet
+        warn-dirty = false;
       };
     };
 

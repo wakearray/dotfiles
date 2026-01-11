@@ -112,6 +112,13 @@ let
       description = "QNAP TS-251";
       users = [ "kent" ];
     };
+    homeassistant = {
+      prettyName = "Home Assistant";
+      ip = "192.168.0.138";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjtTzTujCfgpjoI+OHgcOSwVLOMi6IQnei7Rx3z2twL";
+      description = "Hardkernel Odroid HC4";
+      users = [ "kent" ];
+    };
 
     # Just here so it gets added to the knownhosts file automatically
     # When connecting for the first time to a new server use the command:

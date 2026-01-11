@@ -42,6 +42,8 @@
         # 3D Modeling
         blender
         stable.openscad-unstable
+        # An open source parametric CAD program similar to Fusion360
+        solvespace
 
         # GTK patchbay for pipewire
         # https://gitlab.freedesktop.org/pipewire/helvum

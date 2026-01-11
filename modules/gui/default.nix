@@ -57,7 +57,7 @@ in
         mission-center
 
         # The XFCE terminal, installed as a backup.
-        xfce.xfce4-terminal
+        xfce4-terminal
 
         # A simple calculator designed for elementary OS
         pantheon.elementary-calculator
