@@ -53,7 +53,7 @@ This setting is required for any of the following features:
         enable = true;
         settings = {
           base-url = "https://${cfg.domain}";
-          listen-http = "127.0.0.1:${builtins.toString cfg.localPort}";
+          listen-http = "127.0.0.1:${toString cfg.localPort}";
           # firebase-key-file = "/etc/ntfy/firebase.json";
           cache-file = "${cfg.cacheRootDirectory}/cache.db";
           auth-file = "${cfg.authFile}";
@@ -69,7 +69,7 @@ This setting is required for any of the following features:
         enableACME = true;
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://localhost:${builtins.toString cfg.localPort}";
+          proxyPass = "http://localhost:${toString cfg.localPort}";
           proxyWebsockets = true;
         };
       };
