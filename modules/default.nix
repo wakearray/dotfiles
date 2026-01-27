@@ -208,7 +208,7 @@
         auto-optimise-store = true;
 
         substituters = [
-          "http://192.168.0.46:8501"  # Use https:// if behind reverse proxy
+          #"http://192.168.0.46:8501"  # Use https:// if behind reverse proxy
           "https://cache.nixos.org"
           # ... other substituters
         ];
