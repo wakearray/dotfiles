@@ -224,7 +224,6 @@
           nixos-hardware.nixosModules.common-cpu-amd-pstate
           nixos-hardware.nixosModules.common-cpu-amd-zenpower
           nixvim.nixosModules.nixvim
-          simple-nixos-mailserver.nixosModule
           sops-nix.nixosModules.sops
           disko.nixosModules.disko
           nix-index-database.nixosModules.nix-index
@@ -271,7 +270,6 @@
           ./modules/servers
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
-          simple-nixos-mailserver.nixosModule
           nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
@@ -313,6 +311,7 @@
         modules = [
           ./hosts/hamburger/configuration.nix
           ./modules/servers
+          ./modules/mail
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           simple-nixos-mailserver.nixosModule

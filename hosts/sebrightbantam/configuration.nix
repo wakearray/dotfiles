@@ -8,7 +8,7 @@
     ../../users/kent
   ];
 
-  # System will only work with MBR and fails to find derivations to boot from with EFI.
+  # This host will only boot with MBR and fails to boot with EFI.
   boot.loader.grub.device = "/dev/sdc";
 
   networking.hostName = "SebrightBantam"; # Define your hostname.

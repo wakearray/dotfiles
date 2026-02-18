@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  mail = config.servers.mail;
-  domain = mail.domain;
+  cfg = config.servers.mail;
 in
 {
+  # Make sure to include `simple-nixos-mailserver.nixosModule` in the flake modules for the host you want to use this with.
   options.servers.mail = with lib; {
     enable = mkEnableOption "Enable an opinionated mail server config using the Simple NixOS Mailserver: https://nixos-mailserver.readthedocs.io/en/latest/";
 
@@ -19,17 +19,17 @@ in
     users = mkOption {
       type = types.attrs;
       default = {
-        "admin@${domain}" = {
+        "admin@${cfg.domain}" = {
           hashedPasswordFile = "/run/secrets/mail-server-admin";
-          aliases = [ "postmaster@${domain}" "security@${domain}" "abuse@${domain}" ];
+          aliases = [ "postmaster@${cfg.domain}" "security@${cfg.domain}" "abuse@${cfg.domain}" ];
         };
-        "noreply@${domain}" = {
+        "noreply@${cfg.domain}" = {
           hashedPasswordFile = "/run/secrets/mail-server-noreply";
         };
-        "kent@${domain}" = {
+        "kent@${cfg.domain}" = {
           hashedPasswordFile = "/run/secrets/mail-server-kent";
         };
-        "jess@${domain}" = {
+        "jess@${cfg.domain}" = {
           hashedPasswordFile = "/run/secrets/mail-server-jess";
         };
       };
@@ -55,18 +55,18 @@ in
       description = "Include the hashed password files from the SOPS /mailserver.yaml file.";
     };
   };
-  config = lib.mkIf mail.enable {
+  config = lib.mkIf cfg.enable {
     mailserver = {
       enable = true;
-      fqdn = "mail.${domain}";
-      domains = [ "${domain}" ];
+      fqdn = "mail.${cfg.domain}";
+      domains = [ "${cfg.domain}" ];
       openFirewall = true;
 
-      enableImap = mail.imap.enable;
-      enableImapSsl = mail.imap.enable;
+      enableImap = cfg.imap.enable;
+      enableImapSsl = cfg.imap.enable;
 
-      enableSubmission = mail.smtp.enable;
-      enableSubmissionSsl = mail.smtp.enable;
+      enableSubmission = cfg.smtp.enable;
+      enableSubmissionSsl = cfg.smtp.enable;
 
       fullTextSearch = {
         enable = true;
@@ -77,7 +77,7 @@ in
 
       # A list of all login accounts. To create the password hashes, use
       # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
-      loginAccounts = mail.users;
+      loginAccounts = cfg.users;
 
       # Use Let's Encrypt certificates. Note that this needs to set up a stripped
       # down nginx and opens port 80.
@@ -86,7 +86,7 @@ in
       stateVersion = 3;
     };
 
-    sops.secrets = mail.secrets;
+    sops.secrets = cfg.secrets;
 
     # mailserver.openFirewall = true; Should be opening all these ports
     #

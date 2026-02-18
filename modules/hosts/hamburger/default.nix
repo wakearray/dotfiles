@@ -31,16 +31,17 @@
         siteName = "VoicelessCrimson";
       };
 
-      # TODO: setup ntfy
-      ntfy = {
-        enable = true;
-        domain = "ntfy.${domain}";
-        localPort = 2586;
-        sopsFile = ./ntfy.yaml;
-      };
-
       docker = {
         enable = true;
+
+        ntfy-sh = {
+          enable = true;
+          domain = "ntfy.${domain}";
+          localPort = 2586;
+          visitorRequestLimitExemptHosts = "70.109.49.31";
+          sopsFile = ./ntfy.yaml;
+        };
+
         vaultwarden = {
           enable = true;
           domain = "vault.${domain}";

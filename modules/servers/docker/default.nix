@@ -11,6 +11,7 @@ in
     #./lobechat.nix
     #./omada-controller.nix
     ./gow-wolf.nix
+    ./ntfy-sh.nix
     ./tubearchivist.nix
     ./vaultwarden.nix
     #./wger.nix

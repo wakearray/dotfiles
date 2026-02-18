@@ -107,7 +107,7 @@ let
     };
     sebrightbantam = {
       prettyName = "Sebright Bantam";
-      ip = "192.168.0.80";
+      ip = "192.168.0.164";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJnBdFqtIA/MRYb7Wtmp7xxn7l4M0Fc09JkUMw3665Ua";
       description = "QNAP TS-251";
       users = [ "kent" ];

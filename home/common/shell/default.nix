@@ -52,7 +52,7 @@ in
         # Opens nvim to the `~/notes` directory
         notes = "zellij action rename-tab Notes; nvim-socket ~/notes; zellij action undo-rename-tab";
 
-        systemctl = "sudo EDITOR=nvim-socket systemctl-tui";
+        sudosystemctl-tui = "sudo EDITOR=nvim-socket systemctl-tui";
 
         rename = "zellij action rename-tab";
 

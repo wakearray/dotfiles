@@ -21,11 +21,11 @@ in
     ./forgejo
     ./home-assistant
     ./jellyfin.nix
-    ./mailserver.nix
     ./mattermost.nix
     ./miniflux.nix
     ./ncps.nix
     ./nginx.nix
+    ./ntfy-sh.nix
     ./paperless
     ./printers.nix
     ./satisfactory.nix

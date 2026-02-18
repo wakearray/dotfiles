@@ -29,13 +29,13 @@ This setting is required for any of the following features:
 
     cacheRootDirectory = mkOption {
       type = types.str;
-      default = "/var/cache/ntfy";
+      default = "/var/lib/ntfy-sh";
       description = "Root directory of the cache files.";
     };
 
     authFile = mkOption {
       type = types.str;
-      default = "/var/lib/ntfy/user.db";
+      default = "/var/lib/ntfy-sh/user.db";
       description = "Where to store the SQLite db file the contains the users and password hashes.";
     };
 
@@ -47,7 +47,7 @@ This setting is required for any of the following features:
 
   };
 
-  config = lib.mkif cfg.enable {
+  config = lib.mkIf cfg.enable {
     services = {
       ntfy-sh = {
         enable = true;
@@ -90,22 +90,18 @@ This setting is required for any of the following features:
       smtp-sender-addr = opts;
       smtp-sender-user = opts;
       smtp-sender-pass = opts;
-      # format: 'username:password:admin,username2:password2:user'
-      # https://docs.ntfy.sh/config/#users-via-the-config
-      ntfy-auth-users = opts;
       ntfyEnvironmentVars = opts;
     };
 
     sops.templates."ntfyEnvironmentFile" = {
       content = ''
-        SMTP_SENDER_FROM="${config.sops.placeholder.smtp-sender-from}"
-        SMTP_SERVER_LISTEN="${config.sops.placeholder.smtp_server_listen}";
-        SMTP_SERVER_DOMAIN="${config.sops.placeholder.smtp_server_domain}";
-        SMTP_SERVER_ADDR_PREFIX="${config.sops.placeholder.smtp_server_addr_prefix}";
-        SMTP_SENDER_ADDR="${config.sops.placeholder.smtp_sender_addr}";
-        SMTP_SENDER_USER="${config.sops.placeholder.smtp_sender_user}";
-        SMTP_SENDER_PASS="${config.sops.placeholder.smtp_sender_pass}";
-        NTFY_AUTH_USERS='${config.sops.placeholder.ntfy_auth_users}';
+        NTFY_SMTP_SENDER_FROM="${config.sops.placeholder.smtp-sender-from}"
+        NTFY_SMTP_SERVER_LISTEN="${config.sops.placeholder.smtp-server-listen}"
+        NTFY_SMTP_SERVER_DOMAIN="${config.sops.placeholder.smtp-server-domain}"
+        NTFY_SMTP_SERVER_ADDR_PREFIX="${config.sops.placeholder.smtp-server-addr-prefix}"
+        NTFY_SMTP_SENDER_ADDR="${config.sops.placeholder.smtp-sender-addr}"
+        NTFY_SMTP_SENDER_USER="${config.sops.placeholder.smtp-sender-user}"
+        NTFY_SMTP_SENDER_PASS="${config.sops.placeholder.smtp-sender-pass}"
         ${config.sops.placeholder.ntfyEnvironmentVars}
       '';
       mode = "0400";

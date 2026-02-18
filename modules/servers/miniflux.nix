@@ -27,13 +27,13 @@ in
 
   config = lib.mkIf cfg.enable {
     assertions = [{
-      assertion = !(builtins.isNull cfg.sopsFile);
+      assertion = !(isNull cfg.sopsFile);
       message = "Please define a sops file with admin credentials."; }];
     services.miniflux = {
       enable = true;
       adminCredentialsFile = config.sops.templates."minifluxCredentialsEnvironmentFile".path;
       config = {
-        LISTEN_ADDR = "127.0.0.1:${builtins.toString cfg.localPort}";
+        LISTEN_ADDR = "127.0.0.1:${toString cfg.localPort}";
       };
     };
 
@@ -44,7 +44,7 @@ in
         forceSSL = true;
         locations = {
           "/" = {
-            proxyPass = "http://localhost:${builtins.toString cfg.localPort}";
+            proxyPass = "http://localhost:${toString cfg.localPort}";
           };
         };
       };

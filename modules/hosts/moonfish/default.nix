@@ -5,14 +5,20 @@
     ./sunshineSteam.nix
   ];
 
-  servers.docker = {
-    enable = false;
-    gow = {
-      wolf = {
-        enable = false;
-        renderNode = "/dev/dri/renderD128";
-        gstDebug = 3;
-        rustLog = "INFO";
+  servers = {
+    ncps = {
+      enable = false;
+      storageLocation = "/var/lib/ncps";
+    };
+    docker = {
+      enable = false;
+      gow = {
+        wolf = {
+          enable = false;
+          renderNode = "/dev/dri/renderD128";
+          gstDebug = 3;
+          rustLog = "INFO";
+        };
       };
     };
   };

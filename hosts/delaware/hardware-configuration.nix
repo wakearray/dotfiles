@@ -27,11 +27,6 @@
     [ { device = "/dev/disk/by-uuid/10236a99-67cb-479b-88cc-437cab9751d1"; }
     ];
 
-  fileSystems."/mnt/ssd980" =
-    { device = "/dev/disk/by-uuid/086fdc69-d895-48da-aa0a-307714f18c87";
-      fsType = "ext4";
-    };
-
   fileSystems."/mnt/ssd850" =
     { device = "/dev/disk/by-uuid/036e0731-e29c-40f7-9161-9a239dd79093";
       fsType = "ext4";

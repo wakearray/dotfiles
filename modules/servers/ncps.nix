@@ -11,6 +11,12 @@ in
       default = "/var/lib/ncps";
       description = "The location where the `data`, `tmp`, and `db` directories will be located.";
     };
+
+    maxSize = mkOption {
+      type = types.str;
+      default = "50G";
+      description = "The maximum amount of space reserved for the nix cache.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -20,7 +26,7 @@ in
         hostName = "Delaware";
         dataPath = "${cfg.storageLocation}";
         databaseURL = "sqlite:${cfg.storageLocation}/db/db.sqlite";
-        maxSize = "50G";
+        maxSize = "${cfg.maxSize}";
         lru.schedule = "0 4 1 * *"; # Clean up on the first of every month at 4 AM
         allowPutVerb = true;
         allowDeleteVerb = true;

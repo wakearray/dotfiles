@@ -12,6 +12,5 @@
   };
 
   # Enable if MQTT server needs to be accessed on the local or remote network
-  # Currently I only plan to use it on localhost
   # networking.firewall.allowedTCPPorts = [ 1883 ];
 }
