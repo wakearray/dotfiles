@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   ## These are the defaults I want on SebrightBantam only:
   imports = [
@@ -6,4 +6,10 @@
     #./mosquitto.nix
     ./nginx
   ];
+
+  config = {
+    environment.systemPackages = [
+      pkgs.rclone
+    ];
+  };
 }

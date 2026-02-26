@@ -44,7 +44,7 @@
     nixos-generators
 
     # Kdenlive is video editing software
-    kdePackages.kdenlive
+    #kdePackages.kdenlive
     # Vector animation tool that works with kdenlive
     # glaxnimate
 
