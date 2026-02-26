@@ -15,5 +15,16 @@
       # Userspace file system mounting
       fuse3
     ];
+
+    networking.firewall = {
+      allowedTCPPorts = [
+        # Rclone port for allowing rcloneui to connect
+        5572
+      ];
+      allowedUDPPorts = [
+        # Rclone port for allowing rcloneui to connect
+        5572
+      ];
+    };
   };
 }

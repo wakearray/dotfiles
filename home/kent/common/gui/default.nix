@@ -54,6 +54,15 @@ in
       # Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deeze
       # https://github.com/nathom/streamrip
       streamrip
+
+      # Command line program to sync files and directories to and from major cloud storage
+      # https://rclone.org/
+      rclone
+
+      # Cross-platform desktop GUI for rclone & S3
+      # https://github.com/rclone-ui/rclone-ui
+      rclone-ui
+
     ] ++ [ inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default ];
   };
 }
