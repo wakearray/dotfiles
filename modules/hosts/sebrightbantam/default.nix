@@ -8,8 +8,12 @@
   ];
 
   config = {
-    environment.systemPackages = [
-      pkgs.rclone
+    environment.systemPackages = with pkgs; [
+      # CLI program to sync files to/from most cloud services
+      rclone
+
+      # Userspace file system mounting
+      fuse3
     ];
   };
 }
