@@ -128,6 +128,7 @@ in
     services.sunshine = {
       enable = true;
       autoStart = true;
+      package = pkgs.Stable.sunshine;
       # Needed for Wayland use, disable for x11
       capSysAdmin = true;
       openFirewall = true;

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   sunshine = config.gui.gaming.sunshine;
 in
@@ -724,6 +724,7 @@ You can optionally use -tune to change settings based upon the specifics of your
     services.sunshine = {
       enable = true;
       autoStart = sunshine.autoStart;
+      package = pkgs.Stable.sunshine;
       # Needed for Wayland use, disable for x11
       capSysAdmin = true;
       openFirewall = true;
@@ -737,7 +738,7 @@ You can optionally use -tune to change settings based upon the specifics of your
         locale = sunshine.locale;
         sunshine_name = sunshine.sunshineName;
         min_log_level = sunshine.minLogLevel;
-        global_prep_cmd = ( builtins.toString sunshine.globalPrepCommands );
+        global_prep_cmd = ( toString sunshine.globalPrepCommands );
         # Since versioning is handled by nix, notifications of new releases is annoying
         notify_pre_releases = false;
 
@@ -759,16 +760,16 @@ You can optionally use -tune to change settings based upon the specifics of your
         '';
 
         ## Audio/Video
-        audio_sink = lib.mkIf (!builtins.isNull sunshine.audioSink) sunshine.audioSink;
-        virtual_sink = lib.mkIf (!builtins.isNUll sunshine.virtualSink) sunshine.virtualSink;
+        audio_sink = lib.mkIf (!isNull sunshine.audioSink) sunshine.audioSink;
+        virtual_sink = lib.mkIf (!isNull sunshine.virtualSink) sunshine.virtualSink;
         stream_audio = boolToStatus sunshine.streamAudio;
         install_steam_audio_drivers = boolToStatus sunshine.installSteamAudioDrivers;
-        output_name = lib.mkIf (!builtins.isNUll sunshine.outputName) sunshine.outputName;
+        output_name = lib.mkIf (!isNull sunshine.outputName) sunshine.outputName;
         max_bitrate = sunshine.maxBitrate;
 
         ## Networking
         upnp = boolToStatus sunshine.upnp;
-        address_family = sunshine.addressFamily;
+        address_family = sunshine.addre.packagessFamily;
         port = sunshine.port;
         origin_web_ui_allowed = sunshine.originWebUiAllowed;
         external_ip = sunshine.externalIP;
@@ -789,8 +790,8 @@ You can optionally use -tune to change settings based upon the specifics of your
         min_threads = sunshine.minThreads;
         hevc_mode = sunshine.hevcMode;
         av1_mode = sunshine.av1Mode;
-        capture = lib.mkIf (!builtins.isNUll sunshine.capture) sunshine.capture;
-        encoder = lib.mkIf (!builtins.isNull sunshine.encoder) sunshine.encoder;
+        capture = lib.mkIf (!isNull sunshine.capture) sunshine.capture;
+        encoder = lib.mkIf (!isNull sunshine.encoder) sunshine.encoder;
 
         ## Nvidia NVENC Encoder
         nvenc_preset = sunshine.nvencPreset;

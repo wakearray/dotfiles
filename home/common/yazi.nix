@@ -11,6 +11,7 @@ in
       yazi = {
         enable = true;
         enableZshIntegration = true;
+        shellWrapperName = "y";
         initLua = ''
           require("starship"):setup()
         '';
