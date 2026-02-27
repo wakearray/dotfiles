@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    ./sunshine.nix
+    #./sunshine.nix
     ./gamepad.nix
   ];
 

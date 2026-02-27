@@ -40,6 +40,10 @@
 
     # Tool for AMD GPUs
     rocmPackages.rocm-smi
+
+    # Command line program to sync files and directories to and from major cloud storage
+    # https://rclone.org/
+    rclone
   ];
 
   virtualisation = {

@@ -1,6 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
-  sunshine = config.gui.gaming.sunshine;
+  cfg = config.gui.gaming.sunshine;
 in
 {
   options.gui.gaming.sunshine = with lib; {
@@ -132,40 +132,40 @@ If set to `null` Sunshine will select the default audio device.
         type = types.nullOr types.str;
         default = null;
         description = ''
-Select the video card you want to stream.
+          Select the video card you want to stream.
 
-Use `ls /dev/dri/renderD*` to find which GPUs are available.
+          Use `ls /dev/dri/renderD*` to find which GPUs are available.
 
-To find their capabilities use the command:
+          To find their capabilities use the command:
 
-```nix
-nix-shell -p libva-utils --run 'vainfo --display drm --device /dev/dri/renderD128 | grep -E "((VAProfileH264High|VAProfileHEVCMain|VAProfileHEVCMain10).*VAEntrypointEncSlice)|Driver version"'
-```
+          ```nix
+          nix-shell -p libva-utils --run 'vainfo --display drm --device /dev/dri/renderD128 | grep -E "((VAProfileH264High|VAProfileHEVCMain|VAProfileHEVCMain10).*VAEntrypointEncSlice)|Driver version"'
+          ```
 
-To be supported by Sunshine, it needs to have at the very minimum: `VAProfileH264High : VAEntrypointEncSlice`
+          To be supported by Sunshine, it needs to have at the very minimum: `VAProfileH264High : VAEntrypointEncSlice`
 
-If set to `null` Sunshine will select the default video card.
-'';
+          If set to `null` Sunshine will select the default video card.
+        '';
       };
       outputName = mkOption {
         type = types.nullOr types.int;
         default = null;
         description = ''
-Select the display number you want to stream.
+          Select the display number you want to stream.
 
-During Sunshine startup, you should see the list of detected displays:
-```
-Info: Detecting displays
-Info: Detected display: DVI-D-0 (id: 0) connected: false
-Info: Detected display: HDMI-0 (id: 1) connected: true
-Info: Detected display: DP-0 (id: 2) connected: true
-Info: Detected display: DP-1 (id: 3) connected: false
-Info: Detected display: DVI-D-1 (id: 4) connected: false
-```
-You need to use the id value inside the parenthesis, e.g. 1.
+          During Sunshine startup, you should see the list of detected displays:
+          ```ansi
+          Info: Detecting displays
+          Info: Detected display: DVI-D-0 (id: 0) connected: false
+          Info: Detected display: HDMI-0 (id: 1) connected: true
+          Info: Detected display: DP-0 (id: 2) connected: true
+          Info: Detected display: DP-1 (id: 3) connected: false
+          Info: Detected display: DVI-D-1 (id: 4) connected: false
+          ```
+          You need to use the id value inside the parenthesis, e.g. 1.
 
-If set to `null` Sunshine will select the default display.
-'';
+          If set to `null` Sunshine will select the default display.
+        '';
       };
       maxBitrate = mkOption {
         type = types.int;
@@ -202,32 +202,34 @@ If set to `null` Sunshine will select the default display.
       lanEncryptionMode = mkOption {
         type = types.ints.between 0 2;
         default = 0;
-        description = "This determines when encryption will be used when streaming over your local network.
+        description = ''
+          This determines when encryption will be used when streaming over your local network.
 
-Options include:
-0 = encryption will not be used
-1 = encryption will be used if the client supports it
-2 = encryption is mandatory and unencrypted connections are rejected
+          Options include:
+          0 = encryption will not be used
+          1 = encryption will be used if the client supports it
+          2 = encryption is mandatory and unencrypted connections are rejected
 
-::: {.warning}
-Encryption can reduce streaming performance, particularly on less powerful hosts and clients.
-:::
-";
+          ::: {.warning}
+          Encryption can reduce streaming performance, particularly on less powerful hosts and clients.
+          :::
+       '';
       };
       wanEncryptionMode = mkOption {
         type = types.ints.between 0 2;
         default = 1;
-        description = "This determines when encryption will be used when streaming over the Internet.
+        description = ''
+          This determines when encryption will be used when streaming over the Internet.
 
-Options include:
-0 = encryption will not be used
-1 = encryption will be used if the client supports it
-2 = encryption is mandatory and unencrypted connections are rejected
+          Options include:
+          0 = encryption will not be used
+          1 = encryption will be used if the client supports it
+          2 = encryption is mandatory and unencrypted connections are rejected
 
-::: {.warning}
-Encryption can reduce streaming performance, particularly on less powerful hosts and clients.
-:::
-";
+          ::: {.warning}
+          Encryption can reduce streaming performance, particularly on less powerful hosts and clients.
+          :::
+        '';
       };
       pingTimeout = mkOption {
         type = types.int;
@@ -250,23 +252,25 @@ Encryption can reduce streaming performance, particularly on less powerful hosts
         type = types.str;
         default = "credentials/cakey.pem";
         example = "/run/secrets/pkey.pem";
-        description = "The private key used for the web UI and Moonlight client pairing. For best compatibility, this should be an RSA-2048 private key.
+        description = ''
+          The private key used for the web UI and Moonlight client pairing. For best compatibility, this should be an RSA-2048 private key.
 
-::: {.warning}
-Not all Moonlight clients support ECDSA keys or RSA key lengths other than 2048 bits.
-:::
-";
+          ::: {.warning}
+          Not all Moonlight clients support ECDSA keys or RSA key lengths other than 2048 bits.
+          :::
+        '';
       };
       cert = mkOption {
         type = types.str;
         default = "credentials/cacert.pem";
         example = "/run/secrets/cert.pem";
-        description = "The certificate used for the web UI and Moonlight client pairing. For best compatibility, this should have an RSA-2048 public key.
+        description = ''
+          The certificate used for the web UI and Moonlight client pairing. For best compatibility, this should have an RSA-2048 public key.
 
-::: {.warning}
-Not all Moonlight clients support ECDSA keys or RSA key lengths other than 2048 bits.
-:::
-";
+          ::: {.warning}
+          Not all Moonlight clients support ECDSA keys or RSA key lengths other than 2048 bits.
+          :::
+        '';
       };
       fileState = mkOption {
         type = types.str;
@@ -719,12 +723,11 @@ You can optionally use -tune to change settings based upon the specifics of your
     };
   };
 
-  config = lib.mkIf sunshine.enable {
+  config = lib.mkIf cfg.enable {
     # On the moonlight client manually add the server as `<server IP>:47989`
     services.sunshine = {
       enable = true;
-      autoStart = sunshine.autoStart;
-      package = pkgs.Stable.sunshine;
+      autoStart = cfg.autoStart;
       # Needed for Wayland use, disable for x11
       capSysAdmin = true;
       openFirewall = true;
@@ -735,93 +738,93 @@ You can optionally use -tune to change settings based upon the specifics of your
       in
       {
         ## General
-        locale = sunshine.locale;
-        sunshine_name = sunshine.sunshineName;
-        min_log_level = sunshine.minLogLevel;
-        global_prep_cmd = ( toString sunshine.globalPrepCommands );
+        locale = cfg.locale;
+        sunshine_name = cfg.sunshineName;
+        min_log_level = cfg.minLogLevel;
+        global_prep_cmd = ( toString cfg.globalPrepCommands );
         # Since versioning is handled by nix, notifications of new releases is annoying
         notify_pre_releases = false;
 
         ## Input
-        controller = boolToStatus sunshine.controller;
-        gamepad = sunshine.gamepad;
-        back_button_timeout = sunshine.backButtonTimeout;
-        keyboard = boolToStatus sunshine.keyboard;
-        key_repeat_delay = sunshine.keyRepeatDelay;
-        key_repeat_frequency = sunshine.keyRepeatFrequency;
-        key_rightalt_to_key_win = boolToStatus sunshine.keyRightAltToKeyWin;
-        mouse = boolToStatus sunshine.mouse;
-        high_resolution_scrolling = boolToStatus sunshine.highResolutionScrolling;
-        native_pen_touch = boolToStatus sunshine.nativePenTouch;
+        controller = boolToStatus cfg.controller;
+        gamepad = cfg.gamepad;
+        back_button_timeout = cfg.backButtonTimeout;
+        keyboard = boolToStatus cfg.keyboard;
+        key_repeat_delay = cfg.keyRepeatDelay;
+        key_repeat_frequency = cfg.keyRepeatFrequency;
+        key_rightalt_to_key_win = boolToStatus cfg.keyRightAltToKeyWin;
+        mouse = boolToStatus cfg.mouse;
+        high_resolution_scrolling = boolToStatus cfg.highResolutionScrolling;
+        native_pen_touch = boolToStatus cfg.nativePenTouch;
         keybindings = ''
         [
-          ${builtins.concatStringsSep ",\n  " sunshine.keybindings}
+          ${builtins.concatStringsSep ",\n  " cfg.keybindings}
         ]
         '';
 
         ## Audio/Video
-        audio_sink = lib.mkIf (!isNull sunshine.audioSink) sunshine.audioSink;
-        virtual_sink = lib.mkIf (!isNull sunshine.virtualSink) sunshine.virtualSink;
-        stream_audio = boolToStatus sunshine.streamAudio;
-        install_steam_audio_drivers = boolToStatus sunshine.installSteamAudioDrivers;
-        output_name = lib.mkIf (!isNull sunshine.outputName) sunshine.outputName;
-        max_bitrate = sunshine.maxBitrate;
+        audio_sink = lib.mkIf (!isNull cfg.audioSink) cfg.audioSink;
+        virtual_sink = lib.mkIf (!isNull cfg.virtualSink) cfg.virtualSink;
+        stream_audio = boolToStatus cfg.streamAudio;
+        install_steam_audio_drivers = boolToStatus cfg.installSteamAudioDrivers;
+        output_name = lib.mkIf (!isNull cfg.outputName) cfg.outputName;
+        max_bitrate = cfg.maxBitrate;
 
         ## Networking
-        upnp = boolToStatus sunshine.upnp;
-        address_family = sunshine.addre.packagessFamily;
-        port = sunshine.port;
-        origin_web_ui_allowed = sunshine.originWebUiAllowed;
-        external_ip = sunshine.externalIP;
-        lan_encryption_mode = sunshine.lanEncryptionMode;
-        wan_encryption_mode = sunshine.wanEncryptionMode;
-        ping_timeout = sunshine.pingTimeout;
+        upnp = boolToStatus cfg.upnp;
+        address_family = cfg.addre.packagessFamily;
+        port = cfg.port;
+        origin_web_ui_allowed = cfg.originWebUiAllowed;
+        external_ip = cfg.externalIP;
+        lan_encryption_mode = cfg.lanEncryptionMode;
+        wan_encryption_mode = cfg.wanEncryptionMode;
+        ping_timeout = cfg.pingTimeout;
 
         ## Config Files
         # file_apps is handled by the NixOS module
-        credentials_file = sunshine.credentialsFile;
-        log_path = sunshine.logPath;
-        pkey = sunshine.pkey;
-        file_state = sunshine.fileState;
+        credentials_file = cfg.credentialsFile;
+        log_path = cfg.logPath;
+        pkey = cfg.pkey;
+        file_state = cfg.fileState;
 
         ## Advanced
-        fec_percentage = sunshine.fecPercentage;
-        qp = sunshine.qp;
-        min_threads = sunshine.minThreads;
-        hevc_mode = sunshine.hevcMode;
-        av1_mode = sunshine.av1Mode;
-        capture = lib.mkIf (!isNull sunshine.capture) sunshine.capture;
-        encoder = lib.mkIf (!isNull sunshine.encoder) sunshine.encoder;
+        fec_percentage = cfg.fecPercentage;
+        qp = cfg.qp;
+        min_threads = cfg.minThreads;
+        hevc_mode = cfg.hevcMode;
+        av1_mode = cfg.av1Mode;
+        capture = lib.mkIf (!isNull cfg.capture) cfg.capture;
+        encoder = lib.mkIf (!isNull cfg.encoder) cfg.encoder;
 
         ## Nvidia NVENC Encoder
-        nvenc_preset = sunshine.nvencPreset;
-        nvenc_twopass = sunshine.nvencTwopass;
-        nvencSpatialAq = boolToStatus sunshine.nvencSpatialAq;
-        nvenc_vbv_increase = sunshine.nvencVbvIncrease;
-        nvenc_h264_cavlc = boolToStatus sunshine.nvencH264Cavlc;
+        nvenc_preset = cfg.nvencPreset;
+        nvenc_twopass = cfg.nvencTwopass;
+        nvencSpatialAq = boolToStatus cfg.nvencSpatialAq;
+        nvenc_vbv_increase = cfg.nvencVbvIncrease;
+        nvenc_h264_cavlc = boolToStatus cfg.nvencH264Cavlc;
 
         ## Intel QuickSync Encoder
-        qsv_preset = sunshine.qsvPreset;
-        qsv_coder = sunshine.qsvCoder;
-        qsv_slow_hevc = boolToStatus sunshine.qsvSlowHevc;
+        qsv_preset = cfg.qsvPreset;
+        qsv_coder = cfg.qsvCoder;
+        qsv_slow_hevc = boolToStatus cfg.qsvSlowHevc;
 
         ## AMD AMF Encoder
-        amd_usage = sunshine.amdUsage;
-        amd_enforce_hrd = boolToStatus sunshine.amdEnforceHrd;
-        amd_quality = sunshine.amdQuality;
-        amd_preanalysis = boolToStatus sunshine.amdPreanalysis;
-        amd_vbac = boolToStatus sunshine.amdVbac;
-        amd_coder = sunshine.amdCoder;
+        amd_usage = cfg.amdUsage;
+        amd_enforce_hrd = boolToStatus cfg.amdEnforceHrd;
+        amd_quality = cfg.amdQuality;
+        amd_preanalysis = boolToStatus cfg.amdPreanalysis;
+        amd_vbac = boolToStatus cfg.amdVbac;
+        amd_coder = cfg.amdCoder;
 
         ## VA-API Encoderlibva-utils
-        vaapi_strict_rc_buffer = boolToStatus sunshine.vaapiStrictRcBuffer;
+        vaapi_strict_rc_buffer = boolToStatus cfg.vaapiStrictRcBuffer;
 
         ## Software Encoder
-        sw_preset = sunshine.swPreset;
-        sw_tune = sunshine.swTune;
+        sw_preset = cfg.swPreset;
+        sw_tune = cfg.swTune;
       };
 
-      applications = sunshine.applications;
+      applications = cfg.applications;
     };
   };
 }
