@@ -14,9 +14,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    warnings = (
-      lib.optionals (config.services.sunshine.package == pkgs.sunshine.override { boost = pkgs.boost187; }) "Remove this after the merged fix propagates down to unstable."
-    );
+    warnings = [] ++ lib.optionals (config.services.sunshine.package == pkgs.sunshine.override { boost = pkgs.boost187; }) [ "Remove this after the merged fix propagates down to unstable." ];
 
     boot = lib.mkIf cfg.quietBoot {
       kernelParams = [ "quiet" "splash" "console=/dev/null" ];

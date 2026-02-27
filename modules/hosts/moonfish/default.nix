@@ -47,7 +47,7 @@
   ];
 
   virtualisation = {
-    virtualbox.host.enable = true;
+    virtualbox.host.enable = false;
   };
 
   boot.supportedFilesystems."fuse.bindfs" = true;
