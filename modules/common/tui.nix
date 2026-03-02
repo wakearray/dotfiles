@@ -29,5 +29,13 @@
     # Command line JSON processor
     # https://github.com/jqlang/jq
     jq
+
+    # Disk usage analyzer with an ncurses interface
+    # https://dev.yorhel.nl/ncdu
+    ncdu
+
+    # Disk Usage/Free Utility
+    # https://github.com/muesli/duf/
+    duf
   ];
 }

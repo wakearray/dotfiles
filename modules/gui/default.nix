@@ -64,6 +64,10 @@ in
 
         # App for updating the keymap of ZMK keyboards
         zmk-studio
+
+        # Graphical application to analyse disk usage in any GNOME environment
+        # https://apps.gnome.org/Baobab/
+        baobab
       ];
 
       variables = {

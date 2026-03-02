@@ -189,13 +189,12 @@
     };
 
     nix = {
-      # package = pkgs.lixPackageSets.latest.lix;
       package = pkgs.lixPackageSets.latest.lix;
       settings = {
         # Enable flakes.
         experimental-features = [ "nix-command" "flakes" ];
 
-        # download-buffer-size is unavailable in lix
+        # download-buffer-size is unavailable in lix, but sometimes needed in nix
         # download-buffer-size = 524288000; # 500 MiB
 
         # Remote builders will source their own binary substitutes if available
@@ -287,7 +286,9 @@
         domainName = "wakenet";
         publish = {
           enable = true;
+          domain = true;
           userServices = true;
+          addresses = true;
         };
       };
       # Enable SMART error monitoring on NixOS machines
