@@ -46,9 +46,6 @@
 
         # qt6ct for theming QT applications
         qt6Packages.qt6ct
-
-        # Python package manager
-        uv
       ];
 
       locker.gtklock = {

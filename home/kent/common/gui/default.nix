@@ -63,6 +63,9 @@ in
       # https://github.com/rclone-ui/rclone-ui
       rclone-ui
 
+      # Python package manager
+      uv
+
     ] ++ [ inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default ];
   };
 }
