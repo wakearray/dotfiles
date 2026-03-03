@@ -27,14 +27,14 @@ in
       # https://github.com/tsowell/wiremix
       pkgs.wiremix
 
+      # Because I need pactl to set the default audio device
+      pkgs.pulseaudio
+
     ] ++ lib.optionals config.gui.enable [
       ## And GUI based sound programs should go here
 
       # A pipewire audio mixer inspired by voicemeeter
       pkgs.pulsemeeter
-
-      # GTK patchbay for pipewire
-      pkgs.helvum
 
       # Low level control GUI for the PipeWire multimedia server
       # https://github.com/dimtpap/coppwr?tab=readme-ov-file

@@ -24,6 +24,8 @@
     greeter.tuigreet.enable = true;
   };
 
+  mediatek.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Generate Nix packages from URLs
     # https://github.com/nix-community/nix-init

@@ -13,6 +13,7 @@ in
     ./gaming.nix
     ./greeters
     ./kiosk.nix
+    ./mediatek.nix
     ./lockers
     ./office.nix
     ./sound.nix

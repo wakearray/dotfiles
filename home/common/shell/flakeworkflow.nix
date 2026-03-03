@@ -17,6 +17,8 @@
         text = /*bash*/ ''
 #!/usr/bin/env bash
 
+#skate set @flakeworkflow
+
 FLAKE_ERROR_BIT=0
 FLAKE_LOG_UUID="$(uuidgen | sed 's/-.*//')"
 FLAKE_ERROR_LOG="/tmp/flakeworkflow_error_log_$FLAKE_LOG_UUID.tmp"
@@ -83,6 +85,9 @@ rebuild() {
   git -C "$NH_FLAKE" add .
   if [ $IS_NIXOS -eq 1 ]; then
     zellij action rename-tab "Test Building NixOS:$FLAKE_GIT_BRANCH"
+    REBUILD_METHOD=$(rebuild_method_menu)
+    REBUILD_TARGET_HOST=$(rebuild_target_menu)
+    REBUILD_BUILD_HOST=$(rebuild_build_host_menu)
     gum log "Running test build with --show-trace option" -t rfc822 -l debug -s
     if nh os test "$NH_FLAKE" -- --show-trace; then
       gum log "Test build successful." -t rfc822 -l debug -s
@@ -97,6 +102,29 @@ rebuild() {
     zellij action rename-tab "Rebuilding Home Manager:$FLAKE_GIT_BRANCH"
     nh home switch -v -c "$(hostname)" && clear
   fi
+}
+
+rebuild_method_menu() {
+  # switch    Build and activate the new configuration, and make it the boot default
+  REBUILD_OPTION_SWITCH="Switch:switch"
+  # boot      Build the new configuration and make it the boot default
+  REBUILD_OPTION_BOOT="Boot:boot"
+  # test      Build and activate the new configuration
+  REBUILD_OPTION_TEST="Test:test"
+  # build     Build the new configuration
+  REBUILD_OPTION_BUILD="Build:build"
+  # build-vm  Build a `NixOS` VM image
+  REBUILD_OPTION_BUILD_VM="Build VM:build-vm"
+
+  MENU_OPTIONS=("$REBUILD_OPTION_SWITCH" "$REBUILD_OPTION_BOOT" "$REBUILD_OPTION_TEST" "$REBUILD_OPTION_BUILD" "$REBUILD_OPTION_BUILD_VM")
+
+  gum choose "''${MENU_OPTIONS[@]}" --label-delimiter=":"
+}
+
+rebuild_target_menu() {
+  MENU_OPTIONS=("$REBUILD_OPTION_SWITCH" "$REBUILD_OPTION_BOOT" "$REBUILD_OPTION_TEST" "$REBUILD_OPTION_BUILD" "$REBUILD_OPTION_BUILD_VM")
+
+  gum choose "''${MENU_OPTIONS[@]}" --label-delimiter=":"
 }
 
 commit() {

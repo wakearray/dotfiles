@@ -1,17 +1,19 @@
 { config, lib, ... }:
 let
   devices = import ../../../modules/devices.nix;
+
   # Function to generate aliases for a given user
   generateAliasesForUser = user:
   let
     isUserInDevice = device: lib.elem user device.value.users;
     devicesForUser = lib.filter isUserInDevice (lib.attrsToList devices);
-    deviceAliases = builtins.map (device: {
+    deviceAliases = map (device: {
       name = device.name;
       value = "zellij action rename-tab '${device.value.prettyName}' && ssh -t ${device.value.ip} \"zellij a || zellij\"; zellij action undo-rename-tab";
     }) devicesForUser;
   in
   lib.listToAttrs deviceAliases;
+
   # Get current user
   currentUser = config.home.username;
 

@@ -11,8 +11,6 @@ in
   };
 
   config = lib.mkIf gaming.enable {
-    warnings = [] ++ lib.optionals (config.services.sunshine.package == pkgs.sunshine.override { boost = pkgs.boost187; }) [ "Remove this after the merged fix propagates down to unstable." ];
-
     programs = {
       # Enable Steam
       steam = {
@@ -71,9 +69,7 @@ in
     # On the moonlight client manually add the server as `<server IP>:47989`
     services.sunshine = {
       enable = true;
-      package = pkgs.sunshine.override {
-        boost = pkgs.boost187;
-      };
+      package = pkgs.sunshine;
       # If autoStart is set to true, server will run on system login
       # If autoStart is set to false you need to start the server with the command `sunshine`
       autoStart = true;

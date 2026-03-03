@@ -14,8 +14,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    warnings = [] ++ lib.optionals (config.services.sunshine.package == pkgs.sunshine.override { boost = pkgs.boost187; }) [ "Remove this after the merged fix propagates down to unstable." ];
-
     boot = lib.mkIf cfg.quietBoot {
       kernelParams = [ "quiet" "splash" "console=/dev/null" ];
       plymouth.enable = true;
@@ -130,9 +128,7 @@ in
     services.sunshine = {
       enable = true;
       autoStart = true;
-      package = pkgs.sunshine.override {
-        boost = pkgs.boost187;
-      };
+      package = pkgs.sunshine;
       # Needed for Wayland use, disable for x11
       capSysAdmin = true;
       openFirewall = true;
