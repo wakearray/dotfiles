@@ -11,7 +11,7 @@
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
-          ExecStart = "${pkgs.zfs}/bin/zfs get -H -o value mounted /data/userdata | grep -q yes";
+          ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.zfs}/bin/zfs get -H -o value mounted /data/userdata | ${pkgs.gnugrep}/bin/grep -q yes'";
           Restart = "on-failure";
           RestartSec = "2s";
         };
