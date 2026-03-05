@@ -26,6 +26,8 @@
     greeter.tuigreet.enable = true;
   };
 
+  mediatek.enable = true;
+
   environment.systemPackages = with pkgs; [
     # GPD Specific Tool:
     # RyzenAdj for controlling many RyzenCPU/APU/GPU power settings

@@ -18,6 +18,7 @@
           path = "/data/userdata/Family/Notes";    # Which folder to add to Syncthing
           devices = [
             "Jess_S20_Ultra"
+            "Jess_HiBreak_Pro_Color"
 	          "Jess_Cichlid"
             "Jess_Boox"
 
@@ -100,6 +101,7 @@
           path = "/data/userdata/Jess/Backups/Android";
 	        devices = [
             "Jess_S20_Ultra"
+            "Jess_HiBreak_Pro_Color"
 	          "Jess_Cichlid"
             "Jess_Shoebill"
             "Jess_Boox"
@@ -118,6 +120,7 @@
           path = "/data/userdata/Jess/Notes";
           devices = [
 	          "Jess_S20_Ultra"
+            "Jess_HiBreak_Pro_Color"
 	          "Jess_Cichlid"
             "Jess_Shoebill"
             "Jess_Boox"
@@ -127,6 +130,12 @@
         "Jess_S20_Ultra" = {
           path = "/data/userdata/Jess/Pictures/S20_Ultra";
           devices = [ "Jess_S20_Ultra" ];
+          ignorePerms = true;
+          type = "receiveonly";
+        };
+        "Jess_HiBreak_Pro_Color" = {
+          path = "/data/userdata/Jess/Pictures/HiBreak_Pro_Color";
+          devices = [ "Jess_HiBreak_Pro_Color" ];
           ignorePerms = true;
           type = "receiveonly";
         };
