@@ -38,7 +38,7 @@
         rootURL.enable = false;
       };
       paperless = {
-        enable = true;
+        enable = false;
         domain = "paperless.${domain}";
         port = 28981;
       };
