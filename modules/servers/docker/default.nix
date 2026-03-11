@@ -8,9 +8,9 @@ in
   # regardless of other firewall rules.
 
   imports = [
-    #./lobechat.nix
     #./omada-controller.nix
     ./gow-wolf.nix
+    ./lldap.nix
     ./ntfy-sh.nix
     ./tubearchivist.nix
     ./vaultwarden.nix

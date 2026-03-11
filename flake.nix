@@ -109,7 +109,7 @@
     # systemDetails can have a few variables to control what things are installed
     # hostName     = (string of) hostname or home-manager configuration
     # hostType     = (one of) "laptop" "desktop" "server" "android" "kiosk"
-    # display      = (one of) "wayland" "x11" "none"
+    # display      = (one of) "wayland" "x11" "cli"
     # features     = (none, one, or more of) "printers" "installer"
     #                "gaming" "minimal" "developer" "gaming" "eink" "einkColor"
     # architecture = (one of) "x86_64-linux" "aarch64-linux"
@@ -377,12 +377,15 @@
           }
         ];
       };
-      # Cat's projector
+      # MeLE Quieter2Q Fanless
+      # CPU: Celeron J4125
+      # RAM: 8GB DDR4
+      # STORAGE: 256GB eMMC
       Lagurus = let
         systemDetails = {
-          hostType = "kiosk";
+          hostType = "server";
           hostName = "Lagurus";
-          display = "wayland";
+          display = "cli";
           features = "minimal";
           architecture = "x86_64-linux";
         };
@@ -403,13 +406,6 @@
               users.kent = {
                 imports = [
                   ./home/kent
-                  nixvim.homeModules.nixvim
-                ];
-              };
-              users.entertainment = {
-                imports = [
-                  ./home/entertainment
-                  ./home/entertainment/hosts/lagurus
                   nixvim.homeModules.nixvim
                 ];
               };

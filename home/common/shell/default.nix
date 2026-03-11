@@ -62,7 +62,7 @@ in
 
         # SSH Hosts
         lhosts = ''
-          echo "
+          echo '
           The available hosts for ssh are:                           \n
                                                                      \n
           greatblue        GPD Win 2 2023        192.168.0.11        \n
@@ -73,9 +73,9 @@ in
           jerboa           Livingroom TV         192.168.0.32        \n
           sebrightbantam   QNAP TS-251           192.168.0.66        \n
           orloff           Odroid HC4            n/a                 \n
-          cichlid          Jess' Desktop         n/a                 \n
+          cichlid          Jess  Desktop         n/a                 \n
           p80              Cubot P80 Phone       192.168.0.10 -p8022 \n
-          hamburger        Hetzner VPS           5.161.77.151"
+          hamburger        Hetzner VPS           5.161.77.151'
         '';
 
         orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
