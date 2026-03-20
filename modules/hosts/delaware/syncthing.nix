@@ -17,22 +17,24 @@
         "Family_Notes" = {         # Name of folder in Syncthing, also the folder ID
           path = "/data/userdata/Family/Notes";    # Which folder to add to Syncthing
           devices = [
+	          "Jess_Cichlid"
             "Jess_S20_Ultra"
             "Jess_HiBreak_Pro_Color"
-	          "Jess_Cichlid"
             "Jess_Boox"
 
+            "Kent_GreatBlue"
+            "Kent_Starling"
             "Kent_S24_Ultra"
             "Kent_P80"
             "Kent_y700"
             "Kent_Boox"
             "Kent_Hisense_A9"
             "Kent_Hibreak_Color"
-            "Kent_GreatBlue"
-            "Kent_Starling"
+            "Kent_HiBreak_Pro_Color"
           ];
           ignorePerms = true;
         };
+
         "Shared_Development" = {         # Name of folder in Syncthing, also the folder ID
           path = "/data/userdata/Family/Development";    # Which folder to add to Syncthing
           devices = [
@@ -46,6 +48,7 @@
             #"Kent_Boox"
             #"Kent_Hisense_A9"
             #"Kent_Hibreak_Color"
+            #"Kent_HiBreak_Pro_Color"
             "Kent_GreatBlue"
             "Kent_Starling"
           ];
@@ -55,14 +58,16 @@
         "Kent_Notes" = {
           path = "/data/userdata/Kent/Notes";
           devices = [
+            "Kent_GreatBlue"
+            "Kent_Starling"
+
             "Kent_S24_Ultra"
             "Kent_P80"
             "Kent_y700"
             "Kent_Boox"
             "Kent_Hisense_A9"
             "Kent_Hibreak_Color"
-            "Kent_GreatBlue"
-            "Kent_Starling"
+            "Kent_HiBreak_Pro_Color"
           ];
           ignorePerms = true;
         };
@@ -74,17 +79,26 @@
           type = "receiveonly";
         };
 
+        "Kent_HiBreak_Pro_Color" = {
+          path = "/data/userdata/Kent/Pictures/Cameras/HiBreak_Pro_Color";
+          devices = [ "Kent_HiBreak_Pro_Color" ];
+          ignorePerms = true;
+          type = "receiveonly";
+        };
+
 	      "Kent_Backup_Android" = {
           path = "/data/userdata/Kent/Backups/Android";
 	        devices = [
+            "Kent_GreatBlue"
+            "Kent_Starling"
+
             "Kent_S24_Ultra"
             "Kent_P80"
             "Kent_y700"
             "Kent_Boox"
             "Kent_Hisense_A9"
             "Kent_Hibreak_Color"
-            "Kent_GreatBlue"
-            "Kent_Starling"
+            "Kent_HiBreak_Pro_Color"
           ];
           ignorePerms = true;
 	      };
@@ -108,6 +122,7 @@
           ];
           ignorePerms = true;
 	      };
+
         "Jess_Backup_PC" = {
           path = "/data/userdata/Jess/Backups/PC";
 	        devices = [
@@ -116,6 +131,7 @@
           ];
           ignorePerms = true;
 	      };
+
         "Jess_Notes" = {
           path = "/data/userdata/Jess/Notes";
           devices = [
@@ -127,12 +143,14 @@
 	        ];
           ignorePerms = true;
         };
+
         "Jess_S20_Ultra" = {
           path = "/data/userdata/Jess/Pictures/S20_Ultra";
           devices = [ "Jess_S20_Ultra" ];
           ignorePerms = true;
           type = "receiveonly";
         };
+
         "Jess_HiBreak_Pro_Color" = {
           path = "/data/userdata/Jess/Pictures/HiBreak_Pro_Color";
           devices = [ "Jess_HiBreak_Pro_Color" ];

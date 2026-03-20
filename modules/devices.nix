@@ -17,7 +17,7 @@ let
     };
     samsungs24 = {
       prettyName = "S24 Ultra";
-      ip = "192.168.0.70";
+      ip = "192.168.0.68";
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB1SOk+WGYv+LMAt8bdJfnKQG5eHHqcBUYbjeJw4Sflp";
       description = "Samsung Galaxy S24 Ultra";
       users = [ "kent" ];
@@ -50,8 +50,13 @@ let
       description = "Hisense A9 Eink Phone";
       users = [ "kent" ];
     };
-    # TODO
-    # bigmehibreakcolor
+    kentsbigmehibreakprocolor = {
+      prettyName = "Kents Bigme HiBreak Pro Color";
+      ip = "192.168.0.192";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINR7vRV+OVcnSuUyDNKyAuC1uaJPgxXH+/J0Dua3yc3H";
+      description = "Black Bigme HiBreak Pro Color Eink Phone";
+      users = [ "kent" ];
+    };
 
     # Jess
     cichlid = {

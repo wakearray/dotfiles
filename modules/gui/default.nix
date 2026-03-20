@@ -37,6 +37,9 @@ in
     programs = {
       # Cross platform Airdrop replacement
       localsend.enable = true;
+
+      # Blazing fast terminal file manager written in Rust, based on async I/O
+      yazi.enable = true;
     };
 
     services = {

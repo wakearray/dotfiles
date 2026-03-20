@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 let
   gui = config.gui;
   onePass = gui._1pass;
@@ -22,16 +22,6 @@ in
   };
 
   config = lib.mkIf (gui.enable && onePass.enable) {
-    environment.systemPackages = with pkgs; [
-      # Password Management
-      _1password-cli
-      _1password-gui
-
-      # Gnome Keyring is needed for 1Password to be able to store u2f tokens
-      gnome-keyring
-      libgnome-keyring
-    ];
-
     # Runs gnome-keyring as root
     services.gnome.gnome-keyring.enable = true;
 
@@ -48,12 +38,10 @@ in
     programs = {
       _1password = {
         enable = true;
-        package = pkgs._1password-cli;
       };
       _1password-gui = {
         enable = true;
         polkitPolicyOwners = config.gui._1pass.polkitPolicyOwners;
-        package = pkgs._1password-gui;
       };
     };
   };
