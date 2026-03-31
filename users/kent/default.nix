@@ -1,15 +1,6 @@
-{ lib, ... }:
+{ inputs, ... }:
 let
-  devices = import ../../modules/devices.nix;
-
-  # Function to extract keys for a specific user
-  getKeysForUser = user:
-    let
-      isUserInDevice = device: lib.elem user device.users;
-    in
-      map (device: device.key) (lib.filter isUserInDevice (lib.attrValues devices));
-
-  userKeys = getKeysForUser "kent";
+  inherit (inputs) kent-ssh-keys;
 in
 {
   imports = [
@@ -23,6 +14,7 @@ in
     initialHashedPassword = "$y$j9T$a09xjLjAlf/rHpCdhnAM4/$wlp6tDHeX2OfnUTXA29RWbALS5PvLc/1cpu0rZF4170";
     # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
     #hashedPasswordFile = ;
+    openssh.authorizedKeys.keyFiles = [ kent-ssh-keys.outPath ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEjMJxmbuWJRmhB9zSa7jyz2v5+3ie9hr8ik8udoPyZ7" # Starling
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOGhJ+3+JajosnhJOFOg0Q202XigcatIgHIWqVdJr1O" # Great Blue

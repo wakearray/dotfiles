@@ -380,6 +380,18 @@
         "type": "github"
       }
     },
+    "kent-ssh-keys": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-a7lGOEHZhZe/TjZn2Zo8Zq4epC1ubj9NGcypy/f5YDk=",
+        "type": "file",
+        "url": "https://github.com/wakearray.keys"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/wakearray.keys"
+      }
+    },
     "mk-naked-shell": {
       "flake": false,
       "locked": {
@@ -810,6 +822,7 @@
         "home-manager": "home-manager",
         "hyprland-contrib": "hyprland-contrib",
         "impermanence": "impermanence",
+        "kent-ssh-keys": "kent-ssh-keys",
         "nix-index-database": "nix-index-database",
         "nix-inspect": "nix-inspect",
         "nix-system-graphics": "nix-system-graphics",

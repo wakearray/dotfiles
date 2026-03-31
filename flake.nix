@@ -80,6 +80,11 @@
     # Catppuccin theming for home-manager
     catppuccin.url = "github:catppuccin/nix";
 
+    kent-ssh-keys = {
+        url = "https://github.com/wakearray.keys";
+        flake = false;
+    };
+
     # Zen browser, Firefox fork with updated UI
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
