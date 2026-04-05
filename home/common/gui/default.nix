@@ -6,6 +6,7 @@ in
   # home/common/gui
   imports = [
     ./alacritty.nix
+    ./bitwarden.nix
     ./cliphist.nix
     ./firefox.nix
     ./fonts.nix

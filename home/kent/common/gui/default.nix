@@ -25,6 +25,7 @@ in
 
     gui = {
       themes.gruvbox.enable = true;
+      bitwarden.enable = true;
       rofi = {
         enable = true;
         plugins = with pkgs; [
