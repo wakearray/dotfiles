@@ -401,6 +401,7 @@
         };
         modules = [
           ./hosts/lagurus/configuration.nix
+          ./modules/servers
           nixvim.nixosModules.nixvim
           sops-nix.nixosModules.sops
           nix-index-database.nixosModules.nix-index
