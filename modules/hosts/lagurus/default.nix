@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+{ ... }:
 {
   config = {
-    environment.systemPackages = with pkgs; [ vlc ];
+    servers.lldap = {
+      enable = true;
+      domain = "voicelesscrimson.com";
+      sopsFile = ./lldap.yaml;
+    };
   };
 }

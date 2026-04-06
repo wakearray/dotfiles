@@ -6,6 +6,12 @@ in
   options.servers.lldap = with lib; {
     enable = mkEnableOption "Enable an opinionated lldap config.";
 
+    domain = mkOption {
+      type = types.str;
+      default = "example.com";
+      description = "External domain name. Will add ldap infront. E.g. ldap.example.com";
+    };
+
     sopsFile = mkOption {
       type = types.nullOr types.path;
       default = null;
@@ -23,6 +29,7 @@ in
       description = "The port on which to have the HTTP server, for user login and administration.";
       default = 17170;
     };
+
   };
 
   config = lib.mkIf cfg.enable {
@@ -41,10 +48,10 @@ in
     in
     {
       lldapEnvironmentVars = opts;
-      LLDAP_JWT_SECRET_FILE = opts;
-      LLDAP_LDAP_USER_PASS_FILE = opts;
-      LLDAP_KEY_FILE = opts;
+      lldap_jwt_secret = opts;
+      ldap_user_pass = opts;
       LLDAP_KEY_SEED = opts;
+      LLDAP_LDAP_USER_DN = opts;
       LLDAP_SMTP_OPTIONS__SERVER = opts;
       LLDAP_SMTP_OPTIONS__USER = opts;
       LLDAP_SMTP_OPTIONS__PASSWORD = opts;
@@ -83,10 +90,10 @@ in
         LLDAP_HTTP_PORT=${toString cfg.http_port}
 
         ## The public URL of the server, for password reset links.
-        LLDAP_HTTP_URL="http://localhost"
+        LLDAP_HTTP_URL="https://ldap.${toString cfg.domain}"
 
         ## The path to the front-end assets (relative to the working directory).
-        LLDAP_ASSETS_PATH="./app"
+        #LLDAP_ASSETS_PATH="./app"
 
         ## Random secret for JWT signature.
         ## This secret should be random, and should be shared with application
@@ -104,18 +111,18 @@ in
         ## The sample value is for "example.com", but you can extend it with as
         ## many "dc" as you want, and you don't actually need to own the domain
         ## name.
-        LLDAP_LDAP_BASE_DN="dc=voicelesscrimson,dc=com"
+        LLDAP_LDAP_BASE_DN="dc=${toString (lib.sublist 0 1 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))},dc=${toString (lib.sublist 1 2 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))}"
 
         ## Admin username.
         ## For the LDAP interface, a value of "admin" here will create the LDAP
         ## user "cn=admin,ou=people,dc=example,dc=com" (with the base DN above).
         ## For the administration interface, this is the username.
-        LLDAP_LDAP_USER_DN="admin"
+        LLDAP_LDAP_USER_DN="${config.sops.placeholder.LLDAP_LDAP_USER_DN}"
 
         ## Admin email.
         ## Email for the admin account. It is only used when initially creating
         ## the admin user, and can safely be omitted.
-        LLDAP_LDAP_USER_EMAIL="admin@example.com"
+        LLDAP_LDAP_USER_EMAIL="${config.sops.placeholder.LLDAP_LDAP_USER_DN}@${toString cfg.domain}"
 
         ## Admin password.
         ## Password for the admin account, both for the LDAP bind and for the
@@ -136,18 +143,6 @@ in
         ## Alternatively, you can set it to "always" to reset every time the server starts.
         LLDAP_FORCE_LDAP_USER_PASS_RESET=false
 
-        ## Database URL.
-        ## This encodes the type of database (SQlite, MySQL, or PostgreSQL)
-        ## , the path, the user, password, and sometimes the mode (when
-        ## relevant).
-        ## Note: SQlite should come with "?mode=rwc" to create the DB
-        ## if not present.
-        ## Example URLs:
-        ##  - "postgres://postgres-user:password@postgres-server/my-database"
-        ##  - "mysql://mysql-user:password@mysql-server/my-database"
-        ##
-        LLDAP_DATABASE_URL="sqlite:///data/users.db?mode=rwc"
-
         ## Private key file.
         ## Not recommended, use key_seed instead.
         ## Contains the secret private key used to store the passwords safely.
@@ -155,12 +150,12 @@ in
         ## would still have to perform an (expensive) brute force attack to find
         ## each password.
         ## Randomly generated on first run if it doesn't exist.
-        LLDAP_KEY_FILE="/run/secrets/lldap_private_key"
+        #LLDAP_KEY_FILE="/run/secrets/lldap_private_key"
 
         ## Seed to generate the server private key, see key_file above.
         ## This can be any random string, the recommendation is that it's at least 12
         ## characters long.
-        LLDAP_KEY_SEED="RanD0m STR1ng"
+        LLDAP_KEY_SEED="${config.sops.placeholder.LLDAP_KEY_SEED}"
 
         ## Ignored attributes.
         ## Some services will request attributes that are not present in LLDAP. When it
@@ -176,32 +171,32 @@ in
         ## Whether to enabled password reset via email, from LLDAP.
         LLDAP_SMTP_OPTIONS__ENABLE_PASSWORD_RESET=true
         ## The SMTP server.
-        LLDAP_SMTP_OPTIONS__SERVER="smtp.gmail.com"
+        LLDAP_SMTP_OPTIONS__SERVER="${config.sops.placeholder.LLDAP_SMTP_OPTIONS__SERVER}"
         ## The SMTP port.
         LLDAP_SMTP_OPTIONS__PORT=587
         ## How the connection is encrypted, either "NONE" (no encryption), "TLS" or "STARTTLS".
         LLDAP_SMTP_OPTIONS__SMTP_ENCRYPTION="TLS"
         ## The SMTP user, usually your email address.
-        LLDAP_SMTP_OPTIONS__USER="sender@gmail.com"
+        LLDAP_SMTP_OPTIONS__USER="${config.sops.placeholder.LLDAP_SMTP_OPTIONS__USER}"
         ## The SMTP password.
-        LLDAP_SMTP_OPTIONS__PASSWORD="password"
+        LLDAP_SMTP_OPTIONS__PASSWORD="${config.sops.placeholder.LLDAP_SMTP_OPTIONS__PASSWORD}"
         ## The header field, optional: how the sender appears in the email. The first
         ## is a free-form name, followed by an email between <>.
-        LLDAP_SMTP_OPTIONS__FROM="LLDAP Admin <sender@gmail.com>"
+        LLDAP_SMTP_OPTIONS__FROM="${config.sops.placeholder.LLDAP_SMTP_OPTIONS__FROM}"
         ## Same for reply-to, optional.
-        LLDAP_SMTP_OPTIONS__REPLY_TO="Do not reply <noreply@localhost>"
+        LLDAP_SMTP_OPTIONS__REPLY_TO="${config.sops.placeholder.LLDAP_SMTP_OPTIONS__REPLY_TO}"
 
         # [ldaps_options]
         ## Options to configure LDAPS.
 
         ## Whether to enable LDAPS.
-        LLDAP_LDAPS_OPTIONS__ENABLED=true
+        #LLDAP_LDAPS_OPTIONS__ENABLED=true
         ## Port on which to listen.
-        LLDAP_LDAPS_OPTIONS__PORT=6360
+        #LLDAP_LDAPS_OPTIONS__PORT=6360
         ## Certificate file.
-        LLDAP_LDAPS_OPTIONS__CERT_FILE="/data/cert.pem"
+        #LLDAP_LDAPS_OPTIONS__CERT_FILE="/data/cert.pem"
         ## Certificate key file.
-        LLDAP_LDAPS_OPTIONS__KEY_FILE="/data/key.pem"
+        #LLDAP_LDAPS_OPTIONS__KEY_FILE="/data/key.pem"
 
         # [healthcheck_options]
         ## Options to configure the healthcheck command.

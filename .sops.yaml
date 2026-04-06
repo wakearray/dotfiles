@@ -19,6 +19,7 @@ keys:
     - &delaware        age1pddnp2as3e76uqhk9uh3ff48jcua5st5px3cp35nmk2urem2xewq7vn6m4
     - &hamburger       age1cpxkxj7rgefd0yatd2muyhcty02ehxd08vdtfnhyyhulkhgy6pmqnrh3je
     - &sebrightbantam  age1zr7g45lcdjmt0hhcmvjwzsx3arpwh36n9q97znxdy2qlx0r6xeys243ntz
+    - &lagurus         age1pdwz3m4ng0x00qvqxvfvp855v9g8ydpchh0x4p3r7luaad8hv4ts95graz
     # - &moonfish        age1
     # - &orloff          age1
 
@@ -94,3 +95,9 @@ creation_rules:
         - *kent
         - *kent_new
         - *sebrightbantam
+  - path_regex: modules/hosts/lagurus/.*.yaml$
+    key_groups:
+      - age:
+        - *kent
+        - *kent_new
+        - *lagurus

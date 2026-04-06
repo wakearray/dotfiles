@@ -60,25 +60,7 @@ in
 
         steamfs = "sshfs kent@192.168.0.166:/mnt/shares/steamapps /home/kent/remote_steamapps/";
 
-        # SSH Hosts
-        lhosts = ''
-          echo '
-          The available hosts for ssh are:                           \n
-                                                                     \n
-          greatblue        GPD Win 2 2023        192.168.0.11        \n
-          starling         7" Tablet             192.168.0.143       \n
-          delaware         Dell Optiplex Server  192.168.0.46        \n
-          moonfish         Game Streaming Server 192.168.0.166       \n
-          lagurus          Cat Projector         192.168.0.65        \n
-          jerboa           Livingroom TV         192.168.0.32        \n
-          sebrightbantam   QNAP TS-251           192.168.0.66        \n
-          orloff           Odroid HC4            n/a                 \n
-          cichlid          Jess  Desktop         n/a                 \n
-          p80              Cubot P80 Phone       192.168.0.10 -p8022 \n
-          hamburger        Hetzner VPS           5.161.77.151'
-        '';
-
-        orloff = "echo 'This computer isn't setup yet'"; # Odroid HC4
+        orloff = "echo 'This computer isn\'t setup yet'"; # Odroid HC4
 
         # Phones
         p80 = "zellij action rename-tab 'P80' && ssh u0_a183@192.168.0.10 -p8022; zellij action undo-rename-tab";

@@ -411,6 +411,7 @@
               users.kent = {
                 imports = [
                   ./home/kent
+                  ./home/kent/hosts/lagurus
                   nixvim.homeModules.nixvim
                 ];
               };
