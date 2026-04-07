@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  cfg = config.servers;
+  cfg = config.servers.lldap;
 in
 {
   options.servers.lldap = with lib; {
@@ -35,6 +35,10 @@ in
   config = lib.mkIf cfg.enable {
     services.lldap = {
       enable = true;
+      settings = {
+        ldap_base_dn = "dc=${toString (lib.sublist 0 1 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))},dc=${toString (lib.sublist 1 2 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))}";
+        ldap_user_pass_file = "/run/secrets/ldap_user_pass";
+      };
       environmentFile = config.sops.templates."lldapEnvironmentFile".path;
     };
 
@@ -47,7 +51,6 @@ in
       };
     in
     {
-      lldapEnvironmentVars = opts;
       lldap_jwt_secret = opts;
       ldap_user_pass = opts;
       LLDAP_KEY_SEED = opts;
@@ -57,8 +60,8 @@ in
       LLDAP_SMTP_OPTIONS__PASSWORD = opts;
       LLDAP_SMTP_OPTIONS__FROM = opts;
       LLDAP_SMTP_OPTIONS__REPLY_TO = opts;
-      LLDAP_LDAPS_OPTIONS__CERT_FILE = opts;
-      LLDAP_LDAPS_OPTIONS__KEY_FILE = opts;
+      #LLDAP_LDAPS_OPTIONS__CERT_FILE = opts;
+      #LLDAP_LDAPS_OPTIONS__KEY_FILE = opts;
     };
 
     sops.templates."lldapEnvironmentFile" = {
@@ -111,7 +114,7 @@ in
         ## The sample value is for "example.com", but you can extend it with as
         ## many "dc" as you want, and you don't actually need to own the domain
         ## name.
-        LLDAP_LDAP_BASE_DN="dc=${toString (lib.sublist 0 1 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))},dc=${toString (lib.sublist 1 2 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))}"
+        #LLDAP_LDAP_BASE_DN="dc=${toString (lib.sublist 0 1 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))},dc=${toString (lib.sublist 1 2 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))}"
 
         ## Admin username.
         ## For the LDAP interface, a value of "admin" here will create the LDAP
@@ -134,7 +137,7 @@ in
         ## in the LLDAP_LDAP_USER_PASS_FILE environment variable
         ## Note: you can create another admin user for user administration, this
         ## is just the default one.
-        LLDAP_LDAP_USER_PASS_FILE="/run/secrets/ldap_user_pass"
+        #LLDAP_LDAP_USER_PASS_FILE="/run/secrets/ldap_user_pass"
 
         ## Force reset of the admin password.
         ## Break glass in case of emergency: if you lost the admin password, you
@@ -209,8 +212,6 @@ in
         ## If "ldap_host" is set to a specific IP address, this must be set to match if the built-in
         ## healthcheck command is used.
         LLDAP_HEALTHCHECK_OPTIONS__LDAP_HOST="localhost"
-
-        ${config.sops.placeholder.lldapEnvironmentVars}
       '';
       mode = "0400";
       owner = "lldap";
