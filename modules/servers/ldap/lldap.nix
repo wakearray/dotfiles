@@ -38,6 +38,7 @@ in
       settings = {
         ldap_base_dn = "dc=${toString (lib.sublist 0 1 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))},dc=${toString (lib.sublist 1 2 (lib.splitStringBy (prev: curr: builtins.elem curr [ "." ]) false cfg.domain))}";
         ldap_user_pass_file = "/run/secrets/ldap_user_pass";
+        force_ldap_user_pass_reset = "always";
       };
       environmentFile = config.sops.templates."lldapEnvironmentFile".path;
     };
