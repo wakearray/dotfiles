@@ -14,7 +14,7 @@
     syntaxHighlighting.enable = true;
     enableCompletion = true;
 		autosuggestions.enable = true;
-    histFile = "$HOME/.zsh_history";
+    histFile = "$XDG_HOME_CONFIG/zsh/.zsh_history";
     histSize = 10000;
     setOptions = [
       "ALWAYS_TO_END"
@@ -29,7 +29,7 @@
     ];
     shellAliases = {
       # use exa instead of ls.
-      l = "eza -la --tree --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore --level=1";
+      l = "eza -lag --color=always --color-scale=all --color-scale-mode=fixed --icons=always --group-directories-first --git-ignore";
       c = "clear";
       # use zoxide instead of cd.
       cd = "z";
@@ -50,7 +50,6 @@
       clean(){
         nix-collect-garbage -d
 	      nix-store --gc
-	      clear
 	      echo "Avaliable NixOS generations:"
 	      nix-env --list-generations --profile /nix/var/nix/profiles/system
       }
@@ -71,7 +70,7 @@
         fi
       }
 
-      function yy() {
+      function y() {
         local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
         yazi "$@" --cwd-file="$tmp"
         if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
