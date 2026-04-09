@@ -29,11 +29,11 @@
       enable = true;
     };
     # Things to put in the .zshenv file
-    envExtra = lib.mkDefault /*sh*/ ''
+    envExtra = /*sh*/ ''
       export SSH_AUTH_SOCK=/home/$USER/.bitwarden-ssh-agent.sock
     '';
     # Things to put in the .zshrc file
-    initContent = lib.mkDefault /*sh*/ ''
+    initContent = /*sh*/ ''
 center() {
   # String to center is $1
   # The first line when surrounded by a gum style border will be the longest
@@ -47,12 +47,12 @@ center() {
 }
 
 lhosts() {
-  hosts='
-greatblue        GPD Win 2 2023        192.168.0.11
+  clear
+  hosts='greatblue        GPD Win 2 2023        192.168.0.11
 starling         7" Tablet             192.168.0.143
 delaware         Dell Optiplex Server  192.168.0.46
 moonfish         Game Streaming Server 192.168.0.166
-lagurus          Cat Projector         192.168.0.65
+lagurus          Cat Projector         192.168.0.181
 jerboa           Livingroom TV         192.168.0.32
 sebrightbantam   QNAP TS-251           192.168.0.66
 orloff           Odroid HC4            n/a
@@ -60,7 +60,7 @@ cichlid          Jess  Desktop         n/a
 p80              Cubot P80 Phone       192.168.0.10 -p8022
 hamburger        Hetzner VPS           5.161.77.151'
   formatted_hosts="$(gum style "$hosts" --border-foreground="4" --padding="1 2" --border="rounded")"
-  center formatted_hosts
+  center "$formatted_hosts"
 }
 
 clean() {

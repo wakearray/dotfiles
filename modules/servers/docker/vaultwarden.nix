@@ -44,7 +44,7 @@ in
       volumes = [
         "${cfg.dataFolder}:/data/"
       ];
-      ports = let port = builtins.toString cfg.localPort; in [
+      ports = let port = toString cfg.localPort; in [
         "127.0.0.1:${port}:${port}"
       ];
     };
@@ -56,7 +56,7 @@ in
         forceSSL = true;
         locations = {
           "/" = {
-            proxyPass = "http://127.0.0.1:${builtins.toString cfg.localPort}";
+            proxyPass = "http://127.0.0.1:${toString cfg.localPort}";
             proxyWebsockets = true;
           };
         };
@@ -79,8 +79,10 @@ in
 
         DOMAIN=https://${cfg.domain}
         SIGNUPS_ALLOWED=false
-        ROCKET_PORT=${builtins.toString cfg.localPort}
+        ROCKET_PORT=${toString cfg.localPort}
         ROCKET_LOG=critical
+
+        EXPERIMENTAL_CLIENT_FEATURE_FLAGS=inline-menu-positioning-improvements,inline-menu-totp,ssh-key-vault-item,ssh-agent,export-attachments,mutual-tls
       '';
     };
   };

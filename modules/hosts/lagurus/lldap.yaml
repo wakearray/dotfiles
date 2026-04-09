@@ -7,6 +7,7 @@ LLDAP_SMTP_OPTIONS__USER: ENC[AES256_GCM,data:LHjh4MFyHl5bWmZG8P36SdmBcVm8s0E7IR
 LLDAP_SMTP_OPTIONS__PASSWORD: ENC[AES256_GCM,data:cq+dIJrrWi+otO7MBkuhaw==,iv:PxsSW2Ew6CKGpHfPHPY7xJlLbtg3eTEtZbp/JVdIF+M=,tag:fn8/RflJhsnuIEX4iJKZTA==,type:str]
 LLDAP_SMTP_OPTIONS__FROM: ENC[AES256_GCM,data:npRwPy+6IVpgLrX40oCVxC6SZIrul3I0UADbCIm1V2x/XkA1vRszS6U3,iv:jSi7cuXPbbthxE3z1B3msAnOFaooC5f76Cy1jlIGepg=,tag:hVDvYposbRNw7pRMlIGEXw==,type:str]
 LLDAP_SMTP_OPTIONS__REPLY_TO: ENC[AES256_GCM,data:swRmbFHJ6x4vlU7zovJzOjdjtUwFDxsoYChrdVeDgt/8Y9EC6+rB,iv:DJ0+ckf29U35tXZj142u3G88GY+GUQeCaS480WgO6WU=,tag:7d1TtJHKOuBOsYCxtQFgxg==,type:str]
+dns_edit_token: ENC[AES256_GCM,data:miYzkUB7wXeG7+pQ19tyyg0+CR/UIX+o/qHt9Xo3V/MVkFkyt9w/v+yGZrS77U86ETa1Lt6Bhdy6IVdeiVN8vrCl3HbDauFf,iv:oC40T79NyTNRo8Z6BnqDcpgi48Lw6/Dqqj56UZRx92A=,tag:PYBko0HOfd5Kd9TGeBWz1g==,type:str]
 sops:
     age:
         - recipient: age1em9n3fvg9jphpsx055cv0t8u5wnxs64x2auddxsvjtuvg85kmerqp0wjg0
@@ -36,7 +37,7 @@ sops:
             eEVZNWNLZ2tRR2tMamp4Qy9RV2wxejQKqWDj5IR7PMZQ0OaQ3ohGnTAqZ2QvdPmm
             exlf6uAfyA4mnFLMv7NexliRUirXHmqB+GRxFlSWMs9pe6+nxL4dgQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-04-06T08:47:28Z"
-    mac: ENC[AES256_GCM,data:btrHi017lQMYwTTKXfvccW8UiW7mmBAqWyn/0H7UGHS7AUGYnEu7YjcoZCXCAauabeOoGc7fqxlGuiVS0AabbFt4h2qpo6tUTXd15dzv290JrQA8XHsj0LexW072jWzNOLC4quurDuCEZmsRaD6wAmWfz8FgRar1j575XeQGWlc=,iv:+k1pORnFWyCYwfcDZgXmFEozHAQa7tE0w5Lu9NQ4Ex4=,tag:UqZF0Qd68swdckt/f6vgrQ==,type:str]
+    lastmodified: "2026-04-08T20:00:08Z"
+    mac: ENC[AES256_GCM,data:lqLL2hHkxFJJJY+8w7sRGaQaAO13jZE3fqAQaJLbYmCr+hivFaPtXmswypWGb/yaPOQQfzVTpwZDhhOrwRYmU8iqKtBQAQdmrtIAtUjr3W3cdXOPE038EbD+KbiDLKsAIfKRA2l6AoNX+ym8Y3yeqv/0uZQsUJIkOhacHxB6E/E=,iv:h6xCf1dCybP0GqP85VoJ8N7aiJoZ3amNBmklHz75wDw=,tag:RG5HGlMVUIuVeZk9J44iiA==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.12.1

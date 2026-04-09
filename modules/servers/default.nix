@@ -20,4 +20,13 @@
     ./satisfactory.nix
     ./webdav.nix
   ];
+
+  config = {
+    security.acme = {
+      acceptTerms = true;
+      defaults = {
+        email = "kent.hambrock@gmail.com";
+      };
+    };
+  };
 }

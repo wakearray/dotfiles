@@ -30,6 +30,21 @@ in
       default = 17170;
     };
 
+    LDAPS = {
+      enable = mkEnableOption "Enable LDAP over SSL/TLS";
+
+      port = mkOption {
+        type = types.port;
+        description = "Default LDAPS ports are 636 and 6360.";
+        default = 6360;
+      };
+
+      dnsProvider = mkOption {
+        type = types.str;
+        description = "Name of your DNS provider, such as `route53` or `cloudflare`";
+        default = "cloudflare";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -41,6 +56,21 @@ in
         force_ldap_user_pass_reset = "always";
       };
       environmentFile = config.sops.templates."lldapEnvironmentFile".path;
+    };
+
+    networking.firewall.allowedTCPPorts = [
+      cfg.ldap_port
+      cfg.http_port
+    ] ++ lib.optionals cfg.LDAPS.enable [ cfg.LDAPS.port ];
+
+    security.acme.certs."ldap.${cfg.domain}" = lib.mkIf cfg.LDAPS.enable {
+      domain = "ldap.${cfg.domain}";
+      dnsProvider = "${cfg.dnsProvider}";
+      credentialsFile = "/run/secrets/dns_edit_token"; # Absolute path to your secret file
+      group = "lldap"; # Ensure lldap can read the resulting certificates
+      postRun =  ''
+        systemctl restart lldap.service
+      '';
     };
 
     sops.secrets = let
@@ -61,8 +91,7 @@ in
       LLDAP_SMTP_OPTIONS__PASSWORD = opts;
       LLDAP_SMTP_OPTIONS__FROM = opts;
       LLDAP_SMTP_OPTIONS__REPLY_TO = opts;
-      #LLDAP_LDAPS_OPTIONS__CERT_FILE = opts;
-      #LLDAP_LDAPS_OPTIONS__KEY_FILE = opts;
+      dns_edit_token = opts;
     };
 
     sops.templates."lldapEnvironmentFile" = {
@@ -190,17 +219,20 @@ in
         ## Same for reply-to, optional.
         LLDAP_SMTP_OPTIONS__REPLY_TO="${config.sops.placeholder.LLDAP_SMTP_OPTIONS__REPLY_TO}"
 
+        ${lib.optionalString cfg.LDAPS.enable /*bash*/ ''
         # [ldaps_options]
         ## Options to configure LDAPS.
 
         ## Whether to enable LDAPS.
-        #LLDAP_LDAPS_OPTIONS__ENABLED=true
+        LLDAP_LDAPS_OPTIONS__ENABLED=true
         ## Port on which to listen.
-        #LLDAP_LDAPS_OPTIONS__PORT=6360
+        LLDAP_LDAPS_OPTIONS__PORT=${toString cfg.LDAPS.port}
         ## Certificate file.
-        #LLDAP_LDAPS_OPTIONS__CERT_FILE="/data/cert.pem"
+        LLDAP_LDAPS_OPTIONS__CERT_FILE="/var/lib/acme/lldap.${cfg.domain}/cert.pem"
         ## Certificate key file.
-        #LLDAP_LDAPS_OPTIONS__KEY_FILE="/data/key.pem"
+        LLDAP_LDAPS_OPTIONS__KEY_FILE="/var/lib/acme/lldap.${cfg.domain}/key.pem"
+        ''
+        }
 
         # [healthcheck_options]
         ## Options to configure the healthcheck command.
