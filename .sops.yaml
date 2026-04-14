@@ -1,4 +1,4 @@
-# pub keys
+# Public keys
 keys:
 - &users:
     # nix-shell -p ssh-to-age --run "ssh-to-age -private-key -i ~/.ssh/signing_key > ~/.config/sops/age/keys.txt"
@@ -7,6 +7,9 @@ keys:
     - &jess            age18j6d63zlrw2t4fd3sdqsxgv3yl6dn9rvzz3rxvf7lq96zwt27pesc7jmuy
 - &hosts:
     # nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
+    # If updating the key for a device, use:
+    # `sops updatekeys <path-to-your-secrets-file>.yaml`
+
     # Kent
     - &greatblue       age158lzfdas82aj2dayppkcv4xgs4u7m0uk7zul90sfpj8wxdavyuqqgv6ar2
     - &starling        age19md57qd8yqh7l5xvql8pynd6cvplnlx0jhmr9p3mz32z584869tswn04py
@@ -19,7 +22,7 @@ keys:
     - &delaware        age1pddnp2as3e76uqhk9uh3ff48jcua5st5px3cp35nmk2urem2xewq7vn6m4
     - &hamburger       age1cpxkxj7rgefd0yatd2muyhcty02ehxd08vdtfnhyyhulkhgy6pmqnrh3je
     - &sebrightbantam  age1zr7g45lcdjmt0hhcmvjwzsx3arpwh36n9q97znxdy2qlx0r6xeys243ntz
-    - &lagurus         age1pdwz3m4ng0x00qvqxvfvp855v9g8ydpchh0x4p3r7luaad8hv4ts95graz
+    - &lagurus         age17vj3ech5wn0dc5272d3mgzp6amt7fa3mmjgzf50f6un80pxq8u2srukdk0
     # - &moonfish        age1
     # - &orloff          age1
 

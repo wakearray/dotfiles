@@ -13,7 +13,13 @@
     servers = {
       nginx = {
         enable = true;
+
         rootURL = {
+          enable = true;
+          domain = domain;
+        };
+
+        miniflux = {
           enable = true;
           domain = domain;
         };
@@ -21,13 +27,13 @@
 
       rss = {
         enable = true;
-        domain = "rss.${domain}";
+        domain = domain;
         sopsFile = ./miniflux.yaml;
       };
 
       mattermost = {
         enable = true;
-        domain = "chat.${domain}";
+        domain = domain;
         siteName = "VoicelessCrimson";
       };
 

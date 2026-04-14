@@ -13,7 +13,7 @@
     ./mattermost.nix
     ./miniflux.nix
     ./ncps.nix
-    ./nginx.nix
+    ./nginx
     ./ntfy-sh.nix
     ./paperless
     ./printers.nix

@@ -87,7 +87,7 @@ let
       ip = "192.168.0.166";
       hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7jTRj4EwVd6jenHGMHJICVPA5aC/ZAVuguicQxknn1";
       description = "Minisforum BD795iSE based game streaming server with Nvidia GTX 1080";
-      users = [ "kent" "jess" ];
+      users = [ "kent" ];
     };
     hamburger = {
       prettyName = "Hamburger";
@@ -105,7 +105,7 @@ let
     };
     jerboa = {
       prettyName = "Jerboa";
-      ip = "192.168.0.32";
+      ip = "192.168.0.28";
       hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILoQeclOZSjy9K8lPvdz/38WU/INxMGuecfFf47X5pGj";
       description = "HTPC";
       users = [ "kent" "entertainment" ];

@@ -1,6 +1,6 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 let
-  aria = config.servers.aria2;
+  cfg = config.servers.aria2;
 in
 {
   options.servers.aria2 = with lib; {
@@ -27,49 +27,35 @@ in
       description = "Set UDP listening port range used by DHT(IPv4, IPv6) and UDP tracker.";
     };
 
-    domain = lib.mkOption {
-      type = lib.types.str;
-      default = "aria.example.com";
-      description = "The domain you want to access AriaNg from.";
+    localPort = mkOption {
+      type = types.port;
+      default = 6800;
+      description = "The local port that Aria2 apps will connect to the server on.";
     };
+
+    sameServerHost = mkEnableOption "If false, localPort will be exposed, if true it won't be.";
   };
 
-  config = lib.mkIf aria.enable {
+  config = lib.mkIf cfg.enable {
     services.aria2 = {
       enable = true;
       settings = {
         # Generates the aria2.conf file. Refer to the documentation for all possible settings.
         # attribute set of (boolean or signed integer or floating point number or (optionally newline-terminated) single-line string)
-        dir = aria.downloadsDirectory;
-        listen-port = aria.listenPorts;
-        rpc-listen-port = 6800;
+        dir = cfg.downloadsDirectory;
+        listen-port = cfg.listenPorts;
+        rpc-listen-port = cfg.localPort;
       };
       rpcSecretFile = "/run/secrets/aria2-rpc-token";
       serviceUMask = "0002";
       openPorts = true;
     };
 
-    # Frontend for Aria2
-    environment.systemPackages = [ pkgs.ariang ];
-
-    # Nginx server
-    services.nginx.virtualHosts."${aria.domain}" = {
-      enableACME = true;
-      forceSSL = true;
-      locations = {
-        "/" = {
-          root = "${pkgs.ariang}/share/ariang";
-        };
-        "/jsonrpc" = {
-          proxyPass = "http://localhost:${toString config.services.aria2.settings.rpc-listen-port}";
-          proxyWebsockets = true;
-        };
-      };
-    };
+    networking.firewall.allowedTCPPorts = [] ++ lib.optionals (!cfg.sameServerHost) [ cfg.localPort ];
 
     # RPC token
     sops.secrets.aria2-rpc-token = {
-      sopsFile = aria.rpcSopsFile;
+      sopsFile = cfg.rpcSopsFile;
       mode     = "0400";
       owner    = "aria2";
       group    = "aria2";

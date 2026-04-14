@@ -15,7 +15,7 @@
       enable = true;
       ssh = {
         enable = true;
-        authorizedKeyFiles = config.users.users."kent".openssh.authorizedKeys.keyFiles;
+        authorizedKeys = config.users.users."kent".openssh.authorizedKeys.keys;
         hostKeys = [ /etc/ssh/ssh_host_ed25519_key ];
       };
     };

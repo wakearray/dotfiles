@@ -6,7 +6,7 @@ in
   options.servers.paperless = with lib; {
     enable = mkEnableOption "Enable an opinionated Paperless-ngx server.";
 
-    port = mkOption {
+    localPort = mkOption {
       type = types.port;
       default = 28981;
       description = "Local paperless port.";
@@ -26,8 +26,14 @@ in
 
     domain = mkOption {
       type = types.str;
-      default = "paperless.example.com";
+      default = "example.com";
       description = "Domain you intend to access your paperless instance from.";
+    };
+
+    subdomain = mkOption {
+      type = types.str;
+      default = "paperless";
+      description = "The subdomain that your server will be hosted at.";
     };
   };
 
@@ -35,9 +41,11 @@ in
     services = {
       paperless = {
         enable = true;
+        address = "0.0.0.0";
         dataDir = cfg.dataDir;
         consumptionDir = cfg.consumptionDir;
-        domain = cfg.domain;
+        domain = "${cfg.subdomain}.${cfg.domain}";
+        database.createLocally = true;
       };
 
       # FTP server
@@ -47,17 +55,8 @@ in
         writeEnable = true;
         anonymousUserHome = cfg.consumptionDir;
       };
-
-      # Nginx server
-      nginx.virtualHosts."${cfg.domain}" = {
-        enableACME = true;
-        forceSSL = true;
-        locations = {
-          "/" = {
-            proxyPass = "http://localhost:${toString cfg.port}";
-          };
-        };
-      };
     };
+
+    networking.firewall.allowedTCPPorts = [ 20 21 ] ++ lib.optionals (!cfg.sameServerHost) [ cfg.localPort ];
   };
 }

@@ -18,13 +18,13 @@ in
       description = "The secrets file needs to be formatted as a single variable named `lldapEnvironmentVars` representing the entire lldap environment variables file.";
     };
 
-    ldap_port = mkOption {
+    ldapPort = mkOption {
       type = types.port;
       description = "The port on which to have the LDAP server.";
       default = 3890;
     };
 
-    http_port = mkOption {
+    httpPort = mkOption {
       type = types.port;
       description = "The port on which to have the HTTP server, for user login and administration.";
       default = 17170;
@@ -58,19 +58,50 @@ in
       environmentFile = config.sops.templates."lldapEnvironmentFile".path;
     };
 
+    # Create the lldap user and group because the lldap module won't, apparently.
+    users = {
+      groups.lldap = {};
+      users."lldap" = {
+        isSystemUser = true;
+        group = "lldap";
+        extraGroups = [ "acme" ];
+      };
+    };
+
     networking.firewall.allowedTCPPorts = [
-      cfg.ldap_port
-      cfg.http_port
-    ] ++ lib.optionals cfg.LDAPS.enable [ cfg.LDAPS.port ];
+      cfg.httpPort
+    ] ++ lib.optionals cfg.LDAPS.enable [
+      cfg.LDAPS.port
+    ] ++ lib.optionals (!cfg.LDAPS.enable) [
+      cfg.ldapPort
+    ];
+
+    # Nginx reverse proxy
+    services.nginx.virtualHosts."lldap.${cfg.domain}" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:${toString cfg.httpPort}";
+        proxyWebsockets = true;
+      };
+    };
 
     security.acme.certs."ldap.${cfg.domain}" = lib.mkIf cfg.LDAPS.enable {
       domain = "ldap.${cfg.domain}";
-      dnsProvider = "${cfg.dnsProvider}";
+      dnsProvider = "${cfg.LDAPS.dnsProvider}";
       credentialsFile = "/run/secrets/dns_edit_token"; # Absolute path to your secret file
-      group = "lldap"; # Ensure lldap can read the resulting certificates
+      group = "acme";
       postRun =  ''
         systemctl restart lldap.service
       '';
+    };
+
+    # Might allow lldap to see the certs it needs for LDAPS
+    systemd.services.lldap.serviceConfig = {
+      # Grant the service filesystem access to the ACME directory
+      ReadOnlyPaths = [ "/var/lib/acme" "/var/lib/acme/ldap.${cfg.domain}" ];
+      # Ensure the group membership is respected inside the service sandbox
+      SupplementaryGroups = [ "acme" ];
     };
 
     sops.secrets = let
@@ -97,7 +128,7 @@ in
     sops.templates."lldapEnvironmentFile" = {
       content = /*bash*/ ''
         ## Tune the logging to be more verbose by setting this to be true.
-        LLDAP_VERBOSE=false
+        LLDAP_VERBOSE=true
 
         ## The host address that the LDAP server will be bound to.
         ## To enable IPv6 support, simply switch "ldap_host" to "::":
@@ -108,7 +139,7 @@ in
         LLDAP_LDAP_HOST="0.0.0.0"
 
         ## The port on which to have the LDAP server.
-        LLDAP_LDAP_PORT=${toString cfg.ldap_port}
+        LLDAP_LDAP_PORT=${toString cfg.ldapPort}
 
         ## The host address that the HTTP server will be bound to.
         ## To enable IPv6 support, simply switch "http_host" to "::".
@@ -120,7 +151,7 @@ in
 
         ## The port on which to have the HTTP server, for user login and
         ## administration.
-        LLDAP_HTTP_PORT=${toString cfg.http_port}
+        LLDAP_HTTP_PORT=${toString cfg.httpPort}
 
         ## The public URL of the server, for password reset links.
         LLDAP_HTTP_URL="https://ldap.${toString cfg.domain}"
@@ -183,7 +214,7 @@ in
         ## would still have to perform an (expensive) brute force attack to find
         ## each password.
         ## Randomly generated on first run if it doesn't exist.
-        #LLDAP_KEY_FILE="/run/secrets/lldap_private_key"
+        LLDAP_KEY_FILE=
 
         ## Seed to generate the server private key, see key_file above.
         ## This can be any random string, the recommendation is that it's at least 12
@@ -233,18 +264,6 @@ in
         LLDAP_LDAPS_OPTIONS__KEY_FILE="/var/lib/acme/lldap.${cfg.domain}/key.pem"
         ''
         }
-
-        # [healthcheck_options]
-        ## Options to configure the healthcheck command.
-
-        ## The host address that the healthcheck should verify for the HTTP server.
-        ## If "http_host" is set to a specific IP address, this must be set to match if the built-in
-        ## healthcheck command is used.  Note: if this is an IPv6 address, it must be wrapped in [].
-        LLDAP_HEALTHCHECK_OPTIONS__HTTP_HOST="localhost"
-        ## The host address that the healthcheck should verify for the LDAP server.
-        ## If "ldap_host" is set to a specific IP address, this must be set to match if the built-in
-        ## healthcheck command is used.
-        LLDAP_HEALTHCHECK_OPTIONS__LDAP_HOST="localhost"
       '';
       mode = "0400";
       owner = "lldap";

@@ -12,6 +12,12 @@ in
       description = "The domain you want to access the server from. If you want to access at https://git.example.com, then make this option `example.com`";
     };
 
+    subdomain = mkOption {
+      type = types.str;
+      default = "git";
+      description = "The subdomain that your server will be hosted at.";
+    };
+
     localPort = mkOption {
       type = types.port;
       default = 8065;
@@ -46,15 +52,10 @@ in
       database.type = "postgres";
       # Enable support for Git Large File Storage
       lfs.enable = true;
-      #secrets = {
-      #  mailer = {
-      #    PASSWD = "/run/secrets/mail-server-noreply";
-      #  };
-      #};
       settings = {
         server = {
           DOMAIN = "localhost";
-          ROOT_URL = "https://git.${cfg.domain}/";
+          ROOT_URL = "https://${cfg.subdomain}.${cfg.domain}/";
           PROTOCOL = "http";
           HTTP_PORT = cfg.localPort;
         };
@@ -81,6 +82,8 @@ in
       };
     };
 
+    networking.firewall.allowedTCPPorts = [ cfg.localPort ];
+
     sops.secrets = let
       opts = {
         sopsFile = ./secrets.yaml;
@@ -91,22 +94,6 @@ in
     in
     {
       forgejo_mailer_password = opts;
-    };
-
-    # Nginx reverse proxy
-    services.nginx.virtualHosts = {
-      "git.${cfg.domain}" = {
-        enableACME = true;
-        forceSSL = true;
-        extraConfig = ''
-          client_max_body_size 512M;
-        '';
-        locations = {
-          "/" = {
-            proxyPass = "http://localhost:${builtins.toString cfg.localPort}";
-          };
-        };
-      };
     };
   };
 }

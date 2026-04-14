@@ -3,17 +3,24 @@ let
   cfg = config.servers.nginx;
 in
 {
+  imports = [
+    ./ariaNg.nix
+    ./audiobookshelf.nix
+    ./forgejo.nix
+    ./miniflux.nix
+    ./paperless.nix
+  ];
+
   options.servers.nginx = with lib; {
     enable = mkEnableOption "Enable nginx";
 
-    rootURL = {
-      enable = mkEnableOption "Enable the root URL. If disabled, this server will enable nginx, but it won't have any virtualHosts by default.";
-
-      domain = mkOption {
-        type = types.str;
-        default = "example.com";
-      };
+    domain = mkOption {
+      type = types.str;
+      default = "example.com";
+      description = "The default domain you want all other virtual hosts on this host hosted at.";
     };
+
+    rootURL.enable = mkEnableOption "Enable the root URL. If disabled, this server will enable nginx, but it won't have any virtualHosts by default.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -49,3 +56,4 @@ in
     networking.firewall.allowedTCPPorts = [ 80 443 ];
   };
 }
+

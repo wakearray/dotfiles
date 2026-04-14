@@ -397,6 +397,7 @@
       in lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
+          domain = "voicelesscrimson.com";
           systemDetails = systemDetails;
         };
         modules = [

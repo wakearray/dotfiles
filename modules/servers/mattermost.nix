@@ -8,8 +8,8 @@ in
 
     domain = mkOption {
       type = types.str;
-      default = "chat.example.com";
-      description = "Subdomain and domain of the hosted instance.";
+      default = "example.com";
+      description = "Domain of the hosted instance, the subdomain will be `chat`.";
     };
 
     localPort = mkOption {
@@ -31,7 +31,7 @@ in
         enable = true;
         package = pkgs.mattermostLatest;
         siteName = cfg.siteName;
-        siteUrl = "https://${cfg.domain}";
+        siteUrl = "https://chat.${cfg.domain}";
         port = cfg.localPort;
         mutableConfig = true;
         socket = {
@@ -324,14 +324,14 @@ in
       };
 
       # Nginx reverse proxy
-      nginx.virtualHosts."${cfg.domain}" = {
+      nginx.virtualHosts."chat.${cfg.domain}" = {
         enableACME = true;
         forceSSL = true;
         extraConfig = ''
           client_max_body_size 105M;
         '';
         locations."/" = {
-          proxyPass = "http://localhost:${builtins.toString cfg.localPort}";
+          proxyPass = "http://localhost:${toString cfg.localPort}";
           proxyWebsockets = true;
         };
       };

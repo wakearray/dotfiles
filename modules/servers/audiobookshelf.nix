@@ -1,6 +1,6 @@
 { lib, config, pkgs, ... }:
 let
-  abs = config.servers.audiobookshelf;
+  cfg = config.servers.audiobookshelf;
 in
 {
   # AudioBookShelf
@@ -9,38 +9,23 @@ in
   options.servers.audiobookshelf = with lib; {
     enable = mkEnableOption "Enable opinionated AudioBookShelf install.";
 
-    domain = mkOption {
-      type = types.str;
-      default = "audiobookshelf.example.com";
-      description = "Domain name of the server.";
-    };
-
     localPort = mkOption {
       type = types.port;
       default = 8066;
       description = "The local port where AudioBookShelf can be accessed.";
     };
+
+    sameServerHost = mkEnableOption "If false, localPort will be exposed, if true it won't be.";
   };
 
-  config = lib.mkIf abs.enable {
+  config = lib.mkIf cfg.enable {
     services.audiobookshelf = {
       enable = true;
-      port = abs.localPort;
+      port = cfg.localPort;
       package = pkgs.audiobookshelf;
+      host = "0.0.0.0";
     };
 
-    # Nginx reverse proxy
-    services.nginx.virtualHosts = {
-      "${abs.domain}" = {
-        enableACME = true;
-        forceSSL = true;
-        locations = {
-          "/" = {
-            proxyPass = "http://localhost:${builtins.toString abs.localPort}";
-            proxyWebsockets = true;
-          };
-        };
-      };
-    };
+    networking.firewall.allowedTCPPorts = [ ] ++ lib.optionals (!cfg.sameServerHost) [ cfg.localPort ];
   };
 }

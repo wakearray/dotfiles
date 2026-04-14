@@ -18,6 +18,8 @@ in
       description = "The port you want to use when locally accessing the server on the same network.";
     };
 
+    sameServerHost = mkEnableOption "If false, localPort will be exposed, if true it won't be.";
+
     sopsFile = mkOption {
       type = types.nullOr types.path;
       default = null;
@@ -28,7 +30,9 @@ in
   config = lib.mkIf cfg.enable {
     assertions = [{
       assertion = !(isNull cfg.sopsFile);
-      message = "Please define a sops file with admin credentials."; }];
+      message = "Please define a sops file with admin credentials.";
+    }];
+
     services.miniflux = {
       enable = true;
       adminCredentialsFile = config.sops.templates."minifluxCredentialsEnvironmentFile".path;
@@ -37,19 +41,7 @@ in
       };
     };
 
-    # Nginx reverse proxy
-    services.nginx.virtualHosts = {
-      "${cfg.domain}" = {
-        enableACME = true;
-        forceSSL = true;
-        locations = {
-          "/" = {
-            proxyPass = "http://localhost:${toString cfg.localPort}";
-          };
-        };
-      };
-    };
-
+    networking.firewall.allowedTCPPorts = [] ++ lib.optionals (!cfg.sameServerHost) [ cfg.localPort ];
 
     sops.secrets.minifluxCredentialsEnvironmentVars = {
       sopsFile = cfg.sopsFile;

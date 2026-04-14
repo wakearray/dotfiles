@@ -139,10 +139,9 @@
       };
     };
 
-    # Ensure nginx and docker are enabled
+    # Ensure docker is enabled
     servers = {
       docker.enable = true;
-      nginx.enable = true;
     };
   };
 }

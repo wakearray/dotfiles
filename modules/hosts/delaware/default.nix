@@ -14,13 +14,9 @@
     servers = {
       aria2 = {
         enable = true;
-        domain = "aria2.${domain}";
         downloadsDirectory = "/data/downloads/";
       };
-      audiobookshelf = {
-        enable = true;
-        domain = "audiobookshelf.${domain}";
-      };
+      audiobookshelf.enable = true;
       deluge.enable = true;
       docker = {
         enable = true;
@@ -28,7 +24,7 @@
       };
       forgejo = {
         enable = true;
-        domain = "${domain}";
+        domain = domain;
         localPort = 8065;
         disableRegistration = true;
         actions.enable = true;
@@ -39,8 +35,8 @@
       };
       paperless = {
         enable = false;
-        domain = "paperless.${domain}";
-        port = 28981;
+        domain = "${domain}";
+        localPort = 28981;
       };
       print.enable = true;
       satisfactory.enable = true;
