@@ -8,7 +8,7 @@
     ./firewall
     ./forgejo
     ./home-assistant
-    ./ldap
+    ./idP
     ./jellyfin.nix
     ./mattermost.nix
     ./miniflux.nix

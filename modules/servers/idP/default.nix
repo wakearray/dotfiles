@@ -1,8 +1,9 @@
 { ... }:
 {
   imports = [
-    ./authentik.nix
+    #./authentik.nix
     ./lldap.nix
     ./kanidm.nix
+    ./authelia.nix
   ];
 }

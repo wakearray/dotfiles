@@ -6,6 +6,7 @@ in
   imports = [
     ./ariaNg.nix
     ./audiobookshelf.nix
+    ./authelia.nix
     ./forgejo.nix
     ./miniflux.nix
     ./paperless.nix

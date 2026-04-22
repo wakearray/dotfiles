@@ -1,0 +1,39 @@
+autheliaAuthenticationBackendLdapPasswordFile: ENC[AES256_GCM,data:c6HRQI6nJH7Etr+WDkOnJweZuoRxwaAhI+IAF9R16Fm9wwHL4pLyw+9mzWvWXc+woeo40h8OLfVBlJf9iAGThzAMf5MUR2PsYlvj80LLXpu7xTZNJ2HVs+Xv9pgpb/mrXwnCX/fq7/96eBHwwS+LqeWNy1C5ixAXQ1yq2dUETH3P7lKzMkq2B3kCcUZY64nFEsmxxWc6E2MqiA0hNaQQh2iHWvd95gwJjEBSwY4mzgotggQ6jrigthpEZ2xUFK0KpaHdjWWkfdRIf6jePdp4z3gePD4AS2fazHMODYiGyfYDhL7t0FDj8k9v/sL+bplmeOLsa+nUKvtHvQfzzQ3iVffigA+YwEthq3QrPhEvBu7KC3sDfWEJ8OJROiqna5CsiWYMnGtJaTLgFvKLUCtfKC6UR1NE4+3NX9puujBZPNx2x0/w0ZTUSwKX1Q==,iv:JVc3Uu6O03p6jxea+wF3uqCVszsX+JC0HjMNZWfG6f4=,tag:q2CSlmsbuwyDAqKiETRDnA==,type:str]
+autheliaIdentityValidationResetPasswordJwtSecretFile: ENC[AES256_GCM,data:TlYntbTDsJvsJk75vUXKVq1HdhgTnulbn96aMdgQdFhjnjs+EbzMDaCdaZTue3a3ofCaeOIvPXp8WAy/5/6RwCACFyA6Y68kmrPc7S+W2H0+F/BGd4+yyWEbWw+YT3rXR2W+GCuYNjXhAPCxxfXf+y/nEFp/GbSqnRf+XWHXbaE=,iv:jRhKZER6oBR0fbi1K3Ta9EaLtxCbPKvs/RsaraJZFUU=,tag:iZyPLso0U7yIQ3q5W3CQJg==,type:str]
+autheliaStorageEncryptionKeyFile: ENC[AES256_GCM,data:uMAQVP2M2oY2C0p/PgVf1z/R4g/cJQdp+PGpm1Z8byqVgZIkvWWoqPNeYghqyu/eMDq3j8P7Uk/E2S4k3z1IwVMhn4eWHLip2H0gSWDA2hiT6V/v+xzLhws4nO7webuTy2gLmKHYwGSg5we7CkVkVBVWlti+TkpP1kB+onD6+oQ=,iv:9uPpvU5jwwY1Y77LitK2gkox+qEW2f3acHQGTxBIpJ4=,tag:lC6znLuM4GD5QKjgiwJ4CA==,type:str]
+autheliaSessionSecretFile: ENC[AES256_GCM,data:HxsQpavuXSTKmPLU1idJcFfKfkUxQqqzkUVmbR82u22g6/Hhfux53y00hxi5kcEtj3A67l2l0gNSL0e2/Lfp+yD7rgFy+jNzvJGMS1NkPU9NLW94VaXvmQd2q9j+oZk87GM4T+DaOk/9kM3mb936h0juOPwbs1k6EFLl6Z/ruk4=,iv:khIx3FA8iZrWBLsgsHL4e8W8/TNlft/4V8iUKL8IToQ=,tag:sBvTAGzAP+56+6myfhNjzw==,type:str]
+autheliaNotifierSmtpPasswordFile: ENC[AES256_GCM,data:zISx3FI9Oc+IfudNiyOedA==,iv:ikp/qyu89jbzXwXwCkx24TElA7OpW1/oBDW68C6Pj7I=,tag:3ArnROvhXSMLxDoo3YGcTg==,type:str]
+autheliaOidcHmacSecretFile: ENC[AES256_GCM,data:0ufdRiH/Mfv7yfumaO9VWY+4n3z6H6s4q4ubtAegdhByFT8Yf9AMzcu0Kk7bY6RFsW6sfyMOjQ5cuipC/w2o7XFaeHGCwXHaap/dPAPBqm2ltL4EeyvX+hqym3SeG2Vs6WxWRg+DF5NWSvwW22baDueS8qkrSnl6WkQ1JATYRZE=,iv:usnfWThP5Yeobwk76TIYbpnC4TsxXqZnFotJBvfDA7s=,tag:mUIOWpRDlxljlvSPe8//2g==,type:str]
+sops:
+    age:
+        - recipient: age1em9n3fvg9jphpsx055cv0t8u5wnxs64x2auddxsvjtuvg85kmerqp0wjg0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5ZlVZK2tzQURyTjN4R3Nq
+            Q093L0M5aHg2YkwrL2p6Yzl0a1JhMXl1WmpVCnJuODRPQmNJRDZEdEkzd1pWTzNl
+            U2VLMFJnM2g1dTZiSGd3bHVaSGVjMkkKLS0tIFJYWlcxcXU1dHR5cWNJcEZtY0hR
+            QzBJRDdzR0JuWTVZVXl1bGl5NFMveVkKfhgbHOjXhc0DCdcDblWO0qu6r/LOi9RQ
+            zIbVHsjn4XvYBm/KWnu8Q21txQXq1gSum2AaCLZUH72peO7cqLDHHg==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age15msunp0tetxut3lg4v5c32lmynkw29l2hhj3mguut3fmttdjw5esh4y4hf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvWWpwTDNyVkJBdnFiRUtL
+            STR1Q1lmY1hHL2hKaEFtb3VQU0M3U3hIOHlrClRhdzEzTlJJRGc1Nk9mL0tqeHI5
+            K2swK2VkTGFuakVhVzNGZS9YRU56MFEKLS0tIGRTMmhkQUc5ci9zUXJpUG5nZm5L
+            T0s0OEptR0xJMVNEekFiWkhPSDBYTmcK5HwZaTAeM+oMLMDyurOR0Sp5tb6HhqCq
+            C2jvFwzFtWyH3zEvx1WlQyy6WzjvXSNjeJCImEgDlxoOINaUNVlzEg==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age17vj3ech5wn0dc5272d3mgzp6amt7fa3mmjgzf50f6un80pxq8u2srukdk0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkR1VYTzdBRlZSejRwMkdM
+            V2VOZkVUYWxyMUNpNUNNNHYyNU1nRzZTZlVVClRlWGlqS3FKaFNFbEd5U2ZIb0VX
+            TE0yTENReEt2ZWtUOWt1WUZ6N3pNM2sKLS0tIFRiU3RSemhZOSt2aWd5alhWWFFH
+            TUQvWmRPM0xxWEZmamM0WSt1MVpkaUUKlJLWC6A/do6GW7iqPU4Nh0ub7LDiiner
+            IhnMVsostDBOP8Djex+Fs/8PECyrcqfPfKtGvrY2nMERC1HU8Ek48A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-21T00:49:11Z"
+    mac: ENC[AES256_GCM,data:gqyZrpHByAlvl3jempeBoguIL6rA4ZShZqhopNdN3cyQrPQ1GpNPKm/2WaDr8EWuoNaRHQdutCLb0rUP/1CarWP5oraqt0X3vcnzToQLbBaJ8HYYvVgyNnyTD4dLRlW7n5RDZYfqeogRuP/7ObRWRlU3W+/TFqZJWLpC1z48Acs=,iv:p/rS24GppEGqEa3yueMCCB/3YhPfWumZWMrj3oTFlho=,tag:Vv4waGIiVhxeV2Us7ZtOLw==,type:str]
+    unencrypted_suffix: _unencrypted
+    version: 3.12.1

@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.servers.nginx.miniflux;
+  cfg = config.servers.nginx.authelia;
 in
 {
-  options.servers.nginx.miniflux = with lib; {
+  options.servers.nginx.authelia = with lib; {
     enable = mkEnableOption "Enable an nginx reverse proxy server.";
 
     domain = mkOption {
@@ -20,7 +20,7 @@ in
 
     localPort = mkOption {
       type = types.port;
-      default = 8080;
+      default = config.servers.authelia.localPort;
       description = "The local port your server is exposed on.";
     };
 

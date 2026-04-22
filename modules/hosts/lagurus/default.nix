@@ -7,6 +7,10 @@ in
   # modules/hosts/lagurus
   config = {
     servers = {
+      authelia = {
+        enable = true;
+        sopsFile = ./authelia.yaml;
+      };
       nginx = {
         enable = true;
         domain = domain;
@@ -17,6 +21,9 @@ in
         audiobookshelf = {
           enable = true;
           localIP = serverIP;
+        };
+        authelia = {
+          enable = true;
         };
         forgejo = {
           enable = true;
