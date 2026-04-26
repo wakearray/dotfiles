@@ -103,6 +103,13 @@ let
       description = "MeLE Quieter2Q Fanless";
       users = [ "kent" ];
     };
+    lagurusLUKS = {
+      prettyName = "Lagurus LUKS";
+      ip = "192.168.0.181";
+      hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIML5I2OO9GvEkuFq058ABpjoj2ZTqgpTVwbc1KUUs8ee";
+      description = "This is the key used exclusively for ssh during boot to unlock the LUKS full disk encryption.";
+      users = [ "kent" ];
+    };
     jerboa = {
       prettyName = "Jerboa";
       ip = "192.168.0.28";

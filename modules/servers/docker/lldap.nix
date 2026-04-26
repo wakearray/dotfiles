@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.docker.lldap;
+  cfg = config.servers.docker.lldap;
 in
 {
-  options.docker.lldap = with lib; {
+  options.servers.docker.lldap = with lib; {
     enable = mkEnableOption "Enable a docker based lldap config";
   };
 

@@ -8,6 +8,7 @@ in
     ./audiobookshelf.nix
     ./authelia.nix
     ./forgejo.nix
+    ./mealie.nix
     ./miniflux.nix
     ./paperless.nix
   ];
@@ -36,10 +37,10 @@ in
 
         virtualHosts = lib.mkIf cfg.rootURL.enable {
           # Additional virtualHosts can be found with their respective services config files.
-          "${cfg.rootURL.domain}" = {
+          "${cfg.domain}" = {
             enableACME = true;
             forceSSL = true;
-            root = "/var/www/${cfg.rootURL.domain}";
+            root = "/var/www/${cfg.domain}";
           };
         };
       };

@@ -15,7 +15,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBqoI7me+VjJ8IBJdqBiW4jJ2nyf98IcRPfoV8V4002" # Bitwarden stored key
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEjMJxmbuWJRmhB9zSa7jyz2v5+3ie9hr8ik8udoPyZ7" # Starling
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOGhJ+3+JajosnhJOFOg0Q202XigcatIgHIWqVdJr1O" # Great Blue
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB1SOk+WGYv+LMAt8bdJfnKQG5eHHqcBUYbjeJw4Sflp" # S24 Ultra
     ];
   };
   gui._1pass.polkitPolicyOwners = [ "kent" ];

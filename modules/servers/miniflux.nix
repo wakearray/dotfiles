@@ -1,16 +1,10 @@
 { config, lib, ... }:
 let
-  cfg = config.servers.rss;
+  cfg = config.servers.miniflux;
 in
 {
-  options.servers.rss = with lib; {
+  options.servers.miniflux = with lib; {
     enable = mkEnableOption "Enable an opinionated Miniflux config.";
-
-    domain = mkOption {
-      type = types.str;
-      default = "rss.example.com";
-      description = "Domain of the nginx proxy hosting this server.";
-    };
 
     localPort = mkOption {
       type = types.port;
@@ -18,7 +12,7 @@ in
       description = "The port you want to use when locally accessing the server on the same network.";
     };
 
-    sameServerHost = mkEnableOption "If false, localPort will be exposed, if true it won't be.";
+    sameServerHost = mkEnableOption "If false, localPort will be exposed, if true it won't be." // { default = true;};
 
     sopsFile = mkOption {
       type = types.nullOr types.path;

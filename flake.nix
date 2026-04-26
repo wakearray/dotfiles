@@ -116,7 +116,7 @@
     # hostType     = (one of) "laptop" "desktop" "server" "android" "kiosk"
     # display      = (one of) "wayland" "x11" "cli"
     # features     = (none, one, or more of) "printers" "installer"
-    #                "gaming" "minimal" "developer" "gaming" "eink" "einkColor"
+    #                "gaming" "minimal" "developer" "eink" "einkColor"
     # architecture = (one of) "x86_64-linux" "aarch64-linux"
 
     # NixOS configuration entrypoint

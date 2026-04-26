@@ -8,8 +8,14 @@ in
 
     domain = mkOption {
       type = types.str;
-      default = "vault.example.com";
+      default = "example.com";
       description = "The domain you want vaultwarden hosted at.";
+    };
+
+    subdomain = mkOption {
+      type = types.str;
+      default = "vault";
+      description = "The subdomain you want vaultwarden hosted at.";
     };
 
     localPort = mkOption {
@@ -51,7 +57,7 @@ in
 
     # Nginx reverse proxy
     services.nginx.virtualHosts = {
-      "${cfg.domain}" = {
+      "${cfg.subdomain}.${cfg.domain}" = {
         enableACME = true;
         forceSSL = true;
         locations = {
@@ -77,7 +83,7 @@ in
         PUSH_INSTALLATION_KEY=${config.sops.placeholder.vw_push_key}
         ADMIN_TOKEN=${config.sops.placeholder.vw_admin_token}
 
-        DOMAIN=https://${cfg.domain}
+        DOMAIN=https://${cfg.subdomain}.${cfg.domain}
         SIGNUPS_ALLOWED=false
         ROCKET_PORT=${toString cfg.localPort}
         ROCKET_LOG=critical

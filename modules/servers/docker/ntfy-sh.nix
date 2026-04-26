@@ -8,8 +8,14 @@ in
 
     domain = mkOption {
       type = types.str;
-      default = "ntfy.example.com";
+      default = "example.com";
       description = "The domain you want ntfy-sh hosted at.";
+    };
+
+    subdomain = mkOption {
+      type = types.str;
+      default = "ntfy";
+      description = "The subdomain you want ntfy-sh hosted at.";
     };
 
     localPort = mkOption {
@@ -65,13 +71,13 @@ in
       ];
       ports = [
         "127.0.0.1:${toString cfg.localPort}:80"
-        #"25:25"
+        #"2525:25"
       ];
     };
 
     # Nginx reverse proxy
     services.nginx.virtualHosts = {
-      "${cfg.domain}" = {
+      "${cfg.subdomain}.${cfg.domain}" = {
         enableACME = true;
         forceSSL = true;
         locations = {
@@ -81,7 +87,7 @@ in
           };
         };
         extraConfig = ''
-          proxy_set_header Host ${cfg.domain};
+          proxy_set_header Host ${cfg.subdomain}.${cfg.domain};
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection "upgrade";
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -121,14 +127,14 @@ in
         #NTFY_AUTH_USERS='${config.sops.placeholder.ntfy-auth-users}'
         #NTFY_AUTH_ACCESS='${config.sops.placeholder.ntfy-auth-access}'
         #NTFY_SMTP_SENDER_FROM="${config.sops.placeholder.smtp-sender-from}"
-        #NTFY_SMTP_SERVER_LISTEN=:25
+        #NTFY_SMTP_SERVER_LISTEN=:2525
         #NTFY_SMTP_SERVER_DOMAIN="${config.sops.placeholder.smtp-server-domain}"
         #NTFY_SMTP_SERVER_ADDR_PREFIX="${config.sops.placeholder.smtp-server-addr-prefix}"
         #NTFY_SMTP_SENDER_ADDR="${config.sops.placeholder.smtp-sender-addr}"
         #NTFY_SMTP_SENDER_USER="${config.sops.placeholder.smtp-sender-user}"
         #NTFY_SMTP_SENDER_PASS="${config.sops.placeholder.smtp-sender-pass}"
       content  = ''
-        NTFY_BASE_URL=https://${cfg.domain}
+        NTFY_BASE_URL=https://${cfg.subdomain}.${cfg.domain}
         NTFY_CACHE_FILE=${toString cfg.cacheDirectory}/cache.db
         NTFY_AUTH_FILE=${toString cfg.cacheDirectory}/auth.db
         NTFY_AUTH_DEFAULT_ACCESS=deny-all

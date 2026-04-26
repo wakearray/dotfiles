@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.servers.nginx.miniflux;
+  cfg = config.servers.nginx.mealie;
 in
 {
-  options.servers.nginx.miniflux = with lib; {
+  options.servers.nginx.mealie = with lib; {
     enable = mkEnableOption "Enable an nginx reverse proxy server.";
 
     domain = mkOption {
@@ -14,13 +14,13 @@ in
 
     subdomain = mkOption {
       type = types.str;
-      default = "rss";
+      default = "recipe";
       description = "The subdomain that your server will be hosted at.";
     };
 
     localPort = mkOption {
       type = types.port;
-      default = 8080;
+      default = 9925;
       description = "The local port your server is exposed on.";
     };
 

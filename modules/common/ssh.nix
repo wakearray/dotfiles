@@ -13,7 +13,7 @@
   };
 
   programs.ssh = {
-    # Currently being set to gnome-keyring in the 1password config
+    # Currently being set to gnome-keyring in the 1password config for gui machines
     # You cannot have two sshAgents running at the same time and gnome-keyring is required for 1Pass
     #startAgent = lib.mkDefault true;
     pubkeyAcceptedKeyTypes = [ "ssh-ed25519" ];

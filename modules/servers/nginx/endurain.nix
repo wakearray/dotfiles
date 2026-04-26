@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.servers.nginx.miniflux;
+  cfg = config.servers.nginx.endurain;
 in
 {
-  options.servers.nginx.miniflux = with lib; {
+  options.servers.nginx.endurain = with lib; {
     enable = mkEnableOption "Enable an nginx reverse proxy server.";
 
     domain = mkOption {
@@ -14,7 +14,7 @@ in
 
     subdomain = mkOption {
       type = types.str;
-      default = "rss";
+      default = "run";
       description = "The subdomain that your server will be hosted at.";
     };
 

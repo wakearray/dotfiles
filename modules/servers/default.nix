@@ -17,6 +17,7 @@
     ./ntfy-sh.nix
     ./paperless
     ./printers.nix
+    ./remoteLUKSUnlock.nix
     ./satisfactory.nix
     ./webdav.nix
   ];

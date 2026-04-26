@@ -13,22 +13,10 @@
     servers = {
       nginx = {
         enable = true;
-
-        rootURL = {
-          enable = true;
-          domain = domain;
-        };
-
-        miniflux = {
-          enable = true;
-          domain = domain;
-        };
-      };
-
-      rss = {
-        enable = true;
         domain = domain;
-        sopsFile = ./miniflux.yaml;
+        rootURL.enable = true;
+        mealie.enable = true;
+        miniflux.enable = true;
       };
 
       mattermost = {
@@ -37,20 +25,31 @@
         siteName = "VoicelessCrimson";
       };
 
+      miniflux = {
+        enable = true;
+        sopsFile = ./miniflux.yaml;
+      };
+
       docker = {
         enable = true;
 
         ntfy-sh = {
           enable = true;
-          domain = "ntfy.${domain}";
+          domain = domain;
           localPort = 2586;
           visitorRequestLimitExemptHosts = "70.109.49.31";
           sopsFile = ./ntfy.yaml;
         };
 
+        mealie = {
+          enable = true;
+          domain = domain;
+          sopsFile = ./mealie.yaml;
+        };
+
         vaultwarden = {
           enable = true;
-          domain = "vault.${domain}";
+          domain = domain;
           sopsFile = ./vaultwarden.yaml;
         };
       };

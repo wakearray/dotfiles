@@ -164,13 +164,16 @@
 
       # Provides `lspci`, `pcilmr`, and `setpci`
       pciutils
+
+      # Provides 'lsusb'
+      usbutils
     ];
 
     # Add the userdata usergroup
     users.groups.userdata = {};
 
     # Enable userborn declarative user management
-    services.userborn.enable = true;
+    services.userborn.enable = lib.mkDefault true;
 
     # nixpkgs allow unfree with unstable overlay.
     nixpkgs = {

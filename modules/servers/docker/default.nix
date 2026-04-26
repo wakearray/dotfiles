@@ -11,6 +11,7 @@ in
     #./omada-controller.nix
     ./gow-wolf.nix
     ./lldap.nix
+    ./mealie.nix
     ./ntfy-sh.nix
     ./tubearchivist.nix
     ./vaultwarden.nix

@@ -16,11 +16,20 @@
         enable = true;
         downloadsDirectory = "/data/downloads/";
       };
-      audiobookshelf.enable = true;
-      deluge.enable = true;
+      audiobookshelf = {
+        enable = true;
+        localPort = 8066;
+      };
+      deluge = {
+        enable = true;
+        webUIPort = 8112;
+      };
       docker = {
         enable = true;
-        tubearchivist.enable = true;
+        tubearchivist = {
+          enable = true;
+          localPort = 8062;
+        };
       };
       forgejo = {
         enable = true;
@@ -29,13 +38,9 @@
         disableRegistration = true;
         actions.enable = true;
       };
-      nginx = {
-        enable = true;
-        rootURL.enable = false;
-      };
       paperless = {
         enable = false;
-        domain = "${domain}";
+        domain = domain;
         localPort = 28981;
       };
       print.enable = true;

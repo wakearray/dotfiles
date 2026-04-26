@@ -1,9 +1,36 @@
 { lib, config, ... }:
+let
+  cfg = config.servers.docker.tubearchivist;
+in
 {
-  options.servers.docker.tubearchivist = {
-    enable = lib.mkEnableOption "Enable TubeArchivist";
+  options.servers.docker.tubearchivist = with lib; {
+    enable = mkEnableOption "Enable TubeArchivist";
+
+    host = mkOption {
+      type = types.str;
+      default = "http://192.168.0.46";
+      description = "The URL you'll be accessing TubeArchivist on.";
+    };
+
+    localPort = mkOption {
+      type = types.port;
+      default = 8062;
+      description = "The local port you want TubeArchivist hosted on.";
+    };
+
+    dataFolder = mkOption {
+      type = types.str;
+      default = "/data/tubearchivist";
+      description = "String of path to where you want the data to be located.";
+    };
+
+    sopsFile = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      description = "";
+    };
   };
-  config = lib.mkIf config.servers.docker.tubearchivist.enable {
+  config = lib.mkIf cfg.enable {
     # TubeArchivist - A YouTube downloader and archival tool
     # https://docs.tubearchivist.com/installation/docker-compose/
     # https://github.com/tubearchivist/tubearchivist/blob/master/docker-compose.yml
@@ -11,17 +38,17 @@
       tubearchivist = {
         image = "bbilly1/tubearchivist";
         autoStart = true;
-        ports = [ "8062:8000" ];
+        ports = [ "${toString cfg.localPort}:8000" ];
         volumes = [
-          "/data/tubearchivist/media:/youtube"
-          "/data/tubearchivist/cache:/cache"
+          "${cfg.dataFolder}/media:/youtube"
+          "${cfg.dataFolder}/cache:/cache"
         ];
         environment = {
           ES_URL = "http://archivist-es:9200";  # needs protocol e.g. http and port
           REDIS_CON = "redis://archivist-redis:6379";
           HOST_UID = "1000";
           HOST_GID = "1000";
-          TA_HOST = "http://192.168.0.46";      # set your host name
+          TA_HOST = cfg.host;      # set your host name
           TZ = "America/New_York";
         };
         environmentFiles = [
@@ -43,7 +70,7 @@
         autoStart = true;
         ports = [ "127.0.0.1:6379:6379" ];
         volumes = [
-          "/data/tubearchivist/redis:/data"
+          "${cfg.dataFolder}/redis:/data"
         ];
         dependsOn = [ "archivist-es" ];
         extraOptions = [ "--network=archivist-network" ];
@@ -67,7 +94,7 @@
         ];
         volumes = [
           # If encountering permissions error, run `sudo chown 1000:0 -R /data/tubearchivist/es`
-          "/data/tubearchivist/es:/usr/share/elasticsearch/data"            # check for permission error when using bind mount, see readme
+          "${cfg.dataFolder}/es:/usr/share/elasticsearch/data"            # check for permission error when using bind mount, see readme
         ];
         ports = [ "127.0.0.1:9200:9200" ];
       };

@@ -3,6 +3,7 @@
   imports = [
     ./nvim
     ./printers.nix
+    ./security.nix
     ./spellcheck.nix
     ./ssh.nix
     ./syncthing.nix
