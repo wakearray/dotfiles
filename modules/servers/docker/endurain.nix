@@ -3,6 +3,7 @@ let
   cfg = config.servers.docker.endurain;
 in
 {
+  # WIP
   options.severs.docker.endurain = with lib; {
     enable = mkEnableOption "Enable an opinionated Endurain config.";
 

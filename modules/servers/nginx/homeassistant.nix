@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.servers.nginx.mealie;
+  cfg = config.servers.nginx.homeassistant;
 in
 {
-  options.servers.nginx.mealie = with lib; {
+  options.servers.nginx.homeassistant = with lib; {
     enable = mkEnableOption "Enable an nginx reverse proxy server.";
 
     domain = mkOption {
@@ -14,13 +14,13 @@ in
 
     subdomain = mkOption {
       type = types.str;
-      default = "recipes";
+      default = "hass";
       description = "The subdomain that your server will be hosted at.";
     };
 
     localPort = mkOption {
       type = types.port;
-      default = 9925;
+      default = 8123;
       description = "The local port your server is exposed on.";
     };
 
@@ -39,7 +39,6 @@ in
       locations."/" = {
         proxyPass = "http://${cfg.localIP}:${toString cfg.localPort}";
         proxyWebsockets = true;
-        recommendedProxySettings = true;
       };
     };
   };

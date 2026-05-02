@@ -37,10 +37,11 @@ in
         AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = "/run/secrets/autheliaNotifierSmtpPasswordFile";
         #AUTHELIA_NOTIFIER_SMTP_TLS_CERTIFICATE_CHAIN_FILE = "";
         #AUTHELIA_NOTIFIER_SMTP_TLS_PRIVATE_KEY_FILE = "";
-        AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE = "";
+        #AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE = "";
         #AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE = "";
         #AUTHELIA_STORAGE_POSTGRES_TLS_CERTIFICATE_CHAIN_FILE = "";
         #AUTHELIA_STORAGE_POSTGRES_TLS_PRIVATE_KEY_FILE = "";
+        X_AUTHELIA_CONFIG_FILTERS = "template";
       };
 
       settings = {
@@ -80,6 +81,25 @@ in
             remember_me = "1d";
           }];
         };
+        access_control = {
+          default_policy = "deny";
+          rules = [
+            {
+              domain = "*.voicelesscrimson.com";
+              networks = ["5.161.77.151/32"];
+              policy = "bypass";
+            }
+            {
+              domain = "*.voicelesscrimson.com";
+              networks = ["192.168.0.0/24"];
+              policy = "bypass";
+            }
+            {
+              domain = "*.voicelesscrimson.com";
+              policy = "two_factor";
+            }
+          ];
+        };
         notifier.smtp = {
           address = "smtp://mail.smtp2go.com:2525";
           timeout = "5s";
@@ -103,6 +123,34 @@ in
           address = "unix:///var/run/postgresql";
           database = "${user}";
           username = "${user}";
+        };
+        identity_providers = {
+          oidc = {
+            jwks = [{ key = "{{- fileContent \"/run/secrets/autheliaJwksPrivate_1\" | nindent 10 }}"; }];
+            clients = [
+              {
+                client_id = "095a2e9f29d8db708b718dc03432e429da6a14b110cb8794d6c2aa8f4e63f2885c83ba6ecaa16bf90450389fbf4a6b35f78599449d640f7cde8d6668b19f9bc";
+                client_name = "Mealie";
+                client_secret = "{{- fileContent \"/run/secrets/autheliaClientSecret_Mealie\" | nindent 10 }}";
+                public = false;
+                authorization_policy = "two_factor";
+                require_pkce = true;
+                pkce_challenge_method = "S256";
+                redirect_uris = [ "https://recipe.voicelesscrimson.com/login" ];
+                scopes = [
+                  "openid"
+                  "email"
+                  "profile"
+                  "groups"
+                ];
+                response_types = [ "code" ];
+                grant_types = [ "authorization_code" ];
+                access_token_signed_response_alg = "none";
+                userinfo_signed_response_alg = "none";
+                token_endpoint_auth_method = "client_secret_basic";
+              }
+            ];
+          };
         };
       };
 
@@ -158,6 +206,9 @@ in
       autheliaStorageEncryptionKeyFile = opts;
       autheliaSessionSecretFile = opts;
       autheliaNotifierSmtpPasswordFile = opts;
+      autheliaOidcHmacSecretFile = opts;
+      autheliaJwksPrivate_1 = opts;
+      autheliaClientSecret_Mealie = opts;
     };
   };
 }

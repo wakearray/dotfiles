@@ -9,7 +9,7 @@ let
     devicesForUser = lib.filter isUserInDevice (lib.attrsToList devices);
     deviceAliases = map (device: {
       name = device.name;
-      value = "zellij action rename-tab '${device.value.prettyName}' && ssh -t ${device.value.ip} \"zellij a || zellij\"; zellij action undo-rename-tab";
+      value = "zellij action rename-tab '${device.value.prettyName}' && ssh -t ${device.value.ip} \"zellij a ${device.name} || zellij -s ${device.name}\"; zellij action undo-rename-tab";
     }) devicesForUser;
   in
   lib.listToAttrs deviceAliases;

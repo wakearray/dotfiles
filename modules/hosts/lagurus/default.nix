@@ -8,34 +8,30 @@ in
   config = {
     servers = {
       authelia = {
-        enable = true;
+        enable = false;
         sopsFile = ./authelia.yaml;
       };
       nginx = {
         enable = true;
         domain = domain;
-        ariaNg = {
-          enable = true;
-          localIP = serverIP;
-        };
         audiobookshelf = {
-          enable = true;
+          enable = false;
           localIP = serverIP;
         };
         authelia = {
-          enable = true;
+          enable = false;
         };
-        endurain = {
-          enable = true;
-          localIP = serverIP;
-        };
+        #endurain = {
+        #  enable = true;
+        #  localIP = serverIP;
+        #};
         forgejo = {
-          enable = true;
+          enable = false;
           localIP = serverIP;
         };
-        paperless = {
+        homeassistant = {
           enable = true;
-          localIP = serverIP;
+          localIP = "192.168.0.138";
         };
       };
       kanidm = {

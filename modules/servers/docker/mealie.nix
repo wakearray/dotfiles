@@ -26,7 +26,7 @@ in
 
     subdomain = mkOption {
       type = types.str;
-      default = "recipe";
+      default = "recipes";
       description = "The subdomain you want mealie hosted at.";
     };
 
@@ -80,10 +80,12 @@ in
       in
       {
         #postgresUser = opts;
-        postgresPassword = opts;
+        mealiePostgresPassword = opts;
 
-        smtpUser = opts;
-        smtpPassword = opts;
+        mealieSmtpUser = opts;
+        mealieSmtpPassword = opts;
+
+        mealieOidcClientSecret = opts;
       };
 
       templates = let
@@ -92,7 +94,7 @@ in
       {
         "mealie-postgres.env".content = ''
           POSTGRES_USER=mealie
-          POSTGRES_PASSWORD=${ph.postgresPassword}
+          POSTGRES_PASSWORD=${ph.mealiePostgresPassword}
           PGUSER=mealie
           POSTGRES_DB=mealie
         '';
@@ -108,7 +110,7 @@ in
 
           DB_ENGINE=postgres
           POSTGRES_USER=mealie
-          POSTGRES_PASSWORD=${ph.postgresPassword}
+          POSTGRES_PASSWORD=${ph.mealiePostgresPassword}
           POSTGRES_SERVER=mealie-postgres
           POSTGRES_PORT=5432
           POSTGRES_DB=mealie
@@ -118,8 +120,20 @@ in
           SMTP_FROM_NAME="Recipies at Voiceless Crimson"
           SMTP_AUTH_STRATEGY=TLS # Options: 'TLS', 'SSL', 'NONE'
           SMTP_FROM_EMAIL=noreply@${cfg.domain}
-          SMTP_USER=${ph.smtpUser}
-          SMTP_PASSWORD=${ph.smtpPassword}
+          SMTP_USER=${ph.mealieSmtpUser}
+          SMTP_PASSWORD=${ph.mealieSmtpPassword}
+
+          OIDC_AUTH_ENABLED=true
+          OIDC_SIGNUP_ENABLED=true
+          OIDC_CONFIGURATION_URL=https://idm.voicelesscrimson.com/oauth2/openid/mealie/.well-known/openid-configuration
+          OIDC_CLIENT_ID=mealie
+          OIDC_CLIENT_SECRET=${ph.mealieOidcClientSecret}
+          OIDC_PROVIDER_NAME=Kanidm
+          OIDC_AUTO_REDIRECT=false
+          #OIDC_USER_CLAIM=preferred_username
+          OIDC_GROUPS_CLAIM=groups
+          OIDC_ADMIN_GROUP=mealie_admins@idm.voicelesscrimson.com
+          OIDC_USER_GROUP=mealie_users@idm.voicelesscrimson.com
         '';
       };
     };

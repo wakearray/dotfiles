@@ -7,7 +7,9 @@ in
     ./ariaNg.nix
     ./audiobookshelf.nix
     ./authelia.nix
+    ./endurain.nix
     ./forgejo.nix
+    ./homeassistant.nix
     ./mealie.nix
     ./miniflux.nix
     ./paperless.nix
@@ -43,6 +45,13 @@ in
             root = "/var/www/${cfg.domain}";
           };
         };
+
+        appendHttpConfig = ''
+          deny 45.187.0.0/16;
+          deny 40.119.0.0/16;
+          deny 107.155.0.0/16;
+          deny 52.172.0.0/16;
+        '';
       };
     };
 

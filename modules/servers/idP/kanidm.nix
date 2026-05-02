@@ -52,7 +52,7 @@ in
           };
           log_level = "info";
           ldapbindaddress = "0.0.0.0:${toString cfg.ldapPort}";
-          domain = "${cfg.domain}";
+          domain = "${cfg.subdomain}.${cfg.domain}";
           bindaddress = "127.0.0.1:${toString cfg.httpPort}";
         };
       };
