@@ -10,7 +10,7 @@ in
 
     domain = mkOption {
       type = types.str;
-      default = "laser.example.com";
+      default = config.servers.nginx.domain;
       description = "The domain you want laserweb hosted at.";
     };
 

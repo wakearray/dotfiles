@@ -2,8 +2,8 @@
 {
   imports = [
     #./authentik.nix
-    ./lldap.nix
+    #./lldap.nix
     ./kanidm.nix
-    ./authelia.nix
+    #./authelia.nix
   ];
 }

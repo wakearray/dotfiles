@@ -8,14 +8,15 @@ in
   # regardless of other firewall rules.
 
   imports = [
-    #./omada-controller.nix
+    ./endurain.nix
     ./gow-wolf.nix
+    #./karakeep.nix
     ./lldap.nix
     ./mealie.nix
     ./ntfy-sh.nix
+    #./omada-controller.nix
     ./tubearchivist.nix
     ./vaultwarden.nix
-    #./wger.nix
     ./wyze-bridge.nix
   ];
 

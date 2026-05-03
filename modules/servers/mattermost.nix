@@ -8,7 +8,7 @@ in
 
     domain = mkOption {
       type = types.str;
-      default = "example.com";
+      default = config.servers.nginx.domain;
       description = "Domain of the hosted instance, the subdomain will be `chat`.";
     };
 

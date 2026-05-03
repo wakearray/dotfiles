@@ -7,10 +7,6 @@ in
   # modules/hosts/lagurus
   config = {
     servers = {
-      authelia = {
-        enable = false;
-        sopsFile = ./authelia.yaml;
-      };
       nginx = {
         enable = true;
         domain = domain;
@@ -18,13 +14,11 @@ in
           enable = false;
           localIP = serverIP;
         };
-        authelia = {
-          enable = false;
+        endurain = {
+          enable = true;
+          localIP = serverIP;
+          localPort = 8060;
         };
-        #endurain = {
-        #  enable = true;
-        #  localIP = serverIP;
-        #};
         forgejo = {
           enable = false;
           localIP = serverIP;

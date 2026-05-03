@@ -7,14 +7,12 @@
     ./docker
     ./firewall
     ./forgejo
-    ./home-assistant
     ./idP
     ./jellyfin.nix
     ./mattermost.nix
     ./miniflux.nix
     ./ncps.nix
     ./nginx
-    ./ntfy-sh.nix
     ./paperless
     ./printers.nix
     ./remoteLUKSUnlock.nix

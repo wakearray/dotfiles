@@ -4,9 +4,7 @@
   imports =
   [
     ./zfs.nix
-
     ./systemd-mounts.nix
-
     ./syncthing.nix
   ];
 
@@ -26,6 +24,11 @@
       };
       docker = {
         enable = true;
+        endurain = {
+          enable = true;
+          localPort = 8060;
+          sopsFile = ./endurain.yaml;
+        };
         tubearchivist = {
           enable = true;
           localPort = 8062;
@@ -38,6 +41,7 @@
         disableRegistration = true;
         actions.enable = true;
       };
+      nginx.domain = domain;
       paperless = {
         enable = false;
         domain = domain;

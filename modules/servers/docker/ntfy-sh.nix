@@ -8,7 +8,7 @@ in
 
     domain = mkOption {
       type = types.str;
-      default = "example.com";
+      default = config.servers.nginx.domain;
       description = "The domain you want ntfy-sh hosted at.";
     };
 
