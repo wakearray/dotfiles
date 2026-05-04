@@ -11,7 +11,7 @@ in
         enable = true;
         domain = domain;
         audiobookshelf = {
-          enable = false;
+          enable = true;
           localIP = serverIP;
         };
         endurain = {

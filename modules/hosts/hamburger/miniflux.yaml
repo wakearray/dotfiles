@@ -1,4 +1,5 @@
 minifluxCredentialsEnvironmentVars: ENC[AES256_GCM,data:cWH2f+t5wFlfPYdGYWRI2TrvMKEZVPq+uOThqaHYDKnul3TWahnhbh9rLJGuo3NJaaT9YoQVfcpplUhbELVLuftXC7xQ,iv:ZrxB4G/t8Sc8gLH+Woz1L14X3p9dB/HMHYYlGVMt7fQ=,tag:DrQBIi+ZyaKaoB1orqyrDg==,type:str]
+oauth2_client_secret: ENC[AES256_GCM,data:m/g4gYwybkY5ElcLq906ZCIjDVYTyD/+0GpXTHsiaZMJO36/jxOHx/ax/WjmVKVM,iv:Mjhxx0507qEe/7na59Idq4xRAh0c2oNxHrzA6xQ8UkM=,tag:8uPT2l3YdqEY+UaL8y/ENw==,type:str]
 sops:
     age:
         - recipient: age1em9n3fvg9jphpsx055cv0t8u5wnxs64x2auddxsvjtuvg85kmerqp0wjg0
@@ -28,7 +29,7 @@ sops:
             NWVYWjhuOWF3QzF1dDhTRDNQTU92MkUKxKK1IBmd9w9amIaBm6R/oen3YLmIWsV0
             Ulf7KlPLIpt64HRFbCH1PFWDLApwRf8v9IhOYNWcTBKg4Tk0qOT7hg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-10-20T22:35:20Z"
-    mac: ENC[AES256_GCM,data:kGtbRuxgstXb3HKe1Sc4y76trK3wTZaLbq64tS6Os9kpjnCvO5ieK1AimFhL0rbmOi2HKa6atRxkSlyjutvuYhca84gfCBPWOYgjG+8FAniawfsojAcsYrelXvFdWBa8epHW2BngfWAFu+wO/p9tq1iySVWdLrj7SSWW9+dZijA=,iv:TBRgw4dxjosY0DoC0HdBJsHvYd+S2fuK7c/z8i/xzjA=,tag:/pRwj8tZdj5pw2TBWt/ftA==,type:str]
+    lastmodified: "2026-05-04T19:36:42Z"
+    mac: ENC[AES256_GCM,data:BLwaNmcWfzxORxfT49sPbl1qs1sCYQGQsDGneo0N3eGHmMyVjiyhIIwWKvhX0xjG7U0cGx9hySogtcrZ9s3rk7VoM5DUBIpDkp3VwPl3UMdb5iy32PU+Xn43ZTYO7X1T5m4g06WrR8DNeCe/260RLuaMYvHYsT0r2+u7LR/b+RA=,iv:tc7GeQyzlTXmedruXB8wIOEn5j48btIW6doobyPd61w=,tag:0sWD2GaM/NXEH0bA/VGhmQ==,type:str]
     unencrypted_suffix: _unencrypted
-    version: 3.10.2
+    version: 3.12.1
