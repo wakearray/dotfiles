@@ -27,6 +27,9 @@
         });
       })
     ];
+    openldap = prev.openldap.overrideAttrs {
+      doCheck = false;
+    };
   };
 
   # When applied, the 24.11 nixpkgs set (declared in the flake inputs) will

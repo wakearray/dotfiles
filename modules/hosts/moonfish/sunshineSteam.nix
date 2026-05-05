@@ -73,8 +73,7 @@ in
 
       # Game launcher with access to Steam, GOG, Epic, and Humble Bundle
       # https://github.com/lutris/lutris
-      # Disabled due to issues with wine dependancy OpenLdap
-      #lutris
+      lutris
 
       # Game launcher with access to Epic, GOG, and Amazon Games
       # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher

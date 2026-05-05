@@ -35,6 +35,7 @@ in
       # Steam container
       steam-run
 
+      lutris
       heroic       # Epic and GOG games
       bottles      # A sensible Wine wrapper for games
       protontricks # Use winetricks in proton
