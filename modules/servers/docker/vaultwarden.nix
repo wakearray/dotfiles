@@ -44,9 +44,6 @@ in
       environmentFiles = [
         config.sops.templates."vaultwardenEnvironmentFile.env".path
       ];
-      #environment = {
-      #  ADMIN_TOKEN="\${VAULTWARDEN_ADMIN_TOKEN}";
-      #};
       volumes = [
         "${cfg.dataFolder}:/data/"
       ];
@@ -74,6 +71,7 @@ in
       vw_push_id = { sopsFile = cfg.sopsFile; };
       vw_push_key = { sopsFile = cfg.sopsFile; };
       vw_admin_token = { sopsFile = cfg.sopsFile; };
+      vw_sso_client_secret = { sopsFile = cfg.sopsFile; };
     };
 
     sops.templates."vaultwardenEnvironmentFile.env" = {
@@ -89,6 +87,44 @@ in
         ROCKET_LOG=critical
 
         EXPERIMENTAL_CLIENT_FEATURE_FLAGS=inline-menu-positioning-improvements,inline-menu-totp,ssh-key-vault-item,ssh-agent,export-attachments,mutual-tls
+
+        # Activate the SSO
+        SSO_ENABLED=true
+        # disable email+Master password authentication
+        SSO_ONLY=false
+        # On SSO Signup if a user with a matching email already exists make the association (default true)
+        SSO_SIGNUPS_MATCH_EMAIL=true
+        # Allow unknown email verification status (default false). Allowing this with SSO_SIGNUPS_MATCH_EMAIL open potential account takeover.
+        SSO_ALLOW_UNKNOWN_EMAIL_VERIFICATION=false
+
+        # The OpenID Connect Discovery endpoint of your SSO
+        # The URL must not include the /.well-known/openid-configuration
+        # <OIDC_URL>/.well-known/openid-configuration must return a JSON document
+        # SSO_AUTHORITY has to match the exact value of the issuer field that is returned by that JSON
+        # (so take the issuer value of the file if you are unsure whether to include a trailing slash or not).
+        SSO_AUTHORITY=https://voicelesscrimson.com/oauth2/openid/vaultwarden
+        # Activate PKCE for the Auth Code flow (default true).
+        SSO_PKCE=true
+        # Client Id
+        SSO_CLIENT_ID=vaultwarden
+        # Client Secret
+        SSO_CLIENT_SECRET=${config.sops.placeholder.vw_sso_client_secret}
+
+        # Optional, allow to override scopes if needed (default profile email, openid is implicit)
+        #SSO_SCOPES=
+        # Optional, allow to add extra parameter to the authorize redirection (default "")
+        #SSO_AUTHORIZE_EXTRA_PARAMS=
+        # Optional, Regex to trust additional audience for the IdToken
+        # (client_id is always trusted). Use single quote when writing the regex: '^$'.
+        #SSO_AUDIENCE_TRUSTED=
+
+        # Enable to use SSO only for authentication not session lifecycle
+        SSO_AUTH_ONLY_NOT_SESSION=false
+        # Cache calls to the discovery endpoint, duration in seconds, 0 to disable (default 0);
+        SSO_CLIENT_CACHE_EXPIRATION=0
+        # Log all tokens for easier debugging
+        # (default false, LOG_LEVEL=debug or LOG_LEVEL=info,vaultwarden::sso=debug need to be set)
+        SSO_DEBUG_TOKENS=false
       '';
     };
   };
