@@ -143,21 +143,6 @@ in
 #      };
     };
 
-    home.packages = with pkgs; [
-      # Tridactyl native connector
-      tridactyl-native
-
-      # Allows creation of PWAs in Firefox
-      firefoxpwa
-
-      # Allows playing of videos in MPV rather than the browser itself
-      ff2mpv
-
-      # Allows Firefox to cast to Chromecast devices and apps
-      # https://hensm.github.io/fx_cast/
-      fx-cast-bridge
-    ];
-
     xdg.configFile."ff2mpv-rust.json" = {
       enable = true;
       force = true;

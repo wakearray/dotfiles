@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 let
   gui = config.gui;
-  vscode = gui.vscode;
+  cfg = gui.vscode;
 in
 {
   options.gui.vscode = with lib; {
@@ -72,11 +72,11 @@ in
       description = "An attribute set of attribute sets of users and their settings. Documentation can be found here: https://nix-community.github.io/home-manager/options.xhtml#opt-programs.vscode.profiles";
     };
   };
-  config = lib.mkIf (gui.enable && vscode.enable) {
-    programs.vscode = {
+  config = lib.mkIf cfg.enable {
+    programs.vscodium = {
       enable = true;
       package = pkgs.vscodium.fhsWithPackages (ps: with ps; [ rustup zlib ]);
-      profiles = vscode.profiles;
+      profiles = cfg.profiles;
     };
   };
 }

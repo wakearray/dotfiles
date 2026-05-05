@@ -1,5 +1,4 @@
-{ lib, ... }:
-
+{ config, lib, ... }:
 let
   # Define regex patterns for each color format
   rgbPattern = ''^rgb\(\s*(\d{1,3}%?),\s*(\d{1,3}%?),\s*(\d{1,3}%?)\s*\)$'';
@@ -31,5 +30,7 @@ in
     };
   };
 
-  config = {};
+  config = {
+    gtk.gtk4.theme = config.gtk.theme;
+  };
 }

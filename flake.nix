@@ -68,7 +68,7 @@
 
     # Declarative mailserver configured in Nixlang
     simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/main";
     };
 
     # Build ISOs, VM images, and more using Nixlang/Flakes
