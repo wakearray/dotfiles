@@ -1,7 +1,4 @@
 { inputs, lib, config, pkgs, ... }:
-let
-  system = config.home.systemDetails.architecture.text;
-in
 {
   # kent/common/gui
   # All settings and packages should be compatible with Android profiles
@@ -46,11 +43,11 @@ in
     home.packages = with pkgs; [
       # A FOSS PDF Editor
       # https://github.com/JakubMelka/PDF4QT
-      pdf4qt
+      stable.pdf4qt
 
       # LibreOffice, a FOSS MS Office clone
       # https://www.libreoffice.org/about-us/source-code/
-      libreoffice-qt6
+      stable.libreoffice-qt6
 
       # Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deeze
       # https://github.com/nathom/streamrip

@@ -5,14 +5,14 @@
   environment.systemPackages = with pkgs; [
     # GitHub cli tool
     # https://cli.github.com/
-    gh
+    stable.gh
 
     # GitHub tool for managing PRs and issues
     # https://github.com/dlvhdr/gh-dash
-    gh-dash
+    stable.gh-dash
 
     # Lazycli - A tool to static turn CLI commands into TUIs
     # https://github.com/jesseduffield/lazycli
-    lazycli
+    stable.lazycli
   ] ++ [ inputs.nix-inspect.packages.x86_64-linux.nix-inspect-release ];
 }

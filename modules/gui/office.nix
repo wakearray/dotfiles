@@ -1,19 +1,18 @@
 { pkgs, lib, config, ... }:
 let
-  gui = config.gui;
-  office = gui.office;
+  cfg = config.gui.office;
 in
 {
   options.gui.office = with lib; {
     enable = mkEnableOption "Turn on office software.";
   };
-  config = lib.mkIf (gui.enable && office.enable) {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      libreoffice-qt6-fresh
+      stable.libreoffice-qt6-fresh
 
       # Spell check for libreoffice
-      hunspell
-      hunspellDicts.en_US
+      stable.hunspell
+      stable.hunspellDicts.en_US
     ];
   };
 }

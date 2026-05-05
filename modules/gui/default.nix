@@ -55,13 +55,13 @@ in
     environment = {
       systemPackages = with pkgs; [
         # Allows theming of QT6 applications like LibreOffice
-        qt6Packages.qt6ct
+        stable.qt6Packages.qt6ct
 
         # A windows task manager styled resource monitor
         mission-center
 
         # The XFCE terminal, installed as a backup.
-        xfce4-terminal
+        stable.xfce4-terminal
 
         # A simple calculator designed for elementary OS
         pantheon.elementary-calculator

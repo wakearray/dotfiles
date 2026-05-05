@@ -126,47 +126,47 @@
 
     environment.systemPackages = with pkgs; [
       # 7-Zip
-      _7zz
+      stable._7zz
 
       # eza - Modern, maintained replacement for ls
       # https://github.com/eza-community/eza
-      eza
+      stable.eza
 
       # Zoxide - A fast cd command that learns your habits
       # https://github.com/ajeetdsouza/zoxide
       # https://www.youtube.com/watch?v=aghxkpyRVDY
-      zoxide
+      stable.zoxide
 
       # Starship - A minimal, blazing fast, and extremely customizable prompt for any shell
       # https://starship.rs/
-      starship
+      stable.starship
 
       # fzf - Command-line fuzzy finder written in Go
       # https://github.com/junegunn/fzf
-      fzf
+      stable.fzf
 
       # Lemonade - Remote utility tool that to copy, paste and open browsers over TCP
       # https://github.com/lemonade-command/lemonade/
-      lemonade
+      stable.lemonade
 
       # https://www.gnu.org/software/wget/
-      wget
+      stable.wget
 
       # ImageMagick - Command line software for manipulating images
       # https://imagemagick.org/
-      imagemagick
+      stable.imagemagick
 
       # Fast duplicate file finder written in rust
       ddh
 
       # Adds support for mounting webdav directories
-      davfs2
+      stable.davfs2
 
       # Provides `lspci`, `pcilmr`, and `setpci`
-      pciutils
+      stable.pciutils
 
       # Provides 'lsusb'
-      usbutils
+      stable.usbutils
     ];
 
     # Add the userdata usergroup

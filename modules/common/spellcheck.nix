@@ -2,9 +2,9 @@
 {
   environment.systemPackages = with pkgs; [
     # aspell - english spellcheck
-    aspell
-    aspellDicts.en
-    aspellDicts.en-computers
-    aspellDicts.en-science
+    stable.aspell
+    stable.aspellDicts.en
+    stable.aspellDicts.en-computers
+    stable.aspellDicts.en-science
   ];
 }
