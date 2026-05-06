@@ -189,7 +189,6 @@ in
       path = [ pkgs.docker ];
       serviceConfig = {
         Type = "oneshot";
-        RemainAfterExit = true;
       };
       script = ''
         docker volume inspect karakeep_meilisearch || docker volume create karakeep_meilisearch

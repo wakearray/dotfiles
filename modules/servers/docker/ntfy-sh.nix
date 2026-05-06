@@ -101,6 +101,31 @@ in
       };
     };
 
+        # Docker Container Update Timer
+    systemd.services."updateNtfyDockerImage" = {
+      description = "Pull latest Docker image and restart services";
+      path = [ config.virtualisation.docker.package ];
+      script = ''
+        docker pull binwiederhier/ntfy:latest
+        systemctl restart docker-ntfy.service
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+      };
+    };
+
+    # Define the timer
+    systemd.timers.updateNtfyDockerImageTimer = {
+      description = "Daily timer to pull latest Docker image for Ntfy and restart services";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "06:00:00";
+        Persistent = true; # Ensures the timer catches up if it missed a run
+        Unit = "updateNtfyDockerImage.service";
+      };
+    };
+
+
     # sops secrets
     sops.secrets = let
       opts = {

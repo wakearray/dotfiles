@@ -86,7 +86,6 @@ in
         ROCKET_PORT=${toString cfg.localPort}
         ROCKET_LOG=critical
 
-        EXPERIMENTAL_CLIENT_FEATURE_FLAGS=inline-menu-positioning-improvements,inline-menu-totp,ssh-key-vault-item,ssh-agent,export-attachments,mutual-tls
 
         # Activate the SSO
         SSO_ENABLED=true
@@ -125,6 +124,9 @@ in
         # Log all tokens for easier debugging
         # (default false, LOG_LEVEL=debug or LOG_LEVEL=info,vaultwarden::sso=debug need to be set)
         SSO_DEBUG_TOKENS=false
+
+
+        EXPERIMENTAL_CLIENT_FEATURE_FLAGS=ssh-key-vault-item,ssh-agent,mutual-tls
       '';
     };
   };

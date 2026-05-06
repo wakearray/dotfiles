@@ -79,6 +79,18 @@
           silent = true;
         };
       }
+      {
+        mode = [ "c" ]; # Command-line mode
+        key = "W<CR>";
+        action = "w<CR>";
+        options.silent = false;
+      }
+      {
+        mode = [ "c" ]; # Command-line mode
+        key = "Nw<CR>";
+        action = "w<CR>";
+        options.silent = false;
+      }
     ];
 
     # plugins

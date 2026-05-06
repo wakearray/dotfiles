@@ -20,8 +20,9 @@ in
           localPort = 8060;
         };
         forgejo = {
-          enable = false;
+          enable = true;
           localIP = serverIP;
+          localPorst = 8065;
         };
         homeassistant = {
           enable = true;

@@ -143,13 +143,13 @@ in
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig.Type = "oneshot";
-      script = let dockercli = "${config.virtualisation.docker.package}/bin/docker";
-      in ''
+      path = [ config.virtualisation.docker.package ];
+      script = ''
         # Put a true at the end to prevent getting non-zero return code, which will
         # crash the whole service.
-        check=$(${dockercli} network ls | grep "mealie-network" || true)
+        check=$(docker network ls | grep "mealie-network" || true)
         if [ -z "$check" ]; then
-          ${dockercli} network create mealie-network
+          docker network create mealie-network
         else
           echo "mealie-network already exists in docker"
         fi
@@ -159,9 +159,9 @@ in
     # Docker Container Update Timer
     systemd.services."updateMealieDockerImage" = {
       description = "Pull latest Docker image and restart services";
-      script = let dockercli = "${config.virtualisation.docker.package}/bin/docker";
-      in ''
-        ${dockercli} pull ghcr.io/mealie-recipes/mealie:latest
+      path = [ config.virtualisation.docker.package ];
+      script = ''
+        docker pull ghcr.io/mealie-recipes/mealie:latest
         systemctl restart docker-mealie.service
       '';
       serviceConfig = {
