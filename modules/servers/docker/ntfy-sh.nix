@@ -59,12 +59,8 @@ in
     virtualisation.oci-containers.containers.ntfy = {
       image = "binwiederhier/ntfy:latest";
       autoStart = true;
-      cmd = [
-        "serve"
-      ];
-      environmentFiles = [
-        config.sops.templates."ntfyEnvironmentFile.env".path
-      ];
+      cmd = [ "serve" ];
+      environmentFiles = [ config.sops.templates."ntfyEnvironmentFile.env".path ];
       volumes = [
         "${cfg.cacheDirectory}:/var/cache/ntfy"
         "${cfg.configDirectory}:/etc/ntfy"
@@ -101,7 +97,7 @@ in
       };
     };
 
-        # Docker Container Update Timer
+    # Docker Container Update Timer
     systemd.services."updateNtfyDockerImage" = {
       description = "Pull latest Docker image and restart services";
       path = [ config.virtualisation.docker.package ];
@@ -124,7 +120,6 @@ in
         Unit = "updateNtfyDockerImage.service";
       };
     };
-
 
     # sops secrets
     sops.secrets = let

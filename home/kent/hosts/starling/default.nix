@@ -45,6 +45,9 @@
 
         # qt6ct for theming QT applications
         qt6Packages.qt6ct
+
+        # Console benchmarking tool
+        hyperfine
       ];
 
       locker.gtklock = {

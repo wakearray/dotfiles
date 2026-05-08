@@ -10,6 +10,7 @@ in
     ./endurain.nix
     ./forgejo.nix
     ./homeassistant.nix
+    ./karakeep.nix
     ./mealie.nix
     ./miniflux.nix
     ./paperless.nix

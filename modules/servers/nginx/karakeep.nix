@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.servers.nginx._server_;
+  cfg = config.servers.nginx.karakeep;
 in
 {
-  options.servers.nginx._server_ = with lib; {
+  options.servers.nginx.karakeep = with lib; {
     enable = mkEnableOption "Enable an nginx reverse proxy server.";
 
     domain = mkOption {
@@ -14,13 +14,13 @@ in
 
     subdomain = mkOption {
       type = types.str;
-      default = "_subdomain_";
+      default = "pin";
       description = "The subdomain that your server will be hosted at.";
     };
 
     localPort = mkOption {
       type = types.port;
-      default = 6800;
+      default = 3000;
       description = "The local port your server is exposed on.";
     };
 

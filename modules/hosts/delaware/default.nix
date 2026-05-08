@@ -29,6 +29,11 @@
           localPort = 8060;
           sopsFile = ./endurain.yaml;
         };
+        karakeep = {
+          enable = true;
+          localPort = 8061;
+          sopsFile = ./karakeep.yaml;
+        };
         tubearchivist = {
           enable = true;
           localPort = 8062;

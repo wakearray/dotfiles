@@ -66,6 +66,30 @@ in
       };
     };
 
+    # Docker Container Update Timer
+    systemd.services."updateVaultwardenDockerImage" = {
+      description = "Pull latest Docker image and restart services";
+      path = [ config.virtualisation.docker.package ];
+      script = ''
+        docker pull vaultwarden/server:latest
+        systemctl restart docker-vaultwarden.service
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+      };
+    };
+
+    # Define the timer
+    systemd.timers.updateVaultwardenDockerImageTimer = {
+      description = "Daily timer to pull latest Docker image for Vaultwarden and restart services";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "06:00:00";
+        Persistent = true; # Ensures the timer catches up if it missed a run
+        Unit = "updateVaultwardenDockerImage.service";
+      };
+    };
+
     # sops secrets
     sops.secrets = {
       vw_push_id = { sopsFile = cfg.sopsFile; };
@@ -101,7 +125,7 @@ in
         # <OIDC_URL>/.well-known/openid-configuration must return a JSON document
         # SSO_AUTHORITY has to match the exact value of the issuer field that is returned by that JSON
         # (so take the issuer value of the file if you are unsure whether to include a trailing slash or not).
-        SSO_AUTHORITY=https://voicelesscrimson.com/oauth2/openid/vaultwarden
+        SSO_AUTHORITY=https://idm.voicelesscrimson.com/oauth2/openid/vaultwarden
         # Activate PKCE for the Auth Code flow (default true).
         SSO_PKCE=true
         # Client Id

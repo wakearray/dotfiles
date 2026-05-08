@@ -1,7 +1,7 @@
 { domain, ... }:
 let
   devices = import ../../devices.nix;
-  serverIP = devices.delaware.ip;
+  delaware = devices.delaware.ip;
 in
 {
   # modules/hosts/lagurus
@@ -12,21 +12,26 @@ in
         domain = domain;
         audiobookshelf = {
           enable = true;
-          localIP = serverIP;
+          localIP = delaware;
         };
         endurain = {
           enable = true;
-          localIP = serverIP;
+          localIP = delaware;
           localPort = 8060;
         };
         forgejo = {
           enable = true;
-          localIP = serverIP;
-          localPorst = 8065;
+          localIP = delaware;
+          localPort = 8065;
         };
         homeassistant = {
           enable = true;
           localIP = "192.168.0.138";
+        };
+        karakeep = {
+          enable = true;
+          localIP = delaware;
+          localPort = 8061;
         };
       };
       kanidm = {

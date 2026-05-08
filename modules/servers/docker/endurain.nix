@@ -89,6 +89,30 @@ in
       wantedBy = [ "multi-user.target" ];
     };
 
+    # Docker Container Update Timer
+    systemd.services."updateEndurainDockerImage" = {
+      description = "Pull latest Docker image and restart services";
+      path = [ config.virtualisation.docker.package ];
+      script = ''
+        docker pull ghcr.io/endurain-project/endurain:latest
+        systemctl restart docker-endurain-app.service
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+      };
+    };
+
+    # Define the timer
+    systemd.timers.updateEndurainDockerImageTimer = {
+      description = "Daily timer to pull latest Docker image for Endurain and restart services";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "06:00:00";
+        Persistent = true; # Ensures the timer catches up if it missed a run
+        Unit = "updateEndurainDockerImage.service";
+      };
+    };
+
     # sops secrets
     sops.secrets = {
       endurain_postgres_password = { sopsFile = cfg.sopsFile; };

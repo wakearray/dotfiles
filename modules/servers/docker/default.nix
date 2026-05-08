@@ -9,15 +9,14 @@ in
 
   imports = [
     ./endurain.nix
-    ./gow-wolf.nix
-    #./karakeep.nix
-    ./lldap.nix
+    #./gow-wolf.nix
+    ./karakeep.nix
     ./mealie.nix
     ./ntfy-sh.nix
     #./omada-controller.nix
     ./tubearchivist.nix
     ./vaultwarden.nix
-    ./wyze-bridge.nix
+    #./wyze-bridge.nix
   ];
 
   options.servers.docker = {
